@@ -1,0 +1,33 @@
+.btn {
+  border: none;
+  height: 48px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 0 auto 24px;
+  transition: background .2s ease-in-out;
+  &.white {
+    color: #fff;
+  }
+  &.black {
+    color: #000;
+  }
+  &.small {
+    width: 48px;
+  }
+  &.middle {
+    width: 300px;
+  }
+  &.large {
+    width: 340px;
+  }
+  &.contained {
+    background-color: #000000;
+  }
+  &.outlined {
+    background-color: transparent;
+    border: 2px solid #000000;
+  }
+  &:disabled {
+    background: #C0C4C9;
+  }
+}

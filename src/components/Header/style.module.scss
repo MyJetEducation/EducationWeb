@@ -1,0 +1,61 @@
+.wrap {
+  max-width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #F1F4F8;
+}
+
+.container {
+  max-width: 970px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 36px;
+  color: #000000;
+}
+
+.navBar {
+  display: flex;
+  &__item+.navBar__item {
+    margin-left: 26px;
+  }
+  &__link{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+  }
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  .login {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin-right: 16px;
+    color: #777C85;
+    cursor: pointer;
+  }
+  .singUp {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 9px 16px 7px;
+    border: 2px solid #000000;
+    border-radius: 12px;
+    color: #000000;
+    cursor: pointer;
+  }
+}
