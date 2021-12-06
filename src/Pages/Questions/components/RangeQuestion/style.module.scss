@@ -1,0 +1,30 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 73px;
+}
+
+.inner {
+  height: 36px;
+  display: flex;
+  width: 100%;
+}
+
+.thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #374DFB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 6px #AAA;
+}
+
+.rangeSteps {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

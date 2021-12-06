@@ -11,7 +11,16 @@ interface buttonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-export const Button:React.FC<buttonProps> = ({ variant = "contained", size = "middle", color = "white", children, disabled = false, onClick }) => {
+export const Button: React.FC<buttonProps> = (
+  {
+    variant = "contained",
+    size = "middle",
+    color = "white",
+    children,
+    disabled = false,
+    onClick
+  }
+) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     onClick && onClick(e);
   }
