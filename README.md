@@ -1,2 +1,3 @@
 # EducationWeb
-EducationWeb
+UI for MyJetEducation
+
