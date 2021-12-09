@@ -7,6 +7,7 @@ import {AllReadyAccount} from "../../components/AllReadyAccount";
 import {OrContinueWith} from "../../components/OrContinueWith";
 
 import {useAuth} from "../../hooks/auth";
+
 import s from "./style.module.scss";
 
 export const Login = () => {
@@ -19,22 +20,29 @@ export const Login = () => {
   const [isLoading, setLoading] = useState(false);
   const [isDisabled, setDisabled] = useState(true);
 
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const getAuth = async () => {
-      const res = await fetch("https://reactmarathon-api.herokuapp.com/api/v2/auth/signin/email", {
+      const res = await fetch("https://education.dfnt.work/api/auth/v1/login", {
         method: "POST",
-        body: JSON.stringify({email, password})
+        body: JSON.stringify({"userName": email, "password": password}),
+        headers:{
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
       })
-      const data: {email: string, idToken: string} = await res.json();
-
+      const data = await res.json();
+      console.log("####: data", data.data.token);
       setLoading(false);
 
-      auth.signIn(data.idToken, () => {
+      auth.signIn(data.data.token, () => {
         navigate('/start');
       })
     }
     setLoading(true);
+
+
     getAuth();
   }
 
@@ -96,6 +104,5 @@ export const Login = () => {
         </form>
       </div>
     </>
-
   )
 }

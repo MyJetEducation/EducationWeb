@@ -1,5 +1,6 @@
 export const QUESTIONS = [
   {
+    id: 1,
     title: "Уровень вашего дохода",
     answer: {
       type: "radio",

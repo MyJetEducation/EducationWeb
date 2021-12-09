@@ -9,7 +9,6 @@ import arrowBtn from '../../components/Button/assets/arrowLeft.svg'
 import s from './style.module.scss';
 
 export const Questions = () => {
-  console.log("####: <RenderQuerstion/>");
   const [qNumber, setQNumber] = useState<number>(0);
   const [isDisabled, setDisabled] = useState<boolean>(false);
 

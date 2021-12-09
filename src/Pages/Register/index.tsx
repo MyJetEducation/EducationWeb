@@ -56,13 +56,19 @@ export const Register = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const getAuth = async () => {
-      const res = await fetch("https://reactmarathon-api.herokuapp.com/api/v2/auth/signup/email", {
+      const res = await fetch("https://education.dfnt.work/api/register/v1/create", {
         method: "POST",
-        body: JSON.stringify({email, password})
+        body: JSON.stringify({"userName": email, "password": password}),
+        headers:{
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
       })
       const data = await res.json();
-      setLoading(true)
-      auth.signIn(data.idToken, () => {
+      console.log("####: data", data);
+      setLoading(false);
+
+      auth.signIn(data, () => {
         navigate('/start');
       })
 

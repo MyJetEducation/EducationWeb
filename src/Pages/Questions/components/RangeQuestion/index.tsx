@@ -35,7 +35,6 @@ export const RangeQuestion: React.FC<rangeQuestionProps> = ({onChange, defaultVa
   }, []);
 
   return (
-    <>
       <div className={s.wrap}>
         <output
           style={{marginBottom: "30px"}}
@@ -90,9 +89,5 @@ export const RangeQuestion: React.FC<rangeQuestionProps> = ({onChange, defaultVa
         </div>
 
       </div>
-      {
-        values[0] && <div>Молодец</div>
-      }
-    </>
   )
 }
