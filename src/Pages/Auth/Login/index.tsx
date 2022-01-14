@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 
 import {Button} from "../../../components/Button";
 import {Input} from "../../../components/Inputs/InputEmailOrPass";
@@ -10,10 +11,16 @@ import {useAuth} from "../../../hooks/auth";
 
 import req from "../../../utils/request";
 import {configEndpoint} from "../../../config";
+import {RootState} from "../../../store";
+
+import {counterValueSelector, decrement, increment, incrementByAmount} from "../../../store/counterSlicer";
 import s from "./style.module.scss";
+import {setToken} from "../../../store/userSlicer";
 
 export const Login = () => {
-
+  const dispatch = useDispatch();
+  const value = useSelector(counterValueSelector);
+  console.log("####: value", value);
   const auth = useAuth();
   const navigate = useNavigate();
 
@@ -30,7 +37,7 @@ export const Login = () => {
       const data = await req(configEndpoint.authLogin, {userName: email, password})
 
       setLoading(false);
-
+      dispatch(setToken(data.data.token));
       auth.signIn(data.data.token, () => {
         navigate('/');
       })
@@ -66,7 +73,9 @@ export const Login = () => {
       }
       <div className={s.wrap}>
         <h3 className={s.title}>Log In</h3>
-
+        <button onClick={() => dispatch(increment())}>+</button>
+        <button onClick={() => dispatch(decrement())}>-</button>
+        <button onClick={() => dispatch(incrementByAmount(10))}>+10</button>
         <form className={s.form} onSubmit={handleSubmit}>
           <Input
             type="email"

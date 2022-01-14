@@ -11,17 +11,17 @@ import {ARRAY, ARRAY_2} from "./constans";
 import Breadcrumbs from "../../components/Breadcrumbs";
 
 import s from './style.module.scss';
+import {useDispatch, useSelector} from "react-redux";
+import {menuSelector, validChange} from "../../store/menuSlicer";
 
 export const FreeQuestions = () => {
+
+  const menu = useSelector(menuSelector);
+  console.log("####: menuSelect", menu);
+  const dispatch = useDispatch();
+
   const [timer, setTimer] = useState<any>();
   const [time, setTime] = useState<any>({});
-  const [menu, setMenu] = useState(() => {
-    const data: any = localStorage.getItem("key");
-    if (!data) {
-      return ARRAY
-    }
-    return JSON.parse(data)
-  });
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
   const {id} = useParams<"id">();
@@ -85,11 +85,7 @@ export const FreeQuestions = () => {
 
   const handleClickNextQuestion = () => {
     //TODO: прописать условия если showResult(пропса снизу) будет true
-    setMenu((prevState: any) => {
-      const copyState = [...prevState];
-      copyState[currentIndex].valid = true;
-      return copyState;
-    })
+
     // TODO: доделать на Redux
     setTime((prevState: any) => {
       const newState = {
@@ -101,7 +97,7 @@ export const FreeQuestions = () => {
       }
       return newState;
     });
-  
+    dispatch(validChange(currentIndex))
     if (currentIndex === menu.length - 1) {
       navigate(`/finish`);
     } else {

@@ -10,20 +10,18 @@ import map from '../../../OnBoarding/assets/source_map.png';
 import achiv from './assets/achiv.svg';
 
 import s from './style.module.scss';
+import {useSelector} from "react-redux";
+import {menuSelector} from "../../../../store/menuSlicer";
 
 const SummaryBord = () => {
-
-  const [menu, setMenu] = useState([]);
+  const menu = useSelector(menuSelector);
   const navigate = useNavigate();
 
   useEffect(() => {
     const data: any = localStorage.getItem("key");
     if (!data) {
       navigate("/quest/lessons/1")
-    } else {
-      setMenu(JSON.parse(data))
     }
-
   }, []);
 
 
