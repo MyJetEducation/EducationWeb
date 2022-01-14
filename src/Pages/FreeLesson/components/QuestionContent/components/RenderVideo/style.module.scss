@@ -1,0 +1,23 @@
+.wrap {
+  max-width: 560px;
+}
+
+.video {
+  width: 560px;
+  height: 400px;
+  border-radius: 32px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 57px;
+}
+
+.text {
+  h4 {
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 25px;
+  }
+}

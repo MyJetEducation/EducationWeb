@@ -1,0 +1,48 @@
+name: NodeJS with Webpack
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    #strategy:
+    #  matrix:
+    #    node-version: [12.x, 14.x, 16.x]
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+    #    node-version: ${{ matrix.node-version }}
+        node-version: 16.x
+
+    - name: Build
+      run: |
+        npm install
+        npx webpack
+
+
+    - name: Publish image github
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        path: ./
+        registry: docker.pkg.github.com
+        repository: myjeteducation/educationweb/educationweb-test
+        tags: latest
+        build_args: app_version=educationweb-test:latest
+        
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        port: ${{ secrets.PORT }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        script: cd /home/monfex/Services/educationweb-test && docker-compose pull && docker-compose up -d

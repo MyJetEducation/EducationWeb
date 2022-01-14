@@ -1,0 +1,48 @@
+.wrap {
+  max-width: 620px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .card{
+    cursor: pointer;
+    position: relative;
+    width: 300px;
+    height: 200px;
+  }
+  .front,
+  .back{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: bold;
+    border-radius: 32px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    transition: transform .6s linear;
+  }
+
+  .front{
+    transform: perspective(600px) rotateY(0deg);
+    background: #E0E5EB;
+  }
+
+  .back{
+    transform: perspective(600px) rotateY(180deg);
+    background: #C7F0C3;
+    border: 4px solid #0BCA1E;
+    box-sizing: border-box;
+    border-radius: 32px;
+  }
+
+  .front.active {
+    transform: perspective(600px) rotateY(-180deg);
+  }
+  .back.active{
+    transform: perspective(600px) rotateY(0deg);
+  }
+}

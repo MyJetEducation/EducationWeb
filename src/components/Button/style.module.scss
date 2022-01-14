@@ -1,0 +1,45 @@
+.btn {
+  border: none;
+  height: 48px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 0 auto;
+  transition: background .2s ease-in-out;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  &.white {
+    color: #fff;
+  }
+  &.black {
+    color: #000;
+  }
+  &.small {
+    width: 48px;
+  }
+  &.little {
+    width: 252px;
+  }
+  &.middle {
+    width: 300px;
+  }
+  &.large {
+    width: 340px;
+  }
+  &.bgBlack {
+    background-color: #000000;
+  }
+  &.bgBlue {
+    background-color: #374DFB;
+  }
+  &.bgGrey {
+    background-color: #777C85;
+  }
+  &.outlined {
+    background-color: transparent;
+    border: 2px solid #000000;
+  }
+  &:disabled {
+    background: #C0C4C9;
+  }
+}
