@@ -1,25 +1,28 @@
 import React from 'react';
+import {useSelector} from "react-redux";
+
 
 import {Container} from "../../components/Container";
 import DisciplineBlock from "./components/DisciplineBlock";
 import StatsBlock from "./components/StatsBlock";
-import {useSelector} from "react-redux";
+
+import {userTokenSelector} from "../../store/userSlicer";
 
 import map from './assets/map.png';
 
 import s from './style.module.scss'
-import {userTokenSelector} from "../../store/userSlicer";
 
 interface dashboardProps {
   name?: string
 }
 
 export const DashBoard:React.FC<dashboardProps> = ({ name = "Anton"}) => {
-  
+
+  //example redux token
   const token = useSelector(userTokenSelector);
   console.log("####: token", token);
-  
-  
+
+
   return (
     <div className={s.wrap}>
 

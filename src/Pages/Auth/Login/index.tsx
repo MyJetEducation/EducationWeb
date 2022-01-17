@@ -7,15 +7,15 @@ import {Input} from "../../../components/Inputs/InputEmailOrPass";
 import {AllReadyAccount} from "../../../components/AllReadyAccount";
 import {OrContinueWith} from "../../../components/OrContinueWith";
 
-import {useAuth} from "../../../hooks/auth";
-
-import req from "../../../utils/request";
-import {configEndpoint} from "../../../config";
-import {RootState} from "../../../store";
-
-import {counterValueSelector, decrement, increment, incrementByAmount} from "../../../store/counterSlicer";
-import s from "./style.module.scss";
 import {setToken} from "../../../store/userSlicer";
+import {counterValueSelector, decrement, increment, incrementByAmount} from "../../../store/counterSlicer";
+
+import {configEndpoint} from "../../../config";
+import {useAuth} from "../../../hooks/auth";
+import req from "../../../utils/request";
+
+
+import s from "./style.module.scss";
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -33,9 +33,7 @@ export const Login = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const getAuth = async () => {
-
       const data = await req(configEndpoint.authLogin, {userName: email, password})
-
       setLoading(false);
       dispatch(setToken(data.data.token));
       auth.signIn(data.data.token, () => {
@@ -43,8 +41,6 @@ export const Login = () => {
       })
     }
     setLoading(true);
-
-
     getAuth();
   }
 

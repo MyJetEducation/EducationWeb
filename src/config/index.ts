@@ -5,7 +5,8 @@ export enum configEndpoint {
   putKeyValue = "putKeyValue"
 };
 
-const urlServer = new URL(process.env.REACT_APP_APISERVICELOGIN as string);
+const urlServer = new URL(process.env.REACT_APP as string);
+console.log("####: urlServer", urlServer);
 
 const config = {
   client: {

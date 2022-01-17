@@ -42,9 +42,7 @@ const QuestionContent = ({ id }: any) => {
       )
     case "game":
       return (
-        <RenderGame
-
-        />
+        <RenderGame/>
       )
     default:
       return <div/>

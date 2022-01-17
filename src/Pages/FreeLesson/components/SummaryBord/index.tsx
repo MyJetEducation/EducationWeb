@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+
 import {ProgressMenu} from "../ProgressMenu";
 import {QuestionFooter} from "../QuestionFooter";
 import {Container} from "../../../../components/Container";
 import Breadcrumbs from "../../../../components/Breadcrumbs";
+import {menuSelector} from "../../../../store/menuSlicer";
 
 import map from '../../../OnBoarding/assets/source_map.png';
-
 import achiv from './assets/achiv.svg';
 
 import s from './style.module.scss';
-import {useSelector} from "react-redux";
-import {menuSelector} from "../../../../store/menuSlicer";
 
 const SummaryBord = () => {
   const menu = useSelector(menuSelector);
@@ -23,11 +23,6 @@ const SummaryBord = () => {
       navigate("/quest/lessons/1")
     }
   }, []);
-
-
-  const handleRegisterNavigate = () => {
-    navigate('/register')
-  }
 
   return (
     <Container>
