@@ -23,6 +23,8 @@ jobs:
 
     - name: Build
       run: |
+        pwd
+        ls -la
         npm install
         npx webpack
 
