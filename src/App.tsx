@@ -12,7 +12,6 @@ import FreeLesson from "./Pages/OnBoarding";
 import {FreeQuestions} from "./Pages/FreeLesson";
 import SummaryBord from "./Pages/FreeLesson/components/SummaryBord";
 import Plans from "./Pages/PlansPayment/Plans";
-import {DashBoard} from "./Pages/Dashboard";
 
 
 export const App = () => {
@@ -28,13 +27,19 @@ export const App = () => {
           <Route path="/free" element={<FreeLesson/>}/>
           <Route path="/quest/:lesson/:id" element={<FreeQuestions/>}/>
           <Route path="/finish" element={<SummaryBord/>}/>
-          <Route path="/plans" element={<Plans/>}/>
-          <Route path="/dashboard" element={<DashBoard/>}/>
+
 
           <Route path="/start" element={(
             <RequireAuth>
               <Questions/>
             </RequireAuth>
+
+          )}/>
+          <Route path="/plans" element={(
+            <RequireAuth>
+              <Plans/>
+            </RequireAuth>
+
           )}/>
         </Routes>
       </BrowserRouter>
