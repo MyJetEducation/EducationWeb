@@ -36,7 +36,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         path: ./
-        registry: docker.pkg.github.com
+        registry: ghcr.io
         repository: myjeteducation/educationweb/educationweb-test
         tags: latest
         build_args: app_version=educationweb-test:latest
