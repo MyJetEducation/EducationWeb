@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-
+import cn from 'classnames';
 
 import {useAuth} from "../../../hooks/auth";
 import {Button} from "../../../components/Button";
 import {Input} from "../../../components/Inputs/InputEmailOrPass";
 import {AllReadyAccount} from "../../../components/AllReadyAccount";
 import {OrContinueWith} from "../../../components/OrContinueWith";
-
-import cn from 'classnames';
-import s from './style.module.scss';
 import req from "../../../utils/request";
+
+import s from './style.module.scss';
 
 export const Register = () => {
   const [email, setEmail] = useState('');
@@ -29,7 +28,7 @@ export const Register = () => {
     if ( auth.user ) {
       navigate("/start");
     }
-  },[]);
+  },);
 
   useEffect(() =>{
     if (password.length >= 8 && password.length <= 31 ) {

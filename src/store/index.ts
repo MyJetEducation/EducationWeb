@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import counterSlicer from "./counterSlicer";
 import userSlicer from "./userSlicer";
 import menuSlicer from "./menuSlicer";
+import testSlicer from "./testSlicer";
 
 export const store = configureStore({
   reducer: {
     counter: counterSlicer,
     user: userSlicer,
-    menu: menuSlicer
+    menu: menuSlicer,
+    test: testSlicer
   },
 })
 

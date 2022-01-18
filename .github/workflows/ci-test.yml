@@ -21,11 +21,15 @@ jobs:
     #    node-version: ${{ matrix.node-version }}
         node-version: 16.x
 
-    - name: Build
+    - name: Install
       run: |
         pwd
         ls -la
         npm install
+
+
+    - name: Build
+      run: |
         CI=false
         npm run build
 
@@ -40,7 +44,7 @@ jobs:
         repository: myjeteducation/educationweb/educationweb-test
         tags: latest
         build_args: app_version=educationweb-test:latest
-        
+
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
       with:

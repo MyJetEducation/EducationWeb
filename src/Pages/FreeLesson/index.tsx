@@ -6,31 +6,31 @@ import {ProgressMenu} from "./components/ProgressMenu";
 import {QuestionFooter} from "./components/QuestionFooter";
 import QuestionContent from "./components/QuestionContent";
 
-import {ARRAY, ARRAY_2} from "./constans";
+import {ARRAY_2} from "./constans";
 
 import Breadcrumbs from "../../components/Breadcrumbs";
 
-import s from './style.module.scss';
 import {useDispatch, useSelector} from "react-redux";
-import {menuSelector, validChange} from "../../store/menuSlicer";
+import {currentIdSelector, menuSelector, validChange} from "../../store/menuSlicer";
+import {testSelector} from "../../store/testSlicer";
+
+import s from './style.module.scss';
 
 export const FreeQuestions = () => {
 
   const menu = useSelector(menuSelector);
-  console.log("####: menuSelect", menu);
   const dispatch = useDispatch();
 
-  const [timer, setTimer] = useState<any>();
   const [time, setTime] = useState<any>({});
-  const [disabled, setDisabled] = useState(false);
+
+  const disabled = useSelector(testSelector);
   const navigate = useNavigate();
   const {id} = useParams<"id">();
   const data = useMemo(() => ARRAY_2[id as keyof typeof ARRAY_2], [id]);
-  const currentIndex = useMemo(() => {
-    return menu.findIndex((item: any) => item?.id === id)
-  }, [id, menu]);
 
-  const currentLessonTime = useMemo(() => menu[currentIndex]?.time,[menu]);
+  const currentIndex = useSelector(currentIdSelector(id as string));
+
+  const currentLessonTime = useMemo(() => menu[currentIndex]?.time,[menu, currentIndex]);
 
   const setFetch = async (val: any) => {
     const value = JSON.stringify(val);
@@ -55,7 +55,7 @@ export const FreeQuestions = () => {
         navigate(`/quest/lesson/${menu[0].id}`)
       }
     }
-  }, [menu, id]);
+  }, [id, navigate]);
 
   const nextQuestion = useMemo(() => {
     const index = currentIndex + 1;
@@ -64,7 +64,7 @@ export const FreeQuestions = () => {
     } else {
       return menu[index].id
     }
-  }, [id, menu]);
+  }, [menu, currentIndex]);
 
 
   // TODO: надо разобраться с этой функцией
@@ -81,7 +81,7 @@ export const FreeQuestions = () => {
         setFetch(fn(menu))
       }
     }
-  }, [menu])
+  }, [menu, currentIndex])
 
   const handleClickNextQuestion = () => {
     //TODO: прописать условия если showResult(пропса снизу) будет true
@@ -113,9 +113,9 @@ export const FreeQuestions = () => {
   }, [currentIndex, menu]);
 
   // timer
-  useEffect(() => {
-    setTime({...time, [id as keyof typeof time]: {start: new Date()}});
-  }, [id]);
+  // useEffect(() => {
+  //   setTime({...time, [id as keyof typeof time]: {start: new Date()}});
+  // }, [id]);
 
   return (
     <Container>
@@ -126,7 +126,6 @@ export const FreeQuestions = () => {
         <QuestionContent
           index={currentIndex}
           id={id}
-          disabledBtn={(val: any) => setDisabled(val)}
         />
 
         <ProgressMenu

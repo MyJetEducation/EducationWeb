@@ -5,7 +5,7 @@ import s from './style.module.scss';
 type BoardProps = {
   setMoves: React.Dispatch<React.SetStateAction<number>>
   finishGameCallback: () => void
-  cardIds: Array<number>
+  cardIds: Array<{ value: number, src: string}>
 }
 
 function Board(props: BoardProps) {
@@ -80,14 +80,14 @@ function Board(props: BoardProps) {
 
   return (
     <div className={s.board}>
-      {props.cardIds.map(i => {
+      {props.cardIds.map((i) => {
         return <Card
-          key={i}
-          image={`/images/${i % 6 + 1}.png`}
-          id={i}
+          key={i.value}
+          image={i.src}
+          id={i.value}
           isDisabled={shouldDisableAllCards}
-          isInactive={checkIsInactive(i)}
-          isFlipped={checkIsFlipped(i)}
+          isInactive={checkIsInactive(i.value)}
+          isFlipped={checkIsFlipped(i.value)}
           onClick={handleCardClick}
         />
       })}

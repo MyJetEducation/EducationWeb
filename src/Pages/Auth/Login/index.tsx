@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 
 import {Button} from "../../../components/Button";
 import {Input} from "../../../components/Inputs/InputEmailOrPass";
@@ -8,7 +8,6 @@ import {AllReadyAccount} from "../../../components/AllReadyAccount";
 import {OrContinueWith} from "../../../components/OrContinueWith";
 
 import {setToken} from "../../../store/userSlicer";
-import {counterValueSelector, decrement, increment, incrementByAmount} from "../../../store/counterSlicer";
 
 import {configEndpoint} from "../../../config";
 import {useAuth} from "../../../hooks/auth";
@@ -19,8 +18,6 @@ import s from "./style.module.scss";
 
 export const Login = () => {
   const dispatch = useDispatch();
-  const value = useSelector(counterValueSelector);
-  console.log("####: value", value);
   const auth = useAuth();
   const navigate = useNavigate();
 
@@ -48,7 +45,7 @@ export const Login = () => {
     if ( auth.user ) {
       navigate("/");
     }
-  },[]);
+  },);
 
   useEffect(() => {
     if ( email.length >= 1 && password.length >= 1) {
@@ -69,9 +66,6 @@ export const Login = () => {
       }
       <div className={s.wrap}>
         <h3 className={s.title}>Log In</h3>
-        <button onClick={() => dispatch(increment())}>+</button>
-        <button onClick={() => dispatch(decrement())}>-</button>
-        <button onClick={() => dispatch(incrementByAmount(10))}>+10</button>
         <form className={s.form} onSubmit={handleSubmit}>
           <Input
             type="email"
