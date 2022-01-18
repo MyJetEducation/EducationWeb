@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import cn from 'classnames';
+
 import s from './style.module.scss';
 
 interface radioBlockProps {
@@ -14,8 +15,8 @@ const RadioBlock: React.FC<radioBlockProps> = ({content, size, selectedAll, onCh
   const [answers, setAnswers] = useState({});
 
   useEffect(() => {
-    selectedAll(Object.keys(answers).length === content.length);
-    onChange(answers)
+    selectedAll && selectedAll(Object.keys(answers).length === content.length);
+    onChange && onChange(answers)
   }, [answers])
 
   const handleChange = (e: any) => {

@@ -84,8 +84,6 @@ export const FreeQuestions = () => {
   }, [menu, currentIndex])
 
   const handleClickNextQuestion = () => {
-    //TODO: прописать условия если showResult(пропса снизу) будет true
-
     // TODO: доделать на Redux
     setTime((prevState: any) => {
       const newState = {

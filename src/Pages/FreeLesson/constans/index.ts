@@ -460,6 +460,14 @@ export const ARRAY_ANSWERS = {
   "5q": "q2"
 }
 
+export const ARRAY_ANSWERS2 = {
+  "1q": "2q",
+  "2q": "2q",
+  "3q": "2q",
+  "4q": "2q",
+  "5q": "2q"
+}
+
 
 
 

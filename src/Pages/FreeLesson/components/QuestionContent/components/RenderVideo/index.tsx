@@ -15,12 +15,11 @@ interface renderVideoProps {
 const RenderVideo: React.FC<renderVideoProps> = ({content}) => {
   return (
     <div className={s.wrap}>
-      <Link
-        to={content[0].url_video}
+      <div
         className={s.video}
       >
         <img src={play} alt="play btn"/>
-      </Link>
+      </div>
 
       <ReactMarkdown className={s.text} children={content[0].html_text} remarkPlugins={[remarkGfm]}/>
     </div>
