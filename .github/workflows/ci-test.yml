@@ -23,16 +23,13 @@ jobs:
 
     - name: Install
       run: |
-        pwd
-        ls -la
         npm install
 
 
     - name: Build
       run: |
         CI=false
-        npx webpack
-#        npm run build
+        npm run build
 
 
     - name: Publish image github
