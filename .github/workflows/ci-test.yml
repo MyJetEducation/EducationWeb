@@ -23,8 +23,6 @@ jobs:
 
     - name: Install
       run: |
-        pwd
-        ls -la
         npm install
 
 
