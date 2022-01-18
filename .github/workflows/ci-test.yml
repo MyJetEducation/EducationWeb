@@ -31,7 +31,8 @@ jobs:
     - name: Build
       run: |
         CI=false
-        npm run build
+        npx webpack
+#        npm run build
 
 
     - name: Publish image github
