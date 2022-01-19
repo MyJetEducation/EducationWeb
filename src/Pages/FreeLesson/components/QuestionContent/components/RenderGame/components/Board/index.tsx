@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Card from '../Card'
+import Card from '../Card';
+
 import s from './style.module.scss';
 
 type BoardProps = {

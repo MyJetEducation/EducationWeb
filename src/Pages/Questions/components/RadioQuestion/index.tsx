@@ -24,14 +24,14 @@ const RadioQuestion: React.FC<radioQuestionProps> = ({data, onChange, onActive, 
 
   useEffect(() => {
     onActive && onActive(isActive)
-  }, [isActive]);
+  }, [isActive, onActive]);
 
   useEffect(() => {
     ref.current.reset();
     if (defaultValue) {
       setActive(true)
     }
-  }, []);
+  }, [defaultValue]);
 
   return (
     <form

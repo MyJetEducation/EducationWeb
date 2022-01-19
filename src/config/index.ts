@@ -6,7 +6,7 @@ export enum configEndpoint {
 };
 
 const urlServer = new URL(process.env.REACT_APP_APISERVICELOGIN as string);
-
+console.log("####: urlServer", urlServer);
 const config = {
   client: {
     server: {

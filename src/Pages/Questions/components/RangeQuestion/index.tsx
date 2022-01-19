@@ -26,13 +26,13 @@ export const RangeQuestion: React.FC<rangeQuestionProps> = ({onChange, defaultVa
 
   useEffect(() => {
     onActive && onActive(isActive)
-  }, [isActive])
+  }, [isActive, onActive])
 
   useEffect(() => {
     if (defaultValue) {
       setActive(true)
     }
-  }, []);
+  }, [defaultValue]);
 
   return (
       <div className={s.wrap}>

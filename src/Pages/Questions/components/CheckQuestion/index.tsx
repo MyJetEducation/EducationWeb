@@ -10,7 +10,7 @@ export const CheckQuestion: React.FC<any> = ({data, onChange}) => {
 
   useEffect(() => {
     onChange && onChange(values);
-  }, [values]);
+  }, [values, onChange]);
 
   return (
     <form onChange={handleChange}>
