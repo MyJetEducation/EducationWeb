@@ -310,14 +310,14 @@ export const ARRAY_2 = {
               id: "1answer1",
               param: false,
               name: "1q",
-              value: "1q",
+              value: "q1",
               textAnswer: "True"
             },
             {
               id: "1answer2",
               param: true,
               name: "1q",
-              value: "2q",
+              value: "q2",
               textAnswer: "False"
             }
           ]
@@ -330,7 +330,7 @@ export const ARRAY_2 = {
               id: "2answer1",
               name: "q2",
               param: false,
-              value: "q2",
+              value: "q1",
               textAnswer: "True"
             },
             {
@@ -350,14 +350,14 @@ export const ARRAY_2 = {
               id: "3answer1",
               name: "q3",
               param: false,
-              value: "q3",
+              value: "q1",
               textAnswer: "True"
             },
             {
               id: "3answer2",
               name: "q3",
               param: true,
-              value: "q3",
+              value: "q2",
               textAnswer: "False"
             },
           ]
@@ -370,14 +370,14 @@ export const ARRAY_2 = {
               id: "4answer1",
               name: "q4",
               param: false,
-              value: "q4",
+              value: "q1",
               textAnswer: "True"
             },
             {
               id: "4answer2",
               name: "q4",
               param: true,
-              value: "q4",
+              value: "q2",
               textAnswer: "False"
             },
           ]
@@ -390,14 +390,14 @@ export const ARRAY_2 = {
               id: "5answer1",
               name: "q5",
               param: false,
-              value: "q5",
+              value: "q1",
               textAnswer: "True"
             },
             {
               id: "5answer2",
               name: "q5",
               param: true,
-              value: "q5",
+              value: "q1",
               textAnswer: "False"
             },
           ]
@@ -461,11 +461,11 @@ export const ARRAY_ANSWERS = {
 }
 
 export const ARRAY_ANSWERS2 = {
-  "1q": "2q",
-  "2q": "2q",
-  "3q": "2q",
-  "4q": "2q",
-  "5q": "2q"
+  "1q": "q1",
+  "2q": "q2",
+  "3q": "q1",
+  "4q": "q1",
+  "5q": "q1"
 }
 
 

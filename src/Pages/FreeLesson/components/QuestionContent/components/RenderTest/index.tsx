@@ -36,7 +36,7 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
     } else {
       dispatch(setDisabledBtn(true))
     }
-  }, [showResult, answer, currentIndex, dispatch])
+  }, [showResult])
 
 
   return (

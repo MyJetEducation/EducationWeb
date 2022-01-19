@@ -22,7 +22,7 @@ const SummaryBord = () => {
     if (!data) {
       navigate("/quest/lessons/1")
     }
-  }, [navigate]);
+  }, []);
 
   return (
     <Container>

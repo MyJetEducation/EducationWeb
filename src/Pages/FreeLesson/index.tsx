@@ -55,7 +55,7 @@ export const FreeQuestions = () => {
         navigate(`/quest/lesson/${menu[0].id}`)
       }
     }
-  }, [id, navigate, menu]);
+  }, [id, navigate]);
 
   const nextQuestion = useMemo(() => {
     const index = currentIndex + 1;

@@ -17,7 +17,7 @@ const RadioBlock: React.FC<radioBlockProps> = ({content, size, selectedAll, onCh
   useEffect(() => {
     selectedAll && selectedAll(Object.keys(answers).length === content.length);
     onChange && onChange(answers)
-  }, [answers, content.length, onChange, selectedAll])
+  }, [answers])
 
   const handleChange = (e: any) => {
     setAnswers((prevState) => {

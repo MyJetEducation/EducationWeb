@@ -31,7 +31,7 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
     } else {
       dispatch(setDisabledBtn(true))
     }
-  }, [showResult, answer, currentIndex, dispatch])
+  }, [showResult])
   console.log("####: answer", answer);
   return (
     <div style={{display: "flex", maxWidth: "620px", width: "100%", justifyContent: "center"}}>
