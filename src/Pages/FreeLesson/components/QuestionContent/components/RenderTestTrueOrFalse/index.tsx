@@ -8,17 +8,20 @@ import {setDisabledBtn} from "../../../../../../store/testSlicer";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 
-interface renderTestTrueOrFalse {
+interface   renderTestTrueOrFalse {
   content: any
 }
 
 const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
   const {id} = useParams<"id">();
   const dispatch = useDispatch();
-  const currentIndex = useSelector(currentIdSelector(id as string));
+  const [answer, setAnswer] = useState({});
   const [showResult, setShowResult] = useState(false);
   const [percent, setPercent] = useState(0);
-  const [answer, setAnswer] = useState({});
+  const currentIndex = useSelector(currentIdSelector(id as string));
+
+  console.log("####: answerTrueOrFalse", answer);
+
 
   useEffect(() => {
     if (showResult) {

@@ -25,6 +25,8 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
   const [percent, setPercent] = useState(0);
   const [answer, setAnswer] = useState({});
 
+  console.log("####: answerTest", answer);
+
   useEffect(() => {
     if (showResult) {
       const result = similarResult(answer, ARRAY_ANSWERS)

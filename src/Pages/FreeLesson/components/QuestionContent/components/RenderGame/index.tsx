@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, {useEffect, useState} from 'react';
 import Board from './components/Board';
 
 import icon1 from './assets/images/1.png'
@@ -9,6 +9,7 @@ import icon5 from './assets/images/5.png'
 import icon6 from './assets/images/6.png'
 
 import s from './style.module.scss';
+import FinishGame from "./components/FinishGame";
 
 const cardIds = [
   {
@@ -60,25 +61,45 @@ const cardIds = [
     src: icon6
   },
 ];
-export function RenderGame() {
+export const RenderGame = () => {
 
-  const [moves, setMoves] = useState<number>(0)
-  const [bestScore, setBestScore] = useState<number>(
-    parseInt(localStorage.getItem('bestScore') || '0') || Number.MAX_SAFE_INTEGER
-  )
-  const finishGameCallback = () => {
-    const newBestScore = moves < bestScore ? moves : bestScore
-    setBestScore(newBestScore)
-    localStorage.setItem('bestScore', '' + newBestScore)
+  const [isTry, setTry] = useState<number>(() => {
+    return localStorage.getItem("value") ? Number(localStorage.getItem("value")) : 0;
+  });
+
+  const [showResult, setShowResult] = useState(false);
+
+  const handleFinish = (val: boolean) => {
+    if (val) {
+      setTry(prevState => prevState + 1);
+    }
   }
+
+  const handleReload = () => {
+    setShowResult(false)
+  }
+
+  useEffect(() => {
+    localStorage.setItem("value", String(isTry));
+  }, [isTry])
 
   return (
     <div className={s.wrap}>
-      <Board
-        setMoves={setMoves}
-        finishGameCallback={finishGameCallback}
-        cardIds={cardIds}
-      />
+      {
+        showResult ? (
+          <FinishGame
+            onReload={handleReload}
+            count={isTry}
+          />
+        ) : (
+          <Board
+            onFinish={handleFinish}
+            onChange={setShowResult}
+            cardIds={cardIds}
+          />
+        )
+      }
+
     </div>
   )
 }

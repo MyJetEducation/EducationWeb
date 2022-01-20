@@ -3,17 +3,26 @@ import Card from '../Card';
 
 import s from './style.module.scss';
 
-type BoardProps = {
-  setMoves: React.Dispatch<React.SetStateAction<number>>
-  finishGameCallback: () => void
+interface boardProps {
+  onChange: any,
+  onFinish: (data: boolean) => void,
   cardIds: Array<{ value: number, src: string}>
 }
 
-function Board(props: BoardProps) {
+const Board: React.FC<boardProps> = ({onChange, cardIds, onFinish}) => {
   const [openCards, setOpenCards] = useState<Array<number>>([]);
   const [clearedCards, setClearedCards] = useState<Array<number>>([]);
   const [shouldDisableAllCards, setShouldDisableAllCards] = useState<boolean>(false);
   const timeout = useRef<NodeJS.Timeout>(setTimeout(()=>{}));
+
+  console.log("####: clearedCards", clearedCards);
+
+  useEffect(() => {
+    if (cardIds.length === clearedCards.length) {
+      onFinish && onFinish(true);
+      onChange && onChange(true)
+    }
+  }, [cardIds, clearedCards])
 
   const disable = () => {
     setShouldDisableAllCards(true);
@@ -21,12 +30,6 @@ function Board(props: BoardProps) {
   const enable = () => {
     setShouldDisableAllCards(false);
   };
-
-  const checkCompletion = () => {
-    if (clearedCards.length === props.cardIds.length) {
-      props.finishGameCallback()
-    }
-  }
 
   const evaluate = () => {
     const [first, second] = openCards;
@@ -48,7 +51,7 @@ function Board(props: BoardProps) {
       // in this case we have alredy selected one card
       // this means that we are finishing a move
       setOpenCards((prev) => [...prev, id]);
-      props.setMoves((moves) => moves + 1)
+      // setMoves((moves) => moves + 1)
       disable();
     } else {
       // in this case this is the first card we select
@@ -68,7 +71,7 @@ function Board(props: BoardProps) {
   }, [openCards]);
 
   useEffect(() => {
-    checkCompletion();
+    // checkCompletion();
   }, [clearedCards]);
 
   const checkIsFlipped = (id: number) => {
@@ -81,7 +84,7 @@ function Board(props: BoardProps) {
 
   return (
     <div className={s.board}>
-      {props.cardIds.map((i) => {
+      {cardIds.map((i) => {
         return <Card
           key={i.value}
           image={i.src}

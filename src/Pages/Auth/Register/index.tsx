@@ -26,7 +26,7 @@ export const Register = () => {
 
   useEffect(() => {
     if ( auth.user ) {
-      navigate("/plans");
+      navigate("/dashboard");
     }
   },);
 
@@ -58,10 +58,10 @@ export const Register = () => {
     e.preventDefault();
     const getAuth = async () => {
 
-      const data = await req("createAccount", {"userName": email, "password": password})
+      const data = await req("createAccount", {"fullName": nameValue, "userName": email, "password": password})
 
       setLoading(false);
-
+      console.log("####: data", data);
       auth.signIn(data, () => {
         navigate('/plans');
       })

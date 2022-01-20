@@ -10,8 +10,8 @@ export const menuSlicer = createSlice({
   initialState,
   reducers: {
     validChange: (state, action: PayloadAction<string>) => {
-      state[action.payload].valid = true
-
+      state[action.payload].valid = true;
+      console.log("####: state", state);
       // setMenu((prevState: any) => {
       //   const copyState = [...prevState];
       //   copyState[currentIndex].valid = true;
@@ -20,6 +20,11 @@ export const menuSlicer = createSlice({
     }
   }
 });
+
+export const validChangeAsync = (id: string) => (dispatch: any) => {
+  dispatch(validChange(id))
+  return Promise.resolve()
+}
 
 export const {validChange} = menuSlicer.actions;
 

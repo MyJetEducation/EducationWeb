@@ -50,14 +50,13 @@ const caseText = `
 
 `
 
-
 export const ARRAY = [
   {
     id: "1",
     type: "1.1 Text:",
     title: "Your goal by S.M.A.R.T. and life cases",
     icon: textIcon,
-    time: "~1 min",
+    time: "≈5 min",
     valid: false
   },
   {
@@ -65,7 +64,7 @@ export const ARRAY = [
     type: "1.2 Test: ",
     title: "What is S.M.A.R.T.",
     icon: testIcon,
-    time: "~2 min",
+    time: "≈2 min",
     valid: false
   },
   {
@@ -73,7 +72,7 @@ export const ARRAY = [
     type: "1.3 Video: ",
     title: "How to be successful?",
     icon: videoICon,
-    time: "~5 min",
+    time: "≈5 min",
     valid: false
   },
   {
@@ -81,7 +80,7 @@ export const ARRAY = [
     type: "1.4 Case: ",
     title: "#1 SMART technology",
     icon: testIcon,
-    time: "~5 min",
+    time: "≈10 min",
     valid: false
   },
   {
@@ -89,7 +88,7 @@ export const ARRAY = [
     type: "1.5 Test: ",
     title: "Let’s help Amanda",
     icon: testIcon,
-    time: "~5 min",
+    time: "≈5 min",
     valid: false
   },
   {
@@ -97,7 +96,7 @@ export const ARRAY = [
     type: "1.6 Game: ",
     title: "Match a pair",
     icon: testIcon,
-    time: "~5 min",
+    time: "≈10 min",
     valid: false
   }
 ];
@@ -328,14 +327,14 @@ export const ARRAY_2 = {
           answer: [
             {
               id: "2answer1",
-              name: "q2",
+              name: "2q",
               param: false,
               value: "q1",
               textAnswer: "True"
             },
             {
               id: "2answer2",
-              name: "q2",
+              name: "2q",
               param: true,
               value: "q2",
               textAnswer: "False"
@@ -348,14 +347,14 @@ export const ARRAY_2 = {
           answer: [
             {
               id: "3answer1",
-              name: "q3",
+              name: "3q",
               param: false,
               value: "q1",
               textAnswer: "True"
             },
             {
               id: "3answer2",
-              name: "q3",
+              name: "3q",
               param: true,
               value: "q2",
               textAnswer: "False"
@@ -368,14 +367,14 @@ export const ARRAY_2 = {
           answer: [
             {
               id: "4answer1",
-              name: "q4",
+              name: "4q",
               param: false,
               value: "q1",
               textAnswer: "True"
             },
             {
               id: "4answer2",
-              name: "q4",
+              name: "4q",
               param: true,
               value: "q2",
               textAnswer: "False"
@@ -388,14 +387,14 @@ export const ARRAY_2 = {
           answer: [
             {
               id: "5answer1",
-              name: "q5",
+              name: "5q",
               param: false,
               value: "q1",
               textAnswer: "True"
             },
             {
               id: "5answer2",
-              name: "q5",
+              name: "5q",
               param: true,
               value: "q1",
               textAnswer: "False"

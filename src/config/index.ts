@@ -5,26 +5,27 @@ export enum configEndpoint {
   putKeyValue = "putKeyValue"
 };
 
-const urlServer = new URL(process.env.REACT_APP_APISERVICELOGIN as string);
-console.log("####: urlServer", urlServer);
+const urlServerLogin = new URL(process.env.REACT_APP_APISERVICELOGIN as string);
+const urlServerRegister = new URL(process.env.REACT_APP_APISERVICEREGISTER as string);
+
 const config = {
   client: {
     server: {
-      protocol: urlServer.protocol,
-      host: urlServer.host,
-      port: urlServer.port
+      protocol: urlServerLogin.protocol,
+      host: urlServerLogin.host,
+      port: urlServerLogin.port
     },
     endpoint: {
       [configEndpoint.authLogin]: {
         method: "POST",
         uri: {
-          pathname: urlServer.pathname
+          pathname: urlServerLogin.pathname
         }
       },
       [configEndpoint.createAccount]: {
         method: "POST",
         uri: {
-          pathname: "/api/register/v1/create"
+          pathname: urlServerRegister.pathname
         }
       },
       [configEndpoint.getKeyValue]: {

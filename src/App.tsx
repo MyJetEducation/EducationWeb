@@ -12,6 +12,7 @@ import FreeLesson from "./Pages/OnBoarding";
 import {FreeQuestions} from "./Pages/FreeLesson";
 import SummaryBord from "./Pages/FreeLesson/components/SummaryBord";
 import Plans from "./Pages/PlansPayment/Plans";
+import {DashBoard} from "./Pages/Dashboard";
 
 
 export const App = () => {
@@ -38,6 +39,13 @@ export const App = () => {
           <Route path="/plans" element={(
             <RequireAuth>
               <Plans/>
+            </RequireAuth>
+
+          )}/>
+
+          <Route path="/dashboard" element={(
+            <RequireAuth>
+              <DashBoard/>
             </RequireAuth>
 
           )}/>

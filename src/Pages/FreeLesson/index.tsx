@@ -8,7 +8,6 @@ import QuestionContent from "./components/QuestionContent";
 
 import {ARRAY_2} from "./constans";
 
-import Breadcrumbs from "../../components/Breadcrumbs";
 
 import {useDispatch, useSelector} from "react-redux";
 import {currentIdSelector, menuSelector, validChange} from "../../store/menuSlicer";
@@ -67,21 +66,9 @@ export const FreeQuestions = () => {
   }, [menu, currentIndex]);
 
 
-  // TODO: надо разобраться с этой функцией
   useEffect(() => {
     setFetch(menu)
-
-    return () => {
-      if (currentIndex === menu.length - 1) {
-        const fn = (menu: any) => {
-          const copyState = [...menu];
-          copyState[currentIndex].valid = true;
-          return copyState;
-        }
-        setFetch(fn(menu))
-      }
-    }
-  }, [menu, currentIndex])
+  }, [menu])
 
   const handleClickNextQuestion = () => {
     // TODO: доделать на Redux
@@ -95,7 +82,9 @@ export const FreeQuestions = () => {
       }
       return newState;
     });
-    dispatch(validChange(currentIndex))
+
+    dispatch(validChange(currentIndex));
+
     if (currentIndex === menu.length - 1) {
       navigate(`/finish`);
     } else {
@@ -117,7 +106,6 @@ export const FreeQuestions = () => {
 
   return (
     <Container>
-      <Breadcrumbs questionName={menu}/>
       <h1 className={s.title}>{data.title}</h1>
       <div className={s.wrap}>
 

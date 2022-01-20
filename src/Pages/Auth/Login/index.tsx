@@ -13,7 +13,6 @@ import {configEndpoint} from "../../../config";
 import {useAuth} from "../../../hooks/auth";
 import req from "../../../utils/request";
 
-
 import s from "./style.module.scss";
 
 export const Login = () => {
@@ -25,7 +24,6 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [isDisabled, setDisabled] = useState(true);
-
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,7 +43,7 @@ export const Login = () => {
     if ( auth.user ) {
       navigate("/");
     }
-  },);
+  }, []);
 
   useEffect(() => {
     if ( email.length >= 1 && password.length >= 1) {
