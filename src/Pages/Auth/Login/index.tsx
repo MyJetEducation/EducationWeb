@@ -7,7 +7,7 @@ import {Input} from "../../../components/Inputs/InputEmailOrPass";
 import {AllReadyAccount} from "../../../components/AllReadyAccount";
 import {OrContinueWith} from "../../../components/OrContinueWith";
 
-import {setToken} from "../../../store/userSlicer";
+import {setRefreshToken, setToken} from "../../../store/userSlicer";
 
 import {configEndpoint} from "../../../config";
 import {useAuth} from "../../../hooks/auth";
@@ -31,7 +31,11 @@ export const Login = () => {
       const data = await req(configEndpoint.authLogin, {userName: email, password})
       setLoading(false);
       dispatch(setToken(data.data.token));
+      dispatch(setRefreshToken(data.data.refreshToken));
       auth.signIn(data.data.token, () => {
+        navigate('/');
+      })
+      auth.signInRefresh(data.data.refreshToken, () => {
         navigate('/');
       })
     }

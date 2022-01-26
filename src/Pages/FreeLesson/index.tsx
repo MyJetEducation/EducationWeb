@@ -47,11 +47,11 @@ export const FreeQuestions = () => {
       }, -1);
 
       if (valid !== -1 && menu.length - 1 !== valid) {
-        navigate(`/quest/lesson/${menu[valid + 1].id}`)
+        navigate(`/free/lesson/${menu[valid + 1].id}`)
       } else if (menu.length - 1 === valid) {
         navigate("/finish")
       } else {
-        navigate(`/quest/lesson/${menu[0].id}`)
+        navigate(`/free/lesson/${menu[0].id}`)
       }
     }
   }, [id, navigate]);
@@ -88,8 +88,9 @@ export const FreeQuestions = () => {
     if (currentIndex === menu.length - 1) {
       navigate(`/finish`);
     } else {
-      navigate(`/quest/lesson/${nextQuestion}`);
+      navigate(`/free/lesson/${nextQuestion}`);
     }
+
   }
 
   const lastQuestion = useCallback(() => {

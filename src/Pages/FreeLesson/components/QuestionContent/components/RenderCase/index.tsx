@@ -33,13 +33,11 @@ const RenderCase: React.FC<renderCaseProps> = ({content}) => {
         children={content[0].html_text}
         remarkPlugins={[remarkGfm]}
       />
-
       <RadioBlock
         onChange={setAnswer}
         content={content}
         size="small"
       />
-
     </div>
 
   )

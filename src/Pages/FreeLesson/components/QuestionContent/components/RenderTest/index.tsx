@@ -14,18 +14,12 @@ interface renderTestProps {
 }
 
 const RenderTest: React.FC<renderTestProps> = ({content}) => {
-
   const {id} = useParams<"id">();
-
   const dispatch = useDispatch();
-
   const currentIndex = useSelector(currentIdSelector(id as string));
-
   const [showResult, setShowResult] = useState(false);
   const [percent, setPercent] = useState(0);
   const [answer, setAnswer] = useState({});
-
-  console.log("####: answerTest", answer);
 
   useEffect(() => {
     if (showResult) {
@@ -39,7 +33,6 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
       dispatch(setDisabledBtn(true))
     }
   }, [showResult])
-
 
   return (
     <>

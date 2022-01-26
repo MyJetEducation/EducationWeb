@@ -61,7 +61,6 @@ export const Register = () => {
       const data = await req("createAccount", {"fullName": nameValue, "userName": email, "password": password})
 
       setLoading(false);
-      console.log("####: data", data);
       auth.signIn(data, () => {
         navigate('/plans');
       })

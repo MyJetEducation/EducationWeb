@@ -54,6 +54,9 @@ const DisciplineBlock = () => {
           ))
         }
       </div>
+      <div className={s.tasks}>
+
+      </div>
     </div>
   )
 }

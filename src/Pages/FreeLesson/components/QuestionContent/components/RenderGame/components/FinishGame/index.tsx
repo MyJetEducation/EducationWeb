@@ -2,16 +2,13 @@ import React, {useEffect, useState} from 'react';
 
 import s from './style.module.scss'
 import {Button} from "../../../../../../../../components/Button";
-import {useNavigate} from "react-router-dom";
 
 const FinishGame: React.FC<{count: number, onReload: () => void}> = ({ count, onReload}) => {
-
   const [disabled, setDisabled] = useState(false);
 
   const handleResetGame = () => {
     onReload && onReload();
   }
-
 
   useEffect(() => {
     if ( count === 3) {

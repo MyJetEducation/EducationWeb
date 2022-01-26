@@ -8,18 +8,18 @@ import {Container} from "../../../../components/Container";
 import {menuSelector} from "../../../../store/menuSlicer";
 
 import map from '../../../OnBoarding/assets/source_map.png';
-import achiv from './assets/achiv.svg';
+import achievementIcon from './assets/achiv.svg';
 
 import s from './style.module.scss';
 
-const SummaryBord = () => {
+export const SummaryBord = () => {
   const menu = useSelector(menuSelector);
   const navigate = useNavigate();
 
   useEffect(() => {
     const data: any = localStorage.getItem("key");
     if (!data) {
-      navigate("/quest/lessons/1")
+      navigate("/free/lessons/1")
     }
   }, []);
 
@@ -68,7 +68,7 @@ const SummaryBord = () => {
             <div className={s.achievementsList}>
               <div className={s.achievementsItem}>
                 <div className={s.achiv}>
-                  <img src={achiv} alt="achiv"/>
+                  <img src={achievementIcon} alt="achievement"/>
                 </div>
                 <p className={s.achivDescr}>
                   хороший старт
@@ -99,5 +99,3 @@ const SummaryBord = () => {
 
   )
 }
-
-export default SummaryBord;

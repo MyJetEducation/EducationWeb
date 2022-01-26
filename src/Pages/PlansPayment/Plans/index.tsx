@@ -7,7 +7,7 @@ import cn from 'classnames';
 
 import s from './style.module.scss';
 
-const Plans = () => {
+export const Plans = () => {
   const [activePartner, setActivePartner] = useState(false);
   const [activeCustomer, setActiveCustomer] = useState(false);
 
@@ -136,5 +136,3 @@ const Plans = () => {
     </div>
   )
 }
-
-export default Plans;

@@ -1,19 +1,20 @@
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {Header} from "./components/Header";
+
 import {Login} from "./Pages/Auth/Login";
+import {Plans} from "./Pages/PlansPayment/Plans";
+import {Header} from "./components/Header";
 import {Register} from "./Pages/Auth/Register";
 import {HomePage} from "./Pages/Home";
-import {ForgotPassWord} from "./Pages/Auth/ForgotPassword";
-import {AuthProvider} from "./context/AuthProvider";
-import {Questions} from "./Pages/Questions";
-import {RequireAuth} from "./components/RequireAuth";
-import FreeLesson from "./Pages/OnBoarding";
-import {FreeQuestions} from "./Pages/FreeLesson";
-import SummaryBord from "./Pages/FreeLesson/components/SummaryBord";
-import Plans from "./Pages/PlansPayment/Plans";
 import {DashBoard} from "./Pages/Dashboard";
-
+import {Questions} from "./Pages/Questions";
+import {FreeLesson} from "./Pages/OnBoarding";
+import {SummaryBord} from "./Pages/FreeLesson/components/SummaryBord";
+import {RequireAuth} from "./components/RequireAuth";
+import {AuthProvider} from "./context/AuthProvider";
+import {FreeQuestions} from "./Pages/FreeLesson";
+import {ForgotPassWord} from "./Pages/Auth/ForgotPassword";
+import {Lesson} from "./Pages/Сourse/Lesson";
 
 export const App = () => {
   return (
@@ -26,8 +27,9 @@ export const App = () => {
           <Route path="/register" element={<Register/>}/>
           <Route path="/forgot" element={<ForgotPassWord/>}/>
           <Route path="/free" element={<FreeLesson/>}/>
-          <Route path="/quest/:lesson/:id" element={<FreeQuestions/>}/>
+          <Route path="/free/:lesson/:id" element={<FreeQuestions/>}/>
           <Route path="/finish" element={<SummaryBord/>}/>
+          {/*<Route path="/:lesson/:id" element={<Lesson/>}/>*/}
 
 
           <Route path="/start" element={(
@@ -46,6 +48,12 @@ export const App = () => {
           <Route path="/dashboard" element={(
             <RequireAuth>
               <DashBoard/>
+            </RequireAuth>
+
+          )}/>
+          <Route path="/:lesson/:id" element={(
+            <RequireAuth>
+              <Lesson/>
             </RequireAuth>
 
           )}/>

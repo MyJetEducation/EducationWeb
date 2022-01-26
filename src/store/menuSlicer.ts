@@ -11,7 +11,6 @@ export const menuSlicer = createSlice({
   reducers: {
     validChange: (state, action: PayloadAction<string>) => {
       state[action.payload].valid = true;
-      console.log("####: state", state);
       // setMenu((prevState: any) => {
       //   const copyState = [...prevState];
       //   copyState[currentIndex].valid = true;

@@ -6,12 +6,12 @@ import s from './style.module.scss'
 import {Button} from "../../components/Button";
 import {useNavigate} from "react-router-dom";
 
-const FreeLesson = () => {
+export const FreeLesson = () => {
 
   const navigate = useNavigate();
 
   const handleClickStartFreeLesson = () => {
-    navigate('/quest/lessons/1')
+    navigate('/free/lessons/1')
   }
 
   return (
@@ -31,4 +31,3 @@ const FreeLesson = () => {
   )
 }
 
-export default FreeLesson;

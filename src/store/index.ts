@@ -3,13 +3,17 @@ import counterSlicer from "./counterSlicer";
 import userSlicer from "./userSlicer";
 import menuSlicer from "./menuSlicer";
 import testSlicer from "./testSlicer";
+import dashboardSlicer from "./dashboardSlicer";
+import progressMenuSlicer from "./progressMenuSlicer";
 
 export const store = configureStore({
   reducer: {
     counter: counterSlicer,
     user: userSlicer,
     menu: menuSlicer,
-    test: testSlicer
+    test: testSlicer,
+    dashboard: dashboardSlicer,
+    progressMenu: progressMenuSlicer
   },
 })
 

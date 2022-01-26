@@ -60,7 +60,12 @@ export const Header = () => {
           {
             auth.user && (
               <div className={s.auth}>
-                <div className={s.singUp} onClick={() => auth.signOut(() => navigate("/"))}>Sing Out</div>
+                <div
+                  className={s.userProfile}
+                  onClick={() => auth.signOut(() => navigate("/"))}
+                >
+                  DS
+                </div>
               </div>
             )
           }

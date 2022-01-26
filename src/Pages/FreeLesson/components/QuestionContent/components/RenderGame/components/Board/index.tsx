@@ -15,8 +15,6 @@ const Board: React.FC<boardProps> = ({onChange, cardIds, onFinish}) => {
   const [shouldDisableAllCards, setShouldDisableAllCards] = useState<boolean>(false);
   const timeout = useRef<NodeJS.Timeout>(setTimeout(()=>{}));
 
-  console.log("####: clearedCards", clearedCards);
-
   useEffect(() => {
     if (cardIds.length === clearedCards.length) {
       onFinish && onFinish(true);

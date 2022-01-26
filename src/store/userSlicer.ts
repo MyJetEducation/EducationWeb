@@ -2,11 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {RootState} from "./index";
 
 export interface UserState {
-  token: string | null
+  token: string | null,
+  refreshToken: string | null
 }
 
 const initialState: UserState = {
   token: localStorage.getItem("token") || null,
+  refreshToken: localStorage.getItem("refreshToken") || null,
 }
 
 export const userSlicer = createSlice({
@@ -15,13 +17,18 @@ export const userSlicer = createSlice({
   reducers: {
     setToken: (state, action: PayloadAction<string>) => {
       state.token += action.payload
-    }
+    },
+    setRefreshToken: (state, action: PayloadAction<string>) => {
+      state.refreshToken += action.payload
+    },
   }
 });
 
 export const {setToken} = userSlicer.actions;
+export const {setRefreshToken} = userSlicer.actions;
 
 export const userTokenSelector = (state: RootState) => state.user.token;
+export const userRefreshTokenSelector = (state: RootState) => state.user.refreshToken;
 
 
 export default userSlicer.reducer;

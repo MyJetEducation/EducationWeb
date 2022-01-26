@@ -20,8 +20,6 @@ const RenderQuestion = ({qNumber, onActive}: any) => {
     })
   }
 
-  console.log("####: answer", answer);
-
   const type = QUESTIONS[qNumber].answer.type;
   switch (type) {
     case "radio":
