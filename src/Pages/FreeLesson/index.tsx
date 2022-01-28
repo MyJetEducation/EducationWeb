@@ -2,18 +2,18 @@ import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 
 import {Container} from "../../components/Container";
-import {ProgressMenu} from "./components/ProgressMenu";
+import {ProgressMenu} from "../../components/ProgressMenu";
 import {QuestionFooter} from "./components/QuestionFooter";
 import QuestionContent from "./components/QuestionContent";
 
 import {ARRAY_2} from "./constans";
-
 
 import {useDispatch, useSelector} from "react-redux";
 import {currentIdSelector, menuSelector, validChange} from "../../store/menuSlicer";
 import {testSelector} from "../../store/testSlicer";
 
 import s from './style.module.scss';
+import {UserLocationCheck} from "../../hooks/uerLocationCheck";
 
 export const FreeQuestions = () => {
 
@@ -28,7 +28,6 @@ export const FreeQuestions = () => {
   const data = useMemo(() => ARRAY_2[id as keyof typeof ARRAY_2], [id]);
 
   const currentIndex = useSelector(currentIdSelector(id as string));
-
   const currentLessonTime = useMemo(() => menu[currentIndex]?.time,[menu, currentIndex]);
 
   const setFetch = async (val: any) => {
@@ -37,24 +36,7 @@ export const FreeQuestions = () => {
     return data;
   };
 
-  useEffect(() => {
-    if (menu.length > 0) {
-      const valid = menu.reduce((acc: any, item: any, index: any) => {
-        if (item.valid === true) {
-          acc = index
-        }
-        return acc
-      }, -1);
-
-      if (valid !== -1 && menu.length - 1 !== valid) {
-        navigate(`/free/lesson/${menu[valid + 1].id}`)
-      } else if (menu.length - 1 === valid) {
-        navigate("/finish")
-      } else {
-        navigate(`/free/lesson/${menu[0].id}`)
-      }
-    }
-  }, [id, navigate]);
+  UserLocationCheck(menu, id, "free/lesson");
 
   const nextQuestion = useMemo(() => {
     const index = currentIndex + 1;
@@ -111,7 +93,6 @@ export const FreeQuestions = () => {
       <div className={s.wrap}>
 
         <QuestionContent
-          index={currentIndex}
           id={id}
         />
 

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 
-import {ProgressMenu} from "../ProgressMenu";
+import {ProgressMenu} from "../../../../components/ProgressMenu";
 import {QuestionFooter} from "../QuestionFooter";
 import {Container} from "../../../../components/Container";
 import {menuSelector} from "../../../../store/menuSlicer";

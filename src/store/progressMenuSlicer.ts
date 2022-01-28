@@ -23,6 +23,9 @@ export const progressMenuSlicer = createSlice({
     fetchProgressMenuReject: (state, action: PayloadAction<any>) => {
       state.isLoading = false
       state.error = action.payload
+    },
+    progressMenuValidChange: (state, action: PayloadAction<string>) => {
+      state.data[action.payload].valid = true;
     }
   }
 });
@@ -42,10 +45,9 @@ export const progressMenuAsync = () => async (dispatch: any) => {
   };
 }
 
-export const {fetchProgressMenu, fetchProgressMenuResolve, fetchProgressMenuReject} = progressMenuSlicer.actions;
+export const {fetchProgressMenu, fetchProgressMenuResolve, fetchProgressMenuReject, progressMenuValidChange} = progressMenuSlicer.actions;
 
+export const currentIdSelector = (id: string) => (state: RootState) => state.menu.findIndex((item: any) => item?.id === id);
 export const progressMenuSelector = (state: RootState) => state.progressMenu;
-export const currentIdProgressMenuSelector = (id: string) => (state: RootState) => state.progressMenu.findIndex((item: any) => item?.id === id);
 
 export default progressMenuSlicer.reducer;
-

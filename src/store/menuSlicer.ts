@@ -30,6 +30,5 @@ export const {validChange} = menuSlicer.actions;
 export const menuSelector = (state: RootState) => state.menu;
 export const currentIdSelector = (id: string) => (state: RootState) => state.menu.findIndex((item: any) => item?.id === id);
 
-
 export default menuSlicer.reducer;
 

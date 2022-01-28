@@ -62,7 +62,6 @@ async function req(endpoint: string, query: any) {
         } catch (error) {
           return error
         };
-
       }
       return res.json()
     });

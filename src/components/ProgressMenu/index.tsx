@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import cn from "classnames";
 
-import check from "../../assets/check.png";
+import check from "./assets/check.png";
 
 import s from "./style.module.scss";
 
