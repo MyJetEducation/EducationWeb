@@ -1,9 +1,9 @@
-import React from "react";
+import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
-export function UserLocationCheck(menu: any, id: string | undefined, nav: string) {
+export function useLocationCheck(menu: any, id: string | undefined, url: string) {
   const navigate = useNavigate();
-  return React.useEffect(() => {
+   useEffect(() => {
     if (menu.length > 0) {
       const valid = menu.reduce((acc: any, item: any, index: any) => {
         if (item.valid === true) {
@@ -13,11 +13,11 @@ export function UserLocationCheck(menu: any, id: string | undefined, nav: string
       }, -1);
 
       if (valid !== -1 && menu.length - 1 !== valid) {
-        navigate(`/${nav}/${menu[valid + 1].id}`)
+        navigate(`/${url}/${menu[valid + 1].id}`)
       } else if (menu.length - 1 === valid) {
         navigate("/finish")
       } else {
-        navigate(`/${nav}/${menu[0].id}`)
+        navigate(`/${url}/${menu[0].id}`)
       }
     }
   }, [id, navigate]);

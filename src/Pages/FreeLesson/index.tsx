@@ -13,7 +13,7 @@ import {currentIdSelector, menuSelector, validChange} from "../../store/menuSlic
 import {testSelector} from "../../store/testSlicer";
 
 import s from './style.module.scss';
-import {UserLocationCheck} from "../../hooks/uerLocationCheck";
+import {useLocationCheck} from "../../hooks/useLocationCheck";
 
 export const FreeQuestions = () => {
 
@@ -36,7 +36,7 @@ export const FreeQuestions = () => {
     return data;
   };
 
-  UserLocationCheck(menu, id, "free/lesson");
+  useLocationCheck(menu, id, "free/lesson");
 
   const nextQuestion = useMemo(() => {
     const index = currentIndex + 1;

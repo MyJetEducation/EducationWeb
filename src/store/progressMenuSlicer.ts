@@ -38,11 +38,24 @@ export const progressMenuAsync = () => async (dispatch: any) => {
         "progressMenuUnit1"
       ]
     });
-    const items = JSON.parse(data.data.items[0].value)
+    const items = JSON.parse(data.data.items[0].value);
+    console.log("####: items", items);
     dispatch(fetchProgressMenuResolve(items))
   } catch (error) {
     dispatch(fetchProgressMenuReject("Some Error"))
   };
+}
+
+export const setProgressMenuAsync = (currentIndex: string) => async (dispatch: any, getState: () => RootState)  => {
+  dispatch(progressMenuValidChange(currentIndex));
+  await req(configEndpoint.putKeyValue, {
+    "items": [
+      {
+        "key": "progressMenuUnit1",
+        "value": JSON.stringify(getState().progressMenu.data)
+      }
+    ]
+  });
 }
 
 export const {fetchProgressMenu, fetchProgressMenuResolve, fetchProgressMenuReject, progressMenuValidChange} = progressMenuSlicer.actions;
