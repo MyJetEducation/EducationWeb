@@ -6,6 +6,8 @@ import RenderVideo from "../../../../FreeLesson/components/QuestionContent/compo
 import RenderCase from "../../../../FreeLesson/components/QuestionContent/components/RenderCase";
 import RenderTestTrueOrFalse from "../../../../FreeLesson/components/QuestionContent/components/RenderTestTrueOrFalse";
 import {RenderGame} from "../../../../FreeLesson/components/QuestionContent/components/RenderGame";
+import req from "../../../../../utils/request";
+import {configEndpoint} from "../../../../../config";
 
 interface lessonContentProps {
   id: string | undefined,
@@ -14,7 +16,13 @@ interface lessonContentProps {
 }
 
 const LessonContent: React.FC<lessonContentProps> = ({id , index, menu}) => {
-  const dataQuest = useMemo(() => LESSON_CONTENT[id as keyof typeof LESSON_CONTENT].description,[id])
+
+
+
+  const dataQuest = useMemo(() => (
+    LESSON_CONTENT[id as keyof typeof LESSON_CONTENT].description
+  ),[id]);
+
   switch (dataQuest.type) {
     case "text":
       return (

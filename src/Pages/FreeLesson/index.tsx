@@ -21,14 +21,13 @@ export const FreeQuestions = () => {
   const dispatch = useDispatch();
 
   const [time, setTime] = useState<any>({});
-
   const disabled = useSelector(testSelector);
   const navigate = useNavigate();
   const {id} = useParams<"id">();
   const data = useMemo(() => ARRAY_2[id as keyof typeof ARRAY_2], [id]);
 
   const currentIndex = useSelector(currentIdSelector(id as string));
-  const currentLessonTime = useMemo(() => menu[currentIndex]?.time,[menu, currentIndex]);
+  const currentLessonTime = useMemo(() => menu[currentIndex]?.time, [menu, currentIndex]);
 
   const setFetch = async (val: any) => {
     const value = JSON.stringify(val);
@@ -36,7 +35,7 @@ export const FreeQuestions = () => {
     return data;
   };
 
-  useLocationCheck(menu, id, "free/lesson");
+  // useLocationCheck(menu, id, "free/lesson");
 
   const nextQuestion = useMemo(() => {
     const index = currentIndex + 1;
@@ -62,17 +61,16 @@ export const FreeQuestions = () => {
           end: new Date()
         },
       }
+      console.log("####: newState", newState);
       return newState;
     });
 
     dispatch(validChange(currentIndex));
-
     if (currentIndex === menu.length - 1) {
       navigate(`/finish`);
     } else {
       navigate(`/free/lesson/${nextQuestion}`);
     }
-
   }
 
   const lastQuestion = useCallback(() => {
@@ -83,15 +81,14 @@ export const FreeQuestions = () => {
   }, [currentIndex, menu]);
 
   // timer
-  // useEffect(() => {
-  //   setTime({...time, [id as keyof typeof time]: {start: new Date()}});
-  // }, [id]);
+  useEffect(() => {
+    setTime({...time, [id as keyof typeof time]: {start: new Date()}});
+  }, [id]);
 
   return (
     <Container>
       <h1 className={s.title}>{data.title}</h1>
       <div className={s.wrap}>
-
         <QuestionContent
           id={id}
         />

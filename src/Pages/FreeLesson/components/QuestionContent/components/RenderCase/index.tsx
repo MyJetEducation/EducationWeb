@@ -7,6 +7,7 @@ import RadioBlock from "../../../RadioBlock";
 import {setDisabledBtn} from "../../../../../../store/testSlicer";
 
 import s from './style.module.scss';
+import {setStartTimer} from "../../../../../../store/timerSlicer";
 
 interface renderCaseProps {
   content: any
@@ -15,6 +16,10 @@ interface renderCaseProps {
 const RenderCase: React.FC<renderCaseProps> = ({content}) => {
   const [answer, setAnswer] = useState({});
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setStartTimer());
+  }, []);
 
   useEffect(() => {
     const fn = ((obj: any) => {

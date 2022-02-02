@@ -1,6 +1,6 @@
 .wrap {
   width: 300px;
-  height: 715px;
+  height: 100%;
   border: 2px solid #E0E5EB;
   border-radius: 32px;
   padding: 21px 0 32px;
@@ -31,7 +31,6 @@
   &__line {
     position: relative;
     &_all {
-
       width: 100%;
       background: #E0E5EB;
       height: 4px;

@@ -11,6 +11,7 @@ import {checkAnswers, similarResult} from "../../../../../../utils";
 
 import {setDisabledBtn} from "../../../../../../store/testSlicer";
 import {currentIdSelector, validChange} from "../../../../../../store/menuSlicer";
+import {setStartTimer} from "../../../../../../store/timerSlicer";
 
 
 interface   renderTestTrueOrFalse {
@@ -24,6 +25,10 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
   const [showResult, setShowResult] = useState(false);
   const [percent, setPercent] = useState(0);
   const currentIndex = useSelector(currentIdSelector(id as string));
+
+  useEffect(() => {
+    dispatch(setStartTimer());
+  }, []);
 
   useEffect(() => {
     if (showResult) {

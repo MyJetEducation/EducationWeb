@@ -100,6 +100,8 @@ export const PROGRESS_MENU = [
     valid: false
   }
 ];
+// "value": "[{\"id\":\"1\",\"type\":\"1.1 Text:\",\"title\":\"Your goal by S.M.A.R.T. and life cases\",\"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACzSURBVHgB7ZPBDcIwDEXtiAGyDEKoSMAkrAATEDboCN0EKhUBgiEYIQskJkFNCZWrprce+i52LOfLib4Rasrba0fG5C6V8I9GFPk6m5+AQYSErFHMZY8ksqq8Po+cAIbkUj3Ix81qgXFDqH+bUaj2JAIGwE2SIqDbIufqvk8WILQH99B3XEPAZopZn8A2WxYuFOFc/4lMnqCPSWAMArEPvONk7P1OImP9tpFxXAeawDYL9QFcaT6Ja5IKdAAAAABJRU5ErkJggg==\",\"time\":\"≈5 min\",\"valid\":false},{\"id\":\"2\",\"type\":\"1.2 Test: \",\"title\":\"What is S.M.A.R.T.\",\"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADKSURBVHgBvZPdCcJADMeTegN0BEfwQRCpoB2hE+gKblA3cAUn6AitUJGKYEdwhD7ba+NFej5VDZz0D/eV8EvC5Q7AUcjT8XxdU9PszdYXUnf0RvFyPj14fKa2icXwC4BxlxCUNfCyWsxQwmd5QTahB44aJkCaniZZfrn1+ZQERqUSqutIHCDNixJQb+BhOsaw1lEYBqU4AMMIKmHvN5jVewdhEJQEOvoFf66gCwICObfRVlCZ4XcvTCbzH94VELZbaxCqImh38A89AYeaSo4swr/gAAAAAElFTkSuQmCC\",\"time\":\"≈2 min\",\"valid\":false},{\"id\":\"3\",\"type\":\"1.3 Video: \",\"title\":\"How to be successful?\",\"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACpSURBVHgBxZLBDYJAEEX/rIQzJdCCJw56gBKsQCzBDrQDO7AFO9jVSAjEHqQD92wC42ICNyC7HHiXmWTy3+UPsDR0z197ruuL2QO7JCoSqxOprHiDEcIN7XXheBuRTVI9CzYjEJjJqEBl5VXKPHQWgDklX0j5KFM3wV/StsN66OyNZU1VN/76hyRZuwniTbTDBLNbINPnB7Zf2KdRCabm2C6wRzOaMxbnB4LOMP4WyImOAAAAAElFTkSuQmCC\",\"time\":\"≈5 min\",\"valid\":false},{\"id\":\"4\",\"type\":\"1.4 Case: \",\"title\":\"#1 SMART technology\",\"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADKSURBVHgBvZPdCcJADMeTegN0BEfwQRCpoB2hE+gKblA3cAUn6AitUJGKYEdwhD7ba+NFej5VDZz0D/eV8EvC5Q7AUcjT8XxdU9PszdYXUnf0RvFyPj14fKa2icXwC4BxlxCUNfCyWsxQwmd5QTahB44aJkCaniZZfrn1+ZQERqUSqutIHCDNixJQb+BhOsaw1lEYBqU4AMMIKmHvN5jVewdhEJQEOvoFf66gCwICObfRVlCZ4XcvTCbzH94VELZbaxCqImh38A89AYeaSo4swr/gAAAAAElFTkSuQmCC\",\"time\":\"≈10 min\",\"valid\":false},{\"id\":\"5\",\"type\":\"1.5 Test: \",\"title\":\"Let’s help Amanda\",\"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADKSURBVHgBvZPdCcJADMeTegN0BEfwQRCpoB2hE+gKblA3cAUn6AitUJGKYEdwhD7ba+NFej5VDZz0D/eV8EvC5Q7AUcjT8XxdU9PszdYXUnf0RvFyPj14fKa2icXwC4BxlxCUNfCyWsxQwmd5QTahB44aJkCaniZZfrn1+ZQERqUSqutIHCDNixJQb+BhOsaw1lEYBqU4AMMIKmHvN5jVewdhEJQEOvoFf66gCwICObfRVlCZ4XcvTCbzH94VELZbaxCqImh38A89AYeaSo4swr/gAAAAAElFTkSuQmCC\",\"time\":\"≈5 min\",\"valid\":false},{\"id\":\"6\",\"type\":\"1.6 Game: \",\"title\":\"Match a pair\",\"icon\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADKSURBVHgBvZPdCcJADMeTegN0BEfwQRCpoB2hE+gKblA3cAUn6AitUJGKYEdwhD7ba+NFej5VDZz0D/eV8EvC5Q7AUcjT8XxdU9PszdYXUnf0RvFyPj14fKa2icXwC4BxlxCUNfCyWsxQwmd5QTahB44aJkCaniZZfrn1+ZQERqUSqutIHCDNixJQb+BhOsaw1lEYBqU4AMMIKmHvN5jVewdhEJQEOvoFf66gCwICObfRVlCZ4XcvTCbzH94VELZbaxCqImh38A89AYeaSo4swr/gAAAAAElFTkSuQmCC\",\"time\":\"≈10 min\",\"valid\":false}]"
+
 
 export const LESSON_CONTENT = {
   "1": {
@@ -130,14 +132,14 @@ export const LESSON_CONTENT = {
               param: false,
               name: "1q",
               textAnswer: "My idea, that I keep in my mind and dream about every day",
-              value: "q1"
+              value: 1
             },
             {
               id: "1answer2",
               param: true,
               name: "1q",
               textAnswer: "My goal, that is measurable and achievable and costs less than $10,000",
-              value: "q2"
+              value: 2
             },
             {
               id: "1answer3",
@@ -145,7 +147,7 @@ export const LESSON_CONTENT = {
               name: "1q",
               textAnswer: "My goal is specific, measurable, achievable, relevant and \n" +
                 "time-bound.",
-              value: "q3"
+              value: 3
             }
           ]
         },
@@ -158,21 +160,21 @@ export const LESSON_CONTENT = {
               param: false,
               name: "2q",
               textAnswer: "Mental - you have to be able to think about the goal.",
-              value: "q1"
+              value: 1
             },
             {
               id: "2answer2",
               param: true,
               name: "2q",
               textAnswer: "Measurable - a goal must have some kind of number attached so you have a way to know if you are reaching the goal.",
-              value: "q2"
+              value: 2
             },
             {
               id: "2answer3",
               param: false,
               name: "2q",
               textAnswer: "Memorable - a goal must be easily remembered",
-              value: "q3"
+              value: 3
             }
           ]
         },
@@ -185,21 +187,21 @@ export const LESSON_CONTENT = {
               param: false,
               name: "3q",
               textAnswer: "Simple - a goal must be easy.",
-              value: "q1"
+              value: 1
             },
             {
               id: "3answer2",
               param: true,
               name: "3q",
               textAnswer: "Smart- a goal must make sense.",
-              value: "q2"
+              value: 2
             },
             {
               id: "3answer3",
               param: false,
               name: "3q",
               textAnswer: "Specific - a goal must be focused.",
-              value: "q3"
+              value: 3
             }
           ]
         },
@@ -212,14 +214,14 @@ export const LESSON_CONTENT = {
               param: false,
               name: "4q",
               textAnswer: "What kind of clothes do I need to take with me?",
-              value: "q1"
+              value: 1
             },
             {
               id: "4answer2",
               param: true,
               name: "4q",
               textAnswer: "When the holiday is, how much money I am planning to spend, and how much money I have now",
-              value: "q2"
+              value: 2
             },
           ]
         },
@@ -232,21 +234,21 @@ export const LESSON_CONTENT = {
               param: false,
               name: "5q",
               textAnswer: "I choose colours, shapes and amount of things that I want to buy",
-              value: "q1"
+              value: 1
             },
             {
               id: "5answer2",
               param: true,
               name: "5q",
               textAnswer: "I decide how much I need to spend on what I want, how much money I have now and when I can afford this furniture without credits.",
-              value: "q2"
+              value: 2
             },
             {
               id: "5answer3",
               param: false,
               name: "5q",
               textAnswer: "I decide if I really need it now, what it will bring to my life, I find furniture that I want and learn the price on the market, I count the amount of money that I have now and in how many months I can afford this furniture.",
-              value: "q3"
+              value: 3
             }
           ]
         }

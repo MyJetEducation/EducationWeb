@@ -6,7 +6,12 @@ export enum configEndpoint {
   delKeyValue = "delKeyValue",
   refreshToken = "refreshToken",
   createAccount = "createAccount",
-  allKeysKeyValue = "allKeysKeyValue"
+  allKeysKeyValue = "allKeysKeyValue",
+  unit1Text = "unit1Text",
+  unit1Test = "unit1Test",
+  unit1Case = "unit1Case",
+  unit1TrueFalse = "unit1TrueFalse",
+  unit1Game = "unit1Game",
 };
 
 const urlServerLogin = new URL(process.env.REACT_APP_APISERVICELOGIN as string);
@@ -17,6 +22,11 @@ const urlServerKeyValuePut = new URL(process.env.REACT_APP_APISERVICEKEYVALUEPUT
 const urlServerKeyValueDel = new URL(process.env.REACT_APP_APISERVICEKEYVALUEDEL as string);
 const urlServerKeyValueAllKeys = new URL(process.env.REACT_APP_APISERVICEKEYVALUEKEYS as string);
 const urlServerRefreshToken = new URL(process.env.REACT_APP_APISERVICEKEYREFRESHTOKEN as string);
+const unit1Test = new URL(process.env.REACT_APP_APIUNIT1TEST as string);
+const unit1Text = new URL(process.env.REACT_APP_APIUNIT1TEXT as string);
+const unit1Case = new URL(process.env.REACT_APP_APIUNIT1CASE as string);
+const unit1Game = new URL(process.env.REACT_APP_APIUNIT1GAME as string);
+const unit1TrueFalse = new URL(process.env.REACT_APP_APIUNIT1TRUEFALSE as string);
 
 const config = {
   client: {
@@ -72,6 +82,36 @@ const config = {
         method: "POST",
         uri: {
           pathname: urlServerKeyValueAllKeys.pathname
+        }
+      },
+      [configEndpoint.unit1Text]: {
+        method: "POST",
+        uri: {
+          pathname: unit1Text.pathname
+        }
+      },
+      [configEndpoint.unit1Test]: {
+        method: "POST",
+        uri: {
+          pathname: unit1Test.pathname
+        }
+      },
+      [configEndpoint.unit1Case]: {
+        method: "POST",
+        uri: {
+          pathname: unit1Case.pathname
+        }
+      },
+      [configEndpoint.unit1TrueFalse]: {
+        method: "POST",
+        uri: {
+          pathname: unit1TrueFalse.pathname
+        }
+      },
+      [configEndpoint.unit1Game]: {
+        method: "POST",
+        uri: {
+          pathname: unit1Game.pathname
         }
       }
     }

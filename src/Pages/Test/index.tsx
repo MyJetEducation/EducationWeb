@@ -1,5 +1,6 @@
-import React, { Suspense } from 'react';
+import React, {Suspense, useEffect, useState} from 'react';
 import { useTranslation} from 'react-i18next';
+import {use} from "i18next";
 
 
 function Page() {
@@ -33,9 +34,17 @@ const Loader = () => (
 );
 
 export default function TestTranslate() {
+  const [ seconds, setSeconds ] = React.useState(0);
+
+  React.useEffect(() => {
+    setTimeout(setSeconds, 1000, seconds + 1);
+    return clearTimeout(seconds);
+  }, [seconds]);
+
   return (
     <Suspense fallback={<Loader />}>
       <Page />
+      <h1>{seconds}</h1>
     </Suspense>
   );
 }

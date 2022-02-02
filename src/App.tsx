@@ -10,11 +10,13 @@ import {DashBoard} from "./Pages/Dashboard";
 import {Questions} from "./Pages/Questions";
 import {FreeLesson} from "./Pages/OnBoarding";
 import {SummaryBord} from "./Pages/FreeLesson/components/SummaryBord";
+import {SummaryBord2} from "./components/LessonComponents/SummaryBord";
 import {RequireAuth} from "./components/RequireAuth";
 import {AuthProvider} from "./context/AuthProvider";
 import {FreeQuestions} from "./Pages/FreeLesson";
 import {ForgotPassWord} from "./Pages/Auth/ForgotPassword";
 import {Lesson} from "./Pages/Сourse/Lesson";
+import TestTranslate from "./Pages/Test";
 
 export const App = () => {
   return (
@@ -29,6 +31,7 @@ export const App = () => {
           <Route path="/free" element={<FreeLesson/>}/>
           <Route path="/free/:lesson/:id" element={<FreeQuestions/>}/>
           <Route path="/finish" element={<SummaryBord/>}/>
+          <Route path="/test" element={<TestTranslate/>}/>
           {/*<Route path="/:lesson/:id" element={<Lesson/>}/>*/}
 
 
@@ -54,6 +57,12 @@ export const App = () => {
           <Route path="/:lesson/:id" element={(
             <RequireAuth>
               <Lesson/>
+            </RequireAuth>
+
+          )}/>
+          <Route path="/summary" element={(
+            <RequireAuth>
+              <SummaryBord2/>
             </RequireAuth>
 
           )}/>

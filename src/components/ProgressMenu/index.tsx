@@ -49,7 +49,6 @@ export const ProgressMenu:React.FC<progressMenuProps> = ({id, index, length, men
               <div className={s.info}>
                 <p>{item.type}</p>
                 <p>{item.title}</p>
-                <p>{item.time}</p>
               </div>
             </div>
           ))

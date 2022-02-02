@@ -39,7 +39,6 @@ export const progressMenuAsync = () => async (dispatch: any) => {
       ]
     });
     const items = JSON.parse(data.data.items[0].value);
-    console.log("####: items", items);
     dispatch(fetchProgressMenuResolve(items))
   } catch (error) {
     dispatch(fetchProgressMenuReject("Some Error"))
@@ -56,6 +55,11 @@ export const setProgressMenuAsync = (currentIndex: string) => async (dispatch: a
       }
     ]
   });
+  //:TODO сделать таймер
+  await req(configEndpoint.unit1Text, {
+    "isRetry": true,
+    "duration": 100
+  })
 }
 
 export const {fetchProgressMenu, fetchProgressMenuResolve, fetchProgressMenuReject, progressMenuValidChange} = progressMenuSlicer.actions;

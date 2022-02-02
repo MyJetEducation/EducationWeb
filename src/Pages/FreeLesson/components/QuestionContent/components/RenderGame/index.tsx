@@ -10,6 +10,8 @@ import icon6 from './assets/images/6.png'
 
 import s from './style.module.scss';
 import FinishGame from "./components/FinishGame";
+import {setStartTimer} from "../../../../../../store/timerSlicer";
+import {useDispatch} from "react-redux";
 
 const cardIds = [
   {
@@ -63,6 +65,8 @@ const cardIds = [
 ];
 export const RenderGame = () => {
 
+  const dispatch = useDispatch();
+
   const [isTry, setTry] = useState<number>(() => {
     return localStorage.getItem("value") ? Number(localStorage.getItem("value")) : 0;
   });
@@ -78,6 +82,10 @@ export const RenderGame = () => {
   const handleReload = () => {
     setShowResult(false)
   }
+
+  useEffect(() => {
+    dispatch(setStartTimer());
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("value", String(isTry));

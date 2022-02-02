@@ -10,14 +10,26 @@ interface radioBlockProps {
   onChange?: any,
 }
 
+const prepareState = (answers: any) => {
+  return Object.entries(answers).map((item, index) => ({
+    "number": index,
+    "value": [
+      item[1]
+    ]
+  }))
+}
+
 const RadioBlock: React.FC<radioBlockProps> = ({content, size, selectedAll, onChange}) => {
+  console.log("####: content", content);
 
   const [answers, setAnswers] = useState({});
 
   useEffect(() => {
     selectedAll && selectedAll(Object.keys(answers).length === content.length);
-    onChange && onChange(answers)
+    onChange && onChange(prepareState(answers))
   }, [answers])
+
+
 
   const handleChange = (e: any) => {
     setAnswers((prevState) => {

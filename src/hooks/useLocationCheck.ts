@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
-export function useLocationCheck(menu: any, id: string | undefined, url: string) {
+export function useLocationCheck(menu: any, id: string | undefined, url: string, finish: string) {
   const navigate = useNavigate();
    useEffect(() => {
     if (menu.length > 0) {
@@ -15,7 +15,7 @@ export function useLocationCheck(menu: any, id: string | undefined, url: string)
       if (valid !== -1 && menu.length - 1 !== valid) {
         navigate(`/${url}/${menu[valid + 1].id}`)
       } else if (menu.length - 1 === valid) {
-        navigate("/finish")
+        navigate(`/${finish}`)
       } else {
         navigate(`/${url}/${menu[0].id}`)
       }
