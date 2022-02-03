@@ -6,8 +6,6 @@ import {Container} from "../../components/Container";
 import DisciplineBlock from "./components/DisciplineBlock";
 import StatsBlock from "./components/StatsBlock";
 
-import {userRefreshTokenSelector, userTokenSelector} from "../../store/userSlicer";
-
 import map from './assets/map.png';
 
 import s from './style.module.scss'
@@ -17,12 +15,13 @@ interface dashboardProps {
   name?: string
 }
 
-export const DashBoard:React.FC<dashboardProps> = ({ name = "Anton"}) => {
+export const DashBoard: React.FC<dashboardProps> = ({name = "Anton"}) => {
 
   //example redux token
   // const token = useSelector(userTokenSelector);
 
-  // const data = useSelector(dataDashboardSelector);
+  const data: any = useSelector(dataDashboardSelector);
+  console.log("####: data", data);
 
   const isLoading = useSelector(isLoadingDashboardSelector);
 
@@ -45,24 +44,30 @@ export const DashBoard:React.FC<dashboardProps> = ({ name = "Anton"}) => {
         </p>
 
 
-      <div className={s.inner}>
-        {
-          isLoading ? (
-            <div>...Loading</div>
-          ) : (
-            <>
-              <div className={s.leftSide}>
-                <img className={s.map} src={map} alt="map"/>
-                <DisciplineBlock/>
-              </div>
-              <div className={s.rightSide}>
-                <StatsBlock/>
-              </div>
-            </>
-          )
-        }
+        <div className={s.inner}>
+          {
+            isLoading ? (
+              <div>...Loading</div>
+            ) : (
+              <>
+                <div className={s.leftSide}>
+                  <img className={s.map} src={map} alt="map"/>
+                  <DisciplineBlock/>
+                </div>
+                <div className={s.rightSide}>
 
-      </div>
+                  <StatsBlock
+                    testScore={data.units[0].testScore}
+                    tasks={data.units[0].tasks.length}
+                  />
+
+
+                </div>
+              </>
+            )
+          }
+
+        </div>
 
       </Container>
     </div>

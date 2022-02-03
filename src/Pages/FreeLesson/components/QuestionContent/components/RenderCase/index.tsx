@@ -7,19 +7,51 @@ import RadioBlock from "../../../RadioBlock";
 import {setDisabledBtn} from "../../../../../../store/testSlicer";
 
 import s from './style.module.scss';
-import {setStartTimer} from "../../../../../../store/timerSlicer";
+import req from "../../../../../../utils/request";
+import {configEndpoint} from "../../../../../../config";
 
 interface renderCaseProps {
   content: any
 }
 
 const RenderCase: React.FC<renderCaseProps> = ({content}) => {
-  const [answer, setAnswer] = useState({});
+  const [answer, setAnswer] = useState<any[]>([]);
+  const [isValidAnswer, setValidAnswer] = useState(false)
   const dispatch = useDispatch();
 
+  const getTimeToken = async () => {
+    const data = await req(configEndpoint.taskTime, {
+      "tutorial": "1",
+      "unit": 1,
+      "task": 3
+    })
+    localStorage.setItem("timeToken", data.data)
+  }
+
   useEffect(() => {
-    dispatch(setStartTimer());
-  }, []);
+    getTimeToken()
+    return () => {
+      localStorage.removeItem("timeToken")
+    }
+  }, [])
+
+  //:TODO после ответа отправляется timeToken, но пользователь еще не нажал на кнопку Next
+  // и при выборе ответа не хаватет answer
+  useEffect(() => {
+    if (isValidAnswer) {
+      console.log("####: answer", answer[0].value[0]);
+      const setResult = async () => {
+        const data = await req(configEndpoint.unit1Case, {
+          "isRetry": false,
+          "timeToken": localStorage.getItem("timeToken"),
+          "value": answer[0].value[0]
+        })
+        console.log("####: data", await data);
+        return data
+      }
+      setResult()
+    }
+  }, [isValidAnswer])
 
   useEffect(() => {
     const fn = ((obj: any) => {
@@ -40,8 +72,10 @@ const RenderCase: React.FC<renderCaseProps> = ({content}) => {
       />
       <RadioBlock
         onChange={setAnswer}
+        selectedAll={(val: boolean) => setValidAnswer(val)}
         content={content}
         size="small"
+        type={"radio"}
       />
     </div>
 

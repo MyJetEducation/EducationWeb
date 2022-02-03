@@ -4,7 +4,7 @@ import menuSlicer from "./menuSlicer";
 import testSlicer from "./testSlicer";
 import dashboardSlicer from "./dashboardSlicer";
 import progressMenuSlicer from "./progressMenuSlicer";
-import timerSlicer from "./timerSlicer";
+// import timerSlicer from "./timerSlicer";
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +13,7 @@ export const store = configureStore({
     test: testSlicer,
     dashboard: dashboardSlicer,
     progressMenu: progressMenuSlicer,
-    timer: timerSlicer
+    // timer: timerSlicer
   },
 })
 

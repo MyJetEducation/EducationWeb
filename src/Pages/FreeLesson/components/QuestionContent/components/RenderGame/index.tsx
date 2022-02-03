@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Board from './components/Board';
+import FinishGame from "./components/FinishGame";
+import {useDispatch} from "react-redux";
 
 import icon1 from './assets/images/1.png'
 import icon2 from './assets/images/2.png'
@@ -9,9 +11,9 @@ import icon5 from './assets/images/5.png'
 import icon6 from './assets/images/6.png'
 
 import s from './style.module.scss';
-import FinishGame from "./components/FinishGame";
-import {setStartTimer} from "../../../../../../store/timerSlicer";
-import {useDispatch} from "react-redux";
+import req from "../../../../../../utils/request";
+import {configEndpoint} from "../../../../../../config";
+
 
 const cardIds = [
   {
@@ -65,7 +67,20 @@ const cardIds = [
 ];
 export const RenderGame = () => {
 
-  const dispatch = useDispatch();
+  const getTimeToken = async () => {
+    const data = await req(configEndpoint.taskTime, {
+      "tutorial": "1",
+      "unit": 1,
+      "task": 5
+    })
+    localStorage.setItem("timeToken", data.data)
+  }
+  useEffect(() => {
+    getTimeToken()
+    return () => {
+      localStorage.removeItem("timeToken")
+    }
+  }, [])
 
   const [isTry, setTry] = useState<number>(() => {
     return localStorage.getItem("value") ? Number(localStorage.getItem("value")) : 0;
@@ -82,10 +97,6 @@ export const RenderGame = () => {
   const handleReload = () => {
     setShowResult(false)
   }
-
-  useEffect(() => {
-    dispatch(setStartTimer());
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("value", String(isTry));

@@ -55,11 +55,6 @@ export const setProgressMenuAsync = (currentIndex: string) => async (dispatch: a
       }
     ]
   });
-  //:TODO сделать таймер
-  await req(configEndpoint.unit1Text, {
-    "isRetry": true,
-    "duration": 100
-  })
 }
 
 export const {fetchProgressMenu, fetchProgressMenuResolve, fetchProgressMenuReject, progressMenuValidChange} = progressMenuSlicer.actions;

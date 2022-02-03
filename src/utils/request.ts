@@ -28,7 +28,6 @@ async function req(endpoint: string, query: any) {
     url.query = {...url.query, ...query}
   }
   try {
-    console.log("####: configEndpoint", configEndpoint);
     const data = await fetch(URL.format(url), {
       method: configEndpoint.method,
       body,

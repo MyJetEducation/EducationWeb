@@ -11,7 +11,8 @@ import {checkAnswers, similarResult} from "../../../../../../utils";
 
 import {setDisabledBtn} from "../../../../../../store/testSlicer";
 import {currentIdSelector, validChange} from "../../../../../../store/menuSlicer";
-import {setStartTimer} from "../../../../../../store/timerSlicer";
+import req from "../../../../../../utils/request";
+import {configEndpoint} from "../../../../../../config";
 
 
 interface   renderTestTrueOrFalse {
@@ -21,20 +22,39 @@ interface   renderTestTrueOrFalse {
 const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
   const {id} = useParams<"id">();
   const dispatch = useDispatch();
-  const [answer, setAnswer] = useState({});
+  const [answer, setAnswer] = useState<any[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [percent, setPercent] = useState(0);
   const currentIndex = useSelector(currentIdSelector(id as string));
 
+  const getTimeToken = async () => {
+    const data = await req(configEndpoint.taskTime, {
+      "tutorial": "1",
+      "unit": 1,
+      "task": 4
+    })
+    localStorage.setItem("timeToken", data.data)
+  }
+  console.log("####: answer", answer);
   useEffect(() => {
-    dispatch(setStartTimer());
-  }, []);
+    getTimeToken()
+    return () => {
+      localStorage.removeItem("timeToken")
+    }
+  }, [])
 
   useEffect(() => {
     if (showResult) {
-      const result = similarResult(answer, ARRAY_ANSWERS2)
-      const percentAll = checkAnswers(result)
-      setPercent(percentAll)
+      const setResult = async () => {
+        const data = await req(configEndpoint.unit1TrueFalse, {
+          "isRetry": false,
+          "timeToken": localStorage.getItem("timeToken"),
+          "answers": answer
+        })
+        console.log("####: data", data);
+        setPercent(await data.data.unit.testScore)
+      }
+      setResult()
       dispatch(validChange(currentIndex));
       dispatch(setDisabledBtn(false))
 
@@ -52,7 +72,8 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
             size="small"
             selectedAll={(val: boolean) => setShowResult(val)}
             content={content}
-            onChange={setAnswer}
+            onChangeTrueFalse={setAnswer}
+            type={"radio"}
           />
 
         )

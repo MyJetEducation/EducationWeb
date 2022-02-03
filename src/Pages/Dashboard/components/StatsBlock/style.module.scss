@@ -18,17 +18,26 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 9px 0;
+
   .item {
     p {
       font-weight: 600;
       font-size: 32px;
       line-height: 40px;
-      color: #A8B0BA;
+      color: #000;
+
       &:last-child {
         font-size: 18px;
         line-height: 28px;
         margin-top: -7px;
       }
+    }
+
+
+  }
+  .testScore {
+    p {
+      color: #0BCA1E
     }
 
   }

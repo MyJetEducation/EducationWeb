@@ -18,7 +18,6 @@ import LessonContent from "./components/LessonContent";
 import {ProgressMenu} from "../../../components/ProgressMenu";
 import {QuestionFooter} from "../../FreeLesson/components/QuestionFooter";
 import {useLocationCheck} from "../../../hooks/useLocationCheck";
-import {setStartTimer} from "../../../store/timerSlicer";
 
 export const Lesson = () => {
   const dispatch = useDispatch();
@@ -62,7 +61,6 @@ export const Lesson = () => {
 
   useEffect(() => {
     dispatch(progressMenuAsync())
-    dispatch(setStartTimer())
   }, [])
 
   const handleClickNextQuestion = () => {

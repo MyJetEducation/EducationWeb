@@ -5,11 +5,6 @@ import ReactMarkdown from 'react-markdown'
 import s from './style.module.scss';
 import req from "../../../../../../utils/request";
 import {configEndpoint} from "../../../../../../config";
-import Timer from "../../../../../Сourse/Lesson/components/Timer";
-import useTimer from "../../../../../Сourse/Lesson/components/Timer";
-import {useDispatch} from "react-redux";
-import {progressMenuAsync} from "../../../../../../store/progressMenuSlicer";
-import {setEndTimeAsync, setStartTimer} from "../../../../../../store/timerSlicer";
 
 interface renderTextQuestion {
   content?: any
@@ -17,14 +12,38 @@ interface renderTextQuestion {
 
 export const RenderText:React.FC<renderTextQuestion> = ({content}) => {
 
-  const dispatch = useDispatch();
+  const getTimeToken = async () => {
+    const data = await req(configEndpoint.taskTime, {
+      "tutorial": "1",
+      "unit": 1,
+      "task": 1
+    })
+    localStorage.setItem("timeToken", data.data)
+  }
+  const fetchResult = async () => {
+    const data = await req(configEndpoint.unit1Text, {
+      "isRetry": false,
+      "timeToken": localStorage.getItem("timeToken")
+    })
+    return data
+  }
 
   useEffect(() => {
-    dispatch(setStartTimer());
+    getTimeToken()
     return () => {
-      dispatch(setEndTimeAsync())
+      fetchResult()
+      localStorage.removeItem("timeToken")
     }
-  }, []);
+  }, [])
+
+  // const dispatch = useDispatch();
+  //
+  // useEffect(() => {
+  //   dispatch(setStartTimer());
+  //   return () => {
+  //     dispatch(setEndTimeAsync())
+  //   }
+  // }, []);
 
   return (
     <div className={s.wrap}>

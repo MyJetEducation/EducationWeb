@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import RadioBlock from "../../../RadioBlock";
 import ProgressPage from "../ProgressPage";
-import {ARRAY_ANSWERS} from "../../../../constans";
-import {checkAnswers, similarResult} from "../../../../../../utils";
 import {useDispatch, useSelector} from "react-redux";
 import {currentIdSelector, validChange} from "../../../../../../store/menuSlicer";
 import {useParams} from "react-router-dom";
 import {setDisabledBtn} from "../../../../../../store/testSlicer";
 import req from "../../../../../../utils/request";
 import {configEndpoint} from "../../../../../../config";
-import {setEndTimeAsync, setStartTimer, startTimeSelector} from "../../../../../../store/timerSlicer";
 
 
 interface renderTestProps {
@@ -23,30 +20,35 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
   const [showResult, setShowResult] = useState(false);
   const [percent, setPercent] = useState(0);
   const [answer, setAnswer] = useState({});
-  
-  console.log("####: answer", answer);
+
+  const getTimeToken = async () => {
+    const data = await req(configEndpoint.taskTime, {
+      "tutorial": "1",
+      "unit": 1,
+      "task": 2
+    })
+    localStorage.setItem("timeToken", data.data)
+  }
 
   useEffect(() => {
-    dispatch(setStartTimer());
-  }, []);
-
-  const startTime = useSelector(startTimeSelector);
+    getTimeToken()
+    return () => {
+      localStorage.removeItem("timeToken")
+    }
+  }, [])
 
   useEffect(() => {
     if (showResult) {
-      const result = similarResult(answer, ARRAY_ANSWERS)
-      const percentAll = checkAnswers(result)
       const setResult = async () => {
-        const endTime: any = new Date();
-        console.log("####: configEndpoint.unit1Test", configEndpoint.unit1Test);
         const data = await req(configEndpoint.unit1Test, {
-          "isRetry": true,
-          "duration": endTime - startTime,
+          "isRetry": false,
+          "timeToken": localStorage.getItem("timeToken"),
           "answers": answer
         })
         console.log("####: data", data);
+        setPercent(await data.data.unit.testScore)
       }
-      setPercent(percentAll)
+
       dispatch(validChange(currentIndex));
       dispatch(setDisabledBtn(false))
       setResult();
@@ -55,7 +57,6 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
     }
 
   }, [showResult])
-
   return (
     <>
       {
@@ -69,6 +70,7 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
               selectedAll={(val: boolean) => setShowResult(val)}
               content={content}
               onChange={setAnswer}
+              type={"radio"}
             />
           )
       }

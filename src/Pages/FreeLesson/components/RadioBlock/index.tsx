@@ -8,28 +8,35 @@ interface radioBlockProps {
   size?: "default" | "small",
   selectedAll?: any,
   onChange?: any,
+  onChangeTrueFalse?: any,
+  type?: string
 }
 
 const prepareState = (answers: any) => {
   return Object.entries(answers).map((item, index) => ({
-    "number": index,
+    "number": index + 1,
     "value": [
-      item[1]
+      Number(item[1])
     ]
   }))
 }
 
-const RadioBlock: React.FC<radioBlockProps> = ({content, size, selectedAll, onChange}) => {
-  console.log("####: content", content);
+const prepareStateTrueFalse = (answers: any) => {
+  return Object.entries(answers).map((item, index) => ({
+    "number": index + 1,
+    "value": Boolean(item[1])
+  }))
+}
+
+const RadioBlock: React.FC<radioBlockProps> = ({content, size, selectedAll, onChange, onChangeTrueFalse, type}) => {
 
   const [answers, setAnswers] = useState({});
 
   useEffect(() => {
     selectedAll && selectedAll(Object.keys(answers).length === content.length);
     onChange && onChange(prepareState(answers))
+    onChangeTrueFalse && onChangeTrueFalse(prepareStateTrueFalse(answers))
   }, [answers])
-
-
 
   const handleChange = (e: any) => {
     setAnswers((prevState) => {
@@ -59,7 +66,7 @@ const RadioBlock: React.FC<radioBlockProps> = ({content, size, selectedAll, onCh
                     <input
                       className={s.input}
                       value={item.value}
-                      type="radio"
+                      type={type}
                       name={item.name}
                       id={item.id}
                     />

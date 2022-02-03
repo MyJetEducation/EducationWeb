@@ -51,3 +51,6 @@
 [type = "radio"]:checked + .label {
   border: 2px solid #374DFB;
 }
+[type = "checkbox"]:checked + .label {
+  border: 2px solid #374DFB;
+}

@@ -32,6 +32,7 @@ export const App = () => {
           <Route path="/free/:lesson/:id" element={<FreeQuestions/>}/>
           <Route path="/finish" element={<SummaryBord/>}/>
           <Route path="/test" element={<TestTranslate/>}/>
+          <Route path="/quest" element={<Questions/>}/>
           {/*<Route path="/:lesson/:id" element={<Lesson/>}/>*/}
 
 

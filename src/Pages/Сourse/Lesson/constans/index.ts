@@ -283,13 +283,15 @@ export const LESSON_CONTENT = {
               id: 1,
               name: "boolean",
               param: false,
-              textAnswer: "Yes, it will help"
+              textAnswer: "Yes, it will help",
+              value: 1
             },
             {
               id: 2,
               name: "boolean",
               param: true,
-              textAnswer: "I am not ready to agree"
+              textAnswer: "I am not ready to agree",
+              value: 2
             }
           ]
         }
@@ -311,14 +313,14 @@ export const LESSON_CONTENT = {
               id: "1answer1",
               param: false,
               name: "1q",
-              value: "q1",
+              value: true,
               textAnswer: "True"
             },
             {
               id: "1answer2",
               param: true,
               name: "1q",
-              value: "q2",
+              value: false,
               textAnswer: "False"
             }
           ]
@@ -331,14 +333,14 @@ export const LESSON_CONTENT = {
               id: "2answer1",
               name: "2q",
               param: false,
-              value: "q1",
+              value: true,
               textAnswer: "True"
             },
             {
               id: "2answer2",
               name: "2q",
               param: true,
-              value: "q2",
+              value: false,
               textAnswer: "False"
             },
           ]
@@ -351,14 +353,14 @@ export const LESSON_CONTENT = {
               id: "3answer1",
               name: "3q",
               param: false,
-              value: "q1",
+              value: true,
               textAnswer: "True"
             },
             {
               id: "3answer2",
               name: "3q",
               param: true,
-              value: "q2",
+              value: false,
               textAnswer: "False"
             },
           ]
@@ -371,14 +373,14 @@ export const LESSON_CONTENT = {
               id: "4answer1",
               name: "4q",
               param: false,
-              value: "q1",
+              value: true,
               textAnswer: "True"
             },
             {
               id: "4answer2",
               name: "4q",
               param: true,
-              value: "q2",
+              value: false,
               textAnswer: "False"
             },
           ]
@@ -391,14 +393,14 @@ export const LESSON_CONTENT = {
               id: "5answer1",
               name: "5q",
               param: false,
-              value: "q1",
+              value: true,
               textAnswer: "True"
             },
             {
               id: "5answer2",
               name: "5q",
               param: true,
-              value: "q1",
+              value: false,
               textAnswer: "False"
             },
           ]

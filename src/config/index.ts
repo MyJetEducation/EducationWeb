@@ -12,6 +12,7 @@ export enum configEndpoint {
   unit1Case = "unit1Case",
   unit1TrueFalse = "unit1TrueFalse",
   unit1Game = "unit1Game",
+  taskTime = "taskTime"
 };
 
 const urlServerLogin = new URL(process.env.REACT_APP_APISERVICELOGIN as string);
@@ -27,6 +28,7 @@ const unit1Text = new URL(process.env.REACT_APP_APIUNIT1TEXT as string);
 const unit1Case = new URL(process.env.REACT_APP_APIUNIT1CASE as string);
 const unit1Game = new URL(process.env.REACT_APP_APIUNIT1GAME as string);
 const unit1TrueFalse = new URL(process.env.REACT_APP_APIUNIT1TRUEFALSE as string);
+const urlTaskTime = new URL(process.env.REACT_APP_APITASKTIME as string);
 
 const config = {
   client: {
@@ -112,6 +114,12 @@ const config = {
         method: "POST",
         uri: {
           pathname: unit1Game.pathname
+        }
+      },
+      [configEndpoint.taskTime]: {
+        method: "POST",
+        uri: {
+          pathname: urlTaskTime.pathname
         }
       }
     }

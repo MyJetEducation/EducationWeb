@@ -6,8 +6,8 @@ import remarkGfm from "remark-gfm";
 import play from './assets/play_btn.png';
 
 import s from './style.module.scss'
-import {setEndTimeAsync, setStartTimer} from "../../../../../../store/timerSlicer";
-import {useDispatch} from "react-redux";
+import req from "../../../../../../utils/request";
+import {configEndpoint} from "../../../../../../config";
 
 interface renderVideoProps {
   content?: any
@@ -15,14 +15,7 @@ interface renderVideoProps {
 
 const RenderVideo: React.FC<renderVideoProps> = ({content}) => {
 
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setStartTimer());
-    return () => {
-      dispatch(setEndTimeAsync())
-    }
-  }, []);
 
   return (
     <div className={s.wrap}>
