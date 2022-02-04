@@ -28,13 +28,16 @@
 }
 
 .score {
-  width: 380px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 50px;
   .taskCompleted,
   .testScore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .num {
       display: flex;
       justify-content: center;
@@ -48,14 +51,26 @@
       font-size: 18px;
       line-height: 28px;
     }
+
     .text {
       font-weight: bold;
       font-size: 18px;
       line-height: 28px;
       color: #0BCA1E;
     }
+    .numBad {
+      border: 4px solid #F50537;
+      color: #F50537;
+      svg {
+        path {
+          stroke: #F50537;
+        }
+      }
+    }
+    .textBad {
+      color: #F50537;
+    }
   }
-
   .taskCompleted {
     .num {
       border: 4px solid #000;
@@ -66,28 +81,29 @@
     }
   }
 }
-
+.head {
+  margin-bottom: 37px;
+  display: flex;
+  align-items: center;
+  color: #A8B0BA;
+  .plus {
+    margin-right: 10px;
+  }
+  .achievementsText {
+    white-space: nowrap;
+    margin-right: 10px;
+  }
+  .line {
+    width: 100%;
+    height: 1px;
+    background-color: #A8B0BA;
+  }
+}
 .achievements {
   font-size: 16px;
   line-height: 24px;
   color: #A8B0BA;
-  .head {
-    margin-bottom: 37px;
-    display: flex;
-    align-items: center;
-    .plus {
-      margin-right: 10px;
-    }
-    .achievementsText {
-      white-space: nowrap;
-      margin-right: 10px;
-    }
-    .line {
-      width: 100%;
-      height: 1px;
-      background-color: #A8B0BA;
-    }
-  }
+
 
   .achievementsList {
     display: flex;

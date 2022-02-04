@@ -23,7 +23,7 @@ const RenderCase: React.FC<renderCaseProps> = ({content}) => {
     const data = await req(configEndpoint.taskTime, {
       "tutorial": "1",
       "unit": 1,
-      "task": 3
+      "task": 4
     })
     localStorage.setItem("timeToken", data.data)
   }
@@ -39,14 +39,12 @@ const RenderCase: React.FC<renderCaseProps> = ({content}) => {
   // и при выборе ответа не хаватет answer
   useEffect(() => {
     if (isValidAnswer) {
-      console.log("####: answer", answer[0].value[0]);
       const setResult = async () => {
         const data = await req(configEndpoint.unit1Case, {
           "isRetry": false,
           "timeToken": localStorage.getItem("timeToken"),
           "value": answer[0].value[0]
         })
-        console.log("####: data", await data);
         return data
       }
       setResult()

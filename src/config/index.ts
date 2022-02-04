@@ -9,9 +9,11 @@ export enum configEndpoint {
   allKeysKeyValue = "allKeysKeyValue",
   unit1Text = "unit1Text",
   unit1Test = "unit1Test",
+  unit1Video = "unit1Video",
   unit1Case = "unit1Case",
   unit1TrueFalse = "unit1TrueFalse",
   unit1Game = "unit1Game",
+  unitSummary = "unitSummary",
   taskTime = "taskTime"
 };
 
@@ -25,10 +27,12 @@ const urlServerKeyValueAllKeys = new URL(process.env.REACT_APP_APISERVICEKEYVALU
 const urlServerRefreshToken = new URL(process.env.REACT_APP_APISERVICEKEYREFRESHTOKEN as string);
 const unit1Test = new URL(process.env.REACT_APP_APIUNIT1TEST as string);
 const unit1Text = new URL(process.env.REACT_APP_APIUNIT1TEXT as string);
+const unit1Video = new URL(process.env.REACT_APP_APIUNIT1VIDEO as string);
 const unit1Case = new URL(process.env.REACT_APP_APIUNIT1CASE as string);
 const unit1Game = new URL(process.env.REACT_APP_APIUNIT1GAME as string);
 const unit1TrueFalse = new URL(process.env.REACT_APP_APIUNIT1TRUEFALSE as string);
 const urlTaskTime = new URL(process.env.REACT_APP_APITASKTIME as string);
+const urlUnitSummary = new URL(process.env.REACT_APP_APIUNITSUMMARY as string);
 
 const config = {
   client: {
@@ -98,6 +102,12 @@ const config = {
           pathname: unit1Test.pathname
         }
       },
+      [configEndpoint.unit1Video]: {
+        method: "POST",
+        uri: {
+          pathname: unit1Video.pathname
+        }
+      },
       [configEndpoint.unit1Case]: {
         method: "POST",
         uri: {
@@ -114,6 +124,12 @@ const config = {
         method: "POST",
         uri: {
           pathname: unit1Game.pathname
+        }
+      },
+      [configEndpoint.unitSummary]: {
+        method: "POST",
+        uri: {
+          pathname: urlUnitSummary.pathname
         }
       },
       [configEndpoint.taskTime]: {

@@ -32,13 +32,11 @@ const Board: React.FC<boardProps> = ({onChange, cardIds, onFinish}) => {
   const evaluate = () => {
     const [first, second] = openCards;
     enable();
-    // check if first card is equal second card
     if ((first % 6 + 1) === (second % 6 + 1)) {
       setClearedCards((prev) => [...prev, first, second]);
       setOpenCards([]);
       return;
     }
-    // flip the cards back after 500ms duration
     timeout.current = setTimeout(() => {
       setOpenCards([]);
     }, 500);
@@ -46,13 +44,9 @@ const Board: React.FC<boardProps> = ({onChange, cardIds, onFinish}) => {
 
   const handleCardClick = (id: number) => {
     if (openCards.length === 1) {
-      // in this case we have alredy selected one card
-      // this means that we are finishing a move
       setOpenCards((prev) => [...prev, id]);
-      // setMoves((moves) => moves + 1)
       disable();
     } else {
-      // in this case this is the first card we select
       clearTimeout(timeout.current);
       setOpenCards([id]);
     }

@@ -1,31 +1,60 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
+import cn from 'classnames';
 
 import {QuestionFooter} from "../QuestionFooter";
 import {Container} from "../../Container";
+
+import {progressMenuSelector} from "../../../store/progressMenuSlicer";
+import req from "../../../utils/request";
+import {configEndpoint} from "../../../config";
 
 import map from './assets/source_map.png';
 import achievementIcon from './assets/achiv.svg';
 
 import s from './style.module.scss';
-import {progressMenuSelector} from "../../../store/progressMenuSlicer";
-import req from "../../../utils/request";
-import {configEndpoint} from "../../../config";
 
 export const SummaryBord2 = () => {
   const menu = useSelector(progressMenuSelector);
   const navigate = useNavigate();
 
+  const [result, setResult] = useState<any>({});
+
+  const [isCaseTrue, setCaseTrue] = useState(false);
+
+  const getResult = async () => {
+    const data = await req(configEndpoint.unitSummary, {
+      unit: 1
+    })
+    setResult(data)
+  }
+
+  useEffect(() => {
+    getResult()
+  }, [])
+
+  useEffect(() => {
+    if (result.data?.caseProgress === 100) {
+      setCaseTrue(true)
+    } else {
+      setCaseTrue(false)
+    }
+  }, [isCaseTrue])
+
   // useEffect( () => {
-  //   const data: any = req(configEndpoint.getKeyValue, {
-  //     "keys": [
-  //       "progressMenuUnit1"
-  //     ]
-  //   });
-  //   if (!data) {
-  //     navigate("/lessons/1")
+  //   const getMenu = async () => {
+  //     const data = await req(configEndpoint.getKeyValue, {
+  //       "keys": [
+  //         "progressMenuUnit1"
+  //       ]
+  //     });
+  //     // console.log("####: data", data);
+  //     if (!data) {
+  //       navigate("/lessons/1")
+  //     }
   //   }
+  //   getMenu()
   // }, []);
   //
   // useEffect(() => {
@@ -44,22 +73,42 @@ export const SummaryBord2 = () => {
             We hope you enjoyed it, to continue learning create an account
           </p>
           <img src={map} alt="map"/>
-
+          <div className={s.head}>
+            <p className={s.plus}>+</p>
+            <p className={s.achievementsText}>Summary</p>
+            <div className={s.line}/>
+          </div>
           <div className={s.score}>
+
             <div className={s.testScore}>
               <div className={s.num}>
-                90%
+                {`${result.data?.unit.testScore}%`}
               </div>
               <div className={s.text}>
                 Your Test score
               </div>
             </div>
-            <div className={s.taskCompleted}>
+            <div className={s.testScore}>
               <div className={s.num}>
-                {menu.length}
+                {`${result.data?.trueFalseProgress}%`}
               </div>
               <div className={s.text}>
-                Tasks completed
+                True/False
+              </div>
+            </div>
+            <div className={s.testScore}>
+              <div className={cn(s.num, {
+                [s.numBad]: isCaseTrue
+              })}>
+                <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 8L9 15L22 2" stroke="#0BCA1E" strokeWidth="4"/>
+                </svg>
+
+              </div>
+              <div className={cn(s.text, {
+                [s.textBad]: isCaseTrue
+              })}>
+                Case
               </div>
             </div>
           </div>
@@ -86,8 +135,8 @@ export const SummaryBord2 = () => {
       </div>
 
       <QuestionFooter
-        btnName={"Create an account"}
-        onClickNext={() => navigate("/register")}
+        btnName={"Continue"}
+        onClickNext={() => navigate("/dashboard")}
         index={menu.length}
         id={menu.length}
         length={menu.length}

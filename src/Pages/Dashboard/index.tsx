@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 
@@ -10,24 +10,32 @@ import map from './assets/map.png';
 
 import s from './style.module.scss'
 import {dataDashboardSelector, getDashboardAsync, isLoadingDashboardSelector} from "../../store/dashboardSlicer";
+import {use} from "i18next";
+import req from "../../utils/request";
+import {configEndpoint} from "../../config";
 
 interface dashboardProps {
   name?: string
 }
 
 export const DashBoard: React.FC<dashboardProps> = ({name = "Anton"}) => {
-
   //example redux token
   // const token = useSelector(userTokenSelector);
 
-  const data: any = useSelector(dataDashboardSelector);
-  console.log("####: data", data);
+  const [res, setRes] = useState<any>({})
 
+  // const data = useSelector(dataDashboardSelector);
+  const getResult = async () => {
+    const data = await req(configEndpoint.dashboard, {})
+
+    setRes(data)
+  }
   const isLoading = useSelector(isLoadingDashboardSelector);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    getResult()
     dispatch(getDashboardAsync());
   }, [])
 
@@ -55,13 +63,12 @@ export const DashBoard: React.FC<dashboardProps> = ({name = "Anton"}) => {
                   <DisciplineBlock/>
                 </div>
                 <div className={s.rightSide}>
-
                   <StatsBlock
-                    testScore={data.units[0].testScore}
-                    tasks={data.units[0].tasks.length}
+                    testScore={res.data?.units[0]?.testScore}
+                    tasks={res.data?.units[0]?.tasks.length}
+                    skill={res.data?.totalProgress.skill.index}
+                    habit={res.data?.totalProgress.habit.index}
                   />
-
-
                 </div>
               </>
             )

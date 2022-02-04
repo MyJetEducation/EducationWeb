@@ -59,7 +59,7 @@ export const setProgressMenuAsync = (currentIndex: string) => async (dispatch: a
 
 export const {fetchProgressMenu, fetchProgressMenuResolve, fetchProgressMenuReject, progressMenuValidChange} = progressMenuSlicer.actions;
 
-export const currentIdSelector = (id: string) => (state: RootState) => state.menu.findIndex((item: any) => item?.id === id);
+export const currentIdSelector = (id: string) => (state: RootState) => state.progressMenu.data.findIndex((item: any) => item?.id === id);
 export const progressMenuSelector = (state: RootState) => state.progressMenu;
 
 export default progressMenuSlicer.reducer;

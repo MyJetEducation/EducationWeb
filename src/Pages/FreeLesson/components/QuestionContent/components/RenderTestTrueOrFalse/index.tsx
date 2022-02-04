@@ -31,11 +31,10 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
     const data = await req(configEndpoint.taskTime, {
       "tutorial": "1",
       "unit": 1,
-      "task": 4
+      "task": 5
     })
     localStorage.setItem("timeToken", data.data)
   }
-  console.log("####: answer", answer);
   useEffect(() => {
     getTimeToken()
     return () => {
@@ -51,7 +50,6 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
           "timeToken": localStorage.getItem("timeToken"),
           "answers": answer
         })
-        console.log("####: data", data);
         setPercent(await data.data.unit.testScore)
       }
       setResult()

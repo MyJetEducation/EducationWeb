@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from 'react-markdown'
 
@@ -34,16 +34,7 @@ export const RenderText:React.FC<renderTextQuestion> = ({content}) => {
       fetchResult()
       localStorage.removeItem("timeToken")
     }
-  }, [])
-
-  // const dispatch = useDispatch();
-  //
-  // useEffect(() => {
-  //   dispatch(setStartTimer());
-  //   return () => {
-  //     dispatch(setEndTimeAsync())
-  //   }
-  // }, []);
+  }, []);
 
   return (
     <div className={s.wrap}>
