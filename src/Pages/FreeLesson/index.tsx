@@ -45,6 +45,7 @@ export const FreeQuestions = () => {
       return menu[index].id
     }
   }, [menu, currentIndex]);
+  console.log("####: nextQuestion", nextQuestion);
 
 
   useEffect(() => {
@@ -52,19 +53,6 @@ export const FreeQuestions = () => {
   }, [menu])
 
   const handleClickNextQuestion = () => {
-    // TODO: доделать на Redux
-    setTime((prevState: any) => {
-      const newState = {
-        ...prevState,
-        [id as keyof typeof time]: {
-          ...prevState[id as keyof typeof time],
-          end: new Date()
-        },
-      }
-      console.log("####: newState", newState);
-      return newState;
-    });
-
     dispatch(validChange(currentIndex));
     if (currentIndex === menu.length - 1) {
       navigate(`/finish`);

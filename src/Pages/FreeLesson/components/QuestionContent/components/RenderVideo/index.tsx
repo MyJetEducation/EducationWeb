@@ -8,13 +8,14 @@ import play from './assets/play_btn.png';
 import s from './style.module.scss'
 import req from "../../../../../../utils/request";
 import {configEndpoint} from "../../../../../../config";
+import {useParams} from "react-router-dom";
 
 interface renderVideoProps {
   content?: any
 }
 
 const RenderVideo: React.FC<renderVideoProps> = ({content}) => {
-
+  const { unit } = useParams<"unit">();
   const getTimeToken = async () => {
     const data = await req(configEndpoint.taskTime, {
       "tutorial": "1",
@@ -25,7 +26,8 @@ const RenderVideo: React.FC<renderVideoProps> = ({content}) => {
   }
 
   const fetchResult = async () => {
-    const data = await req(configEndpoint.unit1Video, {
+    const data = await req(configEndpoint.unitVideo, {
+      unit,
       "isRetry": false,
       "timeToken": localStorage.getItem("timeToken")
     })

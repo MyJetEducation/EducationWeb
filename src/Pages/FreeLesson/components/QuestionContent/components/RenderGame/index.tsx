@@ -13,6 +13,9 @@ import req from "../../../../../../utils/request";
 import {configEndpoint} from "../../../../../../config";
 
 import s from './style.module.scss';
+import {useDispatch} from "react-redux";
+import {setDisabledBtn} from "../../../../../../store/testSlicer";
+import {useParams} from "react-router-dom";
 
 
 const cardIds = [
@@ -70,8 +73,10 @@ export const RenderGame = () => {
   const [isTry, setTry] = useState<number>(() => {
     return localStorage.getItem("value") ? Number(localStorage.getItem("value")) : 0;
   });
-
+  const { unit } = useParams<"unit">();
   const [showResult, setShowResult] = useState(false);
+
+  const dispatch = useDispatch();
 
   const getTimeToken = async () => {
     const data = await req(configEndpoint.taskTime, {
@@ -83,7 +88,8 @@ export const RenderGame = () => {
   }
 
   const setResult = async () => {
-    const data = await req(configEndpoint.unit1Game, {
+    const data = await req(configEndpoint.unitGame, {
+      unit,
       "isRetry": false,
       "timeToken": localStorage.getItem("timeToken"),
       "passed": showResult
@@ -92,8 +98,10 @@ export const RenderGame = () => {
   }
 
   useEffect(() => {
+    dispatch(setDisabledBtn(true))
     if (showResult) {
       setResult()
+      dispatch(setDisabledBtn(false))
     }
   }, [showResult])
 

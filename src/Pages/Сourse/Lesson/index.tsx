@@ -11,48 +11,49 @@ import {
 } from "../../../store/progressMenuSlicer";
 
 import {useNavigate, useParams} from "react-router-dom";
-import {LESSON_CONTENT} from "./constans";
+import {
+  LESSON_CONTENT_UNIT_1,
+  LESSON_CONTENT_UNIT_2,
+  LESSON_CONTENT_UNIT_3,
+  LESSON_CONTENT_UNIT_4,
+  LESSON_CONTENT_UNIT_5
+} from "./constans";
 import {testSelector} from "../../../store/testSlicer";
-import s from './style.module.scss'
 import LessonContent from "./components/LessonContent";
 import {ProgressMenu} from "../../../components/ProgressMenu";
 import {QuestionFooter} from "../../FreeLesson/components/QuestionFooter";
 import {useLocationCheck} from "../../../hooks/useLocationCheck";
 
+import s from './style.module.scss';
+
 export const Lesson = () => {
   const dispatch = useDispatch();
-  const {id} = useParams<"id">();
+  const {id, unit} = useParams<"id" | "unit">();
+  const number = unit?.replace("unit", "");
   const navigate = useNavigate();
-
   const menu = useSelector(progressMenuSelector);
-  const data = useMemo(() => LESSON_CONTENT[id as keyof typeof LESSON_CONTENT], [id]);
+  const data: any = useMemo(() => {
+    switch (unit) {
+      case "unit1":
+        return LESSON_CONTENT_UNIT_1[id as keyof typeof LESSON_CONTENT_UNIT_1]
+      case "unit2":
+        return LESSON_CONTENT_UNIT_2[id as keyof typeof LESSON_CONTENT_UNIT_2]
+      case "unit3":
+        return LESSON_CONTENT_UNIT_3[id as keyof typeof LESSON_CONTENT_UNIT_3]
+      case "unit4":
+        return LESSON_CONTENT_UNIT_4[id as keyof typeof LESSON_CONTENT_UNIT_4]
+      case "unit5":
+        return LESSON_CONTENT_UNIT_5[id as keyof typeof LESSON_CONTENT_UNIT_5]
+      default:
+        return {}
+    }
+  }, [id]);
   const currentIndex = useSelector(currentIdSelector(id as string))
   const disabled = useSelector(testSelector);
 
-
-
-  useEffect(() => {
-    if (menu.length > 0) {
-      const valid = menu.reduce((acc: any, item: any, index: any) => {
-        if (item.valid === true) {
-          acc = index
-        }
-        return acc
-      }, -1);
-
-      if (valid !== -1 && menu.length - 1 !== valid) {
-        navigate(`/lesson/${menu[valid + 1].id}`)
-      } else if (menu.length - 1 === valid) {
-        navigate("/summary")
-      } else {
-        navigate(`/lesson/${menu[0].id}`)
-      }
-    }
-  }, [id, navigate]);
-
   const nextQuestion = useMemo(() => {
     const index = currentIndex + 1;
-    if (index >= menu.data.length) {
+    if (index !>= menu.data.length) {
       // setDisabled(true)
     } else {
       return menu.data[index].id
@@ -60,29 +61,29 @@ export const Lesson = () => {
   }, [menu, currentIndex]);
 
   useEffect(() => {
-    dispatch(progressMenuAsync())
+    dispatch(progressMenuAsync(unit))
   }, [])
 
   const handleClickNextQuestion = () => {
-    dispatch(setProgressMenuAsync(currentIndex))
+    dispatch(setProgressMenuAsync(currentIndex, unit))
     if (currentIndex === menu.data.length - 1) {
       navigate("/summary");
     } else {
-      navigate(`/lesson/${nextQuestion}`);
+      navigate(`/${unit}/${nextQuestion}`);
     }
   }
 
-  useLocationCheck(menu.data, id, "lesson", "summary");
+  useLocationCheck(menu.data, id, unit, "summary");
 
   return (
     <Container>
       <div className={s.wrap}>
         <div className={s.inner}>
-          <h1 className={s.title}>{data.title}</h1>
+          <h1 className={s.title}>
+            {Object.keys(data).length > 0 ? (data?.title as string) : "Not found"}
+          </h1>
           <LessonContent
-            id={id}
-            index={currentIndex}
-            menu={menu.data}
+            data={data.description}
           />
         </div>
 

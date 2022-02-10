@@ -9,12 +9,14 @@ import {setDisabledBtn} from "../../../../../../store/testSlicer";
 import s from './style.module.scss';
 import req from "../../../../../../utils/request";
 import {configEndpoint} from "../../../../../../config";
+import {useParams} from "react-router-dom";
 
 interface renderCaseProps {
   content: any
 }
 
 const RenderCase: React.FC<renderCaseProps> = ({content}) => {
+  const { unit } = useParams< "unit">();
   const [answer, setAnswer] = useState<any[]>([]);
   const [isValidAnswer, setValidAnswer] = useState(false)
   const dispatch = useDispatch();
@@ -40,7 +42,8 @@ const RenderCase: React.FC<renderCaseProps> = ({content}) => {
   useEffect(() => {
     if (isValidAnswer) {
       const setResult = async () => {
-        const data = await req(configEndpoint.unit1Case, {
+        const data = await req(configEndpoint.unitCase, {
+          unit,
           "isRetry": false,
           "timeToken": localStorage.getItem("timeToken"),
           "value": answer[0].value[0]

@@ -30,10 +30,11 @@ interface statsBlockProps {
   testScore?: number,
   tasks?: number,
   skill?: number,
-  habit?: number
+  habit?: number,
+  units?: any[]
 }
 
-const StatsBlock: React.FC<statsBlockProps> = ({testScore = 0, tasks= 0, skill = 0, habit = 0}) => {
+const StatsBlock: React.FC<statsBlockProps> = ({testScore = 0, tasks= 0, skill = 0, habit = 0, units}) => {
   return (
     <div className={s.wrap}>
       <h5 className={s.title}>Stats</h5>

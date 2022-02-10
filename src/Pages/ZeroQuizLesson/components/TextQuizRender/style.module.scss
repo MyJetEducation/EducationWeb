@@ -1,0 +1,17 @@
+.title {
+  margin-bottom: 20px;
+}
+
+.item {
+  width: 500px;
+  margin: 0 auto;
+  list-style-type: none;
+  background-color: #ccc;
+  border-radius: 10px;
+  &+.item {
+    margin-top: 10px;
+  }
+  &.show {
+    display: none;
+  }
+}

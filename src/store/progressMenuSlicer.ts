@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {RootState} from "./index";
 import req from "../utils/request";
 import {configEndpoint} from "../config";
+import {capitalize} from "../utils";
 
 const initialState: any = {
   isLoading: false,
@@ -30,12 +31,12 @@ export const progressMenuSlicer = createSlice({
   }
 });
 
-export const progressMenuAsync = () => async (dispatch: any) => {
+export const progressMenuAsync = (unit: string | undefined) => async (dispatch: any) => {
   dispatch(fetchProgressMenu())
   try {
     const data = await req(configEndpoint.getKeyValue, {
       "keys": [
-        "progressMenuUnit1"
+        `progressMenu${capitalize(unit as string)}`
       ]
     });
     const items = JSON.parse(data.data.items[0].value);
@@ -45,12 +46,12 @@ export const progressMenuAsync = () => async (dispatch: any) => {
   };
 }
 
-export const setProgressMenuAsync = (currentIndex: string) => async (dispatch: any, getState: () => RootState)  => {
+export const setProgressMenuAsync = (currentIndex: string, unit: string | undefined) => async (dispatch: any, getState: () => RootState)  => {
   dispatch(progressMenuValidChange(currentIndex));
   await req(configEndpoint.putKeyValue, {
     "items": [
       {
-        "key": "progressMenuUnit1",
+        "key": `progressMenu${capitalize(unit as string)}`,
         "value": JSON.stringify(getState().progressMenu.data)
       }
     ]

@@ -29,7 +29,7 @@ export const SummaryBord2 = () => {
     })
     setResult(data)
   }
-
+  console.log("####: result", result);
   useEffect(() => {
     getResult()
   }, [])

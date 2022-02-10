@@ -1,57 +1,48 @@
 import React, {useMemo} from 'react';
-import {LESSON_CONTENT} from "../../constans";
+import {LESSON_CONTENT_UNIT_1} from "../../constans";
 import {RenderText} from "../../../../FreeLesson/components/QuestionContent/components/RenderText";
 import RenderTest from "../../../../FreeLesson/components/QuestionContent/components/RenderTest";
 import RenderVideo from "../../../../FreeLesson/components/QuestionContent/components/RenderVideo";
 import RenderCase from "../../../../FreeLesson/components/QuestionContent/components/RenderCase";
 import RenderTestTrueOrFalse from "../../../../FreeLesson/components/QuestionContent/components/RenderTestTrueOrFalse";
 import {RenderGame} from "../../../../FreeLesson/components/QuestionContent/components/RenderGame";
-import req from "../../../../../utils/request";
-import {configEndpoint} from "../../../../../config";
 
 interface lessonContentProps {
-  id: string | undefined,
-  index: number,
-  menu: any
+  id?: string | undefined,
+  data: any
 }
 
-const LessonContent: React.FC<lessonContentProps> = ({id , index, menu}) => {
+const LessonContent: React.FC<lessonContentProps> = ({data}) => {
 
-
-
-  const dataQuest = useMemo(() => (
-    LESSON_CONTENT[id as keyof typeof LESSON_CONTENT].description
-  ),[id]);
-
-  switch (dataQuest.type) {
+  switch (data.type) {
     case "text":
       return (
         <RenderText
-          content={dataQuest.data}
+          content={data.data}
         />
       )
     case "test":
       return (
         <RenderTest
-          content={dataQuest.data}
+          content={data.data}
         />
       )
     case "video":
       return (
         <RenderVideo
-          content={dataQuest.data}
+          content={data.data}
         />
       )
     case "case":
       return (
         <RenderCase
-          content={dataQuest.data}
+          content={data.data}
         />
       )
     case "testTrueOrFalse":
       return (
         <RenderTestTrueOrFalse
-          content={dataQuest.data}
+          content={data.data}
         />
       )
     case "game":

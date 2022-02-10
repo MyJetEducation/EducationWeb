@@ -20,6 +20,15 @@ async function req(endpoint: string, query: any) {
     ...config.client.server,
     ...configEndpoint?.uri,
   };
+  const pathname = Object.keys(query).reduce((acc, val) => {
+    if (acc.indexOf(`{${val}}`) !== -1) {
+      const result = acc.replace(`{${val}}`, query[val as keyof typeof query]);
+      delete query[val as keyof typeof query];
+      return result;
+    }
+    return acc;
+  }, url.pathname);
+  url.pathname = pathname
   if (configEndpoint.method === "POST" || configEndpoint.method === "PUT") {
     body = JSON.stringify({
       ...query,
@@ -27,6 +36,7 @@ async function req(endpoint: string, query: any) {
   } else if (configEndpoint.method === "GET") {
     url.query = {...url.query, ...query}
   }
+
   try {
     const data = await fetch(URL.format(url), {
       method: configEndpoint.method,
@@ -47,7 +57,8 @@ async function req(endpoint: string, query: any) {
             headers: getHeader(null)
           }).then(res => {
             if (res.status !== 200) {
-              throw {status: 401, message: "Refresh Token not exist"}
+              // throw {status: 401, message: "Refresh Token not exist"}
+              console.log("####: something went wrong");
             }
             return res.json()
           });
@@ -70,9 +81,10 @@ async function req(endpoint: string, query: any) {
     }
     return data;
   } catch (error: any) {
-    localStorage.removeItem("token")
-    localStorage.removeItem("refreshToken")
-    window.location.pathname = "/login"
+    console.log("####: something went wrong");
+    // localStorage.removeItem("token")
+    // localStorage.removeItem("refreshToken")
+    // window.location.pathname = "/login"
     return {
       status: 500,
       message: error.message

@@ -2,26 +2,24 @@ import React, {useEffect} from 'react';
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from 'react-markdown'
 
-import s from './style.module.scss';
 import req from "../../../../../../utils/request";
 import {configEndpoint} from "../../../../../../config";
+import {useGetTimeToken} from "../../../../../Сourse/Lesson/utils/getTimeToken";
+import {useParams} from "react-router-dom";
+import s from './style.module.scss';
 
 interface renderTextQuestion {
   content?: any
 }
 
 export const RenderText:React.FC<renderTextQuestion> = ({content}) => {
+  const {id, unit} = useParams<"id" | "unit">();
+  const numberUnit = Number(unit?.replace("unit", ""));
+  useGetTimeToken("1", numberUnit, Number(id));
 
-  const getTimeToken = async () => {
-    const data = await req(configEndpoint.taskTime, {
-      "tutorial": "1",
-      "unit": 1,
-      "task": 1
-    })
-    localStorage.setItem("timeToken", data.data)
-  }
   const fetchResult = async () => {
-    const data = await req(configEndpoint.unit1Text, {
+    const data = await req(configEndpoint.unitText, {
+      unit: unit,
       "isRetry": false,
       "timeToken": localStorage.getItem("timeToken")
     })
@@ -29,7 +27,7 @@ export const RenderText:React.FC<renderTextQuestion> = ({content}) => {
   }
 
   useEffect(() => {
-    getTimeToken()
+
     return () => {
       fetchResult()
       localStorage.removeItem("timeToken")

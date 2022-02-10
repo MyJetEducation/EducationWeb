@@ -9,8 +9,6 @@ export const similarResult = (user: any, comp: any) => {
   }, {})
 }
 
-
-
 export const checkAnswers = (obj: any): number => {
   const values = Object.values(obj);
   const length = values.length;
@@ -22,4 +20,8 @@ export const checkAnswers = (obj: any): number => {
     return acc;
   }, 0)
   return sumPercent as number;
+}
+
+export const capitalize = ([first, ...res]: string) => {
+  return first.toUpperCase() + res.join('');
 }

@@ -7,6 +7,7 @@ import {useParams} from "react-router-dom";
 import {setDisabledBtn} from "../../../../../../store/testSlicer";
 import req from "../../../../../../utils/request";
 import {configEndpoint} from "../../../../../../config";
+import {useGetTimeToken} from "../../../../../Сourse/Lesson/utils/getTimeToken";
 
 
 interface renderTestProps {
@@ -14,24 +15,18 @@ interface renderTestProps {
 }
 
 const RenderTest: React.FC<renderTestProps> = ({content}) => {
-  const {id} = useParams<"id">();
+  const {id, unit} = useParams<"id" | "unit">();
+  const numberUnit = Number(unit?.replace("unit", ""));
+  console.log("####: numberUnit", numberUnit);
   const dispatch = useDispatch();
   const currentIndex = useSelector(currentIdSelector(id as string));
   const [showResult, setShowResult] = useState(false);
   const [percent, setPercent] = useState(0);
   const [answer, setAnswer] = useState({});
 
-  const getTimeToken = async () => {
-    const data = await req(configEndpoint.taskTime, {
-      "tutorial": "1",
-      "unit": 1,
-      "task": 2
-    })
-    localStorage.setItem("timeToken", data.data)
-  }
+  useGetTimeToken("1", numberUnit, Number(id))
 
   useEffect(() => {
-    getTimeToken()
     return () => {
       localStorage.removeItem("timeToken")
     }
@@ -40,11 +35,13 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
   useEffect(() => {
     if (showResult) {
       const setResult = async () => {
-        const data = await req(configEndpoint.unit1Test, {
+        const data = await req(configEndpoint.unitTest, {
+          unit: unit,
           "isRetry": false,
           "timeToken": localStorage.getItem("timeToken"),
           "answers": answer
         })
+        console.log("####: data", data);
         setPercent(await data.data.unit.testScore)
       }
 
@@ -69,7 +66,7 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
               selectedAll={(val: boolean) => setShowResult(val)}
               content={content}
               onChange={setAnswer}
-              type={"radio"}
+              type={"checkbox"}
             />
           )
       }

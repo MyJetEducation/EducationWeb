@@ -15,9 +15,7 @@ interface radioBlockProps {
 const prepareState = (answers: any) => {
   return Object.entries(answers).map((item, index) => ({
     "number": index + 1,
-    "value": [
-      Number(item[1])
-    ]
+    "value": item[1]
   }))
 }
 
@@ -31,19 +29,21 @@ const prepareStateTrueFalse = (answers: any) => {
 const RadioBlock: React.FC<radioBlockProps> = ({content, size, selectedAll, onChange, onChangeTrueFalse, type}) => {
 
   const [answers, setAnswers] = useState({});
-
   useEffect(() => {
     selectedAll && selectedAll(Object.keys(answers).length === content.length);
-    onChange && onChange(prepareState(answers))
-    onChangeTrueFalse && onChangeTrueFalse(prepareStateTrueFalse(answers))
+    onChange && onChange(prepareState(answers));
+    onChangeTrueFalse && onChangeTrueFalse(prepareStateTrueFalse(answers));
   }, [answers])
 
   const handleChange = (e: any) => {
     setAnswers((prevState) => {
-      return {
-        ...prevState,
-        [e.target.name]: e.target.value
+      const copyState = {...prevState}
+      if (copyState[e.target.name as keyof typeof copyState]) {
+        (copyState[e.target.name as keyof typeof copyState] as number[]).push(Number(e.target.value))
+      } else {
+        (copyState[e.target.name as keyof typeof copyState] as number[]) = [Number(e.target.value)]
       }
+      return copyState
     })
   }
 
@@ -76,7 +76,6 @@ const RadioBlock: React.FC<radioBlockProps> = ({content, size, selectedAll, onCh
                         [s.small]: size === "small"
                       })}
                       htmlFor={item.id}
-
                     >
                       {item.textAnswer}
                     </label>

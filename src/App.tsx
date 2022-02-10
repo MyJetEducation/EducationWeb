@@ -17,6 +17,7 @@ import {FreeQuestions} from "./Pages/FreeLesson";
 import {ForgotPassWord} from "./Pages/Auth/ForgotPassword";
 import {Lesson} from "./Pages/Сourse/Lesson";
 import TestTranslate from "./Pages/Test";
+import ZeroQuizLesson from "./Pages/ZeroQuizLesson";
 
 export const App = () => {
   return (
@@ -33,6 +34,7 @@ export const App = () => {
           <Route path="/finish" element={<SummaryBord/>}/>
           <Route path="/test" element={<TestTranslate/>}/>
           <Route path="/quest" element={<Questions/>}/>
+          <Route path="/zero-lesson" element={<ZeroQuizLesson/>}/>
           {/*<Route path="/:lesson/:id" element={<Lesson/>}/>*/}
 
 
@@ -55,7 +57,7 @@ export const App = () => {
             </RequireAuth>
 
           )}/>
-          <Route path="/:lesson/:id" element={(
+          <Route path="/:unit/:id" element={(
             <RequireAuth>
               <Lesson/>
             </RequireAuth>
