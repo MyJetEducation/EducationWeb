@@ -27,14 +27,16 @@ const STATS = [
 ]
 
 interface statsBlockProps {
-  testScore?: number,
-  tasks?: number,
-  skill?: number,
-  habit?: number,
-  units?: any[]
+  data: any
 }
 
-const StatsBlock: React.FC<statsBlockProps> = ({testScore = 0, tasks= 0, skill = 0, habit = 0, units}) => {
+// testScore={data?.units[0]?.testScore}
+// tasks={data?.units[0]?.tasks.length}
+// skill={data?.totalProgress.skill.index}
+// habit={data?.totalProgress.habit.index}
+
+const StatsBlock: React.FC<statsBlockProps> = ({data}) => {
+  console.log("####: data", data);
   return (
     <div className={s.wrap}>
       <h5 className={s.title}>Stats</h5>
@@ -44,7 +46,7 @@ const StatsBlock: React.FC<statsBlockProps> = ({testScore = 0, tasks= 0, skill =
           className={cn(s.item, s.testScore)}
 
         >
-          <p>{`${testScore}%`}</p>
+          <p>{`${20}%`}</p>
           <p>Test score</p>
         </div>
 
@@ -52,7 +54,7 @@ const StatsBlock: React.FC<statsBlockProps> = ({testScore = 0, tasks= 0, skill =
           className={s.item}
 
         >
-          <p>{`${tasks}`}</p>
+          <p>{`${10}`}</p>
           <p>Tasks</p>
         </div>
 
@@ -60,7 +62,7 @@ const StatsBlock: React.FC<statsBlockProps> = ({testScore = 0, tasks= 0, skill =
           className={s.item}
 
         >
-          <p>{habit}</p>
+          <p>{1}</p>
           <p>Habbit</p>
         </div>
 
@@ -68,7 +70,7 @@ const StatsBlock: React.FC<statsBlockProps> = ({testScore = 0, tasks= 0, skill =
           className={s.item}
 
         >
-          <p>{skill}</p>
+          <p>{1}</p>
           <p>Skill</p>
         </div>
 

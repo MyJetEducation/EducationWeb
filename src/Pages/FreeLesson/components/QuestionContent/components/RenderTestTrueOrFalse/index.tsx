@@ -13,6 +13,7 @@ import {setDisabledBtn} from "../../../../../../store/testSlicer";
 import {currentIdSelector, validChange} from "../../../../../../store/menuSlicer";
 import req from "../../../../../../utils/request";
 import {configEndpoint} from "../../../../../../config";
+import {useGetTimeToken} from "../../../../../Сourse/Lesson/utils/getTimeToken";
 
 
 interface   renderTestTrueOrFalse {
@@ -21,22 +22,15 @@ interface   renderTestTrueOrFalse {
 
 const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
   const {id, unit} = useParams<"id" | "unit">();
+  const numberUnit = Number(unit?.replace("unit", ""))
   const dispatch = useDispatch();
   const [answer, setAnswer] = useState<any[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [percent, setPercent] = useState(0);
   const currentIndex = useSelector(currentIdSelector(id as string));
-
-  const getTimeToken = async () => {
-    const data = await req(configEndpoint.taskTime, {
-      "tutorial": "1",
-      "unit": 1,
-      "task": 5
-    })
-    localStorage.setItem("timeToken", data.data)
-  }
+  useGetTimeToken("1", numberUnit, Number(id))
+  
   useEffect(() => {
-    getTimeToken()
     return () => {
       localStorage.removeItem("timeToken")
     }
@@ -51,7 +45,7 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
           "timeToken": localStorage.getItem("timeToken"),
           "answers": answer
         })
-        setPercent(await data.data.unit.testScore)
+        setPercent(data.data.unit.testScore)
       }
       setResult()
       dispatch(validChange(currentIndex));

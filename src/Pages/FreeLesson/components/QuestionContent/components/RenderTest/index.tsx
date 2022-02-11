@@ -17,7 +17,6 @@ interface renderTestProps {
 const RenderTest: React.FC<renderTestProps> = ({content}) => {
   const {id, unit} = useParams<"id" | "unit">();
   const numberUnit = Number(unit?.replace("unit", ""));
-  console.log("####: numberUnit", numberUnit);
   const dispatch = useDispatch();
   const currentIndex = useSelector(currentIdSelector(id as string));
   const [showResult, setShowResult] = useState(false);

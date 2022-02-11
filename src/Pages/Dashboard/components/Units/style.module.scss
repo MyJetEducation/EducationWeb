@@ -60,6 +60,21 @@
     }
   }
   .unitItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .unitItemName {
+      color: #374DFB;
+      &.unitItemNameDone {
+        color: #0BCA1E;
+      }
+      &.unitItemNameNormal {
+        color: #E3931B;
+      }
+      &.unitItemNameFail {
+        color: #F50537;
+      }
+    }
     &+.unitItem {
       margin-top: 16px;
     }

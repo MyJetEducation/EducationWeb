@@ -6,8 +6,14 @@ import videoIcon from './assets/videos.svg';
 import testIcon from './assets/tests.svg';
 
 import s from './style.module.scss';
-import {LESSON_CONTENT_UNIT_1, LESSON_CONTENT_UNIT_2} from "../../../Сourse/Lesson/constans";
 import Units from "../Units";
+import {
+  LESSON_CONTENT_UNIT_1,
+  LESSON_CONTENT_UNIT_2,
+  LESSON_CONTENT_UNIT_3,
+  LESSON_CONTENT_UNIT_4,
+  LESSON_CONTENT_UNIT_5
+} from "../../../Сourse/Lesson/constans";
 
 const MENU_INFO = [
   {
@@ -31,12 +37,41 @@ const MENU_INFO = [
     title: "10 tests"
   },
 ]
+const UNIT_NAME = [
+  {
+    id: 1,
+    name: "Unit 1. Your income",
+    unitList: Object.values(LESSON_CONTENT_UNIT_1).map((item) => item.title)
+  },
+  {
+    id: 2,
+    name: "Unit 2. Secrets for Spending Your Money Wisely",
+    unitList: Object.values(LESSON_CONTENT_UNIT_2).map((item) => item.title)
+  },
+  {
+    id: 3,
+    name: "Unit 3. Hidden expenses and lost profits",
+    unitList: Object.values(LESSON_CONTENT_UNIT_3).map((item) => item.title)
+  },
+  {
+    id: 4,
+    name: "Unit 4. Salary - make sure that it is enough.",
+    unitList: Object.values(LESSON_CONTENT_UNIT_4).map((item) => item.title)
+  },
+  {
+    id: 5,
+    name: "Unit 5. Modern tools for budget planning in three steps",
+    unitList: Object.values(LESSON_CONTENT_UNIT_5).map((item) => item.title)
+  }
+]
 
 interface tutorialBlockProps {
-  units: any[]
+  unitsScore: any[]
 }
 
-export const TutorialBlock: React.FC<tutorialBlockProps> = ({units}) => {
+export const TutorialBlock: React.FC<tutorialBlockProps> = ({unitsScore}) => {
+
+
   return (
     <>
       <div className={s.wrap}>
@@ -65,41 +100,42 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({units}) => {
 
       </div>
       <div className={s.tasksBlock}>
-        <Units
-          unitList={Object.values(LESSON_CONTENT_UNIT_1).map(item => item.title)}
-          scoreList={units[0].tasks}
-          title={"Unit 1. Your income"}
-          btnName={"Start Unit 1"}
-          urlRelocate={"/unit1/1"}
-        />
-        <Units
-          unitList={Object.values(LESSON_CONTENT_UNIT_2).map(item => item.title)}
-          scoreList={units[1]?.tasks}
-          title={"Unit 2. Secrets for Spending Your Money Wisely"}
-          btnName={"Start Unit 2"}
-          urlRelocate={"/unit2/1"}
-        />
-        <Units
-          unitList={Object.values(LESSON_CONTENT_UNIT_1).map(item => item.title)}
-          scoreList={units[0].tasks}
-          title={"Unit 3. Hidden expenses and lost profits"}
-          btnName={"Start Unit 3"}
-          urlRelocate={"/unit3/1"}
-        />
-        <Units
-          unitList={Object.values(LESSON_CONTENT_UNIT_2).map(item => item.title)}
-          scoreList={units[0].tasks}
-          title={"Unit 4. Salary - make sure that it is enough."}
-          btnName={"Start Unit 4"}
-          urlRelocate={"/unit4/1"}
-        />
-        <Units
-          unitList={Object.values(LESSON_CONTENT_UNIT_2).map(item => item.title)}
-          scoreList={units[0].tasks}
-          title={"Unit 5. Modern tools for budget planning in three steps"}
-          btnName={"Start Unit 5"}
-          urlRelocate={"/unit5/1"}
-        />
+        {
+          UNIT_NAME.map((item, index) => {
+            let isShowActiveTask = false;
+            let scoreList = [];
+            let isSuccess = false;
+
+            if ( unitsScore !== null ) {
+              scoreList = unitsScore[index]?.tasks
+              if (unitsScore[index]?.testScore >= 80) {
+                isSuccess = true
+              }
+              if (index !== 0 && index !== UNIT_NAME.length - 1) {
+                if (unitsScore[index - 1]?.testScore >= 80 && ( !unitsScore[index + 1]?.testScore || unitsScore[index + 1].testScore < 80  )) {
+                  isShowActiveTask = true
+                }
+              }
+            } else {
+              if (index === 0) {
+                isShowActiveTask = true
+              }
+
+            }
+            return (
+              <Units
+                key={index}
+                isSuccess={isSuccess}
+                isShowActiveTask={isShowActiveTask}
+                unitList={item.unitList}
+                scoreList={scoreList}
+                title={UNIT_NAME[index].name}
+                btnName={`Start Unit ${index + 1}`}
+                urlRelocate={`/unit${index + 1}/1`}
+              />
+            )
+          })
+        }
       </div>
     </>
   )

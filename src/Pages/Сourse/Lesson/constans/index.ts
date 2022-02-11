@@ -594,7 +594,7 @@ export const LESSON_CONTENT_UNIT_1 = {
 export const LESSON_CONTENT_UNIT_2 = {
   "1": {
     id: 1,
-    title: "1.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-2",
+    title: "2.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-2",
     description: {
       type: "text",
       data: [
