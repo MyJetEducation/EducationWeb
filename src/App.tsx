@@ -9,8 +9,7 @@ import {HomePage} from "./Pages/Home";
 import {DashBoard} from "./Pages/Dashboard";
 import {Questions} from "./Pages/Questions";
 import {FreeLesson} from "./Pages/OnBoarding";
-import {SummaryBord} from "./Pages/FreeLesson/components/SummaryBord";
-import {SummaryBord2} from "./components/LessonComponents/SummaryBord";
+import {SummaryBord} from "./components/LessonComponents/SummaryBord";
 import {RequireAuth} from "./components/RequireAuth";
 import {AuthProvider} from "./context/AuthProvider";
 import {FreeQuestions} from "./Pages/FreeLesson";
@@ -29,20 +28,12 @@ export const App = () => {
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/forgot" element={<ForgotPassWord/>}/>
-          <Route path="/free" element={<FreeLesson/>}/>
-          <Route path="/free/:lesson/:id" element={<FreeQuestions/>}/>
-          <Route path="/finish" element={<SummaryBord/>}/>
           <Route path="/test" element={<TestTranslate/>}/>
-          <Route path="/quest" element={<Questions/>}/>
           <Route path="/zero-lesson" element={<ZeroQuizLesson/>}/>
-          {/*<Route path="/:lesson/:id" element={<Lesson/>}/>*/}
-
-
           <Route path="/start" element={(
             <RequireAuth>
               <Questions/>
             </RequireAuth>
-
           )}/>
           <Route path="/plans" element={(
             <RequireAuth>
@@ -63,9 +54,9 @@ export const App = () => {
             </RequireAuth>
 
           )}/>
-          <Route path="/summary" element={(
+          <Route path="/:unit/:id/summary" element={(
             <RequireAuth>
-              <SummaryBord2/>
+              <SummaryBord/>
             </RequireAuth>
 
           )}/>

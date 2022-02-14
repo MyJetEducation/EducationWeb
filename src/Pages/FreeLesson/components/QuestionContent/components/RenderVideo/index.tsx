@@ -9,21 +9,16 @@ import s from './style.module.scss'
 import req from "../../../../../../utils/request";
 import {configEndpoint} from "../../../../../../config";
 import {useParams} from "react-router-dom";
+import {useGetTimeToken} from "../../../../../Сourse/Lesson/utils/getTimeToken";
 
 interface renderVideoProps {
   content?: any
 }
 
 const RenderVideo: React.FC<renderVideoProps> = ({content}) => {
-  const { unit } = useParams<"unit">();
-  const getTimeToken = async () => {
-    const data = await req(configEndpoint.taskTime, {
-      "tutorial": "1",
-      "unit": 1,
-      "task": 3
-    })
-    localStorage.setItem("timeToken", data.data);
-  }
+  const { id, unit } = useParams< "id" | "unit" >();
+  const numberUnit = Number(unit?.replace("unit", ""));
+  useGetTimeToken("1", numberUnit, Number(id))
 
   const fetchResult = async () => {
     const data = await req(configEndpoint.unitVideo, {
@@ -35,7 +30,6 @@ const RenderVideo: React.FC<renderVideoProps> = ({content}) => {
   }
 
   useEffect(() => {
-    getTimeToken()
     return () => {
       fetchResult()
       localStorage.removeItem("timeToken")

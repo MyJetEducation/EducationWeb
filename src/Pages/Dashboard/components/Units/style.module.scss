@@ -1,5 +1,4 @@
 .wrap {
-
   padding: 21px 32px 19px;
   margin-left: -2px;
   margin-right: -2px;
@@ -18,12 +17,16 @@
     padding: 74px 32px 19px;
     margin-top: -74px;
   }
-
-  .titleBlock {
+  .header {
     display: flex;
     align-items: center;
     cursor: pointer;
-    .plus {
+    .checkIcon {
+      img {
+        margin: 0 10px 0 0;
+      }
+    }
+    .dropdownBtn {
       display: none;
       width: 10px;
       height: 10px;
@@ -52,19 +55,46 @@
         }
       }
     }
-    .title {
-      font-weight: bold;
-      font-size: 18px;
-      line-height: 28px;
-      color: #000000;
+    .headerTitleBlock {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .headerTitle,
+      .headerTitleScore {
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 28px;
+        color: #ccc;
+        &.itemDone {
+          color: #0BCA1E;
+        }
+        &.itemNormal {
+          color: #E3931B;
+        }
+        &.itemFail {
+          color: #F50537;
+        }
+      }
     }
   }
   .unitItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .unitItemName {
-      color: #374DFB;
+    .unitItemNameBlock {
+      display: flex;
+      align-items: center;
+      img {
+        width: 16px;
+        height: 16px;
+        margin: 0 10px 0 0;
+      }
+    }
+    .unitItemName,
+    .unitItemNameScore{
+      color: #000;
+
       &.unitItemNameDone {
         color: #0BCA1E;
       }
@@ -75,10 +105,14 @@
         color: #F50537;
       }
     }
+    .unitItemNameScore {
+      font-size: 12px;
+      line-height: 18px;
+      margin-left: 16px;
+    }
     &+.unitItem {
       margin-top: 16px;
     }
-
     padding-left: 25px;
     font-weight: normal;
     font-size: 16px;
@@ -87,20 +121,32 @@
   }
   .tasksBlock {
     display: none;
-    margin-bottom: 15px;
+    margin: 15px 0;
     &.active {
       display: block;
     }
+  }
+  .scoreBlock {
+    display: flex;
+    align-items: center;
   }
   &.showActive {
     border: 2px solid #374DFB;
     &::after {
       display: none;
     }
-    .titleBlock {
-      .plus {
+    .header {
+      .headerTitleBlock {
+        .headerTitle {
+          color: #000;
+        }
+      }
+
+      .dropdownBtn {
         display: block;
       }
     }
   }
+
+
 }

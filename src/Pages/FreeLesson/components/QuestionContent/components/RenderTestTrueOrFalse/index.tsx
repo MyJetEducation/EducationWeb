@@ -35,7 +35,6 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
       localStorage.removeItem("timeToken")
     }
   }, [])
-
   useEffect(() => {
     if (showResult) {
       const setResult = async () => {
@@ -45,7 +44,8 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
           "timeToken": localStorage.getItem("timeToken"),
           "answers": answer
         })
-        setPercent(data.data.unit.testScore)
+        console.log("####: data", data);
+        setPercent(data.data.unit.tasks[4].testScore)
       }
       setResult()
       dispatch(validChange(currentIndex));

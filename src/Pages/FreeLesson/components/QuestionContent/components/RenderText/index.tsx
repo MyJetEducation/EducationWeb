@@ -27,7 +27,6 @@ export const RenderText:React.FC<renderTextQuestion> = ({content}) => {
   }
 
   useEffect(() => {
-
     return () => {
       fetchResult()
       localStorage.removeItem("timeToken")

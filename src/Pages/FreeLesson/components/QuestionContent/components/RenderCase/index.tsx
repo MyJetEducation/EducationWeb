@@ -6,39 +6,32 @@ import remarkGfm from "remark-gfm";
 import RadioBlock from "../../../RadioBlock";
 import {setDisabledBtn} from "../../../../../../store/testSlicer";
 
-import s from './style.module.scss';
 import req from "../../../../../../utils/request";
 import {configEndpoint} from "../../../../../../config";
 import {useParams} from "react-router-dom";
+import {useGetTimeToken} from "../../../../../Сourse/Lesson/utils/getTimeToken";
+import s from './style.module.scss';
 
 interface renderCaseProps {
   content: any
 }
 
 const RenderCase: React.FC<renderCaseProps> = ({content}) => {
-  const { unit } = useParams< "unit">();
+  const { id, unit } = useParams< "id" | "unit">();
+  const numberUnit = Number(unit?.replace("unit", ""));
+
   const [answer, setAnswer] = useState<any[]>([]);
   const [isValidAnswer, setValidAnswer] = useState(false)
   const dispatch = useDispatch();
 
-  const getTimeToken = async () => {
-    const data = await req(configEndpoint.taskTime, {
-      "tutorial": "1",
-      "unit": 1,
-      "task": 4
-    })
-    localStorage.setItem("timeToken", data.data)
-  }
+  useGetTimeToken("1", numberUnit, Number(id))
 
   useEffect(() => {
-    getTimeToken()
     return () => {
       localStorage.removeItem("timeToken")
     }
   }, [])
 
-  //:TODO после ответа отправляется timeToken, но пользователь еще не нажал на кнопку Next
-  // и при выборе ответа не хаватет answer
   useEffect(() => {
     if (isValidAnswer) {
       const setResult = async () => {

@@ -29,7 +29,6 @@ import s from './style.module.scss';
 export const Lesson = () => {
   const dispatch = useDispatch();
   const {id, unit} = useParams<"id" | "unit">();
-  const number = unit?.replace("unit", "");
   const navigate = useNavigate();
   const menu = useSelector(progressMenuSelector);
   const data: any = useMemo(() => {
@@ -67,13 +66,13 @@ export const Lesson = () => {
   const handleClickNextQuestion = () => {
     dispatch(setProgressMenuAsync(currentIndex, unit))
     if (currentIndex === menu.data.length - 1) {
-      navigate("/summary");
+      navigate(`/${unit}/${id}/summary`);
     } else {
       navigate(`/${unit}/${nextQuestion}`);
     }
   }
 
-  useLocationCheck(menu.data, id, unit, "summary");
+  useLocationCheck(menu.data, id, unit, `/${unit}/${id}/summary`);
 
   return (
     <Container>

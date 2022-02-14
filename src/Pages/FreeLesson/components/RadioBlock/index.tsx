@@ -27,7 +27,7 @@ const prepareStateTrueFalse = (answers: any) => {
 }
 
 const RadioBlock: React.FC<radioBlockProps> = ({content, size, selectedAll, onChange, onChangeTrueFalse, type}) => {
-
+  //:TODO доделать answers для записи true false
   const [answers, setAnswers] = useState({});
   useEffect(() => {
     selectedAll && selectedAll(Object.keys(answers).length === content.length);

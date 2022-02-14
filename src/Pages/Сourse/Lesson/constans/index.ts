@@ -237,7 +237,7 @@ const caseText_unit_5 = `
 export const LESSON_CONTENT_UNIT_1 = {
   "1": {
     id: 1,
-    unitName: "Unit 1. Your income",
+    icon: textIcon,
     title: "1.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-1",
     description: {
       type: "text",
@@ -251,7 +251,7 @@ export const LESSON_CONTENT_UNIT_1 = {
   },
   "2": {
     id: 2,
-    unitName: "Unit 1. Secrets for Spending Your Money Wisely",
+    icon: testIcon,
     title: "1.2 Test: What is S.M.A.R.T. UNIT-1",
     description: {
       type: "test",
@@ -390,7 +390,7 @@ export const LESSON_CONTENT_UNIT_1 = {
   },
   "3": {
     id: 3,
-    unitName: "Unit 1. Hidden expenses and lost profits",
+    icon: videoICon,
     title: "1.3 Video: How to be successful?",
     description: {
       type: "video",
@@ -404,7 +404,7 @@ export const LESSON_CONTENT_UNIT_1 = {
   },
   "4": {
     id: 4,
-    unitName: "Unit 1. Salary - make sure that it is enough.",
+    icon: testIcon,
     title: "1.4 Case: #1 SMART technology",
     description: {
       type: "case",
@@ -435,7 +435,7 @@ export const LESSON_CONTENT_UNIT_1 = {
   },
   "5": {
     id: 5,
-    unitName: "Unit 1. Modern tools for budget planning in three steps",
+    icon: testIcon,
     title: "1.5 Test: Let’s help Amanda",
     description: {
       type: "testTrueOrFalse",
@@ -547,7 +547,7 @@ export const LESSON_CONTENT_UNIT_1 = {
   "6": {
     id: 6,
     title: "1.6 Game: Match a pair",
-    unitName: "",
+    icon: testIcon,
     description: {
       type: "game",
       data: [
@@ -595,6 +595,7 @@ export const LESSON_CONTENT_UNIT_2 = {
   "1": {
     id: 1,
     title: "2.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-2",
+    icon: textIcon,
     description: {
       type: "text",
       data: [
@@ -608,6 +609,7 @@ export const LESSON_CONTENT_UNIT_2 = {
   "2": {
     id: 2,
     title: "1.2 Test: What is S.M.A.R.T. UNIT-2",
+    icon: testIcon,
     description: {
       type: "test",
       data: [
@@ -746,6 +748,7 @@ export const LESSON_CONTENT_UNIT_2 = {
   "3": {
     id: 3,
     title: "1.3 Video: How to be successful?",
+    icon: videoICon,
     description: {
       type: "video",
       data: [
@@ -759,6 +762,7 @@ export const LESSON_CONTENT_UNIT_2 = {
   "4": {
     id: 4,
     title: "1.4 Case: #1 SMART technology",
+    icon: testIcon,
     description: {
       type: "case",
       data: [
@@ -789,6 +793,7 @@ export const LESSON_CONTENT_UNIT_2 = {
   "5": {
     id: 5,
     title: "1.5 Test: Let’s help Amanda",
+    icon: testIcon,
     description: {
       type: "testTrueOrFalse",
       data: [
@@ -899,6 +904,7 @@ export const LESSON_CONTENT_UNIT_2 = {
   "6": {
     id: 6,
     title: "1.6 Game: Match a pair",
+    icon: testIcon,
     description: {
       type: "game",
       data: [
@@ -946,6 +952,7 @@ export const LESSON_CONTENT_UNIT_3 = {
   "1": {
     id: 1,
     title: "1.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-2",
+    icon: textIcon,
     description: {
       type: "text",
       data: [
@@ -959,6 +966,7 @@ export const LESSON_CONTENT_UNIT_3 = {
   "2": {
     id: 2,
     title: "1.2 Test: What is S.M.A.R.T.",
+    icon: testIcon,
     description: {
       type: "test",
       data: [
@@ -1097,6 +1105,7 @@ export const LESSON_CONTENT_UNIT_3 = {
   "3": {
     id: 3,
     title: "1.3 Video: How to be successful?",
+    icon: videoICon,
     description: {
       type: "video",
       data: [
@@ -1110,6 +1119,7 @@ export const LESSON_CONTENT_UNIT_3 = {
   "4": {
     id: 4,
     title: "1.4 Case: #1 SMART technology",
+    icon: testIcon,
     description: {
       type: "case",
       data: [
@@ -1140,6 +1150,7 @@ export const LESSON_CONTENT_UNIT_3 = {
   "5": {
     id: 5,
     title: "1.5 Test: Let’s help Amanda",
+    icon: testIcon,
     description: {
       type: "testTrueOrFalse",
       data: [
@@ -1250,6 +1261,7 @@ export const LESSON_CONTENT_UNIT_3 = {
   "6": {
     id: 6,
     title: "1.6 Game: Match a pair",
+    icon: testIcon,
     description: {
       type: "game",
       data: [
@@ -1297,6 +1309,7 @@ export const LESSON_CONTENT_UNIT_4 = {
   "1": {
     id: 1,
     title: "1.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-4",
+    icon: textIcon,
     description: {
       type: "text",
       data: [
@@ -1310,6 +1323,7 @@ export const LESSON_CONTENT_UNIT_4 = {
   "2": {
     id: 2,
     title: "1.2 Test: What is S.M.A.R.T.",
+    icon: testIcon,
     description: {
       type: "test",
       data: [
@@ -1448,6 +1462,7 @@ export const LESSON_CONTENT_UNIT_4 = {
   "3": {
     id: 3,
     title: "1.3 Video: How to be successful?",
+    icon: videoICon,
     description: {
       type: "video",
       data: [
@@ -1461,6 +1476,7 @@ export const LESSON_CONTENT_UNIT_4 = {
   "4": {
     id: 4,
     title: "1.4 Case: #1 SMART technology",
+    icon: testIcon,
     description: {
       type: "case",
       data: [
@@ -1491,6 +1507,7 @@ export const LESSON_CONTENT_UNIT_4 = {
   "5": {
     id: 5,
     title: "1.5 Test: Let’s help Amanda",
+    icon: testIcon,
     description: {
       type: "testTrueOrFalse",
       data: [
@@ -1601,6 +1618,7 @@ export const LESSON_CONTENT_UNIT_4 = {
   "6": {
     id: 6,
     title: "1.6 Game: Match a pair",
+    icon: testIcon,
     description: {
       type: "game",
       data: [
@@ -1648,6 +1666,7 @@ export const LESSON_CONTENT_UNIT_5 = {
   "1": {
     id: 1,
     title: "1.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-5",
+    icon: textIcon,
     description: {
       type: "text",
       data: [
@@ -1661,6 +1680,7 @@ export const LESSON_CONTENT_UNIT_5 = {
   "2": {
     id: 2,
     title: "1.2 Test: What is S.M.A.R.T.",
+    icon: testIcon,
     description: {
       type: "test",
       data: [
@@ -1799,6 +1819,7 @@ export const LESSON_CONTENT_UNIT_5 = {
   "3": {
     id: 3,
     title: "1.3 Video: How to be successful?",
+    icon: videoICon,
     description: {
       type: "video",
       data: [
@@ -1812,6 +1833,7 @@ export const LESSON_CONTENT_UNIT_5 = {
   "4": {
     id: 4,
     title: "1.4 Case: #1 SMART technology",
+    icon: testIcon,
     description: {
       type: "case",
       data: [
@@ -1842,6 +1864,7 @@ export const LESSON_CONTENT_UNIT_5 = {
   "5": {
     id: 5,
     title: "1.5 Test: Let’s help Amanda",
+    icon: testIcon,
     description: {
       type: "testTrueOrFalse",
       data: [
@@ -1952,6 +1975,7 @@ export const LESSON_CONTENT_UNIT_5 = {
   "6": {
     id: 6,
     title: "1.6 Game: Match a pair",
+    icon: testIcon,
     description: {
       type: "game",
       data: [

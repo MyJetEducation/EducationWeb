@@ -16,6 +16,7 @@ import s from './style.module.scss';
 import {useDispatch} from "react-redux";
 import {setDisabledBtn} from "../../../../../../store/testSlicer";
 import {useParams} from "react-router-dom";
+import {useGetTimeToken} from "../../../../../Сourse/Lesson/utils/getTimeToken";
 
 
 const cardIds = [
@@ -73,19 +74,14 @@ export const RenderGame = () => {
   const [isTry, setTry] = useState<number>(() => {
     return localStorage.getItem("value") ? Number(localStorage.getItem("value")) : 0;
   });
-  const { unit } = useParams<"unit">();
+  const { id, unit } = useParams<"id" | "unit">();
+  const numberUnit = Number(unit?.replace("unit", ""));
+
   const [showResult, setShowResult] = useState(false);
 
   const dispatch = useDispatch();
 
-  const getTimeToken = async () => {
-    const data = await req(configEndpoint.taskTime, {
-      "tutorial": "1",
-      "unit": 1,
-      "task": 6
-    })
-    localStorage.setItem("timeToken", data.data)
-  }
+  useGetTimeToken("1", numberUnit, Number(id))
 
   const setResult = async () => {
     const data = await req(configEndpoint.unitGame, {
@@ -108,7 +104,6 @@ export const RenderGame = () => {
 
 
   useEffect(() => {
-    getTimeToken()
     return () => {
       localStorage.removeItem("timeToken")
       localStorage.removeItem("value")

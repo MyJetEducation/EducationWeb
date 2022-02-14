@@ -15,7 +15,7 @@ import achievementIcon from './assets/achiv.svg';
 
 import s from './style.module.scss';
 
-export const SummaryBord2 = () => {
+export const SummaryBord = () => {
   const menu = useSelector(progressMenuSelector);
   const navigate = useNavigate();
 
@@ -29,7 +29,6 @@ export const SummaryBord2 = () => {
     })
     setResult(data)
   }
-  console.log("####: result", result);
   useEffect(() => {
     getResult()
   }, [])

@@ -40,8 +40,7 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
           "timeToken": localStorage.getItem("timeToken"),
           "answers": answer
         })
-        console.log("####: data", data);
-        setPercent(await data.data.unit.testScore)
+        setPercent(await data.data.unit.tasks[1].testScore)
       }
 
       dispatch(validChange(currentIndex));

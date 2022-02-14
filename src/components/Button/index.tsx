@@ -5,7 +5,7 @@ import s from './style.module.scss';
 
 interface buttonProps {
   variant?: "bgBlack" | "bgBlue" | "bgGrey" | "outlined",
-  size?: "small" | "little" | "middle" | "large",
+  size?: "reTry" | "small" | "little" | "middle" | "large",
   color?: "white" | "black",
   margin?: string,
   disabled?: boolean,
@@ -38,6 +38,7 @@ export const Button: React.FC<buttonProps> = (
         [s.bgBlue]: variant === "bgBlue",
         [s.bgGrey]: variant === "bgGrey",
         [s.outlined]: variant === "outlined",
+        [s.reTry]: size === "reTry",
         [s.small]: size === "small",
         [s.little]: size === "little",
         [s.middle]: size === "middle",
