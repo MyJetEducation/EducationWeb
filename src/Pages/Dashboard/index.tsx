@@ -10,14 +10,14 @@ import req from "../../utils/request";
 import {configEndpoint} from "../../config";
 
 interface dashboardProps {
-  name?: string
+  name?: string,
+  tutorialName?: string
 }
 
-export const DashBoard: React.FC<dashboardProps> = ({name = "Anton"}) => {
+export const DashBoard: React.FC<dashboardProps> = ({name = "Anton", tutorialName = "personal"}) => {
   const data = useSelector(dataDashboardSelector);
   const isLoading = useSelector(isLoadingDashboardSelector);
   const dispatch = useDispatch();
-
   // const fetchRefreshMenu = async () => {
   //   const data = await req(configEndpoint.putKeyValue, {
   //     "items": [
@@ -47,14 +47,19 @@ export const DashBoard: React.FC<dashboardProps> = ({name = "Anton"}) => {
   //   return data
   // }
 
+  const fetchTutorials = async () => {
+    const data = await req(configEndpoint.dashboard, {
+      "tutorial": 2
+    })
+  }
+
   useEffect(() => {
     // fetchRefreshMenu()
-    dispatch(getDashboardAsync());
+    dispatch(getDashboardAsync(1));
   }, [])
 
   return (
     <div className={s.wrap}>
-
       <Container>
         <h1 className={s.title}>
           {`Welcome, ${name}`}
@@ -71,6 +76,7 @@ export const DashBoard: React.FC<dashboardProps> = ({name = "Anton"}) => {
                 <div className={s.leftSide}>
                   <img className={s.map} src={map} alt="map"/>
                   <TutorialBlock
+                    tutorialName={"personal"}
                     unitsScore={data?.units}
                   />
                 </div>

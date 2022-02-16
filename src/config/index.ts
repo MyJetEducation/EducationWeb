@@ -41,7 +41,7 @@ const config = {
       [configEndpoint.dashboard]: {
         method: "POST",
         uri: {
-          pathname: "/api/v1/education/personal/dashboard"
+          pathname: "/api/v1/education/dashboard/tutorial"
         }
       },
       [configEndpoint.getKeyValue]: {

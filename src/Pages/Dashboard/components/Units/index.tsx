@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
+import {useNavigate} from "react-router-dom";
 
 import cn from 'classnames'
-import s from './style.module.scss';
 import {Button} from "../../../../components/Button";
-import {useNavigate} from "react-router-dom";
+import s from './style.module.scss';
 
 import check from './assets/check.svg'
 import norm from './assets/norm.svg'
@@ -34,6 +34,8 @@ const Units: React.FC<unitsProps> = (
     unitIcon
   }
 ) => {
+  console.log("####: isSuccess", isSuccess);
+  console.log("####: isShowActiveTask", isShowActiveTask);
   const [showUnit, setSetShowUnit] = useState(false);
   const navigate = useNavigate();
 
@@ -44,7 +46,6 @@ const Units: React.FC<unitsProps> = (
   }
 
   const handleRelocateClick = () => {
-    console.log("####: urlRelocate", urlRelocate);
     navigate(urlRelocate)
   }
 
@@ -114,18 +115,18 @@ const Units: React.FC<unitsProps> = (
                   >
                     <div className={s.unitItemNameBlock}>
                       {
-                        scoreList[index]?.testScore >= 80 ? <img src={check} alt="done icon"/> :
-                          scoreList[index]?.testScore >= 60 ? <img src={norm} alt="done icon"/> :
-                            scoreList[index]?.testScore < 60 ? <img src={fail} alt="done icon"/> : (
+                        scoreList[index]?.taskScore >= 80 ? <img src={check} alt="done icon"/> :
+                          scoreList[index]?.taskScore >= 60 ? <img src={norm} alt="done icon"/> :
+                            scoreList[index]?.taskScore < 60 ? <img src={fail} alt="done icon"/> : (
                               <img src={unitIcon[index]} alt="unit icon"/>
                             )
                       }
 
                       <p
                         className={cn(s.unitItemName, {
-                          [s.unitItemNameDone]: scoreList[index]?.testScore <= 100,
-                          [s.unitItemNameNormal]: scoreList[index]?.testScore < 80,
-                          [s.unitItemNameFail]: scoreList[index]?.testScore < 60,
+                          [s.unitItemNameDone]: scoreList[index]?.taskScore <= 100,
+                          [s.unitItemNameNormal]: scoreList[index]?.taskScore < 80,
+                          [s.unitItemNameFail]: scoreList[index]?.taskScore < 60,
                         })}
                       >
                         {item}
@@ -136,11 +137,11 @@ const Units: React.FC<unitsProps> = (
                         (index === 1 || index === 3 || index === 4) && (
                           <>
                             {
-                              scoreList[index]?.testScore < 100 && (
+                              scoreList[index]?.taskScore < 100 && (
                                 <Button
                                   size="reTry"
                                   variant="bgBlue"
-                                  onClick={() => navigate(`/unit1/${index + 1}`)}
+                                  onClick={() => navigate(`/personal/unit1/${index + 1}`)}
                                 >
                                   Re-Try
                                 </Button>
@@ -148,11 +149,11 @@ const Units: React.FC<unitsProps> = (
                             }
 
                             <p className={cn(s.unitItemNameScore, {
-                              [s.unitItemNameDone]: scoreList[index]?.testScore <= 100,
-                              [s.unitItemNameNormal]: scoreList[index]?.testScore < 80,
-                              [s.unitItemNameFail]: scoreList[index]?.testScore < 60,
+                              [s.unitItemNameDone]: scoreList[index]?.taskScore <= 100,
+                              [s.unitItemNameNormal]: scoreList[index]?.taskScore < 80,
+                              [s.unitItemNameFail]: scoreList[index]?.taskScore < 60,
                             })}>
-                              {scoreList[index]?.testScore !== undefined || null || undefined ? `${scoreList[index]?.testScore}%` : null}
+                              {scoreList[index]?.taskScore !== undefined || null || undefined ? `${scoreList[index]?.taskScore}%` : null}
                             </p>
                           </>
                         )

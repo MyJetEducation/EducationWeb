@@ -528,8 +528,8 @@ export const LESSON_CONTENT_UNIT_1 = {
             {
               id: "5answer1",
               name: "5q",
-              param: false,
-              value: true,
+              param: true,
+              value: 1,
               textAnswer: "True"
             },
             {

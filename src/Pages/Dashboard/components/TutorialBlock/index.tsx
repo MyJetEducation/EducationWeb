@@ -71,10 +71,11 @@ const UNIT_NAME = [
 ]
 
 interface tutorialBlockProps {
-  unitsScore: any[]
+  unitsScore: any[],
+  tutorialName: string
 }
 
-export const TutorialBlock: React.FC<tutorialBlockProps> = ({unitsScore}) => {
+export const TutorialBlock: React.FC<tutorialBlockProps> = ({unitsScore, tutorialName}) => {
   return (
     <>
       <div className={s.wrap}>
@@ -108,36 +109,37 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({unitsScore}) => {
             let isShowActiveTask = false;
             let scoreList = [];
             let isSuccess = false;
-            let testScore = null;
-            if ( unitsScore !== null ) {
+            let taskScore = null;
+            if (unitsScore !== null) {
               scoreList = unitsScore[index]?.tasks
-              testScore = unitsScore[index]?.testScore
-              if (unitsScore[index]?.testScore >= 80) {
-                isSuccess = true
-              }
+              taskScore = unitsScore[index]?.taskScore
+
               if (index !== 0 && index !== UNIT_NAME.length - 1) {
-                if (unitsScore[index - 1]?.testScore >= 80 && (!unitsScore[index + 1]?.testScore || unitsScore[index + 1]?.testScore < 80)) {
+                if (unitsScore[index - 1]?.taskScore >= 80 && (!unitsScore[index + 1]?.taskScore || unitsScore[index + 1]?.taskScore < 80)) {
                   isShowActiveTask = true
                 }
+              }
+              if (unitsScore[index]?.taskScore >= 80) {
+                isSuccess = true
+                isShowActiveTask = false
               }
             } else {
               if (index === 0) {
                 isShowActiveTask = true
               }
-
             }
             return (
               <Units
                 key={index}
                 isSuccess={isSuccess}
-                unitScore={testScore}
+                unitScore={taskScore}
                 isShowActiveTask={isShowActiveTask}
                 unitList={item.unitList}
                 unitIcon={item.unitIcon}
                 scoreList={scoreList}
                 title={UNIT_NAME[index].name}
                 btnName={`Start Unit ${index + 1}`}
-                urlRelocate={`/unit${index + 1}/1`}
+                urlRelocate={`/${tutorialName}/unit${index + 1}/1`}
               />
             )
           })

@@ -29,7 +29,7 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
   const [percent, setPercent] = useState(0);
   const currentIndex = useSelector(currentIdSelector(id as string));
   useGetTimeToken("1", numberUnit, Number(id))
-  
+  console.log("####: answer", answer);
   useEffect(() => {
     return () => {
       localStorage.removeItem("timeToken")
@@ -45,7 +45,7 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
           "answers": answer
         })
         console.log("####: data", data);
-        setPercent(data.data.unit.tasks[4].testScore)
+        setPercent(data.data.unit.tasks[4].taskScore)
       }
       setResult()
       dispatch(validChange(currentIndex));

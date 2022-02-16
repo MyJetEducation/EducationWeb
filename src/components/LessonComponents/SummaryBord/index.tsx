@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import cn from 'classnames';
 
@@ -16,49 +16,30 @@ import achievementIcon from './assets/achiv.svg';
 import s from './style.module.scss';
 
 export const SummaryBord = () => {
+  const {unit} = useParams<"unit">();
+  const unitNumber = unit?.replace("unit", "");
   const menu = useSelector(progressMenuSelector);
   const navigate = useNavigate();
 
   const [result, setResult] = useState<any>({});
 
   const [isCaseTrue, setCaseTrue] = useState(false);
-
   const getResult = async () => {
     const data = await req(configEndpoint.unitSummary, {
-      unit: 1
+      unit: unitNumber
     })
     setResult(data)
+
   }
   useEffect(() => {
     getResult()
   }, [])
 
   useEffect(() => {
-    if (result.data?.caseProgress === 100) {
+    if (Object.values(result).length > 0 && result.data?.case === 100) {
       setCaseTrue(true)
-    } else {
-      setCaseTrue(false)
     }
   }, [isCaseTrue])
-
-  // useEffect( () => {
-  //   const getMenu = async () => {
-  //     const data = await req(configEndpoint.getKeyValue, {
-  //       "keys": [
-  //         "progressMenuUnit1"
-  //       ]
-  //     });
-  //     // console.log("####: data", data);
-  //     if (!data) {
-  //       navigate("/lessons/1")
-  //     }
-  //   }
-  //   getMenu()
-  // }, []);
-  //
-  // useEffect(() => {
-  //   localStorage.setItem("key", JSON.stringify(menu));
-  // }, [menu])
 
   return (
     <Container>
@@ -81,7 +62,7 @@ export const SummaryBord = () => {
 
             <div className={s.testScore}>
               <div className={s.num}>
-                {`${result.data?.unit.testScore}%`}
+                {`${result.data?.test}%`}
               </div>
               <div className={s.text}>
                 Your Test score
@@ -89,7 +70,7 @@ export const SummaryBord = () => {
             </div>
             <div className={s.testScore}>
               <div className={s.num}>
-                {`${result.data?.trueFalseProgress}%`}
+                {`${result.data?.trueFalse}%`}
               </div>
               <div className={s.text}>
                 True/False

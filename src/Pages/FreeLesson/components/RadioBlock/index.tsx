@@ -18,24 +18,31 @@ const prepareState = (answers: any) => {
     "value": item[1]
   }))
 }
-
+//:TODO доделать для записи true false
 const prepareStateTrueFalse = (answers: any) => {
-  return Object.entries(answers).map((item, index) => ({
+  return Object.values(answers).map((item, index) => ({
     "number": index + 1,
-    "value": Boolean(item[1])
+    "value": Boolean(item)
   }))
 }
 
 const RadioBlock: React.FC<radioBlockProps> = ({content, size, selectedAll, onChange, onChangeTrueFalse, type}) => {
-  //:TODO доделать answers для записи true false
+
   const [answers, setAnswers] = useState({});
+  const [answersTrueFalse, setAnswersTrueFalse] = useState({});
+  console.log("####: answersTrueFalse", answersTrueFalse);
   useEffect(() => {
     selectedAll && selectedAll(Object.keys(answers).length === content.length);
     onChange && onChange(prepareState(answers));
-    onChangeTrueFalse && onChangeTrueFalse(prepareStateTrueFalse(answers));
+    onChangeTrueFalse && onChangeTrueFalse(prepareStateTrueFalse(answersTrueFalse));
   }, [answers])
 
   const handleChange = (e: any) => {
+    setAnswersTrueFalse((prevState) => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value
+      }})
     setAnswers((prevState) => {
       const copyState = {...prevState}
       if (copyState[e.target.name as keyof typeof copyState]) {
@@ -46,7 +53,7 @@ const RadioBlock: React.FC<radioBlockProps> = ({content, size, selectedAll, onCh
       return copyState
     })
   }
-
+  console.log("####: answersTrueFalse", answersTrueFalse);
   return (
     <form
       onChange={handleChange}

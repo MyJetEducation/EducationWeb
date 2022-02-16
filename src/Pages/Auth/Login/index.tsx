@@ -79,7 +79,6 @@ export const Login = () => {
 
   useEffect(() => {
     if ( auth.user ) {
-
       navigate("/");
     }
   }, []);

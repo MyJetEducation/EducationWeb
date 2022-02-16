@@ -48,13 +48,13 @@ export const App = () => {
             </RequireAuth>
 
           )}/>
-          <Route path="/:unit/:id" element={(
+          <Route path="/:tutorial/:unit/:id" element={(
             <RequireAuth>
               <Lesson/>
             </RequireAuth>
 
           )}/>
-          <Route path="/:unit/:id/summary" element={(
+          <Route path="/:tutorial/:unit/:id/summary" element={(
             <RequireAuth>
               <SummaryBord/>
             </RequireAuth>

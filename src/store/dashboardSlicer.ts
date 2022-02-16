@@ -27,10 +27,13 @@ export const dashboardSlicer = createSlice({
   }
 });
 
-export const getDashboardAsync = () => async (dispatch: any) => {
+export const getDashboardAsync = (number: number) => async (dispatch: any) => {
   dispatch(fetchDashboard())
   try {
-    const data = await req(configEndpoint.dashboard, {});
+    const data = await req(configEndpoint.dashboard, {
+      "tutorial": number
+
+    });
     if (data.status > 300) {
       throw data
     }
