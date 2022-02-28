@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import req from "../utils/request";
+import req from "../services/request";
 import {configEndpoint} from "../config";
 import {RootState} from "./index";
 
@@ -27,12 +27,11 @@ export const dashboardSlicer = createSlice({
   }
 });
 
-export const getDashboardAsync = (number: number) => async (dispatch: any) => {
+export const getDashboardAsync = (tutorial: number) => async (dispatch: any) => {
   dispatch(fetchDashboard())
   try {
     const data = await req(configEndpoint.dashboard, {
-      "tutorial": number
-
+      "tutorial": tutorial,
     });
     if (data.status > 300) {
       throw data

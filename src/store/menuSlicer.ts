@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {RootState} from "./index";
-import {ARRAY} from "../Pages/FreeLesson/constans";
+import {PROGRESS_MENU_EXAMPLE} from "../ui/Lesson/constans";
 
 
-const initialState: any = localStorage.getItem("key") ? JSON.parse(localStorage.getItem("key") as string) : ARRAY
+const initialState: any = localStorage.getItem("key") ? JSON.parse(localStorage.getItem("key") as string) : PROGRESS_MENU_EXAMPLE
 
 export const menuSlicer = createSlice({
   name: "menu",
