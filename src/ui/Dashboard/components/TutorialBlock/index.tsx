@@ -81,13 +81,6 @@ const UNIT_NAME = [
 
 export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, startOrFinished, unitsScore}) => {
 
-  // const overallProgress = useMemo(() => data.taskScore,[data]);
-  // const currentIndex = useMemo(() => index + 1,[index]);
-
-  console.log("####: startOrFinished", startOrFinished);
-  console.log("####: unitsScore", unitsScore);
-
-
   return (
     <div
 
