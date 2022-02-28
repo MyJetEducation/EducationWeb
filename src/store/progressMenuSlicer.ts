@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {RootState} from "./index";
-import req from "../utils/request";
+import req from "../services/request";
 import {configEndpoint} from "../config";
-import {capitalize} from "../utils";
+import {capitalize} from "../services";
 
 const initialState: any = {
   isLoading: false,

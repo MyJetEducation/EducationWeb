@@ -1,0 +1,64 @@
+.form {
+  max-width: 560px;
+}
+
+.titleAnswer {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 28px;
+  color: #000000;
+  margin-bottom: 15px;
+}
+
+.wrap {
+  margin-bottom: 40px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.answerWrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input {
+  position: absolute;
+  left: -9999px;
+}
+
+.label {
+  width: 560px;
+  border: 2px solid #E0E5EB;
+  border-radius: 12px;
+  display: block;
+  padding: 13px 16px 11px;
+  transition: border .2s ease-out;
+
+  &.small {
+    width: 270px;
+  }
+}
+
+[type = "radio"]:checked + .label {
+  border: 2px solid #374DFB;
+}
+[type = "radio"]:disabled + .label {
+  border: 2px solid #E0E5EB;
+  color: #E0E5EB
+}
+[type = "checkbox"]:checked + .label {
+  border: 2px solid #374DFB;
+}
+[type = "checkbox"]:disabled + .label {
+  border: 2px solid #E0E5EB;
+  color: #E0E5EB
+}

@@ -14,7 +14,12 @@ export enum configEndpoint {
   unitTrueFalse = "unitTrueFalse",
   unitGame = "unitGame",
   unitSummary = "unitSummary",
-  taskTime = "taskTime"
+  taskTime = "taskTime",
+  progressAllStatsBlock = "progressAllStatsBlock",
+  tutorials = "tutorials",
+  inRetryDate = "inRetryDate",
+  inRetryCount = "inRetryCount",
+
 };
 
 const urlHostServer = new URL(process.env.REACT_APP_APIHOST as string);
@@ -41,7 +46,7 @@ const config = {
       [configEndpoint.dashboard]: {
         method: "POST",
         uri: {
-          pathname: "/api/v1/education/personal/dashboard"
+          pathname: "/api/v1/education/dashboard/tutorial"
         }
       },
       [configEndpoint.getKeyValue]: {
@@ -120,6 +125,30 @@ const config = {
         method: "POST",
         uri: {
           pathname: "/api/v1/time/task-time/get"
+        }
+      },
+      [configEndpoint.progressAllStatsBlock]: {
+        method: "POST",
+        uri: {
+          pathname: "/api/v1/education/dashboard/progress"
+        }
+      },
+      [configEndpoint.tutorials]: {
+        method: "POST",
+        uri: {
+          pathname: "/api/v1/education/dashboard/tutorials"
+        }
+      },
+      [configEndpoint.inRetryDate]: {
+        method: "POST",
+        uri: {
+          pathname: "/api/v1/retry/use-bydate"
+        }
+      },
+      [configEndpoint.inRetryCount]: {
+        method: "POST",
+        uri: {
+          pathname: "/api/v1/retry/use-bycount"
         }
       }
     }

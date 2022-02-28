@@ -1,0 +1,37 @@
+.wrap {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #E0E5EB;
+  border-radius: 12px;
+  display: block;
+  margin-bottom: 24px;
+  padding-left: 16px;
+  outline: none;
+  transition: all .1s ease-in-out;
+  &.small {
+    width: 166px;
+  }
+  &:focus {
+    border: 2px solid #374DFB;
+  }
+  & ~ .placeholder{
+    position: absolute;
+    color: #A8B0BA;
+    pointer-events: none;
+    background-color: #fff;
+    padding: 0 5px;
+    left: 12px;
+    transition: all .25s ease-in-out;
+  }
+  & ~ .placeholder {
+    top: 15px;
+  }
+  &:focus ~ .placeholder,
+  &.valid ~ .placeholder{
+    top: -9px;
+  }
+}

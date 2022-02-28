@@ -1,22 +1,21 @@
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
-import {Login} from "./Pages/Auth/Login";
-import {Plans} from "./Pages/PlansPayment/Plans";
-import {Header} from "./components/Header";
-import {Register} from "./Pages/Auth/Register";
-import {HomePage} from "./Pages/Home";
-import {DashBoard} from "./Pages/Dashboard";
-import {Questions} from "./Pages/Questions";
-import {FreeLesson} from "./Pages/OnBoarding";
-import {SummaryBord} from "./components/LessonComponents/SummaryBord";
-import {RequireAuth} from "./components/RequireAuth";
-import {AuthProvider} from "./context/AuthProvider";
-import {FreeQuestions} from "./Pages/FreeLesson";
-import {ForgotPassWord} from "./Pages/Auth/ForgotPassword";
-import {Lesson} from "./Pages/Сourse/Lesson";
-import TestTranslate from "./Pages/Test";
-import ZeroQuizLesson from "./Pages/ZeroQuizLesson";
+import {Auth} from "./ui/Auth";
+import {Plans} from "./ui/PlansPayment/Plans";
+import {Register} from "./ui/Register";
+import {HomePage} from "./ui/Home";
+import {DashBoard} from "./ui/Dashboard";
+import {SummaryBord} from "./ui/Lesson/components/SummaryBord";
+import {RequireAuth} from "./services/RequireAuth";
+import {AuthProvider} from "./services/AuthProvider";
+import {Lesson} from "./ui/Lesson";
+import TestTranslate from "./ui/Test";
+import ZeroQuizLesson from "./ui/ZeroQuizLesson";
+import {Header} from "./ui/components/Header";
+import RenderTest from "./ui/Lesson/components/Tasks/RenderTest";
+import RetryTest from "./ui/Lesson/components/Retry/Test";
+import Retry from "./ui/Lesson/components/Retry";
 
 export const App = () => {
   return (
@@ -25,43 +24,40 @@ export const App = () => {
         <Header/>
         <Routes>
           <Route path="/" element={<HomePage/>}/>
-          <Route path="/login" element={<Login/>}/>
+          <Route path="/login" element={<Auth/>}/>
           <Route path="/register" element={<Register/>}/>
-          <Route path="/forgot" element={<ForgotPassWord/>}/>
           <Route path="/test" element={<TestTranslate/>}/>
           <Route path="/zero-lesson" element={<ZeroQuizLesson/>}/>
-          <Route path="/start" element={(
-            <RequireAuth>
-              <Questions/>
-            </RequireAuth>
-          )}/>
+          <Route path="/:confirm/:hash" element={<Register/>}/>
+
           <Route path="/plans" element={(
             <RequireAuth>
               <Plans/>
             </RequireAuth>
-
           )}/>
-
           <Route path="/dashboard" element={(
             <RequireAuth>
               <DashBoard/>
             </RequireAuth>
-
           )}/>
-          <Route path="/:unit/:id" element={(
+          <Route path="/:tutorial/:unit/:id" element={(
             <RequireAuth>
               <Lesson/>
             </RequireAuth>
-
           )}/>
-          <Route path="/:unit/:id/summary" element={(
+          <Route path="/retry/:tutorial/:unit/:id" element={(
+            <RequireAuth>
+              <Retry/>
+            </RequireAuth>
+          )}/>
+          <Route path="/:tutorial/:unit/:id/summary" element={(
             <RequireAuth>
               <SummaryBord/>
             </RequireAuth>
-
           )}/>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
+
   )
 }
