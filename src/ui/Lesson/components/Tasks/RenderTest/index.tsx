@@ -15,14 +15,14 @@ interface renderTestProps {
 }
 
 const RenderTest: React.FC<renderTestProps> = ({content}) => {
-  const {id, unit} = useParams<"id" | "unit">();
+  const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
   const numberUnit = Number(unit?.replace("unit", ""));
   const dispatch = useDispatch();
   const [showResult, setShowResult] = useState(false);
   const [percent, setPercent] = useState(0);
   const [answer, setAnswer] = useState({});
   const location: any = useLocation();
-  useGetTimeToken("1", numberUnit, Number(id));
+  useGetTimeToken(String(tutorial), numberUnit, Number(id));
   useEffect(() => {
     return () => {
       localStorage.removeItem("timeToken")

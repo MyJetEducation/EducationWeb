@@ -17,14 +17,14 @@ interface renderCaseProps {
 }
 
 const RenderCase: React.FC<renderCaseProps> = ({content}) => {
-  const { id, unit } = useParams< "id" | "unit">();
+  const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
   const numberUnit = Number(unit?.replace("unit", ""));
   const location: any = useLocation();
   const [answer, setAnswer] = useState<any[]>([]);
   const [isValidAnswer, setValidAnswer] = useState(false)
   const dispatch = useDispatch();
 
-  useGetTimeToken("1", numberUnit, Number(id))
+  useGetTimeToken(String(tutorial), numberUnit, Number(id))
 
   useEffect(() => {
     return () => {

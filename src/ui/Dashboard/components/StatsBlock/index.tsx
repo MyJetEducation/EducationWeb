@@ -9,6 +9,7 @@ const StatsBlock = () => {
   
   const dispatch = useDispatch();
   const data = useSelector(userTaskScoreSelector);
+  console.log("####: data", data);
   useEffect(() => {
     dispatch(getFetchProgressDashboardAsync());
   }, [])
@@ -35,7 +36,13 @@ const StatsBlock = () => {
           className={s.item}
 
         >
-          <p>{`${10}`}</p>
+          <p>
+            {
+              data !== null ? (
+                data?.habit.index
+              ) : 0
+            }
+          </p>
           <p>Tasks</p>
         </div>
 
@@ -43,7 +50,13 @@ const StatsBlock = () => {
           className={s.item}
 
         >
-          <p>{1}</p>
+          <p>
+            {
+              data !== null ? (
+                data?.habit.index
+              ) : 0
+            }
+          </p>
           <p>Habbit</p>
         </div>
 
@@ -51,7 +64,13 @@ const StatsBlock = () => {
           className={s.item}
 
         >
-          <p>{1}</p>
+          <p>
+            {
+              data !== null ? (
+                data?.skill.index
+              ) : 0
+            }
+          </p>
           <p>Skill</p>
         </div>
 
