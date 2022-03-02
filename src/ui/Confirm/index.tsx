@@ -1,14 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import {useAuth} from "../../services/auth";
 import req from "../../services/request";
 import {configEndpoint} from "../../config";
+import {Button} from "../components/Button";
 
 const RegisterConfirm = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   const location = useLocation();
   const hash: string = location.search.replace("?hash=", "");
+  const [confirm, setConfirm] = useState(false);
   const confirmUser = async () => {
     const data = await fetch("https://api.dfnt.work/api/v1/register/confirm", {
       method: "POST",
@@ -18,7 +20,10 @@ const RegisterConfirm = () => {
         'Content-Type': 'application/json'
       }
     }).then(res => res.json());
-    if (data.data.status === 0) {
+    auth.signIn(data.data?.token as string, () => {})
+    auth.signInRefresh(data.data?.refreshToken as string);
+    const keys = await req(configEndpoint.allKeysKeyValue, {});
+    if (keys.status === -4) {
       const fetchRefreshMenu = async () => {
         const data = await req(configEndpoint.putKeyValue, {
           "items": [
@@ -66,21 +71,18 @@ const RegisterConfirm = () => {
         })
         return data
       }
-      fetchRefreshMenu()
+      fetchRefreshMenu();
+      setConfirm(true);
+      navigate("/register-confirm-done")
     }
-    auth.signIn(data.data?.token as string, () => {
-      navigate('/dashboard');
-    })
-    auth.signInRefresh(data.data?.refreshToken as string)
   }
 
   useEffect(() => {
     confirmUser()
   }, [])
   return (
-    <h1>
-      This is register confirm
-    </h1>
+    <h1>...Loading</h1>
+
   )
 }
 
