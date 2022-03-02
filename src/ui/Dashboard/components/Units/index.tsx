@@ -43,7 +43,10 @@ const Units = (
   }
 
   const handleReadClick = (index: any) => {
-    navigate(`/${tutorialName}/unit1/${index + 1}`, {state: {readonly: true}})
+    console.log("####: scoreList", scoreList[index]);
+    if (scoreList[index]?.taskScore !== 0) {
+      navigate(`/${tutorialName}/unit1/${index + 1}`, {state: {readonly: true}})
+    }
   }
 
   const handleRetryTask = (index: any) => {
@@ -57,7 +60,6 @@ const Units = (
         return data
       }
       fetchByDate();
-
     }
     if (isRetry.tasks[index].retry.inRetry === true) {
       navigate(`/${tutorialName}/unit${unitNumber + 1}/${index + 1}`, {state: {retry: true}})
@@ -153,11 +155,8 @@ const Units = (
 
                       {
                         (index === 1 || index === 3 || index === 4 || index === 5) && (
-                          console.log("####: scoreList[index].task", scoreList[5].taskScore),
                           <>
-
                             {
-
                               (scoreList[index]?.taskScore < 100 && scoreList[index]?.taskScore !== 0 || scoreList[index].task === 6) && (
                                 <Button
                                   size="reTry"

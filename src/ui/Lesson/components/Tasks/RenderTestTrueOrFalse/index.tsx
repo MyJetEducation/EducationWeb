@@ -16,14 +16,14 @@ interface   renderTestTrueOrFalse {
 }
 
 const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
-  const {id, unit} = useParams<"id" | "unit">();
+  const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
   const numberUnit = Number(unit?.replace("unit", ""))
   const dispatch = useDispatch();
   const [answer, setAnswer] = useState<any[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [percent, setPercent] = useState(0);
   const location: any = useLocation();
-  useGetTimeToken("1", numberUnit, Number(id))
+  useGetTimeToken(String(tutorial), numberUnit, Number(id))
   useEffect(() => {
     return () => {
       localStorage.removeItem("timeToken")

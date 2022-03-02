@@ -74,14 +74,14 @@ export const RenderGame = () => {
   const [isTry, setTry] = useState<number>(() => {
     return localStorage.getItem("value") ? Number(localStorage.getItem("value")) : 0;
   });
-  const { id, unit } = useParams<"id" | "unit">();
+  const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
   const numberUnit = Number(unit?.replace("unit", ""));
   const location: any = useLocation();
   const [showResult, setShowResult] = useState(false);
 
   const dispatch = useDispatch();
 
-  useGetTimeToken("1", numberUnit, Number(id))
+  useGetTimeToken(String(tutorial), numberUnit, Number(id))
 
   const setResult = async () => {
     const data = await req(configEndpoint.unitGame, {

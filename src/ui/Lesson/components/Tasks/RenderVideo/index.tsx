@@ -16,10 +16,10 @@ interface renderVideoProps {
 }
 
 const RenderVideo: React.FC<renderVideoProps> = ({content}) => {
-  const { id, unit } = useParams< "id" | "unit" >();
+  const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
   const numberUnit = Number(unit?.replace("unit", ""));
   const location: any = useLocation();
-  useGetTimeToken("1", numberUnit, Number(id))
+  useGetTimeToken(String(tutorial), numberUnit, Number(id))
 
   const fetchResult = async () => {
     const data = await req(configEndpoint.unitVideo, {

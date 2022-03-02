@@ -13,9 +13,9 @@ interface renderTextQuestion {
 }
 
 export const RenderText: React.FC<renderTextQuestion> = ({content}) => {
-  const {id, unit} = useParams<"id" | "unit">();
+  const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
   const numberUnit = Number(unit?.replace("unit", ""));
-  useGetTimeToken("1", numberUnit, Number(id));
+  useGetTimeToken(String(tutorial), numberUnit, Number(id));
   const location: any = useLocation();
   const fetchResult = async () => {
     const data = await req(configEndpoint.unitText, {
