@@ -22,13 +22,7 @@ const StatsBlock = () => {
         <div
           className={cn(s.item, s.testScore)}
         >
-          <p>
-            {
-              data !== null ? (
-                data?.taskScore
-              ) : 0
-            }
-          </p>
+          <p>{`${data?.taskScore}%`}</p>
           <p>Test score</p>
         </div>
 
@@ -39,7 +33,7 @@ const StatsBlock = () => {
           <p>
             {
               data !== null ? (
-                data?.habit.index
+                data?.tasks
               ) : 0
             }
           </p>
