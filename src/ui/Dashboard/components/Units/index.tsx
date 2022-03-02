@@ -153,15 +153,18 @@ const Units = (
 
                       {
                         (index === 1 || index === 3 || index === 4 || index === 5) && (
+                          console.log("####: scoreList[index].task", scoreList[5].taskScore),
                           <>
+
                             {
-                              ((scoreList[index]?.taskScore < 100 && scoreList[index]?.taskScore !== 0) || scoreList[index].task === 6) && (
+
+                              (scoreList[index]?.taskScore < 100 && scoreList[index]?.taskScore !== 0 || scoreList[index].task === 6) && (
                                 <Button
                                   size="reTry"
                                   variant="bgBlue"
                                   onClick={() => handleRetryTask(index)}
                                 >
-                                  { isRetry.tasks[index].retry.canRetryByTime === true ? "Free": "Retry" }
+                                  { isRetry.tasks[index].retry.canRetryByTime === true ? "Free" : "Retry" }
                                 </Button>
                               )
                             }

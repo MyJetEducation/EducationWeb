@@ -55,8 +55,7 @@ export const Lesson = () => {
         return data
     }
   }, [tutorial]);
-  console.log("####: allData", allData);
-  
+
   const currentIndex = useSelector(currentIdSelector(id as string))
   const disabled = useSelector(testSelector);
 
@@ -77,7 +76,7 @@ export const Lesson = () => {
 
   const handleClickNextQuestion = () => {
     dispatch(setProgressMenuAsync(currentIndex, tutorial, unit));
-    if (retry.retry || retry.readonly) {
+    if (retry) {
       navigate("/dashboard", {state: null})
     } else {
       if (currentIndex === menu.data.length - 1) {

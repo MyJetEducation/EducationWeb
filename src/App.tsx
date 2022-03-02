@@ -14,6 +14,8 @@ import TestTranslate from "./ui/Test";
 import ZeroQuizLesson from "./ui/ZeroQuizLesson";
 import {Header} from "./ui/components/Header";
 import RegisterConfirm from "./ui/Confirm";
+import ConfirmDonePage from "./ui/Confirm/conponents/confirmDonePage";
+import FreeLesson from "./ui/FreeLesson";
 
 export const App = () => {
   return (
@@ -27,6 +29,7 @@ export const App = () => {
           <Route path="/test" element={<TestTranslate/>}/>
           <Route path="/zero-lesson" element={<ZeroQuizLesson/>}/>
           <Route path="/register-confirm" element={<RegisterConfirm/>}/>
+          <Route path="/free" element={<FreeLesson/>}/>
 
           <Route path="/plans" element={(
             <RequireAuth>
@@ -46,6 +49,11 @@ export const App = () => {
           <Route path="/:tutorial/:unit/:id/summary" element={(
             <RequireAuth>
               <SummaryBord/>
+            </RequireAuth>
+          )}/>
+          <Route path="/register-confirm-done" element={(
+            <RequireAuth>
+              <ConfirmDonePage/>
             </RequireAuth>
           )}/>
         </Routes>
