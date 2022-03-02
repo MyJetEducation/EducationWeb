@@ -37,13 +37,40 @@ export const getTutorialsAsync = () => async (dispatch: any) => {
     dispatch(fetchTutorialsResolve(data.data))
   } catch (error) {
     dispatch(fetchTutorialsReject("Some Error"))
-  };
+  }
+  ;
 }
 
 export const {fetchTutorials, fetchTutorialsResolve, fetchTutorialsReject} = tutorialsSlicer.actions;
 
+interface TutorialI {
+  started: boolean,
+  finished: boolean,
+  tutorial: string
+}
+
 export const isLoadingTutorialsSelector = (state: RootState) => state.tutorials.isLoading;
-export const dataTutorialsSelector = (state: RootState) => state.tutorials.data?.tutorials;
+export const dataTutorialsSelector = (state: RootState) => {
+  if (!state.tutorials.data) {
+    return null
+  }
+  const {tutorials}: { tutorials: TutorialI[] } = state.tutorials.data;
+
+  return tutorials.map((item, index, arr) => {
+    let show = false;
+    if (index === 0) {
+      show = true
+    } else {
+      if (arr[index - 1].finished) {
+        show = true
+      }
+    }
+    return {
+      ...item,
+      show
+    }
+  });
+};
 export const errorTutorialsSelector = (state: RootState) => state.tutorials.error;
 
 

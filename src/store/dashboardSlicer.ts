@@ -27,16 +27,27 @@ export const dashboardSlicer = createSlice({
   }
 });
 
-export const getDashboardAsync = (tutorial: number) => async (dispatch: any) => {
+export const getDashboardAsync = (tutorial: number) => async (dispatch: any, getState: any) => {
   dispatch(fetchDashboard())
   try {
-    const data = await req(configEndpoint.dashboard, {
+    const result = await req(configEndpoint.dashboard, {
       "tutorial": tutorial,
     });
-    if (data.status > 300) {
-      throw data
+    if (result.status > 300) {
+      throw result
     }
-    dispatch(fetchDashboardResolve(data.data))
+    const {dashboard: {data}} = getState();
+    if (data === null) {
+      dispatch(fetchDashboardResolve({
+        [tutorial]: result.data
+      }));
+    } else {
+      dispatch(fetchDashboardResolve({
+        ...data,
+        [tutorial]: result.data
+      }));
+    }
+
   } catch (error) {
     dispatch(fetchDashboardReject("Some Error"))
   };
@@ -46,6 +57,13 @@ export const {fetchDashboard, fetchDashboardResolve, fetchDashboardReject} = das
 
 export const isLoadingDashboardSelector = (state: RootState) => state.dashboard.isLoading;
 export const dataDashboardSelector = (state: RootState) => state.dashboard.data;
+export const currentDataDashboardSelector = (id: string | number) => (state: RootState) => {
+  if (!state.dashboard.data) {
+    return null
+  };
+  return state.dashboard.data[id];
+};
+
 export const errorDashboardSelector = (state: RootState) => state.dashboard.error;
 
 

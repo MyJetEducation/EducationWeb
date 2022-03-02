@@ -19,7 +19,8 @@ export enum configEndpoint {
   tutorials = "tutorials",
   inRetryDate = "inRetryDate",
   inRetryCount = "inRetryCount",
-
+  confirm = "confirm",
+  getUserInfo = "getUserInfo"
 };
 
 const urlHostServer = new URL(process.env.REACT_APP_APIHOST as string);
@@ -149,6 +150,18 @@ const config = {
         method: "POST",
         uri: {
           pathname: "/api/v1/retry/use-bycount"
+        }
+      },
+      [configEndpoint.confirm]: {
+        method: "POST",
+        uri: {
+          pathname: "/api/v1/register/confirm"
+        }
+      },
+      [configEndpoint.getUserInfo]: {
+        method: "POST",
+        uri: {
+          pathname: "/api/v1/useraccount/get"
         }
       }
     }

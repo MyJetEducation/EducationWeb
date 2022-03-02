@@ -10,5 +10,6 @@ export interface unitsProps {
   unitScore: number,
   unitTask: any,
   isRetry: any,
-  unitNumber: number
+  unitNumber: number,
+  tutorialName: string | undefined
 }

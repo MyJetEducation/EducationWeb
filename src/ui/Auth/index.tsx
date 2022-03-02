@@ -30,7 +30,7 @@ export const Auth = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(getFetchUserAsync(formFields, () => {
-      navigate("/")
+      navigate("/dashboard")
     }))
   }
   const handleChange = (event: any) => {
@@ -43,7 +43,7 @@ export const Auth = () => {
   useEffect(() => {
     if (token !== undefined) {
       auth.signIn(token as string, () => {
-        navigate('/');
+        navigate('/dashboard');
       })
       auth.signInRefresh(refreshToken as string)
     }

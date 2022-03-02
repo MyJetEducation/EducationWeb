@@ -12,11 +12,11 @@ import {
 
 import {useNavigate, useParams} from "react-router-dom";
 import {
-  LESSON_CONTENT_UNIT_1,
-  LESSON_CONTENT_UNIT_2,
-  LESSON_CONTENT_UNIT_3,
-  LESSON_CONTENT_UNIT_4,
-  LESSON_CONTENT_UNIT_5
+  TUT_1_LESSON_CONTENT_UNIT_1,
+  TUT_1_LESSON_CONTENT_UNIT_2,
+  TUT_1_LESSON_CONTENT_UNIT_3,
+  TUT_1_LESSON_CONTENT_UNIT_4,
+  TUT_1_LESSON_CONTENT_UNIT_5
 } from "./constans";
 import {testSelector} from "../../store/testSlicer";
 import LessonContent from "./components/LessonContent";
@@ -34,19 +34,29 @@ export const Lesson = () => {
   const data: any = useMemo(() => {
     switch (unit) {
       case "unit1":
-        return LESSON_CONTENT_UNIT_1[id as keyof typeof LESSON_CONTENT_UNIT_1]
+        return TUT_1_LESSON_CONTENT_UNIT_1[id as keyof typeof TUT_1_LESSON_CONTENT_UNIT_1]
       case "unit2":
-        return LESSON_CONTENT_UNIT_2[id as keyof typeof LESSON_CONTENT_UNIT_2]
+        return TUT_1_LESSON_CONTENT_UNIT_2[id as keyof typeof TUT_1_LESSON_CONTENT_UNIT_2]
       case "unit3":
-        return LESSON_CONTENT_UNIT_3[id as keyof typeof LESSON_CONTENT_UNIT_3]
+        return TUT_1_LESSON_CONTENT_UNIT_3[id as keyof typeof TUT_1_LESSON_CONTENT_UNIT_3]
       case "unit4":
-        return LESSON_CONTENT_UNIT_4[id as keyof typeof LESSON_CONTENT_UNIT_4]
+        return TUT_1_LESSON_CONTENT_UNIT_4[id as keyof typeof TUT_1_LESSON_CONTENT_UNIT_4]
       case "unit5":
-        return LESSON_CONTENT_UNIT_5[id as keyof typeof LESSON_CONTENT_UNIT_5]
+        return TUT_1_LESSON_CONTENT_UNIT_5[id as keyof typeof TUT_1_LESSON_CONTENT_UNIT_5]
       default:
         return {}
     }
-  }, [unit]);
+  }, [unit, id]);
+  const allData: any = useMemo(() => {
+    switch (tutorial) {
+      case "PersonalFinance":
+        return data;
+      case "BehavioralFinance":
+        return data
+    }
+  }, [tutorial]);
+  console.log("####: allData", allData);
+  
   const currentIndex = useSelector(currentIdSelector(id as string))
   const disabled = useSelector(testSelector);
 
@@ -60,13 +70,13 @@ export const Lesson = () => {
   }, [menu, currentIndex]);
 
   useEffect(() => {
-    dispatch(progressMenuAsync(unit))
+    dispatch(progressMenuAsync(unit, tutorial))
   }, [])
 
   const retry = useLocationCheck(menu.data, tutorial as string, id, unit, `${unit}/${id}/summary`);
 
   const handleClickNextQuestion = () => {
-    dispatch(setProgressMenuAsync(currentIndex, unit));
+    dispatch(setProgressMenuAsync(currentIndex, tutorial, unit));
     if (retry.retry || retry.readonly) {
       navigate("/dashboard", {state: null})
     } else {
