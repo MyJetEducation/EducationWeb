@@ -234,7 +234,7 @@ const caseText_unit_5 = `
 `;
 
 //content for tutorial-1
-export const LESSON_CONTENT_UNIT_1 = {
+export const TUT_1_LESSON_CONTENT_UNIT_1 = {
   "1": {
     id: 1,
     icon: textIcon,
@@ -581,7 +581,7 @@ export const LESSON_CONTENT_UNIT_1 = {
     }
   }
 };
-export const LESSON_CONTENT_UNIT_2 = {
+export const TUT_1_LESSON_CONTENT_UNIT_2 = {
   "1": {
     id: 1,
     title: "2.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-2",
@@ -928,7 +928,7 @@ export const LESSON_CONTENT_UNIT_2 = {
     }
   }
 };
-export const LESSON_CONTENT_UNIT_3 = {
+export const TUT_1_LESSON_CONTENT_UNIT_3 = {
   "1": {
     id: 1,
     title: "1.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-2",
@@ -1275,7 +1275,7 @@ export const LESSON_CONTENT_UNIT_3 = {
     }
   }
 };
-export const LESSON_CONTENT_UNIT_4 = {
+export const TUT_1_LESSON_CONTENT_UNIT_4 = {
   "1": {
     id: 1,
     title: "1.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-4",
@@ -1622,7 +1622,7 @@ export const LESSON_CONTENT_UNIT_4 = {
     }
   }
 };
-export const LESSON_CONTENT_UNIT_5 = {
+export const TUT_1_LESSON_CONTENT_UNIT_5 = {
   "1": {
     id: 1,
     title: "1.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-5",

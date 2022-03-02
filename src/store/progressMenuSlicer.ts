@@ -31,12 +31,12 @@ export const progressMenuSlicer = createSlice({
   }
 });
 
-export const progressMenuAsync = (unit: string | undefined) => async (dispatch: any) => {
+export const progressMenuAsync = (unit: string | undefined, tutorial: string | undefined) => async (dispatch: any) => {
   dispatch(fetchProgressMenu())
   try {
     const data = await req(configEndpoint.getKeyValue, {
       "keys": [
-        `progressMenu${capitalize(unit as string)}`
+        `progressMenu${tutorial}${capitalize(unit as string)}`
       ]
     });
     const items = JSON.parse(data.data.items[0].value);
@@ -46,12 +46,12 @@ export const progressMenuAsync = (unit: string | undefined) => async (dispatch: 
   };
 }
 
-export const setProgressMenuAsync = (currentIndex: string, unit: string | undefined) => async (dispatch: any, getState: () => RootState)  => {
+export const setProgressMenuAsync = (currentIndex: string, tutorial: string | undefined, unit: string | undefined) => async (dispatch: any, getState: () => RootState)  => {
   dispatch(progressMenuValidChange(currentIndex));
   await req(configEndpoint.putKeyValue, {
     "items": [
       {
-        "key": `progressMenu${capitalize(unit as string)}`,
+        "key": `progressMenu${tutorial as string}${capitalize(unit as string)}`,
         "value": JSON.stringify(getState().progressMenu.data)
       }
     ]

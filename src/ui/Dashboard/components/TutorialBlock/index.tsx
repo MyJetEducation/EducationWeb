@@ -10,13 +10,16 @@ import {tutorialBlockProps} from "../../../../domain/Dashboard/tutorialBlock";
 import Units from "../Units";
 import s from './style.module.scss';
 import {
-  LESSON_CONTENT_UNIT_1,
-  LESSON_CONTENT_UNIT_2,
-  LESSON_CONTENT_UNIT_3,
-  LESSON_CONTENT_UNIT_4,
-  LESSON_CONTENT_UNIT_5
+  TUT_1_LESSON_CONTENT_UNIT_1,
+  TUT_1_LESSON_CONTENT_UNIT_2,
+  TUT_1_LESSON_CONTENT_UNIT_3,
+  TUT_1_LESSON_CONTENT_UNIT_4,
+  TUT_1_LESSON_CONTENT_UNIT_5
 } from "../../../Lesson/constans";
-import {dataDashboardSelector, getDashboardAsync} from "../../../../store/dashboardSlicer";
+import {
+  currentDataDashboardSelector,
+  getDashboardAsync
+} from "../../../../store/dashboardSlicer";
 import {useDispatch, useSelector} from "react-redux";
 
 const MENU_INFO = [
@@ -45,55 +48,65 @@ const UNIT_NAME = [
   {
     id: 1,
     name: "Unit 1. Your income",
-    unitList: Object.values(LESSON_CONTENT_UNIT_1).map((item) => item.title),
-    unitIcon: Object.values(LESSON_CONTENT_UNIT_1).map((item) => item.icon),
-    unitTasks: Object.values(LESSON_CONTENT_UNIT_1).map((item) => item.description)
+    unitList: Object.values(TUT_1_LESSON_CONTENT_UNIT_1).map((item) => item.title),
+    unitIcon: Object.values(TUT_1_LESSON_CONTENT_UNIT_1).map((item) => item.icon),
+    unitTasks: Object.values(TUT_1_LESSON_CONTENT_UNIT_1).map((item) => item.description)
   },
   {
     id: 2,
     name: "Unit 2. Secrets for Spending Your Money Wisely",
-    unitList: Object.values(LESSON_CONTENT_UNIT_2).map((item) => item.title),
-    unitIcon: Object.values(LESSON_CONTENT_UNIT_2).map((item) => item.icon),
-    unitTasks: Object.values(LESSON_CONTENT_UNIT_2).map((item) => item.description)
+    unitList: Object.values(TUT_1_LESSON_CONTENT_UNIT_2).map((item) => item.title),
+    unitIcon: Object.values(TUT_1_LESSON_CONTENT_UNIT_2).map((item) => item.icon),
+    unitTasks: Object.values(TUT_1_LESSON_CONTENT_UNIT_2).map((item) => item.description)
   },
   {
     id: 3,
     name: "Unit 3. Hidden expenses and lost profits",
-    unitList: Object.values(LESSON_CONTENT_UNIT_3).map((item) => item.title),
-    unitIcon: Object.values(LESSON_CONTENT_UNIT_3).map((item) => item.icon),
-    unitTasks: Object.values(LESSON_CONTENT_UNIT_3).map((item) => item.description)
+    unitList: Object.values(TUT_1_LESSON_CONTENT_UNIT_3).map((item) => item.title),
+    unitIcon: Object.values(TUT_1_LESSON_CONTENT_UNIT_3).map((item) => item.icon),
+    unitTasks: Object.values(TUT_1_LESSON_CONTENT_UNIT_3).map((item) => item.description)
   },
   {
     id: 4,
     name: "Unit 4. Salary - make sure that it is enough.",
-    unitList: Object.values(LESSON_CONTENT_UNIT_4).map((item) => item.title),
-    unitIcon: Object.values(LESSON_CONTENT_UNIT_4).map((item) => item.icon),
-    unitTasks: Object.values(LESSON_CONTENT_UNIT_4).map((item) => item.description)
+    unitList: Object.values(TUT_1_LESSON_CONTENT_UNIT_4).map((item) => item.title),
+    unitIcon: Object.values(TUT_1_LESSON_CONTENT_UNIT_4).map((item) => item.icon),
+    unitTasks: Object.values(TUT_1_LESSON_CONTENT_UNIT_4).map((item) => item.description)
   },
   {
     id: 5,
     name: "Unit 5. Modern tools for budget planning in three steps",
-    unitList: Object.values(LESSON_CONTENT_UNIT_5).map((item) => item.title),
-    unitIcon: Object.values(LESSON_CONTENT_UNIT_5).map((item) => item.icon),
-    unitTasks: Object.values(LESSON_CONTENT_UNIT_5).map((item) => item.description)
+    unitList: Object.values(TUT_1_LESSON_CONTENT_UNIT_5).map((item) => item.title),
+    unitIcon: Object.values(TUT_1_LESSON_CONTENT_UNIT_5).map((item) => item.icon),
+    unitTasks: Object.values(TUT_1_LESSON_CONTENT_UNIT_5).map((item) => item.description)
   }
 ]
 
-export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, startOrFinished, unitsScore}) => {
+export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show, index}) => {
+  const unitsScore = useSelector(currentDataDashboardSelector(index + 1));
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (show) {
+      dispatch(getDashboardAsync(index + 1));
+    }
+
+  }, []);
+  if (!unitsScore) {
+    return <div className={s.loadingBlock}>{`${index + 1}. ${tutorialName}`}</div>
+  }
 
   return (
     <div
-
       className={s.tutorialBlock}
     >
       <div className={cn(s.wrap, {
-        [s.variant]: startOrFinished.started === false && startOrFinished.finished === false
+        [s.variant]: !show
       })}>
         <h3 className={s.title}>
-          {startOrFinished.tutorial}
+          {`${index + 1}. ${tutorialName}`}
         </h3>
         {
-          startOrFinished.started === true && (
+          show && (
             <>
               <p className={s.description}>
                 This Discipline will teach how to manage your finance. Help you to build successful strategy to grow up your
@@ -120,8 +133,7 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, star
         }
       </div>
       <div className={cn(s.tasksBlock, {
-        [s.started]: startOrFinished.started === true,
-        [s.finished]: startOrFinished.finished === false && startOrFinished.started === false
+        [s.finished]: !show
       })}>
         {
           UNIT_NAME.map((item, index) => {
@@ -129,15 +141,15 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, star
             let scoreList = [];
             let isSuccess = false;
             let taskScore = null;
-            if (unitsScore !== null) {
-              scoreList = unitsScore[index]?.tasks
-              taskScore = unitsScore[index]?.taskScore
+            if (unitsScore) {
+              scoreList = unitsScore.units[index]?.tasks
+              taskScore = unitsScore.units[index]?.taskScore
               if (index !== 0) {
-                if (unitsScore[index - 1]?.taskScore >= 80 && (!unitsScore[index + 1]?.taskScore || unitsScore[index + 1]?.taskScore < 80)) {
+                if (unitsScore.units[index - 1]?.taskScore >= 80 && (!unitsScore.units[index + 1]?.taskScore || unitsScore.units[index + 1]?.taskScore < 80)) {
                   isShowActiveTask = true
                 }
               }
-              if (unitsScore[index]?.taskScore >= 80) {
+              if (unitsScore.units[index]?.taskScore >= 80) {
                 isSuccess = true
                 isShowActiveTask = false
               } else if (index === 0) {
@@ -149,7 +161,7 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, star
                 key={index}
                 isSuccess={isSuccess}
                 unitScore={taskScore}
-                isRetry={unitsScore[index]}
+                isRetry={unitsScore.units[index]}
                 isShowActiveTask={isShowActiveTask}
                 unitList={item.unitList}
                 unitIcon={item.unitIcon}
@@ -159,6 +171,7 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, star
                 title={UNIT_NAME[index].name}
                 btnName={`Start Unit ${index + 1}`}
                 urlRelocate={`/${tutorialName}/unit${index + 1}/1`}
+                tutorialName={tutorialName}
               />
             )
           })

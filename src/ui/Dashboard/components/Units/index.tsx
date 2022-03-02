@@ -26,12 +26,12 @@ const Units = (
     unitIcon,
     unitTask,
     isRetry,
-    unitNumber
+    unitNumber,
+    tutorialName
   }: unitsProps
 ) => {
   const [showUnit, setSetShowUnit] = useState(false);
   const navigate = useNavigate();
-
   const handleClickActive = () => {
     if (isShowActiveTask || isSuccess) {
       setSetShowUnit(!showUnit)
@@ -43,7 +43,7 @@ const Units = (
   }
 
   const handleReadClick = (index: any) => {
-    navigate(`/personal/unit1/${index + 1}`, {state: {readonly: true}})
+    navigate(`/${tutorialName}/unit1/${index + 1}`, {state: {readonly: true}})
   }
 
   const handleRetryTask = (index: any) => {
@@ -60,7 +60,7 @@ const Units = (
 
     }
     if (isRetry.tasks[index].retry.inRetry === true) {
-      navigate(`/personal/unit${unitNumber + 1}/${index + 1}`, {state: {retry: true}})
+      navigate(`/${tutorialName}/unit${unitNumber + 1}/${index + 1}`, {state: {retry: true}})
     }
   }
 

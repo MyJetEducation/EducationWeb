@@ -17,8 +17,8 @@ export const store = configureStore({
     dashboard: dashboardSlicer,
     progressMenu: progressMenuSlicer,
     retry: retryUnitSlicer,
-    tutorials: tutorialsSlicer
-  },
+    tutorials: tutorialsSlicer,
+  }
 })
 
 export type RootState = ReturnType<typeof store.getState>

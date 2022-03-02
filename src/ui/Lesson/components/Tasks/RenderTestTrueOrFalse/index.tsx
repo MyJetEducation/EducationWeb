@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 
 import RadioBlock from "../../RadioBlock";
 import ProgressPage from "../../ProgressPage";
 
 import {setDisabledBtn} from "../../../../../store/testSlicer";
-import {currentIdSelector, validChange} from "../../../../../store/menuSlicer";
 import req from "../../../../../services/request";
 import {configEndpoint} from "../../../../../config";
 import {useGetTimeToken} from "../../../../../services/useTimeToken";
@@ -23,7 +22,6 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
   const [answer, setAnswer] = useState<any[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [percent, setPercent] = useState(0);
-  const currentIndex = useSelector(currentIdSelector(id as string));
   const location: any = useLocation();
   useGetTimeToken("1", numberUnit, Number(id))
   useEffect(() => {
@@ -44,7 +42,6 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
         setPercent(data.data.unit.tasks[4].taskScore)
       }
       setResult()
-      dispatch(validChange(currentIndex));
       dispatch(setDisabledBtn(false))
     } else if (location.state?.readonly) {
       dispatch(setDisabledBtn(false))

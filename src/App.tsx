@@ -13,9 +13,7 @@ import {Lesson} from "./ui/Lesson";
 import TestTranslate from "./ui/Test";
 import ZeroQuizLesson from "./ui/ZeroQuizLesson";
 import {Header} from "./ui/components/Header";
-import RenderTest from "./ui/Lesson/components/Tasks/RenderTest";
-import RetryTest from "./ui/Lesson/components/Retry/Test";
-import Retry from "./ui/Lesson/components/Retry";
+import RegisterConfirm from "./ui/Confirm";
 
 export const App = () => {
   return (
@@ -28,7 +26,7 @@ export const App = () => {
           <Route path="/register" element={<Register/>}/>
           <Route path="/test" element={<TestTranslate/>}/>
           <Route path="/zero-lesson" element={<ZeroQuizLesson/>}/>
-          <Route path="/:confirm/:hash" element={<Register/>}/>
+          <Route path="/register-confirm" element={<RegisterConfirm/>}/>
 
           <Route path="/plans" element={(
             <RequireAuth>
@@ -43,11 +41,6 @@ export const App = () => {
           <Route path="/:tutorial/:unit/:id" element={(
             <RequireAuth>
               <Lesson/>
-            </RequireAuth>
-          )}/>
-          <Route path="/retry/:tutorial/:unit/:id" element={(
-            <RequireAuth>
-              <Retry/>
             </RequireAuth>
           )}/>
           <Route path="/:tutorial/:unit/:id/summary" element={(
