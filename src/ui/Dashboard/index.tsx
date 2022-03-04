@@ -10,6 +10,7 @@ import map from './assets/map.png';
 import s from './style.module.scss';
 import req from "../../services/request";
 import {configEndpoint} from "../../config";
+import YourProgress from "./components/YourProgress";
 
 const LOADING_BLOCKS = [
   {
@@ -106,6 +107,7 @@ export const DashBoard: React.FC<dashboardProps> = ({name = "Anton", tutorialNam
                 </div>
                 <div className={s.rightSide}>
                   <StatsBlock/>
+                  <YourProgress/>
                 </div>
               </>
             )

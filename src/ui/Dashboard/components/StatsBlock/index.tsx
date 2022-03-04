@@ -9,7 +9,6 @@ const StatsBlock = () => {
   
   const dispatch = useDispatch();
   const data = useSelector(userTaskScoreSelector);
-  console.log("####: data", data);
   useEffect(() => {
     dispatch(getFetchProgressDashboardAsync());
   }, [])
