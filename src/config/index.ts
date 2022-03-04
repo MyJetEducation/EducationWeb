@@ -19,8 +19,10 @@ export enum configEndpoint {
   tutorials = "tutorials",
   inRetryDate = "inRetryDate",
   inRetryCount = "inRetryCount",
+  inRetryTime = "inRetryTime",
   confirm = "confirm",
-  getUserInfo = "getUserInfo"
+  getUserInfo = "getUserInfo",
+  inRetryAttempts = "inRetryAttempts"
 };
 
 const urlHostServer = new URL(process.env.REACT_APP_APIHOST as string);
@@ -83,43 +85,43 @@ const config = {
       [configEndpoint.unitText]: {
         method: "POST",
         uri: {
-          pathname: "/api/v1/education/personal/{unit}/text"
+          pathname: "/api/v1/education/{tutorial}/{unit}/text"
         }
       },
       [configEndpoint.unitTest]: {
         method: "POST",
         uri: {
-          pathname: "/api/v1/education/personal/{unit}/test"
+          pathname: "/api/v1/education/{tutorial}/{unit}/test"
         }
       },
       [configEndpoint.unitVideo]: {
         method: "POST",
         uri: {
-          pathname: "/api/v1/education/personal/{unit}/video"
+          pathname: "/api/v1/education/{tutorial}/{unit}/video"
         }
       },
       [configEndpoint.unitCase]: {
         method: "POST",
         uri: {
-          pathname: "/api/v1/education/personal/{unit}/case"
+          pathname: "/api/v1/education/{tutorial}/{unit}/case"
         }
       },
       [configEndpoint.unitTrueFalse]: {
         method: "POST",
         uri: {
-          pathname: "/api/v1/education/personal/{unit}/truefalse"
+          pathname: "/api/v1/education/{tutorial}/{unit}/truefalse"
         }
       },
       [configEndpoint.unitGame]: {
         method: "POST",
         uri: {
-          pathname: "/api/v1/education/personal/{unit}/game"
+          pathname: "/api/v1/education/{tutorial}/{unit}/game"
         }
       },
       [configEndpoint.unitSummary]: {
         method: "POST",
         uri: {
-          pathname: "/api/v1/education/personal/state"
+          pathname: "/api/v1/education/{tutorial}/state"
         }
       },
       [configEndpoint.taskTime]: {
@@ -146,10 +148,22 @@ const config = {
           pathname: "/api/v1/retry/use-bydate"
         }
       },
+      [configEndpoint.inRetryAttempts]: {
+        method: "POST",
+        uri: {
+          pathname: "/api/v1/retry/count"
+        }
+      },
       [configEndpoint.inRetryCount]: {
         method: "POST",
         uri: {
           pathname: "/api/v1/retry/use-bycount"
+        }
+      },
+      [configEndpoint.inRetryDate]: {
+        method: "POST",
+        uri: {
+          pathname: "/api/v1/retry/use-bydate"
         }
       },
       [configEndpoint.confirm]: {

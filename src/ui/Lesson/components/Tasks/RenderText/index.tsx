@@ -19,7 +19,8 @@ export const RenderText: React.FC<renderTextQuestion> = ({content}) => {
   const location: any = useLocation();
   const fetchResult = async () => {
     const data = await req(configEndpoint.unitText, {
-      unit: unit,
+      unit,
+      tutorial,
       "isRetry": false,
       "timeToken": localStorage.getItem("timeToken")
     })

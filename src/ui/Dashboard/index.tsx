@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Container} from "../components/Container";
 import {TutorialBlock} from "./components/TutorialBlock";
@@ -49,7 +49,7 @@ interface dashboardProps {
 export const DashBoard: React.FC<dashboardProps> = ({name = "Anton", tutorialName = "personal"}) => {
   const tutorials = useSelector(dataTutorialsSelector);
   const dispatch = useDispatch();
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState("Name");
 
   const getUserName = async () => {
     const data = await req(configEndpoint.getUserInfo, {})

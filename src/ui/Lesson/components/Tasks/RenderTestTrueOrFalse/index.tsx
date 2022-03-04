@@ -35,6 +35,7 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
       const setResult = async () => {
         const data = await req(configEndpoint.unitTrueFalse, {
           unit,
+          tutorial,
           "isRetry": location.state?.retry ? true: false,
           "timeToken": localStorage.getItem("timeToken"),
           "answers": answer

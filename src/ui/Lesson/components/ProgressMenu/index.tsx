@@ -13,7 +13,6 @@ interface progressMenuProps {
 }
 
 export const ProgressMenu:React.FC<progressMenuProps> = ({id, index, length, menu}) => {
-
   const styleProgressLine = useMemo(() => ({
     width: `calc(100% / ${length} * ${index})`}
   ),[length, index]);

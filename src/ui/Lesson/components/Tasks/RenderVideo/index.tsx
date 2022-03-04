@@ -24,6 +24,7 @@ const RenderVideo: React.FC<renderVideoProps> = ({content}) => {
   const fetchResult = async () => {
     const data = await req(configEndpoint.unitVideo, {
       unit,
+      tutorial,
       "isRetry": false,
       "timeToken": localStorage.getItem("timeToken")
     })
