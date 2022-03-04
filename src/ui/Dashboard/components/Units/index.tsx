@@ -71,7 +71,7 @@ const Units = (
     if (isRetry.tasks[index].retry.canRetryByCount === true) {
       const fetchByDate = async () => {
         const data = await req(configEndpoint.inRetryCount, {
-          "tutorial": "PersonalFinance",
+          "tutorial": tutorialName,
           "unit": isRetry.unit,
           "task": isRetry.tasks[index].task
         })
@@ -85,7 +85,7 @@ const Units = (
     if (isRetry.tasks[index].retry.inRetry === true) {
       navigate(`/${urlForTutorial}/unit${unitNumber + 1}/${index + 1}`, {state: {retry: true}})
     }
-
+    console.log("####: urlForTutorial", urlForTutorial);
   }
 
   return (
