@@ -86,6 +86,7 @@ export const RenderGame = () => {
   const setResult = async () => {
     const data = await req(configEndpoint.unitGame, {
       unit,
+      tutorial,
       "isRetry": location.state?.retry ? true : false,
       "timeToken": localStorage.getItem("timeToken"),
       "passed": showResult

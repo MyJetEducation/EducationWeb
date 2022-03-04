@@ -11,5 +11,7 @@ export interface unitsProps {
   unitTask: any,
   isRetry: any,
   unitNumber: number,
-  tutorialName: string | undefined
+  tutorialName: string | undefined,
+  index: number,
+  urlForTutorial: any
 }

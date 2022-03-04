@@ -16,17 +16,17 @@ import achievementIcon from './assets/achiv.svg';
 import s from './style.module.scss';
 
 export const SummaryBord = () => {
-  const {unit} = useParams<"unit">();
+  const {unit, tutorial} = useParams<"unit" | "tutorial">();
   const unitNumber = unit?.replace("unit", "");
   const menu = useSelector(progressMenuSelector);
   const navigate = useNavigate();
 
   const [result, setResult] = useState<any>({});
 
-  const [isCaseTrue, setCaseTrue] = useState(false);
   const getResult = async () => {
     const data = await req(configEndpoint.unitSummary, {
-      unit: unitNumber
+      unit: unitNumber,
+      tutorial
     })
     setResult(data)
 
@@ -34,13 +34,6 @@ export const SummaryBord = () => {
   useEffect(() => {
     getResult()
   }, [])
-
-  useEffect(() => {
-    if (Object.values(result).length > 0 && result.data?.case === 100) {
-      setCaseTrue(true)
-    }
-  }, [isCaseTrue])
-
   return (
     <Container>
       <div className={s.content}>
@@ -62,7 +55,7 @@ export const SummaryBord = () => {
 
             <div className={s.testScore}>
               <div className={s.num}>
-                {`${result.data?.test}%`}
+                {result !== undefined || null ? `${result.data?.test}%` : null}
               </div>
               <div className={s.text}>
                 Your Test score
@@ -77,17 +70,13 @@ export const SummaryBord = () => {
               </div>
             </div>
             <div className={s.testScore}>
-              <div className={cn(s.num, {
-                [s.numBad]: isCaseTrue
-              })}>
+              <div className={s.num}>
                 <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2 8L9 15L22 2" stroke="#0BCA1E" strokeWidth="4"/>
                 </svg>
 
               </div>
-              <div className={cn(s.text, {
-                [s.textBad]: isCaseTrue
-              })}>
+              <div className={s.text}>
                 Case
               </div>
             </div>

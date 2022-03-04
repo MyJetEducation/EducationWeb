@@ -100,7 +100,6 @@ export const Lesson = () => {
 
         <ProgressMenu
           id={id}
-
           length={menu.data.length}
           index={currentIndex}
           menu={menu.data}

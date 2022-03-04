@@ -33,7 +33,8 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
     if (showResult && !location.state?.readonly) {
       const setResult = async () => {
         const data = await req(configEndpoint.unitTest, {
-          unit: unit,
+          unit,
+          tutorial: tutorial,
           "isRetry": location.state?.retry ? true : false,
           "timeToken": localStorage.getItem("timeToken"),
           "answers": answer

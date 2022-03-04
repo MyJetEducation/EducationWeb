@@ -16,6 +16,7 @@ import {Header} from "./ui/components/Header";
 import RegisterConfirm from "./ui/Confirm";
 import ConfirmDonePage from "./ui/Confirm/conponents/confirmDonePage";
 import FreeLesson from "./ui/FreeLesson";
+import MarketPage from "./ui/Market";
 
 export const App = () => {
   return (
@@ -54,6 +55,11 @@ export const App = () => {
           <Route path="/register-confirm-done" element={(
             <RequireAuth>
               <ConfirmDonePage/>
+            </RequireAuth>
+          )}/>
+          <Route path="/market" element={(
+            <RequireAuth>
+              <MarketPage/>
             </RequireAuth>
           )}/>
         </Routes>

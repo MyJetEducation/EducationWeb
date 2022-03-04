@@ -85,12 +85,36 @@ const UNIT_NAME = [
 export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show, index}) => {
   const unitsScore = useSelector(currentDataDashboardSelector(index + 1));
   const dispatch = useDispatch();
+  const name = useMemo(() => {
+    switch (tutorialName) {
+      case "PersonalFinance":
+        return "personal";
+      case "BehavioralFinance":
+        return "behavioral"
+      case "FinancialServices":
+        return "financial"
+      case "FinanceMarkets":
+        return "finance"
+      case "HealthAndFinance":
+        return "health"
+      case "PsychologyAndFinance":
+        return "psychology"
+      case "FinanceSecurity":
+        return "security"
+      case "TimeManagement":
+        return "timemanagement"
+      case "Economics":
+        return "economics"
+      default:
+        return ""
+    }
+  }, [tutorialName]);
   useEffect(() => {
     if (show) {
       dispatch(getDashboardAsync(index + 1));
     }
 
-  }, []);
+  }, [show]);
   if (!unitsScore) {
     return <div className={s.loadingBlock}>{`${index + 1}. ${tutorialName}`}</div>
   }
@@ -170,8 +194,10 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show
                 unitNumber={index}
                 title={UNIT_NAME[index].name}
                 btnName={`Start Unit ${index + 1}`}
-                urlRelocate={`/${tutorialName}/unit${index + 1}/1`}
+                urlRelocate={`/${name}/unit${index + 1}/1`}
                 tutorialName={tutorialName}
+                urlForTutorial={name}
+                index={index}
               />
             )
           })

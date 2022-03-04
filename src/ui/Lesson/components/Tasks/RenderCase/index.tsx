@@ -37,6 +37,7 @@ const RenderCase: React.FC<renderCaseProps> = ({content}) => {
       const setResult = async () => {
         const data = await req(configEndpoint.unitCase, {
           unit,
+          tutorial,
           "isRetry": location.state?.retry ? true : false,
           "timeToken": localStorage.getItem("timeToken"),
           "value": answer[0].value[0]

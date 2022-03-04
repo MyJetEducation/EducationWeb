@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {Link, useNavigate} from "react-router-dom";
 import cn from 'classnames';
 
 import {Button} from "../../../components/Button";
@@ -11,6 +11,8 @@ import norm from './assets/norm.svg'
 import fail from './assets/fail.svg'
 import req from "../../../../services/request";
 import {configEndpoint} from "../../../../config";
+import {useDispatch, useSelector} from "react-redux";
+import {dataCountRetrySelector, getCountRetryAsync} from "../../../../store/countRetryAttempts";
 
 
 const Units = (
@@ -27,33 +29,38 @@ const Units = (
     unitTask,
     isRetry,
     unitNumber,
-    tutorialName
+    tutorialName,
+    urlForTutorial,
+    index
   }: unitsProps
 ) => {
   const [showUnit, setSetShowUnit] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const countRetry = useSelector(dataCountRetrySelector);
   const handleClickActive = () => {
     if (isShowActiveTask || isSuccess) {
       setSetShowUnit(!showUnit)
     }
   }
-
+  useEffect(() => {
+    dispatch(getCountRetryAsync());
+  }, [])
   const handleRelocateClick = () => {
     navigate(urlRelocate)
   }
 
   const handleReadClick = (index: any) => {
-    console.log("####: scoreList", scoreList[index]);
-    if (scoreList[index]?.taskScore !== 0) {
-      navigate(`/${tutorialName}/unit1/${index + 1}`, {state: {readonly: true}})
+    if (scoreList[index]?.taskScore !== 0 && index !==5) {
+      navigate(`/${urlForTutorial}/unit${index + 1}/${index + 1}`, {state: {readonly: true}})
     }
   }
-
   const handleRetryTask = (index: any) => {
-    if (isRetry.tasks[index].retry.canRetryByCount === true || isRetry.tasks[index].retry.inRetry === false) {
+    if (isRetry.tasks[index].retry.canRetryByTime === true) {
       const fetchByDate = async () => {
-        const data = await req(configEndpoint.inRetryCount, {
-          "tutorial": "PersonalFinance",
+        const data =  await req(configEndpoint.inRetryTime, {
+          "tutorial": tutorialName,
           "unit": isRetry.unit,
           "task": isRetry.tasks[index].task
         })
@@ -61,9 +68,24 @@ const Units = (
       }
       fetchByDate();
     }
-    if (isRetry.tasks[index].retry.inRetry === true) {
-      navigate(`/${tutorialName}/unit${unitNumber + 1}/${index + 1}`, {state: {retry: true}})
+    if (isRetry.tasks[index].retry.canRetryByCount === true) {
+      const fetchByDate = async () => {
+        const data = await req(configEndpoint.inRetryCount, {
+          "tutorial": "PersonalFinance",
+          "unit": isRetry.unit,
+          "task": isRetry.tasks[index].task
+        })
+        if (data.status === 0) {
+          navigate(`/${urlForTutorial}/unit${unitNumber + 1}/${index + 1}`, {state: {retry: true}})
+        }
+        return data
+      }
+      fetchByDate();
     }
+    if (isRetry.tasks[index].retry.inRetry === true) {
+      navigate(`/${urlForTutorial}/unit${unitNumber + 1}/${index + 1}`, {state: {retry: true}})
+    }
+
   }
 
   return (
@@ -157,14 +179,29 @@ const Units = (
                         (index === 1 || index === 3 || index === 4 || index === 5) && (
                           <>
                             {
-                              (scoreList[index]?.taskScore < 100 && scoreList[index]?.taskScore !== 0 || scoreList[index].task === 6) && (
-                                <Button
-                                  size="reTry"
-                                  variant="bgBlue"
-                                  onClick={() => handleRetryTask(index)}
-                                >
-                                  { isRetry.tasks[index].retry.canRetryByTime === true ? "Free" : "Retry" }
-                                </Button>
+                              ((scoreList[index]?.task === 6 && scoreList[index]?.taskScore !== 0) || scoreList[index]?.taskScore < 100 && scoreList[index]?.taskScore !== 0 ) && (
+                                <div className={s.buttonBlock}>
+                                  <div className={cn(s.retryPopup, s.showPopup)}>
+                                    {
+                                      isRetry.tasks[index].retry.canRetryByCount === true || isRetry.tasks[index].retry.inRetry === true ? (
+                                        <p>
+                                          { countRetry !== null && `Сейчас будет списана платная попытка осталось попыток: 1/${countRetry} `}
+                                        </p>
+                                      ) : (
+                                        <p>У вас нет попыток, чтобы купить, давай отправимся в  <Link className={s.linkMarket} to={"/market"}>Маркет</Link> </p>
+                                      )
+                                    }
+                                  </div>
+                                  <button
+                                    className={cn(s.retryBtn)}
+                                    disabled={isRetry.tasks[index].retry.canRetryByCount === true ? false : true &&
+                                      isRetry.tasks[index].retry.inRetry === true ? false : true}
+                                    onClick={() => handleRetryTask(index)}
+                                  >
+                                    { isRetry.tasks[index].retry.canRetryByTime === true ? "Free" : "Retry" }
+                                  </button>
+                                </div>
+
                               )
                             }
                             {
@@ -174,7 +211,7 @@ const Units = (
                                   [s.unitItemNameNormal]: scoreList[index]?.taskScore < 80,
                                   [s.unitItemNameFail]: scoreList[index]?.taskScore < 60,
                                 })}>
-                                  {scoreList[index]?.taskScore !== undefined || null || undefined ? `${scoreList[index]?.taskScore}%` : null}
+                                  {scoreList[index]?.taskScore !== undefined || null ? `${scoreList[index]?.taskScore}%` : null}
                                 </p>
                               )
                             }
