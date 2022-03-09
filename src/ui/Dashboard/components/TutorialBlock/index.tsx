@@ -84,7 +84,6 @@ const UNIT_NAME = [
 
 export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show, index}) => {
   const unitsScore = useSelector(currentDataDashboardSelector(index + 1));
-  console.log("####: unitsScore", unitsScore);
   const dispatch = useDispatch();
   const name = useMemo(() => {
     switch (tutorialName) {

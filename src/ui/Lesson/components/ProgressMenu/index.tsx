@@ -16,7 +16,6 @@ export const ProgressMenu:React.FC<progressMenuProps> = ({id, index, length, men
   const styleProgressLine = useMemo(() => ({
     width: `calc(100% / ${length} * ${index})`}
   ),[length, index]);
-
   return (
     <>
       <div className={s.wrap}>

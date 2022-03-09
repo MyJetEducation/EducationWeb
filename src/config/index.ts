@@ -22,7 +22,10 @@ export enum configEndpoint {
   inRetryTime = "inRetryTime",
   confirm = "confirm",
   getUserInfo = "getUserInfo",
-  inRetryAttempts = "inRetryAttempts"
+  inRetryAttempts = "inRetryAttempts",
+  getAchievements = "getAchievements",
+  userTimeGet = "userTimeGet",
+  userTimeLog = "userTimeLog"
 };
 
 const urlHostServer = new URL(process.env.REACT_APP_APIHOST as string);
@@ -176,6 +179,24 @@ const config = {
         method: "POST",
         uri: {
           pathname: "/api/v1/useraccount/get"
+        }
+      },
+      [configEndpoint.getAchievements]: {
+        method: "POST",
+        uri: {
+          pathname: "/api/v1/userprofile/achievements"
+        }
+      },
+      [configEndpoint.userTimeGet]: {
+        method: "POST",
+        uri: {
+          pathname: "/api/v1/time/user-time/get"
+        }
+      },
+      [configEndpoint.userTimeLog]: {
+        method: "POST",
+        uri: {
+          pathname: "/api/v1/time/user-time/log"
         }
       }
     }

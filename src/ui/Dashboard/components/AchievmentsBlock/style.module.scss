@@ -1,0 +1,18 @@
+.wrap {
+  max-width: 300px;
+  width: 100%;
+  border: 2px solid #E0E5EB;
+  border-radius: 32px;
+  padding: 21px 32px 18px;
+  .title {
+    font-size: 18px;
+    line-height: 28px;
+    color: #000000;
+    margin-bottom: 16px;
+  }
+  .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}

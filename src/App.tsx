@@ -17,6 +17,8 @@ import RegisterConfirm from "./ui/Confirm";
 import ConfirmDonePage from "./ui/Confirm/conponents/confirmDonePage";
 import FreeLesson from "./ui/FreeLesson";
 import MarketPage from "./ui/Market";
+import Profile from "./ui/Profile";
+import AchievementsPage from "./ui/AchievementsPage";
 
 export const App = () => {
   return (
@@ -60,6 +62,16 @@ export const App = () => {
           <Route path="/market" element={(
             <RequireAuth>
               <MarketPage/>
+            </RequireAuth>
+          )}/>
+          <Route path="/profile" element={(
+            <RequireAuth>
+              <Profile/>
+            </RequireAuth>
+          )}/>
+          <Route path="/profile/achievements" element={(
+            <RequireAuth>
+              <AchievementsPage/>
             </RequireAuth>
           )}/>
         </Routes>
