@@ -11,6 +11,7 @@ import s from './style.module.scss';
 import req from "../../services/request";
 import {configEndpoint} from "../../config";
 import YourProgress from "./components/YourProgress";
+import AchievementsBlock from "./components/AchievmentsBlock";
 
 const LOADING_BLOCKS = [
   {
@@ -93,7 +94,6 @@ export const DashBoard: React.FC<dashboardProps> = ({name = "Anton", tutorialNam
             ) : (
               <>
                 <div className={s.leftSide}>
-                  <img className={s.map} src={map} alt="map"/>
                   {
                     tutorials.map((item: any, index: number) => (
                       <TutorialBlock
@@ -108,6 +108,7 @@ export const DashBoard: React.FC<dashboardProps> = ({name = "Anton", tutorialNam
                 <div className={s.rightSide}>
                   <StatsBlock/>
                   <YourProgress/>
+                  <AchievementsBlock/>
                 </div>
               </>
             )

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import cn from 'classnames';
 
 import {QuestionFooter} from "../QuestionFooter";
@@ -14,6 +14,12 @@ import map from './assets/source_map.png';
 import achievementIcon from './assets/achiv.svg';
 
 import s from './style.module.scss';
+import {
+  achievementsForSummaryDataSelector,
+  achievementsForSummarySelector,
+  getAchievementsForSummaryAsync
+} from "../../../../store/achievementForSummarySlicer";
+import AchievementsItem from "../../../AchievementsItem";
 
 export const SummaryBord = () => {
   const {unit, tutorial} = useParams<"unit" | "tutorial">();
@@ -21,18 +27,11 @@ export const SummaryBord = () => {
   const menu = useSelector(progressMenuSelector);
   const navigate = useNavigate();
 
-  const [result, setResult] = useState<any>({});
-
-  const getResult = async () => {
-    const data = await req(configEndpoint.unitSummary, {
-      unit: unitNumber,
-      tutorial
-    })
-    setResult(data)
-
-  }
+  const dispatch = useDispatch();
+  const achievements = useSelector(achievementsForSummarySelector);
+  const data = useSelector(achievementsForSummaryDataSelector);
   useEffect(() => {
-    getResult()
+    dispatch(getAchievementsForSummaryAsync(unitNumber, tutorial))
   }, [])
   return (
     <Container>
@@ -45,7 +44,7 @@ export const SummaryBord = () => {
           <p className={s.descr}>
             We hope you enjoyed it, to continue learning create an account
           </p>
-          <img src={map} alt="map"/>
+          <img className={s.map} src={map} alt="map"/>
           <div className={s.head}>
             <p className={s.plus}>+</p>
             <p className={s.achievementsText}>Summary</p>
@@ -55,7 +54,8 @@ export const SummaryBord = () => {
 
             <div className={s.testScore}>
               <div className={s.num}>
-                {result !== undefined || null ? `${result.data?.test}%` : null}
+                60%
+                {/*{data !== null && <p>{`${data.data.test}%`}</p>}*/}
               </div>
               <div className={s.text}>
                 Your Test score
@@ -63,7 +63,8 @@ export const SummaryBord = () => {
             </div>
             <div className={s.testScore}>
               <div className={s.num}>
-                {`${result.data?.trueFalse}%`}
+                100%
+                {/*{data !== null ? `${data.data.trueFalse}%` : null}*/}
               </div>
               <div className={s.text}>
                 True/False
@@ -89,14 +90,17 @@ export const SummaryBord = () => {
               <div className={s.line}/>
             </div>
             <div className={s.achievementsList}>
-              <div className={s.achievementsItem}>
-                <div className={s.achiv}>
-                  <img src={achievementIcon} alt="achievement"/>
-                </div>
-                <p className={s.achivDescr}>
-                  хороший старт
-                </p>
-              </div>
+              {
+                achievements !== null && achievements.map((item: any) => (
+                  <AchievementsItem
+                    key={item.id}
+                    name={item.name}
+                    type={item.type}
+                    icon={item.icon}
+                    nameSize={"big"}
+                  />
+                ))
+              }
             </div>
           </div>
 

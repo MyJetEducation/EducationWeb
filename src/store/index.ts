@@ -8,6 +8,8 @@ import progressDashboardSlicer from "./allProgressDashboard";
 import retryUnitSlicer from "./retryUnitSLicer";
 import tutorialsSlicer from "./tutorialsSlicer";
 import countRetrySlicer from "./countRetryAttempts";
+import achievementsSlicer from "./achievementSlicer";
+import achievementsForSummarySelector from "./achievementForSummarySlicer";
 
 export const store = configureStore({
   reducer: {
@@ -19,7 +21,9 @@ export const store = configureStore({
     progressMenu: progressMenuSlicer,
     retry: retryUnitSlicer,
     tutorials: tutorialsSlicer,
-    countRetry: countRetrySlicer
+    countRetry: countRetrySlicer,
+    achievements: achievementsSlicer,
+    achievementsForSummary: achievementsForSummarySelector
   }
 })
 

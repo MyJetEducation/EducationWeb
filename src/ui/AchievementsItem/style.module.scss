@@ -1,0 +1,55 @@
+.achievementsItem {
+  max-width: 56px;
+  text-align: left;
+  .item {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    background: #F1F4F8;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .icon {
+      max-width: 32px;
+      height: 32px;
+    }
+    &.standard {
+      background-color: #FE7201;
+    }
+    &.rare {
+      background-color: #FE221E;
+    }
+    &.superRare {
+      background-color: #FE6492;
+    }
+
+    &.ultraRare {
+      background-color: #EB0778;
+    }
+    &.unique {
+      background-color: #A131F3;
+    }
+  }
+  .name {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    color: #777C85;
+    white-space: nowrap;
+    &.small {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 21px;
+      color: #777C85;
+    }
+    &.big {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      color: #000000;
+    }
+  }
+}
+

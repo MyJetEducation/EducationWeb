@@ -20,7 +20,7 @@
   margin-bottom: 22px;
 
   .leftSide {
-    img {
+    .map {
       max-width: 613px;
       margin: 0 0 55px 0;
     }
@@ -107,27 +107,6 @@
 
   .achievementsList {
     display: flex;
-    .achievementsItem {
-      .achiv {
-        width: 56px;
-        height: 56px;
-        background: #E0E5EB;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        img {
-          margin: 0 0 10px 0;
-        }
-      }
-      .achivDescr {
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 28px;
-        color: #000000;
-      }
-
-    }
   }
 }
 

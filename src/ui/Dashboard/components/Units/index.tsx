@@ -48,6 +48,7 @@ const Units = (
     dispatch(getCountRetryAsync());
   }, [])
   const handleRelocateClick = () => {
+    console.log("####: urlRelocate", urlRelocate);
     navigate(urlRelocate)
   }
 
@@ -85,7 +86,6 @@ const Units = (
     if (isRetry.tasks[index].retry.inRetry === true) {
       navigate(`/${urlForTutorial}/unit${unitNumber + 1}/${index + 1}`, {state: {retry: true}})
     }
-    console.log("####: urlForTutorial", urlForTutorial);
   }
 
   return (

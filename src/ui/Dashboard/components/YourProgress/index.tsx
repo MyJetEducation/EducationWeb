@@ -96,8 +96,6 @@ const YourProgress = () => {
   const styleProgressSkill = useMemo(() => ( data !== null ? {
     width: `calc(${data.skill.progress}%)`
   } : {}), [data]);
-  
-  console.log("####: data", data);
 
   return (
     <div className={s.wrap}>

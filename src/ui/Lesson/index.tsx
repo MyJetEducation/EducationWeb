@@ -73,10 +73,9 @@ export const Lesson = () => {
   }, [])
 
   const retry = useLocationCheck(menu.data, tutorial as string, id, unit, `${unit}/${id}/summary`);
-
   const handleClickNextQuestion = () => {
     dispatch(setProgressMenuAsync(currentIndex, tutorial, unit));
-    if (retry) {
+    if (retry !== null) {
       navigate("/dashboard", {state: null})
     } else {
       if (currentIndex === menu.data.length - 1) {
