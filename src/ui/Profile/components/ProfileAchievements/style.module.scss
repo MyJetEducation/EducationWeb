@@ -1,0 +1,35 @@
+.profileInfo {
+  border: 2px solid #E0E5EB;
+  border-radius: 32px;
+  width: 652px;
+  height: 209px;
+  padding: 21px 0 28px 32px;
+  margin-bottom: 20px;
+  .profileTitle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+
+    h6 {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      color: #000000;
+      margin-right: 8px;
+    }
+    p {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      color: #A8B0BA;
+    }
+  }
+  .list {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    .item + .item {
+      margin-left: 40px;
+    }
+  }
+}

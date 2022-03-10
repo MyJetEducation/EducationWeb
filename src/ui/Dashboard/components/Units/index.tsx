@@ -20,13 +20,11 @@ const Units = (
     title,
     unitList,
     scoreList = [],
-    urlRelocate,
     btnName,
     isShowActiveTask,
     isSuccess,
     unitScore,
     unitIcon,
-    unitTask,
     isRetry,
     unitNumber,
     tutorialName,
@@ -46,21 +44,22 @@ const Units = (
   }
   useEffect(() => {
     dispatch(getCountRetryAsync());
-  }, [])
+  }, []);
+
   const handleRelocateClick = () => {
-    console.log("####: urlRelocate", urlRelocate);
-    navigate(urlRelocate)
+    //TODO: при клике после прохождения таска, перекидывать на summaryBord
+    navigate(`/${urlForTutorial}/unit${index + 1}/1`)
   }
 
   const handleReadClick = (index: any) => {
-    if (scoreList[index]?.taskScore !== 0 && index !==5) {
+    if (scoreList[index]?.taskScore !== 0 && index !== 5) {
       navigate(`/${urlForTutorial}/unit${index + 1}/${index + 1}`, {state: {readonly: true}})
     }
   }
   const handleRetryTask = (index: any) => {
     if (isRetry.tasks[index].retry.canRetryByTime === true) {
       const fetchByDate = async () => {
-        const data =  await req(configEndpoint.inRetryTime, {
+        const data = await req(configEndpoint.inRetryTime, {
           "tutorial": tutorialName,
           "unit": isRetry.unit,
           "task": isRetry.tasks[index].task
@@ -101,13 +100,14 @@ const Units = (
         {
           unitScore ? (
             <div className={s.checkIcon}>
-              {unitScore >= 80 ? <img src={check} alt="icon"/> : (
-                <div className={cn(s.dropdownBtn, {
-                  [s.active]: showUnit
-                })}>
-                  <span/>
-                </div>
-              )
+              {
+                unitScore >= 80 ? <img src={check} alt="icon"/> : (
+                  <div className={cn(s.dropdownBtn, {
+                    [s.active]: showUnit
+                  })}>
+                    <span/>
+                  </div>
+                )
               }
             </div>
           ) : (
@@ -179,26 +179,28 @@ const Units = (
                         (index === 1 || index === 3 || index === 4 || index === 5) && (
                           <>
                             {
-                              ((scoreList[index]?.task === 6 && scoreList[index]?.taskScore !== 0) || scoreList[index]?.taskScore < 100 && scoreList[index]?.taskScore !== 0 ) && (
+                              ((scoreList[index]?.task === 6 && scoreList[index]?.taskScore !== 0) || scoreList[index]?.taskScore < 100 && scoreList[index]?.taskScore !== 0) && (
                                 <div className={s.buttonBlock}>
                                   <div className={cn(s.retryPopup, s.showPopup)}>
                                     {
                                       isRetry.tasks[index].retry.canRetryByCount === true || isRetry.tasks[index].retry.inRetry === true ? (
                                         <p>
-                                          { countRetry !== null && `Сейчас будет списана платная попытка осталось попыток: 1/${countRetry} `}
+                                          {countRetry !== null && `Сейчас будет списана платная попытка осталось попыток: 1/${countRetry} `}
                                         </p>
                                       ) : (
-                                        <p>У вас нет попыток, чтобы купить, давай отправимся в  <Link className={s.linkMarket} to={"/market"}>Маркет</Link> </p>
+                                        <p>У вас нет попыток, чтобы купить, давай отправимся в <Link className={s.linkMarket}
+                                                                                                     to={"/market"}>Маркет</Link>
+                                        </p>
                                       )
                                     }
                                   </div>
                                   <button
                                     className={cn(s.retryBtn)}
                                     disabled={isRetry.tasks[index].retry.canRetryByCount === true ? false : true &&
-                                      isRetry.tasks[index].retry.inRetry === true ? false : true}
+                                    isRetry.tasks[index].retry.inRetry === true ? false : true}
                                     onClick={() => handleRetryTask(index)}
                                   >
-                                    { isRetry.tasks[index].retry.canRetryByTime === true ? "Free" : "Retry" }
+                                    {isRetry.tasks[index].retry.canRetryByTime === true ? "Free" : "Retry"}
                                   </button>
                                 </div>
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 
 import {Container} from "../Container";
@@ -52,48 +52,64 @@ const MENU_AUTH = [
 export const Header = () => {
   const auth = useAuth();
   const navigate = useNavigate();
+  const [show, setShow] = useState(false)
+
+  const handleClick = () => {
+    setShow(false)
+    navigate("/profile")
+  }
 
   useEffect(() => {
-      const interval = setInterval(() => {
-        if (auth.user) {
-          const getToken = async () => {
-            const token = await req(configEndpoint.userTimeGet, {});
-            localStorage.setItem("at", token.data)
-          }
-          const logToken = async () => {
-            if (localStorage.getItem("at")) {
-              const data = await fetch("https://api.dfnt.work/api/v1/time/user-time/log", {
-                method: "POST",
-                body: JSON.stringify(localStorage.getItem("at")),
-                headers: {
-                  Accept: 'application/json',
-                  'Content-Type': 'application/json',
-                  Authorization: `Bearer ${localStorage.getItem("token")}`
-                }
-              })
-              return data
-            } else {
-              getToken()
-            }
-          }
-          logToken()
+    const interval = setInterval(() => {
+      if (auth.user) {
+        const getToken = async () => {
+          const token = await req(configEndpoint.userTimeGet, {});
+          localStorage.setItem("at", token.data)
         }
+        const logToken = async () => {
+          if (localStorage.getItem("at")) {
+            const data = await fetch("https://api.dfnt.work/api/v1/time/user-time/log", {
+              method: "POST",
+              body: JSON.stringify(localStorage.getItem("at")),
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+              }
+            })
+            return data
+          } else {
+            getToken()
+          }
+        }
+        logToken()
+      }
 
-      }, 10000);
-      return () => {
-        clearInterval(interval)
-        localStorage.removeItem("at")
-      };
+    }, 10000);
+    return () => {
+      setShow(false)
+      clearInterval(interval)
+      localStorage.removeItem("at")
+    };
   }, [])
+
+
+  const handleLogoClick = () => {
+    if (auth.user) {
+      navigate("/dashboard")
+    } else {
+      navigate("/")
+    }
+  }
 
 
   return (
     <div className={s.wrap}>
       <Container>
         <div className={s.inner}>
-          <Link className={s.logo} to="/">
+          <div onClick={handleLogoClick} className={s.logo}>
             DOFINTO
-          </Link>
+          </div>
           {
             !auth.user ? (
               <ul className={s.navBar}>
@@ -131,10 +147,24 @@ export const Header = () => {
               <div className={s.auth}>
                 <div
                   className={s.userProfile}
-                  onClick={() => auth.signOut(() => navigate("/"))}
+                  // onClick={}
+                  onClick={() => setShow(!show)}
                 >
                   DS
                 </div>
+                {
+                  show && (
+                    <div className={s.popup}>
+                      <p onClick={handleClick}>
+                        Profile
+                      </p>
+                      <p onClick={() => auth.signOut(() => navigate("/"))}>
+                        Log out
+                      </p>
+                    </div>
+                  )
+                }
+
               </div>
             )
           }

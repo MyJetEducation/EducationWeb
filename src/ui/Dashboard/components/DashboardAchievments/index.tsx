@@ -8,7 +8,7 @@ import {
 } from "../../../../store/achievementSlicer";
 import AchievementsItem from "../../../AchievementsItem";
 
-const AchievementsBlock = () => {
+const DashboardAchievement = () => {
   const dispatch = useDispatch();
   const received = useSelector(achievementsSelector);
 
@@ -43,4 +43,4 @@ const AchievementsBlock = () => {
   )
 }
 
-export default AchievementsBlock;
+export default DashboardAchievement;

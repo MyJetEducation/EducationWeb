@@ -353,6 +353,109 @@ export const ACHIEVEMENTS = [
   }
 ]
 
+export const HABIT_LIST = [
+  {
+    id: 1,
+    title: "The habit to keep track of income / expenses"
+  },
+  {
+    id: 2,
+    title: "The habit of budgeting"
+  },
+  {
+    id: 3,
+    title: "The habit of making a financial plan"
+  },
+  {
+    id: 4,
+    title: "The habit of exploring passive income opportunities"
+  },
+  {
+    id: 5,
+    title: "The habit of forming savings"
+  },
+  {
+    id: 6,
+    title: "The habit of keeping a diary"
+  },
+  {
+    id: 7,
+    title: "The habit of investing"
+  },
+  {
+    id: 8,
+    title: "The habit of budgeting for all events"
+  },
+  {
+    id: 9,
+    title: "The habit of analyzing events around you"
+  },
+]
+export const KNOWLEDGE_LIST = [
+  {
+    id: 1,
+    title: "Личные финансы"
+  },
+  {
+    id: 2,
+    title: "Поведенческие финансы"
+  },
+  {
+    id: 3,
+    title: "Финансовые услуги"
+  },
+  {
+    id: 4,
+    title: "Финансовые рынки"
+  },
+  {
+    id: 5,
+    title: "Здоровье и финансы"
+  },
+  {
+    id: 6,
+    title: "Психология и финансы"
+  },
+  {
+    id: 7,
+    title: "Финансовая безопасность"
+  },
+  {
+    id: 8,
+    title: "Тайм Менеджмент"
+  },
+  {
+    id: 9,
+    title: "Экономика"
+  },
+]
+export const SKILL_LIST = [
+  {
+    id: 1,
+    title: "Concentration"
+  },
+  {
+    id: 2,
+    title: "Perseverance"
+  },
+  {
+    id: 3,
+    title: "Thoughtfulness"
+  },
+  {
+    id: 4,
+    title: "Memory"
+  },
+  {
+    id: 5,
+    title: "Adaptability"
+  },
+  {
+    id: 6,
+    title: "Activity"
+  }
+]
+
 // text for task-1 tutorial-1
 const text_unit_1 = `
 First of all we dream. But dreams don’t come true. Why is that so? 
@@ -2321,6 +2424,1742 @@ export const TUT_1_LESSON_CONTENT_UNIT_5 = {
   }
 };
 
+// content for tut-2
+export const TUT_2_LESSON_CONTENT_UNIT_1 = {
+  "1": {
+    id: 1,
+    icon: textIcon,
+    title: "1.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-1 tut2",
+    description: {
+      type: "text",
+      data: [
+        {
+          html_text: text_unit_1
+        }
+      ]
+    }
+
+  },
+  "2": {
+    id: 2,
+    icon: testIcon,
+    title: "1.2 Test: What is S.M.A.R.T. UNIT-1",
+    description: {
+      type: "test",
+      data: [
+        {
+          id: 1,
+          title: "Smart Goal is:",
+          answer: [
+            {
+              id: "1answer1",
+              param: false,
+              name: "1q",
+              textAnswer: "My idea, that I keep in my mind and dream about every day",
+              value: 1
+            },
+            {
+              id: "1answer2",
+              param: true,
+              name: "1q",
+              textAnswer: "My goal, that is measurable and achievable and costs less than $10,000",
+              value: 2
+            },
+            {
+              id: "1answer3",
+              param: false,
+              name: "1q",
+              textAnswer: "My goal is specific, measurable, achievable, relevant and \n" +
+                "time-bound.",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: "What does the \"M\" in SMART stand for?",
+          answer: [
+            {
+              id: "2answer1",
+              param: false,
+              name: "2q",
+              textAnswer: "Mental - you have to be able to think about the goal.",
+              value: 1
+            },
+            {
+              id: "2answer2",
+              param: true,
+              name: "2q",
+              textAnswer: "Measurable - a goal must have some kind of number attached so you have a way to know if you are reaching the goal.",
+              value: 2
+            },
+            {
+              id: "2answer3",
+              param: false,
+              name: "2q",
+              textAnswer: "Memorable - a goal must be easily remembered",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 3,
+          title: "What does the \"S\" in SMART stand for?",
+          answer: [
+            {
+              id: "3answer1",
+              param: false,
+              name: "3q",
+              textAnswer: "Simple - a goal must be easy.",
+              value: 1
+            },
+            {
+              id: "3answer2",
+              param: true,
+              name: "3q",
+              textAnswer: "Smart- a goal must make sense.",
+              value: 2
+            },
+            {
+              id: "3answer3",
+              param: false,
+              name: "3q",
+              textAnswer: "Specific - a goal must be focused.",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 4,
+          title: "If you decide to spend holidays at the resort, what to consider when planning with S.M.A.R.T. rules? ",
+          answer: [
+            {
+              id: "4answer1",
+              param: false,
+              name: "4q",
+              textAnswer: "What kind of clothes do I need to take with me?",
+              value: 1
+            },
+            {
+              id: "4answer2",
+              param: true,
+              name: "4q",
+              textAnswer: "When the holiday is, how much money I am planning to spend, and how much money I have now",
+              value: 2
+            },
+          ]
+        },
+        {
+          id: 5,
+          title: "When I decide to buy new furniture what my SMART steps are?",
+          answer: [
+            {
+              id: "5answer1",
+              param: false,
+              name: "5q",
+              textAnswer: "I choose colours, shapes and amount of things that I want to buy",
+              value: 1
+            },
+            {
+              id: "5answer2",
+              param: true,
+              name: "5q",
+              textAnswer: "I decide how much I need to spend on what I want, how much money I have now and when I can afford this furniture without credits.",
+              value: 2
+            },
+            {
+              id: "5answer3",
+              param: false,
+              name: "5q",
+              textAnswer: "I decide if I really need it now, what it will bring to my life, I find furniture that I want and learn the price on the market, I count the amount of money that I have now and in how many months I can afford this furniture.",
+              value: 3
+            }
+          ]
+        }
+      ],
+    }
+  },
+  "3": {
+    id: 3,
+    icon: videoICon,
+    title: "1.3 Video: How to be successful?",
+    description: {
+      type: "video",
+      data: [
+        {
+          url_video: "https://youtu.be/q5JWp47z4bY",
+          html_text: videoText_unit_1
+        }
+      ]
+    }
+  },
+  "4": {
+    id: 4,
+    icon: testIcon,
+    title: "1.4 Case: #1 SMART technology",
+    description: {
+      type: "case",
+      data: [
+        {
+          id: 1,
+          html_text: caseText_unit_1,
+          title: "Do you think it will help to attain goal easier?",
+          answer: [
+            {
+              id: 1,
+              name: "boolean",
+              param: false,
+              textAnswer: "Yes, it will help",
+              value: 1
+            },
+            {
+              id: 2,
+              name: "boolean",
+              param: true,
+              textAnswer: "I am not ready to agree",
+              value: 2
+            }
+          ]
+        }
+      ],
+    }
+  },
+  "5": {
+    id: 5,
+    icon: testIcon,
+    title: "1.5 Test: Let’s help Amanda",
+    description: {
+      type: "testTrueOrFalse",
+      data: [
+        {
+          id: 1,
+          title: "Amanda will spend $25 less on entertainment every month in order to save that $25 instead. This is a time-bound SMART goal. ",
+          answer: [
+
+            {
+              id: "1answer1",
+              name: "1q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "1answer2",
+              name: "1q",
+              value: 0,
+              textAnswer: "False"
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: "Amanda will buy a new camera in a year by saving $50 after every salary. This is a measurable SMART goal.",
+          answer: [
+            {
+              id: "2answer1",
+              name: "2q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "2answer2",
+              name: "2q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 3,
+          title: "Amanda says that her company will cut her salary. This is SMART information.",
+          answer: [
+            {
+              id: "3answer1",
+              name: "3q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "3answer2",
+              name: "3q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 4,
+          title: "Amanda goes to the ice cream store every Sunday. She spends 25$ every month. This is a time-bound SMART spending.",
+          answer: [
+            {
+              id: "4answer1",
+              name: "4q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "4answer2",
+              name: "4q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 5,
+          title: "Amanda plays tennis every weekend and it costs 50$ per one time. She doesn’t need to plan her spendings because it’s not a big sum.",
+          answer: [
+            {
+              id: "5answer1",
+              name: "5q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "5answer2",
+              name: "5q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        }
+      ],
+    }
+  },
+  "6": {
+    id: 6,
+    title: "1.6 Game: Match a pair",
+    icon: testIcon,
+    description: {
+      type: "game",
+      data: [
+        {
+          id: 1,
+          title: "First",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 2,
+          title: "First",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 3,
+          title: "Second",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 4,
+          title: "Second",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 5,
+          title: "Third",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 6,
+          title: "Third",
+          pair: "1",
+          show: false
+        },
+      ],
+    }
+  }
+};
+export const TUT_2_LESSON_CONTENT_UNIT_2 = {
+  "1": {
+    id: 1,
+    title: "2.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-2",
+    icon: textIcon,
+    description: {
+      type: "text",
+      data: [
+        {
+          html_text: text_unit_2
+        }
+      ]
+    }
+
+  },
+  "2": {
+    id: 2,
+    title: "1.2 Test: What is S.M.A.R.T. UNIT-2",
+    icon: testIcon,
+    description: {
+      type: "test",
+      data: [
+        {
+          id: 1,
+          title: "Smart Goal is:",
+          answer: [
+            {
+              id: "1answer1",
+              param: false,
+              name: "1q",
+              textAnswer: "My idea, that I keep in my mind and dream about every day",
+              value: 1
+            },
+            {
+              id: "1answer2",
+              param: true,
+              name: "1q",
+              textAnswer: "My goal, that is measurable and achievable and costs less than $10,000",
+              value: 2
+            },
+            {
+              id: "1answer3",
+              param: false,
+              name: "1q",
+              textAnswer: "My goal is specific, measurable, achievable, relevant and \n" +
+                "time-bound.",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: "What does the \"M\" in SMART stand for?",
+          answer: [
+            {
+              id: "2answer1",
+              param: false,
+              name: "2q",
+              textAnswer: "Mental - you have to be able to think about the goal.",
+              value: 1
+            },
+            {
+              id: "2answer2",
+              param: true,
+              name: "2q",
+              textAnswer: "Measurable - a goal must have some kind of number attached so you have a way to know if you are reaching the goal.",
+              value: 2
+            },
+            {
+              id: "2answer3",
+              param: false,
+              name: "2q",
+              textAnswer: "Memorable - a goal must be easily remembered",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 3,
+          title: "What does the \"S\" in SMART stand for?",
+          answer: [
+            {
+              id: "3answer1",
+              param: false,
+              name: "3q",
+              textAnswer: "Simple - a goal must be easy.",
+              value: 1
+            },
+            {
+              id: "3answer2",
+              param: true,
+              name: "3q",
+              textAnswer: "Smart- a goal must make sense.",
+              value: 2
+            },
+            {
+              id: "3answer3",
+              param: false,
+              name: "3q",
+              textAnswer: "Specific - a goal must be focused.",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 4,
+          title: "If you decide to spend holidays at the resort, what to consider when planning with S.M.A.R.T. rules? ",
+          answer: [
+            {
+              id: "4answer1",
+              param: false,
+              name: "4q",
+              textAnswer: "What kind of clothes do I need to take with me?",
+              value: 1
+            },
+            {
+              id: "4answer2",
+              param: true,
+              name: "4q",
+              textAnswer: "When the holiday is, how much money I am planning to spend, and how much money I have now",
+              value: 2
+            },
+          ]
+        },
+        {
+          id: 5,
+          title: "When I decide to buy new furniture what my SMART steps are?",
+          answer: [
+            {
+              id: "5answer1",
+              param: false,
+              name: "5q",
+              textAnswer: "I choose colours, shapes and amount of things that I want to buy",
+              value: 1
+            },
+            {
+              id: "5answer2",
+              param: true,
+              name: "5q",
+              textAnswer: "I decide how much I need to spend on what I want, how much money I have now and when I can afford this furniture without credits.",
+              value: 2
+            },
+            {
+              id: "5answer3",
+              param: false,
+              name: "5q",
+              textAnswer: "I decide if I really need it now, what it will bring to my life, I find furniture that I want and learn the price on the market, I count the amount of money that I have now and in how many months I can afford this furniture.",
+              value: 3
+            }
+          ]
+        }
+      ],
+    }
+  },
+  "3": {
+    id: 3,
+    title: "1.3 Video: How to be successful?",
+    icon: videoICon,
+    description: {
+      type: "video",
+      data: [
+        {
+          url_video: "https://youtu.be/q5JWp47z4bY",
+          html_text: videoText_unit_2
+        }
+      ]
+    }
+  },
+  "4": {
+    id: 4,
+    title: "1.4 Case: #1 SMART technology",
+    icon: testIcon,
+    description: {
+      type: "case",
+      data: [
+        {
+          id: 1,
+          html_text: caseText_unit_2,
+          title: "Do you think it will help to attain goal easier?",
+          answer: [
+            {
+              id: 1,
+              name: "boolean",
+              param: false,
+              textAnswer: "Yes, it will help",
+              value: 1
+            },
+            {
+              id: 2,
+              name: "boolean",
+              param: true,
+              textAnswer: "I am not ready to agree",
+              value: 2
+            }
+          ]
+        }
+      ],
+    }
+  },
+  "5": {
+    id: 5,
+    icon: testIcon,
+    title: "1.5 Test: Let’s help Amanda",
+    description: {
+      type: "testTrueOrFalse",
+      data: [
+        {
+          id: 1,
+          title: "Amanda will spend $25 less on entertainment every month in order to save that $25 instead. This is a time-bound SMART goal. ",
+          answer: [
+
+            {
+              id: "1answer1",
+              name: "1q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "1answer2",
+              name: "1q",
+              value: 0,
+              textAnswer: "False"
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: "Amanda will buy a new camera in a year by saving $50 after every salary. This is a measurable SMART goal.",
+          answer: [
+            {
+              id: "2answer1",
+              name: "2q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "2answer2",
+              name: "2q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 3,
+          title: "Amanda says that her company will cut her salary. This is SMART information.",
+          answer: [
+            {
+              id: "3answer1",
+              name: "3q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "3answer2",
+              name: "3q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 4,
+          title: "Amanda goes to the ice cream store every Sunday. She spends 25$ every month. This is a time-bound SMART spending.",
+          answer: [
+            {
+              id: "4answer1",
+              name: "4q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "4answer2",
+              name: "4q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 5,
+          title: "Amanda plays tennis every weekend and it costs 50$ per one time. She doesn’t need to plan her spendings because it’s not a big sum.",
+          answer: [
+            {
+              id: "5answer1",
+              name: "5q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "5answer2",
+              name: "5q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        }
+      ],
+    }
+  },
+  "6": {
+    id: 6,
+    title: "1.6 Game: Match a pair",
+    icon: testIcon,
+    description: {
+      type: "game",
+      data: [
+        {
+          id: 1,
+          title: "First",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 2,
+          title: "First",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 3,
+          title: "Second",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 4,
+          title: "Second",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 5,
+          title: "Third",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 6,
+          title: "Third",
+          pair: "1",
+          show: false
+        },
+      ],
+    }
+  }
+};
+export const TUT_2_LESSON_CONTENT_UNIT_3 = {
+  "1": {
+    id: 1,
+    title: "1.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-2",
+    icon: textIcon,
+    description: {
+      type: "text",
+      data: [
+        {
+          html_text: text_unit_3
+        }
+      ]
+    }
+
+  },
+  "2": {
+    id: 2,
+    title: "1.2 Test: What is S.M.A.R.T.",
+    icon: testIcon,
+    description: {
+      type: "test",
+      data: [
+        {
+          id: 1,
+          title: "Smart Goal is:",
+          answer: [
+            {
+              id: "1answer1",
+              param: false,
+              name: "1q",
+              textAnswer: "My idea, that I keep in my mind and dream about every day",
+              value: 1
+            },
+            {
+              id: "1answer2",
+              param: true,
+              name: "1q",
+              textAnswer: "My goal, that is measurable and achievable and costs less than $10,000",
+              value: 2
+            },
+            {
+              id: "1answer3",
+              param: false,
+              name: "1q",
+              textAnswer: "My goal is specific, measurable, achievable, relevant and \n" +
+                "time-bound.",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: "What does the \"M\" in SMART stand for?",
+          answer: [
+            {
+              id: "2answer1",
+              param: false,
+              name: "2q",
+              textAnswer: "Mental - you have to be able to think about the goal.",
+              value: 1
+            },
+            {
+              id: "2answer2",
+              param: true,
+              name: "2q",
+              textAnswer: "Measurable - a goal must have some kind of number attached so you have a way to know if you are reaching the goal.",
+              value: 2
+            },
+            {
+              id: "2answer3",
+              param: false,
+              name: "2q",
+              textAnswer: "Memorable - a goal must be easily remembered",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 3,
+          title: "What does the \"S\" in SMART stand for?",
+          answer: [
+            {
+              id: "3answer1",
+              param: false,
+              name: "3q",
+              textAnswer: "Simple - a goal must be easy.",
+              value: 1
+            },
+            {
+              id: "3answer2",
+              param: true,
+              name: "3q",
+              textAnswer: "Smart- a goal must make sense.",
+              value: 2
+            },
+            {
+              id: "3answer3",
+              param: false,
+              name: "3q",
+              textAnswer: "Specific - a goal must be focused.",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 4,
+          title: "If you decide to spend holidays at the resort, what to consider when planning with S.M.A.R.T. rules? ",
+          answer: [
+            {
+              id: "4answer1",
+              param: false,
+              name: "4q",
+              textAnswer: "What kind of clothes do I need to take with me?",
+              value: 1
+            },
+            {
+              id: "4answer2",
+              param: true,
+              name: "4q",
+              textAnswer: "When the holiday is, how much money I am planning to spend, and how much money I have now",
+              value: 2
+            },
+          ]
+        },
+        {
+          id: 5,
+          title: "When I decide to buy new furniture what my SMART steps are?",
+          answer: [
+            {
+              id: "5answer1",
+              param: false,
+              name: "5q",
+              textAnswer: "I choose colours, shapes and amount of things that I want to buy",
+              value: 1
+            },
+            {
+              id: "5answer2",
+              param: true,
+              name: "5q",
+              textAnswer: "I decide how much I need to spend on what I want, how much money I have now and when I can afford this furniture without credits.",
+              value: 2
+            },
+            {
+              id: "5answer3",
+              param: false,
+              name: "5q",
+              textAnswer: "I decide if I really need it now, what it will bring to my life, I find furniture that I want and learn the price on the market, I count the amount of money that I have now and in how many months I can afford this furniture.",
+              value: 3
+            }
+          ]
+        }
+      ],
+    }
+  },
+  "3": {
+    id: 3,
+    title: "1.3 Video: How to be successful?",
+    icon: videoICon,
+    description: {
+      type: "video",
+      data: [
+        {
+          url_video: "https://youtu.be/q5JWp47z4bY",
+          html_text: videoText_unit_3
+        }
+      ]
+    }
+  },
+  "4": {
+    id: 4,
+    title: "1.4 Case: #1 SMART technology",
+    icon: testIcon,
+    description: {
+      type: "case",
+      data: [
+        {
+          id: 1,
+          html_text: caseText_unit_3,
+          title: "Do you think it will help to attain goal easier?",
+          answer: [
+            {
+              id: 1,
+              name: "boolean",
+              param: false,
+              textAnswer: "Yes, it will help",
+              value: 1
+            },
+            {
+              id: 2,
+              name: "boolean",
+              param: true,
+              textAnswer: "I am not ready to agree",
+              value: 2
+            }
+          ]
+        }
+      ],
+    }
+  },
+  "5": {
+    id: 5,
+    icon: testIcon,
+    title: "1.5 Test: Let’s help Amanda",
+    description: {
+      type: "testTrueOrFalse",
+      data: [
+        {
+          id: 1,
+          title: "Amanda will spend $25 less on entertainment every month in order to save that $25 instead. This is a time-bound SMART goal. ",
+          answer: [
+
+            {
+              id: "1answer1",
+              name: "1q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "1answer2",
+              name: "1q",
+              value: 0,
+              textAnswer: "False"
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: "Amanda will buy a new camera in a year by saving $50 after every salary. This is a measurable SMART goal.",
+          answer: [
+            {
+              id: "2answer1",
+              name: "2q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "2answer2",
+              name: "2q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 3,
+          title: "Amanda says that her company will cut her salary. This is SMART information.",
+          answer: [
+            {
+              id: "3answer1",
+              name: "3q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "3answer2",
+              name: "3q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 4,
+          title: "Amanda goes to the ice cream store every Sunday. She spends 25$ every month. This is a time-bound SMART spending.",
+          answer: [
+            {
+              id: "4answer1",
+              name: "4q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "4answer2",
+              name: "4q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 5,
+          title: "Amanda plays tennis every weekend and it costs 50$ per one time. She doesn’t need to plan her spendings because it’s not a big sum.",
+          answer: [
+            {
+              id: "5answer1",
+              name: "5q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "5answer2",
+              name: "5q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        }
+      ],
+    }
+  },
+  "6": {
+    id: 6,
+    title: "1.6 Game: Match a pair",
+    icon: testIcon,
+    description: {
+      type: "game",
+      data: [
+        {
+          id: 1,
+          title: "First",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 2,
+          title: "First",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 3,
+          title: "Second",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 4,
+          title: "Second",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 5,
+          title: "Third",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 6,
+          title: "Third",
+          pair: "1",
+          show: false
+        },
+      ],
+    }
+  }
+};
+export const TUT_2_LESSON_CONTENT_UNIT_4 = {
+  "1": {
+    id: 1,
+    title: "1.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-4",
+    icon: textIcon,
+    description: {
+      type: "text",
+      data: [
+        {
+          html_text: text_unit_4
+        }
+      ]
+    }
+
+  },
+  "2": {
+    id: 2,
+    title: "1.2 Test: What is S.M.A.R.T.",
+    icon: testIcon,
+    description: {
+      type: "test",
+      data: [
+        {
+          id: 1,
+          title: "Smart Goal is:",
+          answer: [
+            {
+              id: "1answer1",
+              param: false,
+              name: "1q",
+              textAnswer: "My idea, that I keep in my mind and dream about every day",
+              value: 1
+            },
+            {
+              id: "1answer2",
+              param: true,
+              name: "1q",
+              textAnswer: "My goal, that is measurable and achievable and costs less than $10,000",
+              value: 2
+            },
+            {
+              id: "1answer3",
+              param: false,
+              name: "1q",
+              textAnswer: "My goal is specific, measurable, achievable, relevant and \n" +
+                "time-bound.",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: "What does the \"M\" in SMART stand for?",
+          answer: [
+            {
+              id: "2answer1",
+              param: false,
+              name: "2q",
+              textAnswer: "Mental - you have to be able to think about the goal.",
+              value: 1
+            },
+            {
+              id: "2answer2",
+              param: true,
+              name: "2q",
+              textAnswer: "Measurable - a goal must have some kind of number attached so you have a way to know if you are reaching the goal.",
+              value: 2
+            },
+            {
+              id: "2answer3",
+              param: false,
+              name: "2q",
+              textAnswer: "Memorable - a goal must be easily remembered",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 3,
+          title: "What does the \"S\" in SMART stand for?",
+          answer: [
+            {
+              id: "3answer1",
+              param: false,
+              name: "3q",
+              textAnswer: "Simple - a goal must be easy.",
+              value: 1
+            },
+            {
+              id: "3answer2",
+              param: true,
+              name: "3q",
+              textAnswer: "Smart- a goal must make sense.",
+              value: 2
+            },
+            {
+              id: "3answer3",
+              param: false,
+              name: "3q",
+              textAnswer: "Specific - a goal must be focused.",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 4,
+          title: "If you decide to spend holidays at the resort, what to consider when planning with S.M.A.R.T. rules? ",
+          answer: [
+            {
+              id: "4answer1",
+              param: false,
+              name: "4q",
+              textAnswer: "What kind of clothes do I need to take with me?",
+              value: 1
+            },
+            {
+              id: "4answer2",
+              param: true,
+              name: "4q",
+              textAnswer: "When the holiday is, how much money I am planning to spend, and how much money I have now",
+              value: 2
+            },
+          ]
+        },
+        {
+          id: 5,
+          title: "When I decide to buy new furniture what my SMART steps are?",
+          answer: [
+            {
+              id: "5answer1",
+              param: false,
+              name: "5q",
+              textAnswer: "I choose colours, shapes and amount of things that I want to buy",
+              value: 1
+            },
+            {
+              id: "5answer2",
+              param: true,
+              name: "5q",
+              textAnswer: "I decide how much I need to spend on what I want, how much money I have now and when I can afford this furniture without credits.",
+              value: 2
+            },
+            {
+              id: "5answer3",
+              param: false,
+              name: "5q",
+              textAnswer: "I decide if I really need it now, what it will bring to my life, I find furniture that I want and learn the price on the market, I count the amount of money that I have now and in how many months I can afford this furniture.",
+              value: 3
+            }
+          ]
+        }
+      ],
+    }
+  },
+  "3": {
+    id: 3,
+    title: "1.3 Video: How to be successful?",
+    icon: videoICon,
+    description: {
+      type: "video",
+      data: [
+        {
+          url_video: "https://youtu.be/q5JWp47z4bY",
+          html_text: videoText_unit_4
+        }
+      ]
+    }
+  },
+  "4": {
+    id: 4,
+    title: "1.4 Case: #1 SMART technology",
+    icon: testIcon,
+    description: {
+      type: "case",
+      data: [
+        {
+          id: 1,
+          html_text: caseText_unit_4,
+          title: "Do you think it will help to attain goal easier?",
+          answer: [
+            {
+              id: 1,
+              name: "boolean",
+              param: false,
+              textAnswer: "Yes, it will help",
+              value: 1
+            },
+            {
+              id: 2,
+              name: "boolean",
+              param: true,
+              textAnswer: "I am not ready to agree",
+              value: 2
+            }
+          ]
+        }
+      ],
+    }
+  },
+  "5": {
+    id: 5,
+    icon: testIcon,
+    title: "1.5 Test: Let’s help Amanda",
+    description: {
+      type: "testTrueOrFalse",
+      data: [
+        {
+          id: 1,
+          title: "Amanda will spend $25 less on entertainment every month in order to save that $25 instead. This is a time-bound SMART goal. ",
+          answer: [
+
+            {
+              id: "1answer1",
+              name: "1q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "1answer2",
+              name: "1q",
+              value: 0,
+              textAnswer: "False"
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: "Amanda will buy a new camera in a year by saving $50 after every salary. This is a measurable SMART goal.",
+          answer: [
+            {
+              id: "2answer1",
+              name: "2q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "2answer2",
+              name: "2q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 3,
+          title: "Amanda says that her company will cut her salary. This is SMART information.",
+          answer: [
+            {
+              id: "3answer1",
+              name: "3q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "3answer2",
+              name: "3q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 4,
+          title: "Amanda goes to the ice cream store every Sunday. She spends 25$ every month. This is a time-bound SMART spending.",
+          answer: [
+            {
+              id: "4answer1",
+              name: "4q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "4answer2",
+              name: "4q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 5,
+          title: "Amanda plays tennis every weekend and it costs 50$ per one time. She doesn’t need to plan her spendings because it’s not a big sum.",
+          answer: [
+            {
+              id: "5answer1",
+              name: "5q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "5answer2",
+              name: "5q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        }
+      ],
+    }
+  },
+  "6": {
+    id: 6,
+    title: "1.6 Game: Match a pair",
+    icon: testIcon,
+    description: {
+      type: "game",
+      data: [
+        {
+          id: 1,
+          title: "First",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 2,
+          title: "First",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 3,
+          title: "Second",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 4,
+          title: "Second",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 5,
+          title: "Third",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 6,
+          title: "Third",
+          pair: "1",
+          show: false
+        },
+      ],
+    }
+  }
+};
+export const TUT_2_LESSON_CONTENT_UNIT_5 = {
+  "1": {
+    id: 1,
+    title: "1.1 Text: Your goal by S.M.A.R.T. and life cases UNIT-5",
+    icon: textIcon,
+    description: {
+      type: "text",
+      data: [
+        {
+          html_text: text_unit_5
+        }
+      ]
+    }
+
+  },
+  "2": {
+    id: 2,
+    title: "1.2 Test: What is S.M.A.R.T.",
+    icon: testIcon,
+    description: {
+      type: "test",
+      data: [
+        {
+          id: 1,
+          title: "Smart Goal is:",
+          answer: [
+            {
+              id: "1answer1",
+              param: false,
+              name: "1q",
+              textAnswer: "My idea, that I keep in my mind and dream about every day",
+              value: 1
+            },
+            {
+              id: "1answer2",
+              param: true,
+              name: "1q",
+              textAnswer: "My goal, that is measurable and achievable and costs less than $10,000",
+              value: 2
+            },
+            {
+              id: "1answer3",
+              param: false,
+              name: "1q",
+              textAnswer: "My goal is specific, measurable, achievable, relevant and \n" +
+                "time-bound.",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: "What does the \"M\" in SMART stand for?",
+          answer: [
+            {
+              id: "2answer1",
+              param: false,
+              name: "2q",
+              textAnswer: "Mental - you have to be able to think about the goal.",
+              value: 1
+            },
+            {
+              id: "2answer2",
+              param: true,
+              name: "2q",
+              textAnswer: "Measurable - a goal must have some kind of number attached so you have a way to know if you are reaching the goal.",
+              value: 2
+            },
+            {
+              id: "2answer3",
+              param: false,
+              name: "2q",
+              textAnswer: "Memorable - a goal must be easily remembered",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 3,
+          title: "What does the \"S\" in SMART stand for?",
+          answer: [
+            {
+              id: "3answer1",
+              param: false,
+              name: "3q",
+              textAnswer: "Simple - a goal must be easy.",
+              value: 1
+            },
+            {
+              id: "3answer2",
+              param: true,
+              name: "3q",
+              textAnswer: "Smart- a goal must make sense.",
+              value: 2
+            },
+            {
+              id: "3answer3",
+              param: false,
+              name: "3q",
+              textAnswer: "Specific - a goal must be focused.",
+              value: 3
+            }
+          ]
+        },
+        {
+          id: 4,
+          title: "If you decide to spend holidays at the resort, what to consider when planning with S.M.A.R.T. rules? ",
+          answer: [
+            {
+              id: "4answer1",
+              param: false,
+              name: "4q",
+              textAnswer: "What kind of clothes do I need to take with me?",
+              value: 1
+            },
+            {
+              id: "4answer2",
+              param: true,
+              name: "4q",
+              textAnswer: "When the holiday is, how much money I am planning to spend, and how much money I have now",
+              value: 2
+            },
+          ]
+        },
+        {
+          id: 5,
+          title: "When I decide to buy new furniture what my SMART steps are?",
+          answer: [
+            {
+              id: "5answer1",
+              param: false,
+              name: "5q",
+              textAnswer: "I choose colours, shapes and amount of things that I want to buy",
+              value: 1
+            },
+            {
+              id: "5answer2",
+              param: true,
+              name: "5q",
+              textAnswer: "I decide how much I need to spend on what I want, how much money I have now and when I can afford this furniture without credits.",
+              value: 2
+            },
+            {
+              id: "5answer3",
+              param: false,
+              name: "5q",
+              textAnswer: "I decide if I really need it now, what it will bring to my life, I find furniture that I want and learn the price on the market, I count the amount of money that I have now and in how many months I can afford this furniture.",
+              value: 3
+            }
+          ]
+        }
+      ],
+    }
+  },
+  "3": {
+    id: 3,
+    title: "1.3 Video: How to be successful?",
+    icon: videoICon,
+    description: {
+      type: "video",
+      data: [
+        {
+          url_video: "https://youtu.be/q5JWp47z4bY",
+          html_text: videoText_unit_5
+        }
+      ]
+    }
+  },
+  "4": {
+    id: 4,
+    title: "1.4 Case: #1 SMART technology",
+    icon: testIcon,
+    description: {
+      type: "case",
+      data: [
+        {
+          id: 1,
+          html_text: caseText_unit_5,
+          title: "Do you think it will help to attain goal easier?",
+          answer: [
+            {
+              id: 1,
+              name: "boolean",
+              param: false,
+              textAnswer: "Yes, it will help",
+              value: 1
+            },
+            {
+              id: 2,
+              name: "boolean",
+              param: true,
+              textAnswer: "I am not ready to agree",
+              value: 2
+            }
+          ]
+        }
+      ],
+    }
+  },
+  "5": {
+    id: 5,
+    icon: testIcon,
+    title: "1.5 Test: Let’s help Amanda",
+    description: {
+      type: "testTrueOrFalse",
+      data: [
+        {
+          id: 1,
+          title: "Amanda will spend $25 less on entertainment every month in order to save that $25 instead. This is a time-bound SMART goal. ",
+          answer: [
+
+            {
+              id: "1answer1",
+              name: "1q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "1answer2",
+              name: "1q",
+              value: 0,
+              textAnswer: "False"
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: "Amanda will buy a new camera in a year by saving $50 after every salary. This is a measurable SMART goal.",
+          answer: [
+            {
+              id: "2answer1",
+              name: "2q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "2answer2",
+              name: "2q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 3,
+          title: "Amanda says that her company will cut her salary. This is SMART information.",
+          answer: [
+            {
+              id: "3answer1",
+              name: "3q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "3answer2",
+              name: "3q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 4,
+          title: "Amanda goes to the ice cream store every Sunday. She spends 25$ every month. This is a time-bound SMART spending.",
+          answer: [
+            {
+              id: "4answer1",
+              name: "4q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "4answer2",
+              name: "4q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        },
+        {
+          id: 5,
+          title: "Amanda plays tennis every weekend and it costs 50$ per one time. She doesn’t need to plan her spendings because it’s not a big sum.",
+          answer: [
+            {
+              id: "5answer1",
+              name: "5q",
+              value: 1,
+              textAnswer: "True"
+            },
+            {
+              id: "5answer2",
+              name: "5q",
+              value: 0,
+              textAnswer: "False"
+            },
+          ]
+        }
+      ],
+    }
+  },
+  "6": {
+    id: 6,
+    title: "1.6 Game: Match a pair",
+    icon: testIcon,
+    description: {
+      type: "game",
+      data: [
+        {
+          id: 1,
+          title: "First",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 2,
+          title: "First",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 3,
+          title: "Second",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 4,
+          title: "Second",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 5,
+          title: "Third",
+          pair: "1",
+          show: false
+        },
+        {
+          id: 6,
+          title: "Third",
+          pair: "1",
+          show: false
+        },
+      ],
+    }
+  }
+};
 //
 export const PROGRESS_MENU_EXAMPLE = [
   {

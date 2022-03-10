@@ -19,7 +19,7 @@ const prepareState = (answers: any) => {
     "value": item[1]
   }))
 }
-//:TODO доделать для записи true false
+
 const prepareStateTrueFalse = (answers: any) => {
   return Object.values(answers).map((item, index) => ({
     "number": index + 1,

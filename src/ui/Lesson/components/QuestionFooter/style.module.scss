@@ -31,6 +31,9 @@
         font-size: 12px;
         line-height: 18px;
         color: #A8B0BA;
+        &:first-child {
+          margin-right: 4px;
+        }
       }
     }
   }

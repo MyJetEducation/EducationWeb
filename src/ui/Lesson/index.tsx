@@ -5,7 +5,7 @@ import {Container} from "../components/Container";
 
 import {
   currentIdSelector,
-  progressMenuAsync,
+  progressMenuAsync, progressMenuReset,
   progressMenuSelector,
   setProgressMenuAsync
 } from "../../store/progressMenuSlicer";
@@ -70,6 +70,9 @@ export const Lesson = () => {
 
   useEffect(() => {
     dispatch(progressMenuAsync(unit, tutorial))
+    return () => {
+      dispatch(progressMenuReset())
+    }
   }, [])
 
   const retry = useLocationCheck(menu.data, tutorial as string, id, unit, `${unit}/${id}/summary`);
@@ -96,7 +99,6 @@ export const Lesson = () => {
             data={data.description}
           />
         </div>
-
         <ProgressMenu
           id={id}
           length={menu.data.length}

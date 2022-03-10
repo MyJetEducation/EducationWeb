@@ -19,6 +19,7 @@ import FreeLesson from "./ui/FreeLesson";
 import MarketPage from "./ui/Market";
 import Profile from "./ui/Profile";
 import AchievementsPage from "./ui/AchievementsPage";
+import Test222 from "./ui/Test222";
 
 export const App = () => {
   return (
@@ -33,6 +34,7 @@ export const App = () => {
           <Route path="/zero-lesson" element={<ZeroQuizLesson/>}/>
           <Route path="/register-confirm" element={<RegisterConfirm/>}/>
           <Route path="/free" element={<FreeLesson/>}/>
+          <Route path="/testtest" element={<Test222/>}/>
 
           <Route path="/plans" element={(
             <RequireAuth>

@@ -7,11 +7,12 @@ import {ProgressDashboardState} from "../domain/Dashboard/progressDashboard";
 //:TODO make correct interface
 const initialState: any = {
   data: null,
-  isLoading: false
+  isLoading: false,
+  error: null
 }
 
-export const progressDashboardSlicer = createSlice({
-  name: "progressDashboard",
+export const userProgressSlicer = createSlice({
+  name: "userProgress",
   initialState,
   reducers: {
     getFetch: (state) => {
@@ -28,18 +29,18 @@ export const progressDashboardSlicer = createSlice({
   }
 });
 
-export const {getFetch, getFetchResolve, getFetchReject} = progressDashboardSlicer.actions;
+export const {getFetch, getFetchResolve, getFetchReject} = userProgressSlicer.actions;
 
-export const getFetchProgressDashboardAsync = () => async (dispatch: any) => {
+export const userProgressAsync = () => async (dispatch: any) => {
   dispatch(getFetch())
   try {
-    const data = await req(configEndpoint.progressAllStatsBlock, {});
+    const data = await req(configEndpoint.userProgress, {});
     dispatch(getFetchResolve(data.data));
   } catch (error) {
     dispatch(getFetchReject(error))
   };
 }
-export const userTaskScoreSelector = (state: RootState) => state.progress.data;
+export const userTaskScoreSelector = (state: RootState) => state.userProgress.data;
 
-export default progressDashboardSlicer.reducer;
+export default userProgressSlicer.reducer;
 
