@@ -2,91 +2,18 @@ import React, {useEffect, useMemo} from 'react';
 
 import s from './style.module.scss';
 import {useDispatch, useSelector} from "react-redux";
-import {getFetchProgressDashboardAsync, userTaskScoreSelector} from "../../../../store/allProgressDashboard";
+import {getStatsAsync, userTaskScoreSelector} from "../../../../store/statsBlock";
 
-const HABIT_LIST = [
-  {
-    id: 1,
-    title: "The habit to keep track of income / expenses"
-  },
-  {
-    id: 2,
-    title: "The habit of budgeting"
-  },
-  {
-    id: 3,
-    title: "The habit of making a financial plan"
-  },
-  {
-    id: 4,
-    title: "The habit of exploring passive income opportunities"
-  },
-  {
-    id: 5,
-    title: "The habit of forming savings"
-  },
-  {
-    id: 6,
-    title: "The habit of keeping a diary"
-  },
-  {
-    id: 7,
-    title: "The habit of investing"
-  },
-  {
-    id: 8,
-    title: "The habit of budgeting for all events"
-  },
-  {
-    id: 9,
-    title: "The habit of analyzing events around you"
-  },
-]
-const SKILL_LIST = [
-  {
-    id: 1,
-    title: "Skill 1"
-  },
-  {
-    id: 2,
-    title: "Skill 2"
-  },
-  {
-    id: 3,
-    title: "Skill 3"
-  },
-  {
-    id: 4,
-    title: "Skill 4"
-  },
-  {
-    id: 5,
-    title: "Skill 5"
-  },
-  {
-    id: 6,
-    title: "Skill 6"
-  },
-  {
-    id: 7,
-    title: "Skill 7"
-  },
-  {
-    id: 8,
-    title: "Skill 8"
-  },
-  {
-    id: 9,
-    title: "Skill 9"
-  },
-]
+import {HABIT_LIST} from "../../../Lesson/constans";
+import {SKILL_LIST} from '../../../Lesson/constans';
+
 
 const YourProgress = () => {
 
   const dispatch = useDispatch();
   const data = useSelector(userTaskScoreSelector);
   useEffect(() => {
-    dispatch(getFetchProgressDashboardAsync());
+    dispatch(getStatsAsync());
   }, [])
   
   const styleProgressHabit = useMemo(() => ( data !== null ? {
@@ -94,7 +21,7 @@ const YourProgress = () => {
   }: {}), [data]);
 
   const styleProgressSkill = useMemo(() => ( data !== null ? {
-    width: `calc(${data.skill.progress}%)`
+    width: `calc(${data.skillProgress}%)`
   } : {}), [data]);
 
   return (
@@ -127,14 +54,10 @@ const YourProgress = () => {
             className={s.progressLine}
           />
           <div className={s.habitName}>
+            <p>Skill Progress</p>
             <p>
               {
-                data !== null ? data.skill.index !== 0 ?  SKILL_LIST[data.skill.index - 1].title : "Skill name" : ""
-              }
-            </p>
-            <p>
-              {
-                data !== null ? `${data.skill.progress}%` : 0
+                data !== null ? `${data.skillProgress}%` : 0
               }
             </p>
           </div>

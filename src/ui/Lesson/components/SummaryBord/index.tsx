@@ -1,25 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import cn from 'classnames';
-
 import {QuestionFooter} from "../QuestionFooter";
 import {Container} from "../../../components/Container";
-
-import {progressMenuSelector} from "../../../../store/progressMenuSlicer";
-import req from "../../../../services/request";
-import {configEndpoint} from "../../../../config";
-
+import {progressMenuAsync, progressMenuReset, progressMenuSelector} from "../../../../store/progressMenuSlicer";
 import map from './assets/source_map.png';
-import achievementIcon from './assets/achiv.svg';
-
 import s from './style.module.scss';
-import {
-  achievementsForSummaryDataSelector,
-  achievementsForSummarySelector,
-  getAchievementsForSummaryAsync
-} from "../../../../store/achievementForSummarySlicer";
 import AchievementsItem from "../../../AchievementsItem";
+import {
+  achievementsSummarySelector,
+  getSummaryAsync,
+  summaryDataSelector
+} from "../../../../store/summarySlicer";
 
 export const SummaryBord = () => {
   const {unit, tutorial} = useParams<"unit" | "tutorial">();
@@ -28,10 +20,14 @@ export const SummaryBord = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const achievements = useSelector(achievementsForSummarySelector);
-  const data = useSelector(achievementsForSummaryDataSelector);
+  const achievements = useSelector(achievementsSummarySelector);
+  const data = useSelector(summaryDataSelector);
   useEffect(() => {
-    dispatch(getAchievementsForSummaryAsync(unitNumber, tutorial))
+    dispatch(getSummaryAsync(unitNumber, tutorial))
+    dispatch(progressMenuAsync(unit, tutorial))
+    return () => {
+      dispatch(progressMenuReset());
+    }
   }, [])
   return (
     <Container>
@@ -54,8 +50,9 @@ export const SummaryBord = () => {
 
             <div className={s.testScore}>
               <div className={s.num}>
-                60%
-                {/*{data !== null && <p>{`${data.data.test}%`}</p>}*/}
+                {
+                  data === null ? <p>0</p> : <p>{`${data.test}%`}</p>
+                }
               </div>
               <div className={s.text}>
                 Your Test score
@@ -63,8 +60,7 @@ export const SummaryBord = () => {
             </div>
             <div className={s.testScore}>
               <div className={s.num}>
-                100%
-                {/*{data !== null ? `${data.data.trueFalse}%` : null}*/}
+                {data === null ? <p>0</p> : <p>{`${data.trueFalse}%`}</p>}
               </div>
               <div className={s.text}>
                 True/False
@@ -82,41 +78,41 @@ export const SummaryBord = () => {
               </div>
             </div>
           </div>
-
-          <div className={s.achievements}>
-            <div className={s.head}>
-              <p className={s.plus}>+</p>
-              <p className={s.achievementsText}>New achievements</p>
-              <div className={s.line}/>
-            </div>
-            <div className={s.achievementsList}>
-              {
-                achievements !== null && achievements.map((item: any) => (
-                  <AchievementsItem
-                    key={item.id}
-                    name={item.name}
-                    type={item.type}
-                    icon={item.icon}
-                    nameSize={"big"}
-                  />
-                ))
-              }
-            </div>
-          </div>
+          {
+            achievements !== null && (
+              <div className={s.achievements}>
+                <div className={s.head}>
+                  <p className={s.plus}>+</p>
+                  <p className={s.achievementsText}>New achievements</p>
+                  <div className={s.line}/>
+                </div>
+                <div className={s.achievementsList}>
+                  {
+                    achievements.map((item: any) => (
+                      <AchievementsItem
+                        key={item.id}
+                        name={item.name}
+                        type={item.type}
+                        icon={item.icon}
+                        nameSize={"big"}
+                      />
+                    ))
+                  }
+                </div>
+              </div>
+            )
+          }
 
         </div>
       </div>
-
       <QuestionFooter
         btnName={"Continue"}
         onClickNext={() => navigate("/dashboard")}
-        index={menu.length}
-        id={menu.length}
-        length={menu.length}
+        index={menu.data?.length}
+        id={menu.data?.length}
+        length={menu.data?.length}
         time={"Completed"}
       />
-
     </Container>
-
   )
 }

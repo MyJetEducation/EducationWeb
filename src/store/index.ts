@@ -4,26 +4,30 @@ import menuSlicer from "./menuSlicer";
 import testSlicer from "./testSlicer";
 import dashboardSlicer from "./dashboardSlicer";
 import progressMenuSlicer from "./progressMenuSlicer";
-import progressDashboardSlicer from "./allProgressDashboard";
+import statsSlicer from "./statsBlock";
 import retryUnitSlicer from "./retryUnitSLicer";
 import tutorialsSlicer from "./tutorialsSlicer";
 import countRetrySlicer from "./countRetryAttempts";
 import achievementsSlicer from "./achievementSlicer";
-import achievementsForSummarySelector from "./achievementForSummarySlicer";
+import summarySlicer from "./summarySlicer";
+import userInfoSlicer from "./userInfoSlicer";
+import userProgressSlicer from "./userProgressSlicer";
 
 export const store = configureStore({
   reducer: {
     user: userSlicer,
     menu: menuSlicer,
     test: testSlicer,
-    progress: progressDashboardSlicer,
+    statsBlock: statsSlicer,
     dashboard: dashboardSlicer,
     progressMenu: progressMenuSlicer,
     retry: retryUnitSlicer,
     tutorials: tutorialsSlicer,
     countRetry: countRetrySlicer,
     achievements: achievementsSlicer,
-    achievementsForSummary: achievementsForSummarySelector
+    summary: summarySlicer,
+    userInfo: userInfoSlicer,
+    userProgress: userProgressSlicer
   }
 })
 

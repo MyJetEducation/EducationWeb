@@ -43,16 +43,13 @@ export const getAchievementsAsync = () => async (dispatch: any) => {
       throw data
     }
     const receivedFilter = data.data?.userAchievements.map((item: any) => (
-      item.toLowerCase()
-        .replace(/[^a-z]/ig, "")
+      item.toLowerCase().replace(/[^a-z]/ig, "")
     ));
     const unreceivedFilter = data.data?.unreceivedAchievements.map((item: any) => (
-      item.toLowerCase()
-        .replace(/[^a-z]/ig, "")
+      item.toLowerCase().replace(/[^a-z]/ig, "")
     ));
     const received = ACHIEVEMENTS.filter((item) =>
-      receivedFilter.includes(item.name.toLowerCase()
-        .replace(/[^a-z]/ig, "")
+      receivedFilter.includes(item.name.toLowerCase().replace(/[^a-z]/ig, "")
       )
     );
     const unreceived = ACHIEVEMENTS.filter((item) =>
@@ -74,5 +71,4 @@ export const achievementsSelector = (state: RootState) => state.achievements.rec
 export const unAchievementsSelector = (state: RootState) => state.achievements.unreceived;
 export const errorAchievementsSelector = (state: RootState) => state.achievements.error;
 
-console.log("####: initialState", initialState);
 export default achievementsSlicer.reducer;

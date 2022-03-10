@@ -14,7 +14,12 @@ import {
   TUT_1_LESSON_CONTENT_UNIT_2,
   TUT_1_LESSON_CONTENT_UNIT_3,
   TUT_1_LESSON_CONTENT_UNIT_4,
-  TUT_1_LESSON_CONTENT_UNIT_5
+  TUT_1_LESSON_CONTENT_UNIT_5,
+  TUT_2_LESSON_CONTENT_UNIT_1,
+  TUT_2_LESSON_CONTENT_UNIT_2,
+  TUT_2_LESSON_CONTENT_UNIT_3,
+  TUT_2_LESSON_CONTENT_UNIT_4,
+  TUT_2_LESSON_CONTENT_UNIT_5,
 } from "../../../Lesson/constans";
 import {
   currentDataDashboardSelector,
@@ -44,47 +49,71 @@ const MENU_INFO = [
     title: "10 tests"
   },
 ]
-const UNIT_NAME = [
+const unitName = (unit: any) => [
   {
     id: 1,
     name: "Unit 1. Your income",
-    unitList: Object.values(TUT_1_LESSON_CONTENT_UNIT_1).map((item) => item.title),
-    unitIcon: Object.values(TUT_1_LESSON_CONTENT_UNIT_1).map((item) => item.icon),
-    unitTasks: Object.values(TUT_1_LESSON_CONTENT_UNIT_1).map((item) => item.description)
+    unitList: Object.values(unit[0]).map((item: any) => item.title),
+    unitIcon: Object.values(unit[0]).map((item: any) => item.icon),
+    unitTasks: Object.values(unit[0]).map((item: any) => item.description)
   },
   {
     id: 2,
     name: "Unit 2. Secrets for Spending Your Money Wisely",
-    unitList: Object.values(TUT_1_LESSON_CONTENT_UNIT_2).map((item) => item.title),
-    unitIcon: Object.values(TUT_1_LESSON_CONTENT_UNIT_2).map((item) => item.icon),
-    unitTasks: Object.values(TUT_1_LESSON_CONTENT_UNIT_2).map((item) => item.description)
+    unitList: Object.values(unit[1]).map((item: any) => item.title),
+    unitIcon: Object.values(unit[1]).map((item: any) => item.icon),
+    unitTasks: Object.values(unit[1]).map((item: any) => item.description)
   },
   {
     id: 3,
     name: "Unit 3. Hidden expenses and lost profits",
-    unitList: Object.values(TUT_1_LESSON_CONTENT_UNIT_3).map((item) => item.title),
-    unitIcon: Object.values(TUT_1_LESSON_CONTENT_UNIT_3).map((item) => item.icon),
-    unitTasks: Object.values(TUT_1_LESSON_CONTENT_UNIT_3).map((item) => item.description)
+    unitList: Object.values(unit[2]).map((item: any) => item.title),
+    unitIcon: Object.values(unit[2]).map((item: any) => item.icon),
+    unitTasks: Object.values(unit[2]).map((item: any) => item.description)
   },
   {
     id: 4,
     name: "Unit 4. Salary - make sure that it is enough.",
-    unitList: Object.values(TUT_1_LESSON_CONTENT_UNIT_4).map((item) => item.title),
-    unitIcon: Object.values(TUT_1_LESSON_CONTENT_UNIT_4).map((item) => item.icon),
-    unitTasks: Object.values(TUT_1_LESSON_CONTENT_UNIT_4).map((item) => item.description)
+    unitList: Object.values(unit[3]).map((item: any) => item.title),
+    unitIcon: Object.values(unit[3]).map((item: any) => item.icon),
+    unitTasks: Object.values(unit[3]).map((item: any) => item.description)
   },
   {
     id: 5,
     name: "Unit 5. Modern tools for budget planning in three steps",
-    unitList: Object.values(TUT_1_LESSON_CONTENT_UNIT_5).map((item) => item.title),
-    unitIcon: Object.values(TUT_1_LESSON_CONTENT_UNIT_5).map((item) => item.icon),
-    unitTasks: Object.values(TUT_1_LESSON_CONTENT_UNIT_5).map((item) => item.description)
+    unitList: Object.values(unit[4]).map((item: any) => item.title),
+    unitIcon: Object.values(unit[4]).map((item: any) => item.icon),
+    unitTasks: Object.values(unit[4]).map((item: any) => item.description)
   }
 ]
+
+const UNIT = {
+  "PersonalFinance": [
+    TUT_1_LESSON_CONTENT_UNIT_1,
+    TUT_1_LESSON_CONTENT_UNIT_2,
+    TUT_1_LESSON_CONTENT_UNIT_3,
+    TUT_1_LESSON_CONTENT_UNIT_4,
+    TUT_1_LESSON_CONTENT_UNIT_5,
+  ],
+  "BehavioralFinance": [
+    TUT_2_LESSON_CONTENT_UNIT_1,
+    TUT_2_LESSON_CONTENT_UNIT_2,
+    TUT_2_LESSON_CONTENT_UNIT_3,
+    TUT_2_LESSON_CONTENT_UNIT_4,
+    TUT_2_LESSON_CONTENT_UNIT_5,
+  ],
+};
 
 export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show, index}) => {
   const unitsScore = useSelector(currentDataDashboardSelector(index + 1));
   const dispatch = useDispatch();
+
+  const UNIT_NAME = useMemo(() => {
+    if (!UNIT[tutorialName as keyof typeof UNIT]) {
+      return []
+    }
+    return unitName(UNIT[tutorialName as keyof typeof UNIT])
+  }, [tutorialName]);
   const name = useMemo(() => {
     switch (tutorialName) {
       case "PersonalFinance":
@@ -189,12 +218,10 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show
                 isShowActiveTask={isShowActiveTask}
                 unitList={item.unitList}
                 unitIcon={item.unitIcon}
-                unitTask={item.unitTasks}
                 scoreList={scoreList}
                 unitNumber={index}
                 title={UNIT_NAME[index].name}
                 btnName={`Start Unit ${index + 1}`}
-                urlRelocate={`/${name}/unit${index + 1}/1`}
                 tutorialName={tutorialName}
                 urlForTutorial={name}
                 index={index}

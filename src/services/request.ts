@@ -20,19 +20,27 @@ async function req(endpoint: string, query: any) {
     ...config.client.server,
     ...configEndpoint?.uri,
   };
-  const pathname = Object.keys(query).reduce((acc, val) => {
-    if (acc.indexOf(`{${val}}`) !== -1) {
-      const result = acc.replace(`{${val}}`, query[val as keyof typeof query]);
-      delete query[val as keyof typeof query];
-      return result;
-    }
-    return acc;
-  }, url.pathname);
-  url.pathname = pathname
+  if (typeof query === "object") {
+    const pathname = Object.keys(query).reduce((acc, val) => {
+      if (acc.indexOf(`{${val}}`) !== -1) {
+        const result = acc.replace(`{${val}}`, query[val as keyof typeof query]);
+        delete query[val as keyof typeof query];
+        return result;
+      }
+      return acc;
+    }, url.pathname);
+    url.pathname = pathname
+  }
+
   if (configEndpoint.method === "POST" || configEndpoint.method === "PUT") {
-    body = JSON.stringify({
-      ...query,
-    })
+    if (typeof query === "object") {
+      body = JSON.stringify({
+        ...query,
+      })
+    } else {
+      body = JSON.stringify(query)
+    }
+
   } else if (configEndpoint.method === "GET") {
     url.query = {...url.query, ...query}
   }

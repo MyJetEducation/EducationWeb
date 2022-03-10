@@ -27,6 +27,11 @@ export const progressMenuSlicer = createSlice({
     },
     progressMenuValidChange: (state, action: PayloadAction<string>) => {
       state.data[action.payload].valid = true;
+    },
+    progressMenuReset: (state) => {
+      state.data = [];
+      state.isLoading = false;
+      state.error = null;
     }
   }
 });
@@ -58,7 +63,7 @@ export const setProgressMenuAsync = (currentIndex: string, tutorial: string | un
   });
 }
 
-export const {fetchProgressMenu, fetchProgressMenuResolve, fetchProgressMenuReject, progressMenuValidChange} = progressMenuSlicer.actions;
+export const {fetchProgressMenu, fetchProgressMenuResolve, fetchProgressMenuReject, progressMenuValidChange, progressMenuReset} = progressMenuSlicer.actions;
 
 export const currentIdSelector = (id: string) => (state: RootState) => state.progressMenu.data.findIndex((item: any) => item?.id === id);
 export const progressMenuSelector = (state: RootState) => state.progressMenu;
