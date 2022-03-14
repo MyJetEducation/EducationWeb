@@ -39,6 +39,7 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
           "timeToken": localStorage.getItem("timeToken"),
           "answers": answer
         })
+
         setPercent(await data.data.unit.tasks[1].taskScore)
       }
       dispatch(setDisabledBtn(false))

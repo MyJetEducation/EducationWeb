@@ -5,8 +5,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {getStatsAsync, userTaskScoreSelector} from "../../../../store/statsBlock";
 
 import {HABIT_LIST} from "../../../Lesson/constans";
-import {SKILL_LIST} from '../../../Lesson/constans';
-
 
 const YourProgress = () => {
 

@@ -47,7 +47,6 @@ const Units = (
   }, []);
 
   const handleRelocateClick = () => {
-    //TODO: при клике после прохождения таска, перекидывать на summaryBord
     navigate(`/${urlForTutorial}/unit${index + 1}/1`)
   }
 

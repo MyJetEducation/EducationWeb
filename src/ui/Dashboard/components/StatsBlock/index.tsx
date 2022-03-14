@@ -7,7 +7,6 @@ import s from './style.module.scss';
 const StatsBlock = () => {
   const dispatch = useDispatch();
   const data = useSelector(userTaskScoreSelector);
-  console.log("####: data", data);
   useEffect(() => {
     dispatch(getStatsAsync());
   }, []);
