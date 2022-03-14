@@ -5,7 +5,8 @@ import {Container} from "../components/Container";
 
 import {
   currentIdSelector,
-  progressMenuAsync, progressMenuReset,
+  progressMenuAsync,
+  progressMenuReset,
   progressMenuSelector,
   setProgressMenuAsync
 } from "../../store/progressMenuSlicer";

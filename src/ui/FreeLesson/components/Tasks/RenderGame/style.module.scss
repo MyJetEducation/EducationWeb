@@ -1,0 +1,75 @@
+.wrap {
+  max-width: 560px;
+  margin: 0 auto;
+  .inner {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .say {
+    position: absolute;
+    width: 300px;
+    height: fit-content;
+    top: 100px;
+    left: -200px;
+    background-color: rgb(246, 244, 238);
+    padding: 10px 15px;
+
+    border-radius: 15px;
+
+    p {
+      font-size: 18px;
+      color: rgb(25, 23, 23);
+      margin-bottom: 10px;
+    }
+    .colors {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .variant {
+      position: absolute;
+      left: -9999px;
+    }
+    .inputWrap+.inputWrap {
+      margin-left: 10px;
+    }
+    .label {
+      width: 40px;
+      height: 30px;
+      display: block;
+      border-radius: 10px;
+      &.pink {
+        background-color: #F12881;
+      }
+      &.purple {
+        background-color: #D47FEE;
+      }
+    }
+
+  }
+  [type = "radio"]:checked + .label {
+    border: 2px solid #000;
+  }
+  .mascot {
+    width: 350px;
+    transform: scaleX(-1);
+    margin-top: 60px;
+  }
+  .btn,
+  .goRegister{
+    border: none;
+    width: 100px;
+    margin: 0 auto;
+    display: block;
+    background-color: rgb(5, 114, 122);;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 16px 0;
+    border-radius: 14px;
+    &:disabled {
+      background: #b9babc;
+      color: #191717;
+    }
+  }
+}

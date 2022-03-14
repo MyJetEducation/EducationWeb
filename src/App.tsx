@@ -20,6 +20,7 @@ import MarketPage from "./ui/Market";
 import Profile from "./ui/Profile";
 import AchievementsPage from "./ui/AchievementsPage";
 import Test222 from "./ui/Test222";
+import FreeStart from "./ui/FreeStart";
 
 export const App = () => {
   return (
@@ -33,7 +34,8 @@ export const App = () => {
           <Route path="/test" element={<TestTranslate/>}/>
           <Route path="/zero-lesson" element={<ZeroQuizLesson/>}/>
           <Route path="/register-confirm" element={<RegisterConfirm/>}/>
-          <Route path="/free" element={<FreeLesson/>}/>
+          <Route path="/free/:id" element={<FreeLesson/>}/>
+          <Route path="/free" element={<FreeStart/>}/>
           <Route path="/testtest" element={<Test222/>}/>
 
           <Route path="/plans" element={(

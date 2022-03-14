@@ -1,0 +1,26 @@
+.wrap {
+  max-width: 560px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.text {
+  color: #000000;
+  font-size: 28px;
+  line-height: 30px;
+  margin-bottom: 40px;
+}
+
+.btn {
+  border: none;
+  max-width: 260px;
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+  background-color: rgb(5, 114, 122);;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 16px 16px;
+  border-radius: 14px;
+}
