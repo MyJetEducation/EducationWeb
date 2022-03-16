@@ -22,13 +22,11 @@ export const Auth = () => {
   const [formFields, setFormFields] = useState<{userName: string, password: string}>({userName: "", password: ""});
   const isLoading = useSelector(userIsLoadingSelector);
   const token = useSelector(userTokenSelector);
-  const error = useSelector(userErrorSelector);
-  console.log("####: error", error);
   const refreshToken = useSelector(userRefreshTokenSelector);
   const auth = useAuth();
   const [isDisabled, setDisabled] = useState<boolean>(true);
   const dispatch = useDispatch();
-
+  console.log("####: token", token);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(getFetchUserAsync(formFields, () => {
