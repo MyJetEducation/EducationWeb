@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
+import { Step } from "react-joyride";
 
 import {Container} from "../Container";
 
@@ -7,6 +8,8 @@ import s from './style.module.scss';
 import {useAuth} from "../../../services/auth";
 import req from "../../../services/request";
 import {configEndpoint} from "../../../config";
+import useTour from "../../../services/useTour";
+import icon from './assets/icon.svg'
 
 const MENU_NO_AUTH = [
   {
@@ -49,16 +52,60 @@ const MENU_AUTH = [
   }
 ]
 
+export const STEPS: Step[] = [
+  {
+    content: <p>Profile. All information about you</p>,
+    locale: {skip: <strong aria-label="skip">Skip</strong>},
+    placement: "bottom",
+    target: "#DS",
+  },
+  {
+    content: <p>Your statuses and achievements</p>,
+    locale: {skip: <strong aria-label="skip">S-K-I-P</strong>},
+    placement: "top",
+    target: "#step-2",
+  },
+  {
+    content: <p>How much new have you learned - your progress</p>,
+    locale: {skip: <strong aria-label="skip">S-K-I-P</strong>},
+    placement: "top",
+    target: "#step-3",
+  },
+  {
+    content: <p>How much new have you learned - your progress</p>,
+    locale: {skip: <strong aria-label="skip">S-K-I-P</strong>},
+    placement: "right-start",
+    target: "#step-4",
+  },
+  {
+    content: <p>We have credited you with money that you can use inside the service</p>,
+    locale: {skip: <strong aria-label="skip">S-K-I-P</strong>},
+    placement: "right-start",
+    target: "#step-5",
+  },
+  {
+    content: <p>We have credited you with money that you can use inside the service</p>,
+    locale: {skip: <strong aria-label="skip">S-K-I-P</strong>},
+    placement: "right-start",
+    target: "#step-6",
+  },
+  {
+    content: <p>Let's make our first purchase. It's free</p>,
+    locale: {skip: <strong aria-label="skip">S-K-I-P</strong>},
+    placement: "right-start",
+    target: "#step-7",
+  },
+]
+
 export const Header = () => {
+  const tour = useTour(STEPS, "LS_KEY");
   const auth = useAuth();
   const navigate = useNavigate();
   const [show, setShow] = useState(false)
-
   const handleClick = () => {
     setShow(false)
     navigate("/profile")
   }
-
   useEffect(() => {
     const interval = setInterval(() => {
       if (auth.user) {
@@ -92,8 +139,6 @@ export const Header = () => {
       localStorage.removeItem("at")
     };
   }, [])
-
-
   const handleLogoClick = () => {
     if (auth.user) {
       navigate("/dashboard")
@@ -101,10 +146,9 @@ export const Header = () => {
       navigate("/")
     }
   }
-
-
   return (
     <div className={s.wrap}>
+      {tour}
       <Container>
         <div className={s.inner}>
           <div onClick={handleLogoClick} className={s.logo}>
@@ -125,7 +169,7 @@ export const Header = () => {
               <ul className={s.navBar}>
                 {
                   MENU_AUTH.map(({title, to}, index) => (
-                    <li key={index} className={s.navBar__item}>
+                    <li key={index} className={s.navBar__item} id={index === 3 ? "step-6": ""}>
                       <Link className={s.navBar__link} to={to}>{title}</Link>
                     </li>
                   ))
@@ -145,13 +189,20 @@ export const Header = () => {
           {
             auth.user && (
               <div className={s.auth}>
-                <div
-                  className={s.userProfile}
-                  // onClick={}
-                  onClick={() => setShow(!show)}
-                >
-                  DS
-                </div>
+                <>
+                  <div className={s.money} id="step-5">
+                    <img className={s.icon} src={icon} alt="icon"/>
+                    <p>1200</p>
+                  </div>
+                  <div
+                    className={s.userProfile}
+                    onClick={() => setShow(!show)}
+                    id="DS"
+                  >
+                    DS
+                  </div>
+                </>
+
                 {
                   show && (
                     <div className={s.popup}>

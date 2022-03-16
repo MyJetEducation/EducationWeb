@@ -58,29 +58,30 @@ async function req(endpoint: string, query: any) {
           ...config.client.server,
           ...refreshConfigEndPoint?.uri,
         };
-        try {
-          const newToken = await fetch(URL.format(refreshUrl), {
-            method: refreshConfigEndPoint.method,
-            body: JSON.stringify(refreshToken),
-            headers: getHeader(null)
-          }).then(res => {
-            if (res.status !== 200) {
-              // throw {status: 401, message: "Refresh Token not exist"}
-              console.log("####: something went wrong");
-            }
-            return res.json()
-          });
-          localStorage.setItem("token", newToken.data.token)
-          localStorage.setItem("refreshToken", newToken.data.refreshToken)
-          const newData = await fetch(URL.format(url), {
-            method: configEndpoint.method,
-            body,
-            headers: getHeader(newToken.data.token)
-          }).then(res => res.json());
-          return newData;
-        } catch (error) {
-          return error
-        };
+        if (refreshToken) {
+          try {
+            const newToken = await fetch(URL.format(refreshUrl), {
+              method: refreshConfigEndPoint.method,
+              body: JSON.stringify(refreshToken),
+              headers: getHeader(null)
+            }).then(res => {
+              if (res.status !== 200) {
+                throw {status: 401, message: "Refresh Token not exist"}
+              }
+              return res.json()
+            });
+            localStorage.setItem("token", newToken.data.token)
+            localStorage.setItem("refreshToken", newToken.data.refreshToken)
+            const newData = await fetch(URL.format(url), {
+              method: configEndpoint.method,
+              body,
+              headers: getHeader(newToken.data.token)
+            }).then(res => res.json());
+            return newData;
+          } catch (error) {
+            return error
+          };
+        }
       }
       return res.json()
     });
@@ -89,10 +90,8 @@ async function req(endpoint: string, query: any) {
     }
     return data;
   } catch (error: any) {
-    console.log("####: something went wrong");
-    // localStorage.removeItem("token")
-    // localStorage.removeItem("refreshToken")
-    // window.location.pathname = "/login"
+    localStorage.removeItem("token")
+    localStorage.removeItem("refreshToken")
     return {
       status: 500,
       message: error.message

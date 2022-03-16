@@ -16,10 +16,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const dispatch = useDispatch();
   const [user, setUser] = React.useState<any>(() => localStorage.getItem("token"));
 
-  const signIn = (newUser: Token ,callback: VoidFunction) => {
+  const signIn = (newUser: Token, callback?: VoidFunction) => {
     localStorage.setItem("token", newUser);
     setUser(newUser);
-    callback();
+    callback && callback();
   };
   const signInRefresh = (newUser: RefreshToken) => {
     localStorage.setItem("refreshToken", newUser);

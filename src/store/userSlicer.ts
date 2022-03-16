@@ -44,7 +44,7 @@ export const getFetchUserAsync = (values: {userName: string, password: string}, 
   dispatch(getFetch())
   try {
     const data = await req(configEndpoint.authLogin, values);
-    dispatch(getFetchResolve(data.data));
+    console.log("####: data", data);
     callback && callback();
   } catch (error) {
     dispatch(getFetchReject(error))
