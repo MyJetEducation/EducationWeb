@@ -9,7 +9,7 @@ import {OrContinueWith} from "../components/OrContinueWith";
 import {AllReadyAccount} from "../components/AllReadyAccount";
 
 import {
-  getFetchUserAsync,
+  getFetchUserAsync, userErrorSelector,
   userIsLoadingSelector,
   userRefreshTokenSelector,
   userTokenSelector
@@ -22,6 +22,8 @@ export const Auth = () => {
   const [formFields, setFormFields] = useState<{userName: string, password: string}>({userName: "", password: ""});
   const isLoading = useSelector(userIsLoadingSelector);
   const token = useSelector(userTokenSelector);
+  const error = useSelector(userErrorSelector);
+  console.log("####: error", error);
   const refreshToken = useSelector(userRefreshTokenSelector);
   const auth = useAuth();
   const [isDisabled, setDisabled] = useState<boolean>(true);
@@ -59,8 +61,8 @@ export const Auth = () => {
     <div className={s.wrap}>
       <h3 className={s.title}>Log In</h3>
       <form
-        onChange={handleChange}
         className={s.form}
+        onChange={handleChange}
         onSubmit={handleSubmit}
       >
         <Input
@@ -91,7 +93,6 @@ export const Auth = () => {
           Login
         </Button>
         <OrContinueWith/>
-        <AllReadyAccount/>
       </form>
     </div>
   )

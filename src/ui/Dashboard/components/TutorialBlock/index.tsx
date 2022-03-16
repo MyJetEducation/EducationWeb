@@ -107,7 +107,6 @@ const UNIT = {
 export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show, index}) => {
   const unitsScore = useSelector(currentDataDashboardSelector(index + 1));
   const dispatch = useDispatch();
-
   const UNIT_NAME = useMemo(() => {
     if (!UNIT[tutorialName as keyof typeof UNIT]) {
       return []
@@ -151,6 +150,7 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show
   return (
     <div
       className={s.tutorialBlock}
+      id={index === 0 ? "step-4" : ""}
     >
       <div className={cn(s.wrap, {
         [s.variant]: !show

@@ -7,6 +7,7 @@ import s from "./style.module.scss";
 interface inputProps {
   type?: string,
   size?: "small" | "default",
+  error?: "error"
   placeHolder?: string,
   value: string,
   disabled?: boolean,
@@ -14,7 +15,7 @@ interface inputProps {
   name?: string
 }
 
-export const Input:React.FC<inputProps> = ({ type, size = "default", placeHolder,value, onChange, disabled, name}) => {
+export const Input:React.FC<inputProps> = ({ type, size = "default", placeHolder,value, onChange, disabled, name, error}) => {
   const [isValid, setValid] = useState(false);
 
   useEffect(() => {

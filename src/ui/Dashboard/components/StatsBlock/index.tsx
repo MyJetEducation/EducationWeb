@@ -12,7 +12,7 @@ const StatsBlock = () => {
   }, []);
 
   return (
-    <div className={s.wrap}>
+    <div className={s.wrap} id="step-3">
       <h5 className={s.title}>Stats</h5>
 
       <div className={s.statsItems}>

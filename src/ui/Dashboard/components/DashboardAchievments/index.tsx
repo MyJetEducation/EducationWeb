@@ -8,6 +8,7 @@ import {
 } from "../../../../store/achievementSlicer";
 import AchievementsItem from "../../../AchievementsItem";
 
+
 const DashboardAchievement = () => {
   const dispatch = useDispatch();
   const received = useSelector(achievementsSelector);
@@ -17,7 +18,8 @@ const DashboardAchievement = () => {
   }, [])
 
   return (
-    <div className={s.wrap}>
+    <div className={s.wrap} id="step-2">
+
       <h6 className={s.title}>
         Achievements
       </h6>

@@ -6,10 +6,14 @@ import StatsBlock from "./components/StatsBlock";
 import {dataTutorialsSelector, getTutorialsAsync} from "../../store/tutorialsSlicer";
 import YourProgress from "./components/YourProgress";
 import AchievementsBlock from "./components/DashboardAchievments";
-import s from './style.module.scss';
 import {getUserInfoAsync, userInfoSelector} from "../../store/userInfoSlicer";
 
+import s from './style.module.scss';
+import useTour from "../../services/useTour";
+import {STEPS} from "../components/Header";
+
 export const DashBoard = () => {
+
   const tutorials = useSelector(dataTutorialsSelector);
   const userName = useSelector(userInfoSelector);
   const dispatch = useDispatch();
@@ -20,7 +24,7 @@ export const DashBoard = () => {
   return (
     <div className={s.wrap}>
       <Container>
-        <h1 className={s.title}>
+        <h1 className={s.title} id="title">
           {userName !== null ? `Welcome, ${userName.firstName}` : null}
         </h1>
         <p className={s.subtitle}>

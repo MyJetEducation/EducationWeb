@@ -2,10 +2,13 @@
   padding-top: 32px;
   color: #000000;
   .title {
+    width: fit-content;
     font-weight: 600;
     font-size: 40px;
     line-height: 48px;
     margin-bottom: 10px;
+    color: #000000;
+    background-color: #fff;
   }
   .subtitle {
     font-weight: 600;
