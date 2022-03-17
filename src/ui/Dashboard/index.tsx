@@ -9,8 +9,6 @@ import AchievementsBlock from "./components/DashboardAchievments";
 import {getUserInfoAsync, userInfoSelector} from "../../store/userInfoSlicer";
 
 import s from './style.module.scss';
-import useTour from "../../services/useTour";
-import {STEPS} from "../components/Header";
 
 export const DashBoard = () => {
 

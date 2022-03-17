@@ -3,29 +3,20 @@ import Joyride, {CallBackProps, STATUS, Step} from "react-joyride";
 import {useNavigate} from "react-router-dom";
 import {Tooltip} from "../ui/Tour/Tooltip";
 
-
-const joyrideStyles = {
-  options: {
-    arrowColor: "transparent",
-    padding: "10px"
-  }
-}
-
-
 export default function useTour(steps: Step[], localStorageKey: string | null): ReactNode {
-  const [run, setRun] = useState(true);
-  // useEffect(function () {
-  //   if (!localStorageKey) {
-  //     setRun(true);
-  //     return;
-  //   }
-  //   const tourViewed = localStorage.getItem(localStorageKey);
-  //   if (tourViewed) {
-  //     return;
-  //   }
-  //   localStorage.setItem(localStorageKey, "1");
-  //   setRun(true);
-  // }, [localStorageKey])
+  const [run, setRun] = useState(false);
+  useEffect(function () {
+    if (!localStorageKey) {
+      setRun(true);
+      return;
+    }
+    const tourViewed = localStorage.getItem(localStorageKey);
+    if (tourViewed) {
+      return;
+    }
+    localStorage.setItem(localStorageKey, "1");
+    setRun(true);
+  }, [localStorageKey])
   const navigate = useNavigate();
   const handleJoyRideCallBack = useCallback(function (data: CallBackProps) {
     const {status} = data;
@@ -46,7 +37,6 @@ export default function useTour(steps: Step[], localStorageKey: string | null): 
       scrollToFirstStep={true}
       showProgress={true}
       showSkipButton={true}
-      styles={joyrideStyles}
       steps={steps}
     />
   ), [steps, handleJoyRideCallBack, run]);

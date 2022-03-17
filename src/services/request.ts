@@ -94,7 +94,7 @@ async function req(endpoint: string, query: any) {
     localStorage.removeItem("refreshToken")
     return {
       status: 500,
-      message: error.message
+      message: "email address not found"
     }
   };
 }

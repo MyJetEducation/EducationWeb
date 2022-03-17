@@ -3,6 +3,9 @@ import {Button} from "../Button";
 import s from "./style.module.scss";
 
 export const OrContinueWith = () => {
+  const handleClick = (e: any) => {
+    e.preventDefault();
+  }
   return (
     <>
       <p className={s.choice}>
@@ -14,6 +17,7 @@ export const OrContinueWith = () => {
           variant="outlined"
           color="black"
           size="large"
+          onClick={handleClick}
         >
           Facebook
         </Button>
@@ -22,6 +26,7 @@ export const OrContinueWith = () => {
           variant="outlined"
           color="black"
           size="large"
+          onClick={handleClick}
         >
           Google
         </Button>

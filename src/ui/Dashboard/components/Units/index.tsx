@@ -156,7 +156,9 @@ const Units = (
                         scoreList[index]?.taskScore !== 0 ?
                           (scoreList[index]?.taskScore >= 80 ? <img src={check} alt="done icon"/> :
                             scoreList[index]?.taskScore >= 60 ? <img src={norm} alt="done icon"/> :
-                              <img src={fail} alt="done icon"/>) : (
+                              <img src={fail} alt="done icon"/>
+                          ) :
+                          (
                             <img src={unitIcon[index]} alt="unit icon"/>
                           )
                       }

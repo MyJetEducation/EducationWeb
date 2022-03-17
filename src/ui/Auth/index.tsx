@@ -2,11 +2,10 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useAuth} from "../../services/auth";
 
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {Input} from "../components/Input";
 import {Button} from "../components/Button";
 import {OrContinueWith} from "../components/OrContinueWith";
-import {AllReadyAccount} from "../components/AllReadyAccount";
 
 import {
   getFetchUserAsync, userErrorSelector,
@@ -18,15 +17,16 @@ import {
 import s from "./style.module.scss";
 
 export const Auth = () => {
+  const [showPass, setShowPass] = useState(false);
   const navigate = useNavigate();
   const [formFields, setFormFields] = useState<{userName: string, password: string}>({userName: "", password: ""});
   const isLoading = useSelector(userIsLoadingSelector);
   const token = useSelector(userTokenSelector);
+  const error = useSelector(userErrorSelector);
   const refreshToken = useSelector(userRefreshTokenSelector);
   const auth = useAuth();
   const [isDisabled, setDisabled] = useState<boolean>(true);
   const dispatch = useDispatch();
-  console.log("####: token", token);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(getFetchUserAsync(formFields, () => {
@@ -53,45 +53,62 @@ export const Auth = () => {
     if (formFields.userName.length >= 1 && formFields.password.length >= 1) {
       setDisabled(false)
     }
-  }, [formFields.userName, formFields.password])
+  }, [formFields.userName, formFields.password]);
+
+  const handleLocate = () => {
+    window.location.reload()
+  }
 
   return (
     <div className={s.wrap}>
       <h3 className={s.title}>Log In</h3>
-      <form
-        className={s.form}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      >
-        <Input
-          type="text"
-          placeHolder="Email address"
-          name="userName"
-          value={formFields.userName}
-          disabled={isLoading}
-        />
-        <Input
-          type="password"
-          placeHolder="Password"
-          name="password"
-          value={formFields.password}
-          disabled={isLoading}
-        />
-        <Link
-          to="/forgot"
-          className={s.forgotLink}
-        >
-          Forgot password?
-        </Link>
-        <Button
-          disabled={isDisabled}
-          margin={"0 auto 24px"}
-          size="large"
-        >
-          Login
-        </Button>
-        <OrContinueWith/>
-      </form>
+      {
+        error === null ? (
+          <form
+            className={s.form}
+            onChange={handleChange}
+          >
+            <Input
+              type="text"
+              placeHolder="Email address"
+              name="userName"
+              value={formFields.userName}
+              disabled={isLoading}
+            />
+            <Input
+              onChangeShowPass={setShowPass}
+              type={showPass ? "text" : "password"}
+              placeHolder="Password"
+              name="password"
+              value={formFields.password}
+              disabled={isLoading}
+            />
+            <Link
+              to="/forgot"
+              className={s.forgotLink}
+            >
+              Forgot password?
+            </Link>
+
+            <Button
+              onClick={handleSubmit}
+              disabled={isDisabled}
+              margin={"0 auto 24px"}
+              size="large"
+            >
+              Login
+            </Button>
+            <OrContinueWith/>
+          </form>
+        ) : (
+          <div className={s.errorMessage}>
+            <p className={s.text}>
+              Email not found. <span className={s.link} onClick={handleLocate}>Try again</span> or go to the <Link className={s.link} to={"/register"}>registration</Link>
+            </p>
+
+          </div>
+        )
+      }
     </div>
   )
 }

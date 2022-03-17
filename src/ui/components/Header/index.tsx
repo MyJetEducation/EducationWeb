@@ -108,7 +108,7 @@ export const Header = () => {
   }
   useEffect(() => {
     const interval = setInterval(() => {
-      if (auth.user) {
+      if (auth.user !== null) {
         const getToken = async () => {
           const token = await req(configEndpoint.userTimeGet, {});
           localStorage.setItem("at", token.data)
