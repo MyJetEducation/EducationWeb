@@ -1,5 +1,6 @@
 .wrap {
   position: relative;
+
 }
 
 .input {
@@ -12,13 +13,27 @@
   padding-left: 16px;
   outline: none;
   transition: all .1s ease-in-out;
+
   &.small {
     width: 166px;
   }
+
   &:focus {
     border: 2px solid #374DFB;
   }
-  & ~ .placeholder{
+  &.latin {
+    border: 2px solid #FE221E;
+  }
+  &.validEmail {
+    border: 2px solid #FE221E;
+  }
+  &.validFirstName {
+    border: 2px solid #FE221E;
+  }
+  &.validLastName {
+    border: 2px solid #FE221E;
+  }
+  & ~ .placeholder {
     position: absolute;
     color: #A8B0BA;
     pointer-events: none;
@@ -27,6 +42,15 @@
     left: 12px;
     transition: all .25s ease-in-out;
   }
+  & ~ .img {
+    position: absolute;
+    right: 16px;
+    top: 12px;
+    cursor: pointer;
+
+  }
+
+
   & ~ .placeholder {
     top: 15px;
   }
@@ -34,4 +58,31 @@
   &.valid ~ .placeholder{
     top: -9px;
   }
+  &:focus ~ .img {
+    .iconShow {
+      path {
+        stroke: #777C85;
+      }
+      circle {
+        fill: #777C85;
+      }
+    }
+    .iconText {
+      path {
+        fill: #777C85;
+      }
+    }
+  }
+}
+
+.invalidPass,
+.invalidEmail,
+.invalidName{
+  color: red;
+  position: absolute;
+  white-space: nowrap;
+  font-size: 13px;
+  bottom: 10px;
+  left: 12px;
+  z-index: 1;
 }

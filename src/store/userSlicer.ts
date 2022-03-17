@@ -45,9 +45,12 @@ export const getFetchUserAsync = (values: {userName: string, password: string}, 
   try {
     const data = await req(configEndpoint.authLogin, values);
     dispatch(getFetchResolve(data.data));
+    if (data?.status === 500) {
+      dispatch(getFetchReject(data?.message))
+    }
     callback && callback();
-  } catch (error) {
-    dispatch(getFetchReject(error))
+  } catch (error: any) {
+    dispatch(getFetchReject(error.message))
   };
 }
 
@@ -55,6 +58,5 @@ export const userIsLoadingSelector = (state: RootState) => state.user.isLoading;
 export const userErrorSelector = (state: RootState) => state.user.error;
 export const userTokenSelector = (state: RootState) => state.user.data?.token;
 export const userRefreshTokenSelector = (state: RootState) => state.user.data?.refreshToken;
-
 export default userSlicer.reducer;
 

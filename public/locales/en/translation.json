@@ -7,5 +7,32 @@
       "one": "This is block 1",
       "two": "This is block 2"
     }
+  },
+  "tutorial-1": {
+    "unit-1": {
+      "task-1": {
+        "header": "Your income",
+        "textTitle": "Inability to handle cash flow"
+      },
+      "task2": {
+        "testTitle": "How hard is it to cope with your money?",
+        "question-1": {
+          "title": "Title first question",
+          "variant": {
+            "1": "Fist",
+            "2": "Second",
+            "3": "Third"
+          }
+        },
+        "question2": {
+          "title": "Title second question",
+          "variant": {
+            "1": "Fist",
+            "2": "Second",
+            "3": "Third"
+          }
+        }
+      }
+    }
   }
 }

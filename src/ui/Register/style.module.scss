@@ -4,6 +4,39 @@
   padding: 72px 0 18px;
   text-align: center;
 }
+.already {
+  max-width: 570px;
+  width: 100%;
+}
+.verifyTitle {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  text-align: center;
+  color: #000000;
+  margin-bottom: 20px;
+
+}
+.verifyText,
+.verifyRetry {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #A8B0BA;
+  margin-bottom: 20px;
+}
+.verifyText {
+  span {
+    color: #191717;
+  }
+}
+.verifyRetry {
+  margin-bottom: 0;
+  span {
+    color: #374DFB;
+  }
+}
 
 .title {
   font-weight: 600;
@@ -67,6 +100,13 @@
       color: #000;
     }
   }
+}
+
+.status14 {
+  text-align: left;
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #FE221E;
 }
 
 
