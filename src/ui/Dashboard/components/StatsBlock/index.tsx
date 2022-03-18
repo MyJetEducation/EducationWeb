@@ -1,15 +1,8 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React from 'react';
 import cn from 'classnames'
-import {getStatsAsync, userTaskScoreSelector} from "../../../../store/statsBlock";
 import s from './style.module.scss';
 
-const StatsBlock = () => {
-  const dispatch = useDispatch();
-  const data = useSelector(userTaskScoreSelector);
-  useEffect(() => {
-    dispatch(getStatsAsync());
-  }, []);
+const StatsBlock = ({data}: any) => {
 
   return (
     <div className={s.wrap} id="step-3">
@@ -26,7 +19,7 @@ const StatsBlock = () => {
         </div>
         <div className={s.item}>
           <p>{data !== null ? data.habit.index : 0}</p>
-          <p>Test score</p>
+          <p>Habit</p>
         </div>
         <div className={s.item}>
           <p>{data !== null ? data.skillProgress : 0}%</p>

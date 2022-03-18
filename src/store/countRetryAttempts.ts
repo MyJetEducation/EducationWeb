@@ -31,14 +31,13 @@ export const getCountRetryAsync = () => async (dispatch: any) => {
   dispatch(fetchCountRetry())
   try {
     const data = await req(configEndpoint.inRetryAttempts, {});
+    dispatch(fetchCountRetryResolve(data.data))
     if (data.status > 300) {
       throw data
     }
-    dispatch(fetchCountRetryResolve(data.data))
   } catch (error) {
-    dispatch(fetchCountRetryReject("Some Error"))
-  }
-  ;
+    dispatch(fetchCountRetryReject("Some Error"));
+  };
 }
 
 export const {fetchCountRetry, fetchCountRetryResolve, fetchCountRetryReject} = countRetrySlicer.actions;

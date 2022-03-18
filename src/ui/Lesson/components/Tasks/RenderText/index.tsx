@@ -26,8 +26,13 @@ export const RenderText: React.FC<renderTextQuestion> = ({content}) => {
     })
     return data
   }
-
   useEffect(() => {
+    if (tutorial === "personal" && unit === "unit1" && Number(id) === 1 && !location.state?.readonly) {
+      const fetchStart = async () => {
+        return await req(configEndpoint.started, {})
+      }
+      fetchStart()
+    }
     return () => {
       if (!location.state?.readonly) {
         fetchResult()

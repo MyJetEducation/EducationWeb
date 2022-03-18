@@ -1,19 +1,11 @@
 import React, {useEffect, useMemo} from 'react';
 
 import s from './style.module.scss';
-import {useDispatch, useSelector} from "react-redux";
-import {getStatsAsync, userTaskScoreSelector} from "../../../../store/statsBlock";
 
 import {HABIT_LIST} from "../../../Lesson/constans";
 
-const YourProgress = () => {
+const YourProgress = ({data}: any) => {
 
-  const dispatch = useDispatch();
-  const data = useSelector(userTaskScoreSelector);
-  useEffect(() => {
-    dispatch(getStatsAsync());
-  }, [])
-  
   const styleProgressHabit = useMemo(() => ( data !== null ? {
     width: `calc(${data.habit.progress}%)`
   }: {}), [data]);

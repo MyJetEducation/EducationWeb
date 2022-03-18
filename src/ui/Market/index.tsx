@@ -1,11 +1,12 @@
 import React from 'react';
 
-import s from './style.module.scss';
 import {Container} from "../components/Container";
-
 import trash from '../components/Header/assets/trash.svg';
 
+import s from './style.module.scss';
+
 const MarketPage = () => {
+
   return (
     <div className={s.wrap}>
       <Container>

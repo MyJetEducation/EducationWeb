@@ -21,32 +21,27 @@ const RenderCase: React.FC<renderCaseProps> = ({content}) => {
   const numberUnit = Number(unit?.replace("unit", ""));
   const location: any = useLocation();
   const [answer, setAnswer] = useState<any[]>([]);
-  const [isValidAnswer, setValidAnswer] = useState(false)
   const dispatch = useDispatch();
-
   useGetTimeToken(String(tutorial), numberUnit, Number(id))
+  const setResult = async () => {
+    const data = await req(configEndpoint.unitCase, {
+      unit,
+      tutorial,
+      "isRetry": location.state?.retry ? true : false,
+      "timeToken": localStorage.getItem("timeToken"),
+      "value": answer.length === 0 ? [] : answer[0].value[0]
+    })
+    return data
+  }
 
   useEffect(() => {
     return () => {
+      if (!location.state?.readonly) {
+        setResult()
+      }
       localStorage.removeItem("timeToken")
     }
   }, [])
-
-  useEffect(() => {
-    if (isValidAnswer && !location.state?.readonly && !location.state?.retry) {
-      const setResult = async () => {
-        const data = await req(configEndpoint.unitCase, {
-          unit,
-          tutorial,
-          "isRetry": location.state?.retry ? true : false,
-          "timeToken": localStorage.getItem("timeToken"),
-          "value": answer[0].value[0]
-        })
-        return data
-      }
-      setResult()
-    }
-  }, [isValidAnswer])
 
   useEffect(() => {
     const fn = ((obj: any) => {
@@ -56,7 +51,7 @@ const RenderCase: React.FC<renderCaseProps> = ({content}) => {
       return !location.state?.readonly ? dispatch(setDisabledBtn(true)) : dispatch(setDisabledBtn(false))
     })
     fn(answer)
-  }, [answer, dispatch])
+  }, [answer])
 
   return (
     <div className={s.wrap}>
@@ -67,7 +62,6 @@ const RenderCase: React.FC<renderCaseProps> = ({content}) => {
       />
       <RadioBlock
         onChange={setAnswer}
-        selectedAll={(val: boolean) => setValidAnswer(val)}
         content={content}
         size="small"
         type={"radio"}

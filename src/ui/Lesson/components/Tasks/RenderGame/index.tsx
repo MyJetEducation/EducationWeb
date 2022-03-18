@@ -74,6 +74,7 @@ export const RenderGame = () => {
   const [isTry, setTry] = useState<number>(() => {
     return localStorage.getItem("value") ? Number(localStorage.getItem("value")) : 0;
   });
+  //:TODO создать редакс для отправки возможных попыток, в случае если юзер захочет поиграть еще то count попыток обнуляется
   const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
   const numberUnit = Number(unit?.replace("unit", ""));
   const location: any = useLocation();
@@ -97,15 +98,13 @@ export const RenderGame = () => {
   useEffect(() => {
     dispatch(setDisabledBtn(true))
     if (showResult) {
-      setResult()
       dispatch(setDisabledBtn(false))
     }
   }, [showResult])
 
-
-
   useEffect(() => {
     return () => {
+      setResult()
       localStorage.removeItem("timeToken")
       localStorage.removeItem("value")
     }

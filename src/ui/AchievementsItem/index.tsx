@@ -1,7 +1,7 @@
 import React from 'react';
 
-import s from './style.module.scss';
 import cn from "classnames";
+import s from './style.module.scss';
 
 interface achievementsItemProps {
   type?: string,

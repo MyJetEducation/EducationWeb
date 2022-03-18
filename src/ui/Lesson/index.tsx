@@ -68,7 +68,6 @@ export const Lesson = () => {
       return menu.data[index].id
     }
   }, [menu, currentIndex]);
-
   useEffect(() => {
     dispatch(progressMenuAsync(unit, tutorial))
     return () => {

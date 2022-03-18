@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import { Step } from "react-joyride";
-
 import {Container} from "../Container";
-
-import s from './style.module.scss';
 import {useAuth} from "../../../services/auth";
 import req from "../../../services/request";
 import {configEndpoint} from "../../../config";
 import useTour from "../../../services/useTour";
 import icon from './assets/icon.svg'
+import s from './style.module.scss';
 
 const MENU_NO_AUTH = [
   {
@@ -36,7 +34,7 @@ const MENU_NO_AUTH = [
 const MENU_AUTH = [
   {
     title: "Education",
-    to: "/education"
+    to: "/dashboard"
   },
   {
     title: "Tools",
@@ -130,6 +128,8 @@ export const Header = () => {
           }
         }
         logToken()
+      } else {
+        localStorage.removeItem("at")
       }
 
     }, 10000);

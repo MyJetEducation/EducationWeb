@@ -19,14 +19,14 @@ export enum configEndpoint {
   tutorials = "tutorials",
   inRetryDate = "inRetryDate",
   inRetryCount = "inRetryCount",
-  inRetryTime = "inRetryTime",
   confirm = "confirm",
   getUserInfo = "getUserInfo",
   inRetryAttempts = "inRetryAttempts",
   getAchievements = "getAchievements",
   userTimeGet = "userTimeGet",
   userTimeLog = "userTimeLog",
-  userProgress = "userProgress"
+  userProgress = "userProgress",
+  started = "started"
 };
 
 const urlHostServer = new URL(process.env.REACT_APP_APIHOST as string);
@@ -146,12 +146,6 @@ const config = {
           pathname: "/api/v1/education/dashboard/tutorials"
         }
       },
-      [configEndpoint.inRetryDate]: {
-        method: "POST",
-        uri: {
-          pathname: "/api/v1/retry/use-bydate"
-        }
-      },
       [configEndpoint.inRetryAttempts]: {
         method: "POST",
         uri: {
@@ -204,6 +198,12 @@ const config = {
         method: "POST",
         uri: {
           pathname: "/api/v1/userprofile/progress"
+        }
+      },
+      [configEndpoint.started]: {
+        method: "POST",
+        uri: {
+          pathname: "/api/v1/education/personal/started"
         }
       }
     }

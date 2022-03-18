@@ -7,17 +7,21 @@ import {dataTutorialsSelector, getTutorialsAsync} from "../../store/tutorialsSli
 import YourProgress from "./components/YourProgress";
 import AchievementsBlock from "./components/DashboardAchievments";
 import {getUserInfoAsync, userInfoSelector} from "../../store/userInfoSlicer";
-
+import {getStatsAsync, userTaskScoreSelector} from "../../store/statsBlock";
+import {dataCountRetrySelector, getCountRetryAsync} from "../../store/countRetryAttempts";
 import s from './style.module.scss';
 
 export const DashBoard = () => {
-
+  const statsData = useSelector(userTaskScoreSelector);
+  const countRetry = useSelector(dataCountRetrySelector);
   const tutorials = useSelector(dataTutorialsSelector);
   const userName = useSelector(userInfoSelector);
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(getStatsAsync());
     dispatch(getTutorialsAsync())
     dispatch(getUserInfoAsync())
+    dispatch(getCountRetryAsync());
   }, []);
   return (
     <div className={s.wrap}>
@@ -35,6 +39,7 @@ export const DashBoard = () => {
                 <TutorialBlock
                   key={index}
                   tutorialName={item.tutorial}
+                  countRetry={countRetry}
                   index={index}
                   show={item.show}
                 />
@@ -42,8 +47,12 @@ export const DashBoard = () => {
             }
           </div>
           <div className={s.rightSide}>
-            <StatsBlock/>
-            <YourProgress/>
+            <StatsBlock
+              data={statsData}
+            />
+            <YourProgress
+              data={statsData}
+            />
             <AchievementsBlock/>
           </div>
         </div>

@@ -28,13 +28,15 @@ const DashboardAchievement = () => {
           received !== null && received.map((item: any, index: number) => {
             if (index === 0 || index === 1 || index === 2) {
               return (
-                <AchievementsItem
-                  nameSize={"small"}
-                  key={item.id}
-                  type={item.type}
-                  icon={item.icon}
-                  name={item.name}
-                />
+                <div className={s.item} key={item.id}>
+                  <AchievementsItem
+                    nameSize={"small"}
+                    type={item.type}
+                    icon={item.icon}
+                    name={item.name}
+                  />
+                </div>
+
               )
             }
           })
