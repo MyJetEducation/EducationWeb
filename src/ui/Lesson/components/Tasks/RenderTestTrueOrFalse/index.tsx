@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useParams} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import RadioBlock from "../../RadioBlock";
 import ProgressPage from "../../ProgressPage";
@@ -8,25 +8,22 @@ import ProgressPage from "../../ProgressPage";
 import {setDisabledBtn} from "../../../../../store/testSlicer";
 import req from "../../../../../services/request";
 import {configEndpoint} from "../../../../../config";
-import {useGetTimeToken} from "../../../../../services/useTimeToken";
+import {getCleanTimeToken, getTimeTokenAsync} from "../../../../../store/timeTokenSlicer";
 
-
-interface   renderTestTrueOrFalse {
+interface renderTestTrueOrFalse {
   content: any
 }
 
 const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
   const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
-  const numberUnit = Number(unit?.replace("unit", ""))
   const dispatch = useDispatch();
   const [answer, setAnswer] = useState<any[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [percent, setPercent] = useState(0);
   const location: any = useLocation();
-  useGetTimeToken(String(tutorial), numberUnit, Number(id))
   useEffect(() => {
-    return () => {
-      localStorage.removeItem("timeToken")
+    if (!location.state?.readonly || !location.state?.retry) {
+      dispatch(getTimeTokenAsync(tutorial, unit, id))
     }
   }, []);
 
@@ -37,9 +34,10 @@ const RenderTestTrueOrFalse:React.FC<renderTestTrueOrFalse> = ({content}) => {
           unit,
           tutorial,
           "isRetry": location.state?.retry ? true: false,
-          "timeToken": localStorage.getItem("timeToken"),
-          "answers": answer
+          "timeToken": localStorage.getItem("tT"),
+          "answers": answer.length !==0 && answer
         })
+        dispatch(getCleanTimeToken())
         setPercent(data.data.unit.tasks[4].taskScore)
       }
       setResult()

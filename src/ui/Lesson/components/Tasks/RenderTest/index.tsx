@@ -6,8 +6,7 @@ import {useLocation, useParams} from "react-router-dom";
 import {setDisabledBtn} from "../../../../../store/testSlicer";
 import req from "../../../../../services/request";
 import {configEndpoint} from "../../../../../config";
-import {useGetTimeToken} from "../../../../../services/useTimeToken";
-
+import {getCleanTimeToken, getTimeTokenAsync} from "../../../../../store/timeTokenSlicer";
 
 interface renderTestProps {
   content?: any,
@@ -15,18 +14,11 @@ interface renderTestProps {
 
 const RenderTest: React.FC<renderTestProps> = ({content}) => {
   const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
-  const numberUnit = Number(unit?.replace("unit", ""));
   const dispatch = useDispatch();
   const [showResult, setShowResult] = useState(false);
   const [percent, setPercent] = useState(0);
   const [answer, setAnswer] = useState([]);
   const location: any = useLocation();
-  useGetTimeToken(String(tutorial), numberUnit, Number(id));
-  useEffect(() => {
-    return () => {
-      localStorage.removeItem("timeToken")
-    }
-  }, [])
 
   useEffect(() => {
     if (showResult && !location.state?.readonly) {
@@ -35,10 +27,10 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
           unit,
           tutorial: tutorial,
           "isRetry": location.state?.retry ? true : false,
-          "timeToken": localStorage.getItem("timeToken"),
+          "timeToken": localStorage.getItem("tT"),
           "answers": answer
         })
-
+        dispatch(getCleanTimeToken())
         setPercent(await data.data.unit.tasks[1].taskScore)
       }
       dispatch(setDisabledBtn(false))
@@ -50,6 +42,14 @@ const RenderTest: React.FC<renderTestProps> = ({content}) => {
     }
 
   }, [showResult])
+
+  useEffect(() => {
+    if (!location.state?.retry || !location.state?.readonly) {
+      dispatch(getTimeTokenAsync(tutorial, unit, id))
+    }
+
+  }, []);
+
   return (
     <>
       {

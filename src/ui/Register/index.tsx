@@ -208,7 +208,7 @@ export const Register = () => {
 
               <Button
                 margin={"0 auto 24px"}
-                disabled={!isCharacters || !isLetters || !isNumbers || !isEmail || isLatin || isValidFirstName || isValidLastName}
+                disabled={!isCharacters || !isLetters || !isNumbers || !isEmail || isLatin || isValidEmail || isValidFirstName || isValidLastName}
                 variant="bgBlack"
                 size="large"
               >

@@ -104,9 +104,8 @@ const UNIT = {
   ],
 };
 
-export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show, index, countRetry}) => {
+const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show, index, countRetry}) => {
   const unitsScore = useSelector(currentDataDashboardSelector(index + 1));
-  console.log("####: unitsScore", unitsScore);
   const dispatch = useDispatch();
   const UNIT_NAME = useMemo(() => {
     if (!UNIT[tutorialName as keyof typeof UNIT]) {
@@ -239,3 +238,5 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show
     </div>
   )
 }
+
+export default React.memo(TutorialBlock);

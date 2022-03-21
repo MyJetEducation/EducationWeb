@@ -3,7 +3,6 @@ import {RootState} from "./index";
 import req from "../services/request";
 import {configEndpoint} from "../config";
 
-import {ProgressDashboardState} from "../domain/Dashboard/progressDashboard";
 //:TODO make correct interface
 const initialState: any = {
   data: null,

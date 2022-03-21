@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import {useLocation, useParams} from "react-router-dom";
 
 import RadioBlock from "../../RadioBlock";
 import {setDisabledBtn} from "../../../../../store/testSlicer";
-
 import req from "../../../../../services/request";
 import {configEndpoint} from "../../../../../config";
-import {useLocation, useParams} from "react-router-dom";
-import {useGetTimeToken} from "../../../../../services/useTimeToken";
+import {getCleanTimeToken, getTimeTokenAsync} from "../../../../../store/timeTokenSlicer";
+
 import s from './style.module.scss';
 
 interface renderCaseProps {
@@ -18,39 +18,41 @@ interface renderCaseProps {
 
 const RenderCase: React.FC<renderCaseProps> = ({content}) => {
   const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
-  const numberUnit = Number(unit?.replace("unit", ""));
   const location: any = useLocation();
   const [answer, setAnswer] = useState<any[]>([]);
   const dispatch = useDispatch();
-  useGetTimeToken(String(tutorial), numberUnit, Number(id))
-  const setResult = async () => {
+  const fetchResult = async () => {
     const data = await req(configEndpoint.unitCase, {
       unit,
       tutorial,
       "isRetry": location.state?.retry ? true : false,
-      "timeToken": localStorage.getItem("timeToken"),
-      "value": answer.length === 0 ? [] : answer[0].value[0]
+      "timeToken": localStorage.getItem("tT"),
+      "value": answer !== undefined && answer
     })
+    dispatch(getCleanTimeToken())
     return data
   }
 
   useEffect(() => {
+    if (!location.state?.readonly) {
+      dispatch(getTimeTokenAsync(tutorial, unit, id))
+    } else {
+      dispatch(setDisabledBtn(false))
+    }
     return () => {
       if (!location.state?.readonly) {
-        setResult()
+        fetchResult()
       }
-      localStorage.removeItem("timeToken")
     }
-  }, [])
+
+  }, []);
 
   useEffect(() => {
-    const fn = ((obj: any) => {
-      for ( let key in obj) {
-        return dispatch(setDisabledBtn(false))
-      }
-      return !location.state?.readonly ? dispatch(setDisabledBtn(true)) : dispatch(setDisabledBtn(false))
-    })
-    fn(answer)
+    if ( answer !== undefined) {
+      dispatch(setDisabledBtn(false))
+    } else {
+      dispatch(setDisabledBtn(true))
+    }
   }, [answer])
 
   return (
@@ -61,7 +63,7 @@ const RenderCase: React.FC<renderCaseProps> = ({content}) => {
         remarkPlugins={[remarkGfm]}
       />
       <RadioBlock
-        onChange={setAnswer}
+        onChangeCase={setAnswer}
         content={content}
         size="small"
         type={"radio"}

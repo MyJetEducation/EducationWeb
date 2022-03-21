@@ -55,7 +55,6 @@ export const Auth = () => {
       setDisabled(false)
     }
   }, [formFields.userName, formFields.password]);
-  console.log("####: error", error);
   useEffect(() => {
     if (error === null ) {
       setInvalidUser(true)
@@ -112,7 +111,7 @@ export const Auth = () => {
         ) : (
           <div className={s.errorMessage}>
             <p className={s.text}>
-              Email not found. <span className={s.link} onClick={handleLocate}>Try again</span> or go to the <Link className={s.link} to={"/register"}>registration</Link>
+              Email or password not found. <span className={s.link} onClick={handleLocate}>Try again</span> or go to the <Link className={s.link} to={"/register"}>registration</Link>
             </p>
 
           </div>

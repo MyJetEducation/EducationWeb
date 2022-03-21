@@ -18,7 +18,6 @@ export const QuestionFooter:React.FC<questionFooterProps> = ({ disabled, length,
   const styleProgress = useMemo(() => ({width: `calc(100% / ${length} * ${index})`}), [index, length]);
   const handleClickNextQuestion = () => {
     onClickNext && onClickNext(id);
-
   }
   return (
       <div className={s.wrap}>
