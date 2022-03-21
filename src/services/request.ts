@@ -27,6 +27,7 @@ async function req(endpoint: string, query: any) {
         delete query[val as keyof typeof query];
         return result;
       }
+
       return acc;
     }, url.pathname);
     url.pathname = pathname

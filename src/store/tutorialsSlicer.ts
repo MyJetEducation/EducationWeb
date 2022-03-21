@@ -50,6 +50,32 @@ interface TutorialI {
 }
 
 export const isLoadingTutorialsSelector = (state: RootState) => state.tutorials.isLoading;
+
+const convertTutorialName = (name: string) => {
+  switch (name) {
+    case "PersonalFinance":
+      return "personal";
+    case "BehavioralFinance":
+      return "behavioral"
+    case "FinancialServices":
+      return "financial"
+    case "FinanceMarkets":
+      return "finance"
+    case "HealthAndFinance":
+      return "health"
+    case "PsychologyAndFinance":
+      return "psychology"
+    case "FinanceSecurity":
+      return "security"
+    case "TimeManagement":
+      return "timemanagement"
+    case "Economics":
+      return "economics"
+    default:
+      return ""
+  }
+}
+
 export const dataTutorialsSelector = (state: RootState) => {
   if (!state.tutorials.data) {
     return null
@@ -67,7 +93,8 @@ export const dataTutorialsSelector = (state: RootState) => {
     }
     return {
       ...item,
-      show
+      show,
+      tutorialPath: convertTutorialName(item.tutorial)
     }
   });
 };

@@ -10,7 +10,8 @@ interface radioBlockProps {
   selectedAll?: any,
   onChange?: any,
   onChangeTrueFalse?: any,
-  type?: string
+  type?: string,
+  onChangeCase?: any
 }
 
 const prepareState = (answers: any) => {
@@ -27,17 +28,20 @@ const prepareStateTrueFalse = (answers: any) => {
   }))
 }
 
-const RadioBlock: React.FC<radioBlockProps> = ({content, size, selectedAll, onChange, onChangeTrueFalse, type}) => {
+const RadioBlock: React.FC<radioBlockProps> = ({content, onChangeCase, size, selectedAll, onChange, onChangeTrueFalse, type}) => {
   const location: any = useLocation();
   const [answers, setAnswers] = useState({});
   const [answersTrueFalse, setAnswersTrueFalse] = useState({});
+  const [answersCase, setAnswersCase] = useState<any>();
   useEffect(() => {
     selectedAll && selectedAll(Object.keys(answers).length === content.length);
+    onChangeCase && onChangeCase(answersCase)
     onChange && onChange(prepareState(answers));
     onChangeTrueFalse && onChangeTrueFalse(prepareStateTrueFalse(answersTrueFalse));
   }, [answers]);
 
   const handleChange = (e: any) => {
+    setAnswersCase(Number(e.target.value))
     setAnswersTrueFalse((prevState) => {
       return {
         ...prevState,

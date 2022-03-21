@@ -1,15 +1,15 @@
 import React, {useEffect} from 'react';
-
+import {useLocation, useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from "remark-gfm";
 
-import play from './assets/play_btn.png';
-
-import s from './style.module.scss'
 import req from "../../../../../services/request";
 import {configEndpoint} from "../../../../../config";
-import {useLocation, useParams} from "react-router-dom";
-import {useGetTimeToken} from "../../../../../services/useTimeToken";
+import {getCleanTimeToken, getTimeTokenAsync} from "../../../../../store/timeTokenSlicer";
+
+import play from './assets/play_btn.png';
+import s from './style.module.scss'
 
 interface renderVideoProps {
   content?: any
@@ -17,26 +17,28 @@ interface renderVideoProps {
 
 const RenderVideo: React.FC<renderVideoProps> = ({content}) => {
   const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
-  const numberUnit = Number(unit?.replace("unit", ""));
   const location: any = useLocation();
-  useGetTimeToken(String(tutorial), numberUnit, Number(id))
+  const dispatch = useDispatch();
 
   const fetchResult = async () => {
     const data = await req(configEndpoint.unitVideo, {
       unit,
       tutorial,
       "isRetry": false,
-      "timeToken": localStorage.getItem("timeToken")
+      "timeToken": localStorage.getItem("tT")
     })
+    dispatch(getCleanTimeToken())
     return data
   }
 
   useEffect(() => {
+    if (!location.state?.readonly) {
+      dispatch(getTimeTokenAsync(tutorial, unit, id))
+    }
     return () => {
       if (!location.state?.readonly) {
         fetchResult()
       }
-      localStorage.removeItem("timeToken")
     }
   }, [])
 

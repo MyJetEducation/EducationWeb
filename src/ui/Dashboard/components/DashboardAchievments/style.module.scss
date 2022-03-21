@@ -13,7 +13,11 @@
   }
   .inner {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
+    .item {
+      &+.item {
+        margin-left: 30px;
+      }
+    }
   }
 }

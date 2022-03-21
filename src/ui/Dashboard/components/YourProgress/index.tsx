@@ -1,26 +1,18 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useMemo} from 'react';
 
 import s from './style.module.scss';
-import {useDispatch, useSelector} from "react-redux";
-import {getStatsAsync, userTaskScoreSelector} from "../../../../store/statsBlock";
 
 import {HABIT_LIST} from "../../../Lesson/constans";
 
-const YourProgress = () => {
+const YourProgress = ({data}: any) => {
 
-  const dispatch = useDispatch();
-  const data = useSelector(userTaskScoreSelector);
-  useEffect(() => {
-    dispatch(getStatsAsync());
-  }, [])
-  
-  const styleProgressHabit = useMemo(() => ( data !== null ? {
+  const styleProgressHabit = useMemo(() => ({
     width: `calc(${data.habit.progress}%)`
-  }: {}), [data]);
+  }), [data]);
 
-  const styleProgressSkill = useMemo(() => ( data !== null ? {
+  const styleProgressSkill = useMemo(() => ({
     width: `calc(${data.skillProgress}%)`
-  } : {}), [data]);
+  }), [data]);
 
   return (
     <div className={s.wrap}>
@@ -35,14 +27,10 @@ const YourProgress = () => {
           <div className={s.habitName}>
             <p>
               {
-                data !== null ? data.habit.index !== 0 ? HABIT_LIST[data.habit.index - 1].title : "Habit name" : ""
+                data.habit.index !== 0 ? HABIT_LIST[data.habit.index - 1].title : "Habit name"
               }
             </p>
-            <p>
-              {
-                data !== null  ? `${data.habit.progress}%` : ""
-              }
-            </p>
+            <p>{`${data.habit.progress}%`}</p>
           </div>
         </div>
         <div className={s.habit}>
@@ -53,15 +41,8 @@ const YourProgress = () => {
           />
           <div className={s.habitName}>
             <p>Skill Progress</p>
-            <p>
-              {
-                data !== null ? `${data.skillProgress}%` : 0
-              }
-            </p>
+            <p>{`${data.skillProgress}%`}</p>
           </div>
-        </div>
-        <div className={s.skill}>
-
         </div>
       </div>
     </div>

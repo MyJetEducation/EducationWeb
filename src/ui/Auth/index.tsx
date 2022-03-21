@@ -8,7 +8,7 @@ import {Button} from "../components/Button";
 import {OrContinueWith} from "../components/OrContinueWith";
 
 import {
-  getFetchUserAsync, userErrorSelector,
+  getFetchUserAsync, resetUser, userErrorSelector,
   userIsLoadingSelector,
   userRefreshTokenSelector,
   userTokenSelector
@@ -18,6 +18,7 @@ import s from "./style.module.scss";
 
 export const Auth = () => {
   const [showPass, setShowPass] = useState(false);
+  const [invalidUser, setInvalidUser] = useState(false);
   const navigate = useNavigate();
   const [formFields, setFormFields] = useState<{userName: string, password: string}>({userName: "", password: ""});
   const isLoading = useSelector(userIsLoadingSelector);
@@ -54,6 +55,13 @@ export const Auth = () => {
       setDisabled(false)
     }
   }, [formFields.userName, formFields.password]);
+  useEffect(() => {
+    if (error === null ) {
+      setInvalidUser(true)
+    } else {
+      setInvalidUser(false)
+    }
+  }, [])
 
   const handleLocate = () => {
     window.location.reload()
@@ -63,7 +71,7 @@ export const Auth = () => {
     <div className={s.wrap}>
       <h3 className={s.title}>Log In</h3>
       {
-        error === null ? (
+        invalidUser ? (
           <form
             className={s.form}
             onChange={handleChange}
@@ -103,7 +111,7 @@ export const Auth = () => {
         ) : (
           <div className={s.errorMessage}>
             <p className={s.text}>
-              Email not found. <span className={s.link} onClick={handleLocate}>Try again</span> or go to the <Link className={s.link} to={"/register"}>registration</Link>
+              Email or password not found. <span className={s.link} onClick={handleLocate}>Try again</span> or go to the <Link className={s.link} to={"/register"}>registration</Link>
             </p>
 
           </div>

@@ -1,23 +1,23 @@
 import React, {useEffect, useState} from 'react';
+import {useLocation, useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+
 import Board from './components/Board';
 import FinishGame from "./components/FinishGame";
 
-import icon1 from './assets/images/1.png'
-import icon2 from './assets/images/2.png'
-import icon3 from './assets/images/3.png'
-import icon4 from './assets/images/4.png'
-import icon5 from './assets/images/5.png'
-import icon6 from './assets/images/6.png'
-
 import req from "../../../../../services/request";
 import {configEndpoint} from "../../../../../config";
+import {setDisabledBtn} from "../../../../../store/testSlicer";
+import {getCleanTimeToken, getTimeTokenAsync, timeTokenSelector} from "../../../../../store/timeTokenSlicer";
+
+import icon1 from './assets/images/1.png';
+import icon2 from './assets/images/2.png';
+import icon3 from './assets/images/3.png';
+import icon4 from './assets/images/4.png';
+import icon5 from './assets/images/5.png';
+import icon6 from './assets/images/6.png';
 
 import s from './style.module.scss';
-import {useDispatch} from "react-redux";
-import {setDisabledBtn} from "../../../../../store/testSlicer";
-import {useLocation, useParams} from "react-router-dom";
-import {useGetTimeToken} from "../../../../../services/useTimeToken";
-
 
 const cardIds = [
   {
@@ -74,22 +74,18 @@ export const RenderGame = () => {
   const [isTry, setTry] = useState<number>(() => {
     return localStorage.getItem("value") ? Number(localStorage.getItem("value")) : 0;
   });
+  //:TODO создать редакс для отправки возможных попыток в key-value, в случае если юзер захочет поиграть еще то count попыток обнуляется
   const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
-  const numberUnit = Number(unit?.replace("unit", ""));
   const location: any = useLocation();
   const [showResult, setShowResult] = useState(false);
-
   const dispatch = useDispatch();
-
-  useGetTimeToken(String(tutorial), numberUnit, Number(id))
-
-  const setResult = async () => {
+  const fetchResult = async () => {
     const data = await req(configEndpoint.unitGame, {
       unit,
       tutorial,
       "isRetry": location.state?.retry ? true : false,
-      "timeToken": localStorage.getItem("timeToken"),
-      "passed": showResult
+      "timeToken": localStorage.getItem("tT"),
+      "passed": localStorage.getItem("value") === "1" ? true : false
     })
     return data
   }
@@ -97,17 +93,20 @@ export const RenderGame = () => {
   useEffect(() => {
     dispatch(setDisabledBtn(true))
     if (showResult) {
-      setResult()
       dispatch(setDisabledBtn(false))
     }
   }, [showResult])
 
-
-
   useEffect(() => {
+    dispatch(getTimeTokenAsync(tutorial, unit, id))
     return () => {
-      localStorage.removeItem("timeToken")
+      if (!location.state?.retry) {
+        dispatch(getTimeTokenAsync(tutorial, unit, id))
+        fetchResult()
+        dispatch(getCleanTimeToken())
+      }
       localStorage.removeItem("value")
+      localStorage.removeItem("tT")
     }
   }, [])
 

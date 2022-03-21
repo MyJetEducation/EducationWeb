@@ -26,12 +26,25 @@ import {QuestionFooter} from "./components/QuestionFooter";
 import {useLocationCheck} from "../../services/useLocationCheck";
 
 import s from './style.module.scss';
+import {dataTutorialsSelector, getTutorialsAsync} from "../../store/tutorialsSlicer";
 
 export const Lesson = () => {
   const dispatch = useDispatch();
   const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
   const navigate = useNavigate();
   const menu = useSelector(progressMenuSelector);
+  const tut = useSelector(dataTutorialsSelector);
+
+  useEffect(() => {
+    if (tut === null) {
+      dispatch(getTutorialsAsync())
+    } else {
+      const checkLocation = tut.find((item) => item.tutorialPath === tutorial);
+      if (!checkLocation?.show) {
+        navigate("/dashboard")
+      }
+    }
+  }, [tut])
   const data: any = useMemo(() => {
     switch (unit) {
       case "unit1":
@@ -50,7 +63,7 @@ export const Lesson = () => {
   }, [unit, id]);
   const allData: any = useMemo(() => {
     switch (tutorial) {
-      case "PersonalFinance":
+      case "personal":
         return data;
       case "BehavioralFinance":
         return data
@@ -68,9 +81,8 @@ export const Lesson = () => {
       return menu.data[index].id
     }
   }, [menu, currentIndex]);
-
   useEffect(() => {
-    dispatch(progressMenuAsync(unit, tutorial))
+    dispatch(progressMenuAsync(unit, tutorial));
     return () => {
       dispatch(progressMenuReset())
     }
@@ -89,6 +101,7 @@ export const Lesson = () => {
       }
     }
   }
+
   return (
     <Container>
       <div className={s.wrap}>

@@ -1,19 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import cn from 'classnames';
 
 import {Button} from "../../../components/Button";
 import {unitsProps} from "../../../../domain/Dashboard/units";
-import s from './style.module.scss';
-
 import check from './assets/check.svg'
+
 import norm from './assets/norm.svg'
 import fail from './assets/fail.svg'
 import req from "../../../../services/request";
 import {configEndpoint} from "../../../../config";
-import {useDispatch, useSelector} from "react-redux";
-import {dataCountRetrySelector, getCountRetryAsync} from "../../../../store/countRetryAttempts";
-
+import s from './style.module.scss';
 
 const Units = (
   {
@@ -29,22 +26,18 @@ const Units = (
     unitNumber,
     tutorialName,
     urlForTutorial,
-    index
+    index,
+    countRetry,
+    hasProgress
   }: unitsProps
 ) => {
   const [showUnit, setSetShowUnit] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const countRetry = useSelector(dataCountRetrySelector);
   const handleClickActive = () => {
     if (isShowActiveTask || isSuccess) {
       setSetShowUnit(!showUnit)
     }
   }
-  useEffect(() => {
-    dispatch(getCountRetryAsync());
-  }, []);
 
   const handleRelocateClick = () => {
     navigate(`/${urlForTutorial}/unit${index + 1}/1`)
@@ -56,18 +49,23 @@ const Units = (
     }
   }
   const handleRetryTask = (index: any) => {
-    if (isRetry.tasks[index].retry.canRetryByTime === true) {
+    const time = isRetry.tasks[index].retry.canRetryByTime;
+    const count = isRetry.tasks[index].retry.canRetryByCount;
+    if ((time === true && count === true) || (time === true && count === false)) {
       const fetchByDate = async () => {
-        const data = await req(configEndpoint.inRetryTime, {
+        const data = await req(configEndpoint.inRetryDate, {
           "tutorial": tutorialName,
           "unit": isRetry.unit,
           "task": isRetry.tasks[index].task
         })
+        if (data.status === 0) {
+          navigate(`/${urlForTutorial}/unit${unitNumber + 1}/${index + 1}`, {state: {retry: true}})
+        }
         return data
       }
       fetchByDate();
     }
-    if (isRetry.tasks[index].retry.canRetryByCount === true) {
+    if (time === false && count === true) {
       const fetchByDate = async () => {
         const data = await req(configEndpoint.inRetryCount, {
           "tutorial": tutorialName,
@@ -85,7 +83,6 @@ const Units = (
       navigate(`/${urlForTutorial}/unit${unitNumber + 1}/${index + 1}`, {state: {retry: true}})
     }
   }
-
   return (
     <div
       className={cn(s.wrap, {
@@ -153,7 +150,7 @@ const Units = (
                       className={s.unitItemNameBlock}
                     >
                       {
-                        scoreList[index]?.taskScore !== 0 ?
+                        hasProgress && scoreList[index]?.taskScore !== 0  ?
                           (scoreList[index]?.taskScore >= 80 ? <img src={check} alt="done icon"/> :
                             scoreList[index]?.taskScore >= 60 ? <img src={norm} alt="done icon"/> :
                               <img src={fail} alt="done icon"/>
@@ -166,9 +163,9 @@ const Units = (
                       <p
                         onClick={() => handleReadClick(index)}
                         className={cn(s.unitItemName, {
-                          [s.unitItemNameDone]: scoreList[index]?.taskScore !== 0 ? scoreList[index]?.taskScore <= 100 : null,
-                          [s.unitItemNameNormal]: scoreList[index]?.taskScore !== 0 ? scoreList[index]?.taskScore < 80 : null,
-                          [s.unitItemNameFail]: scoreList[index]?.taskScore !== 0 ? scoreList[index]?.taskScore < 60 : null,
+                          [s.unitItemNameDone]: hasProgress && scoreList[index]?.taskScore !== 0 ? scoreList[index]?.taskScore <= 100 : null,
+                          [s.unitItemNameNormal]: hasProgress && scoreList[index]?.taskScore !== 0 ? scoreList[index]?.taskScore < 80 : null,
+                          [s.unitItemNameFail]: hasProgress && scoreList[index]?.taskScore !== 0 ? scoreList[index]?.taskScore < 60 : null,
                         })}
                       >
                         {item}
@@ -177,10 +174,14 @@ const Units = (
                     <div className={s.scoreBlock}>
 
                       {
-                        (index === 1 || index === 3 || index === 4 || index === 5) && (
+                        (index === 1 || index === 4 || index === 5) && (
                           <>
                             {
-                              ((scoreList[index]?.task === 6 && scoreList[index]?.taskScore !== 0) || scoreList[index]?.taskScore < 100 && scoreList[index]?.taskScore !== 0) && (
+                              (
+                                (scoreList[index]?.task === 6 && (scoreList[index]?.taskScore !== 0))
+                                ||
+                                scoreList[index]?.taskScore < 100 && (hasProgress && scoreList[index]?.taskScore !== 0)
+                              ) && (
                                 <div className={s.buttonBlock}>
                                   <div className={cn(s.retryPopup, s.showPopup)}>
                                     {
@@ -189,8 +190,9 @@ const Units = (
                                           {countRetry !== null && `Сейчас будет списана платная попытка осталось попыток: 1/${countRetry} `}
                                         </p>
                                       ) : (
-                                        <p>У вас нет попыток, чтобы купить, давай отправимся в <Link className={s.linkMarket}
-                                                                                                     to={"/market"}>Маркет</Link>
+                                        <p>
+                                          У вас нет попыток, чтобы купить, давай отправимся в
+                                          <Link className={s.linkMarket} to={"/market"}>Маркет</Link>
                                         </p>
                                       )
                                     }
@@ -208,13 +210,13 @@ const Units = (
                               )
                             }
                             {
-                              scoreList[index]?.taskScore !== 0 && (
+                              (hasProgress && scoreList[index]?.taskScore !== 0) && (
                                 <p className={cn(s.unitItemNameScore, {
-                                  [s.unitItemNameDone]: scoreList[index]?.taskScore ? scoreList[index]?.taskScore <= 100 : null,
-                                  [s.unitItemNameNormal]: scoreList[index]?.taskScore < 80,
-                                  [s.unitItemNameFail]: scoreList[index]?.taskScore < 60,
+                                  [s.unitItemNameDone]:hasProgress && scoreList[index]?.taskScore ? scoreList[index]?.taskScore <= 100 : null,
+                                  [s.unitItemNameNormal]:hasProgress && scoreList[index]?.taskScore ? scoreList[index]?.taskScore < 80 : null,
+                                  [s.unitItemNameFail]:hasProgress && scoreList[index]?.taskScore ? scoreList[index]?.taskScore < 60 : null,
                                 })}>
-                                  {scoreList[index]?.taskScore !== undefined || null ? `${scoreList[index]?.taskScore}%` : null}
+                                  {`${scoreList[index]?.taskScore}%`}
                                 </p>
                               )
                             }

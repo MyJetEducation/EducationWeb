@@ -4,43 +4,50 @@ import ReactMarkdown from 'react-markdown'
 
 import req from "../../../../../services/request";
 import {configEndpoint} from "../../../../../config";
-import {useGetTimeToken} from "../../../../../services/useTimeToken";
 import {useLocation, useParams} from "react-router-dom";
 import s from './style.module.scss';
+import {getCleanTimeToken, getTimeTokenAsync} from "../../../../../store/timeTokenSlicer";
+import {useDispatch} from "react-redux";
+import {getStartedAsync} from "../../../../../store/startedSlicer";
 
 interface renderTextQuestion {
   content?: any
 }
 
 export const RenderText: React.FC<renderTextQuestion> = ({content}) => {
-  const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
-  const numberUnit = Number(unit?.replace("unit", ""));
-  useGetTimeToken(String(tutorial), numberUnit, Number(id));
+  const {tutorial, unit, id} = useParams<"id" | "unit" | "tutorial">();
+  const dispatch = useDispatch();
   const location: any = useLocation();
+
   const fetchResult = async () => {
-    const data = await req(configEndpoint.unitText, {
+    return await req(configEndpoint.unitText, {
       unit,
       tutorial,
       "isRetry": false,
-      "timeToken": localStorage.getItem("timeToken")
+      "timeToken": localStorage.getItem("tT")
     })
-    return data
+    dispatch(getCleanTimeToken());
   }
+  useEffect(() => {
+    if (!location.state?.readonly) {
+      dispatch(getTimeTokenAsync(tutorial, unit, id))
+    }
+    if (tutorial === "personal" && unit === "unit1" && id === "1" && !location.state?.readonly) {
+      dispatch(getStartedAsync())
+    }
 
+  }, []);
   useEffect(() => {
     return () => {
       if (!location.state?.readonly) {
-        fetchResult()
+        fetchResult();
       }
-
-      localStorage.removeItem("timeToken")
     }
-  }, []);
+  }, [])
 
   return (
     <div className={s.wrap}>
       <ReactMarkdown className={s.text} children={content[0].html_text} remarkPlugins={[remarkGfm]}/>
     </div>
-
   )
 }

@@ -12,6 +12,8 @@ import achievementsSlicer from "./achievementSlicer";
 import summarySlicer from "./summarySlicer";
 import userInfoSlicer from "./userInfoSlicer";
 import userProgressSlicer from "./userProgressSlicer";
+import timeTokenSlicer from "./timeTokenSlicer";
+import startedSlicer from "./startedSlicer";
 
 export const store = configureStore({
   reducer: {
@@ -27,7 +29,9 @@ export const store = configureStore({
     achievements: achievementsSlicer,
     summary: summarySlicer,
     userInfo: userInfoSlicer,
-    userProgress: userProgressSlicer
+    userProgress: userProgressSlicer,
+    timeToken: timeTokenSlicer,
+    started: startedSlicer
   }
 })
 

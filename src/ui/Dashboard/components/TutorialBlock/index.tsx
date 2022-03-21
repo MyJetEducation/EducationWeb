@@ -104,7 +104,7 @@ const UNIT = {
   ],
 };
 
-export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show, index}) => {
+const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show, index, countRetry}) => {
   const unitsScore = useSelector(currentDataDashboardSelector(index + 1));
   const dispatch = useDispatch();
   const UNIT_NAME = useMemo(() => {
@@ -199,7 +199,10 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show
               taskScore = unitsScore.units[index]?.taskScore
               if (index !== 0) {
                 if (unitsScore.units[index - 1]?.taskScore >= 80 && (!unitsScore.units[index + 1]?.taskScore || unitsScore.units[index + 1]?.taskScore < 80)) {
-                  isShowActiveTask = true
+                  if (unitsScore.units[index - 1]?.finished ) {
+                    isShowActiveTask = true
+                  }
+
                 }
               }
               if (unitsScore.units[index]?.taskScore >= 80) {
@@ -215,15 +218,17 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show
                 isSuccess={isSuccess}
                 unitScore={taskScore}
                 isRetry={unitsScore.units[index]}
+                hasProgress={unitsScore.units[index].hasProgress}
                 isShowActiveTask={isShowActiveTask}
                 unitList={item.unitList}
                 unitIcon={item.unitIcon}
                 scoreList={scoreList}
                 unitNumber={index}
                 title={UNIT_NAME[index].name}
-                btnName={`Start Unit ${index + 1}`}
+                btnName={taskScore > 0 ? `Сontinue Unit ${index + 1}` : `Start Unit ${index + 1}`}
                 tutorialName={tutorialName}
                 urlForTutorial={name}
+                countRetry={countRetry}
                 index={index}
               />
             )
@@ -233,3 +238,5 @@ export const TutorialBlock: React.FC<tutorialBlockProps> = ({ tutorialName, show
     </div>
   )
 }
+
+export default React.memo(TutorialBlock);
