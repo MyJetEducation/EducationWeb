@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {useLocation, useParams} from "react-router-dom";
@@ -19,7 +19,8 @@ interface renderCaseProps {
 const RenderCase: React.FC<renderCaseProps> = ({content}) => {
   const {id, unit, tutorial} = useParams<"id" | "unit" | "tutorial">();
   const location: any = useLocation();
-  const [answer, setAnswer] = useState<any[]>([]);
+  const [answer, setAnswer] = useState<number>();
+  const [showResult, setShowResult] = useState<boolean>(false);
   const dispatch = useDispatch();
   const fetchResult = async () => {
     const data = await req(configEndpoint.unitCase, {
@@ -27,7 +28,7 @@ const RenderCase: React.FC<renderCaseProps> = ({content}) => {
       tutorial,
       "isRetry": location.state?.retry ? true : false,
       "timeToken": localStorage.getItem("tT"),
-      "value": answer !== undefined && answer
+      "value": answer
     })
     dispatch(getCleanTimeToken())
     return data
@@ -40,34 +41,47 @@ const RenderCase: React.FC<renderCaseProps> = ({content}) => {
       dispatch(setDisabledBtn(false))
     }
     return () => {
-      if (!location.state?.readonly) {
-        fetchResult()
-      }
+      localStorage.removeItem("tT")
+      dispatch(getCleanTimeToken());
     }
-
   }, []);
 
   useEffect(() => {
     if ( answer !== undefined) {
+      setShowResult(true)
+      fetchResult()
       dispatch(setDisabledBtn(false))
     } else {
+      setShowResult(false)
       dispatch(setDisabledBtn(true))
     }
   }, [answer])
 
   return (
     <div className={s.wrap}>
-      <ReactMarkdown
-        className={s.text}
-        children={content[0].html_text}
-        remarkPlugins={[remarkGfm]}
-      />
-      <RadioBlock
-        onChangeCase={setAnswer}
-        content={content}
-        size="small"
-        type={"radio"}
-      />
+      {
+        !showResult ? (
+          <>
+            <ReactMarkdown
+              className={s.text}
+              children={content[0].html_text}
+              remarkPlugins={[remarkGfm]}
+            />
+            <RadioBlock
+              onChangeCase={setAnswer}
+              content={content}
+              size="small"
+              type={"radio"}
+            />
+          </>
+        ) : (
+          <ReactMarkdown
+            className={s.text}
+            children={content[0].before_text}
+            remarkPlugins={[remarkGfm]}
+          />
+        )
+      }
     </div>
 
   )

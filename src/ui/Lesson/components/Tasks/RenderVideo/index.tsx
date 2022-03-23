@@ -27,7 +27,6 @@ const RenderVideo: React.FC<renderVideoProps> = ({content}) => {
       "isRetry": false,
       "timeToken": localStorage.getItem("tT")
     })
-    dispatch(getCleanTimeToken())
     return data
   }
 
@@ -38,6 +37,8 @@ const RenderVideo: React.FC<renderVideoProps> = ({content}) => {
     return () => {
       if (!location.state?.readonly) {
         fetchResult()
+        localStorage.removeItem("tT")
+        dispatch(getCleanTimeToken());
       }
     }
   }, [])

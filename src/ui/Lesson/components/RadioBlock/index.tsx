@@ -26,36 +26,53 @@ const prepareStateTrueFalse = (answers: any) => {
     "number": index + 1,
     "value": Boolean(item)
   }))
+};
+
+const generateUniqState = (prevState: any, name: any, value: any, type?: boolean) => {
+  const copyState = {...prevState}
+  if (copyState[name as keyof typeof copyState]) {
+    const index = (copyState[name as keyof typeof copyState] as number[]).indexOf(Number(value));
+    if (index !== -1) {
+      (copyState[name as keyof typeof copyState] as number[]).splice(index, 1);
+    } else {
+      (copyState[name as keyof typeof copyState] as number[]) = Array.from(new Set([...(copyState[name as keyof typeof copyState] as number[]), (Number(value))]))
+    }
+  } else {
+    (copyState[name as keyof typeof copyState] as number[]) = [Number(value)]
+  }
+  return copyState
 }
 
-const RadioBlock: React.FC<radioBlockProps> = ({content, onChangeCase, size, selectedAll, onChange, onChangeTrueFalse, type}) => {
+const RadioBlock: React.FC<radioBlockProps> = (
+  {
+    content,
+    onChangeCase,
+    size,
+    selectedAll,
+    onChange,
+    onChangeTrueFalse,
+    type
+  }) => {
   const location: any = useLocation();
   const [answers, setAnswers] = useState({});
   const [answersTrueFalse, setAnswersTrueFalse] = useState({});
-  const [answersCase, setAnswersCase] = useState<any>();
+  const [answersCase, setAnswersCase] = useState<number>();
   useEffect(() => {
     selectedAll && selectedAll(Object.keys(answers).length === content.length);
     onChangeCase && onChangeCase(answersCase)
     onChange && onChange(prepareState(answers));
     onChangeTrueFalse && onChangeTrueFalse(prepareStateTrueFalse(answersTrueFalse));
-  }, [answers]);
+  }, [answers, answersTrueFalse, answersCase]);
 
   const handleChange = (e: any) => {
-    setAnswersCase(Number(e.target.value))
+    setAnswersCase(Number(e.target.value));
     setAnswersTrueFalse((prevState) => {
       return {
         ...prevState,
         [e.target.name]: Number(e.target.value)
-      }})
-    setAnswers((prevState) => {
-      const copyState = {...prevState}
-      if (copyState[e.target.name as keyof typeof copyState]) {
-        (copyState[e.target.name as keyof typeof copyState] as number[]).push(Number(e.target.value))
-      } else {
-        (copyState[e.target.name as keyof typeof copyState] as number[]) = [Number(e.target.value)]
-      }
-      return copyState
-    })
+      };
+    });
+    setAnswers((prevState) => generateUniqState(prevState, e.target.name, e.target.value))
   }
   return (
     <form

@@ -123,7 +123,7 @@ export const Lesson = () => {
       <QuestionFooter
         disabled={disabled}
         onClickNext={handleClickNextQuestion}
-        btnName={(retry || retry) ? "Go Back" : "NextTask"}
+        btnName={retry ? "Go Back" : "Next Task"}
         length={menu.data.length}
         index={currentIndex}
         id={id}

@@ -67,7 +67,7 @@ export const getTimeTokenAsync = (tutorial: string | undefined, unit: string | u
       "task": Number(task)
     })
     dispatch(getFetchResolveTimeToken(data.data));
-    localStorage.setItem("tT", data.data)
+    localStorage.setItem("tT", data.data);
   } catch (error) {
     dispatch(getFetchRejectTimeToken(error))
   };

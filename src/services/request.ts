@@ -1,6 +1,6 @@
 import config, {configEndpoint as configEndpointEnum} from "../config";
 import URL from 'url';
-
+//TODO: дополнительное условия для протухшего токена, если токен истек, возвращаем на Login
 const getHeader = (token: string | null) => {
   const header: { Accept: string, 'Content-Type': string, Authorization?: string } = {
     Accept: 'application/json',
