@@ -5,10 +5,10 @@ import ReactMarkdown from 'react-markdown'
 import req from "../../../../../services/request";
 import {configEndpoint} from "../../../../../config";
 import {useLocation, useParams} from "react-router-dom";
-import s from './style.module.scss';
 import {getCleanTimeToken, getTimeTokenAsync} from "../../../../../store/timeTokenSlicer";
 import {useDispatch} from "react-redux";
 import {getStartedAsync} from "../../../../../store/startedSlicer";
+import s from './style.module.scss';
 
 interface renderTextQuestion {
   content?: any
@@ -18,7 +18,6 @@ export const RenderText: React.FC<renderTextQuestion> = ({content}) => {
   const {tutorial, unit, id} = useParams<"id" | "unit" | "tutorial">();
   const dispatch = useDispatch();
   const location: any = useLocation();
-
   const fetchResult = async () => {
     return await req(configEndpoint.unitText, {
       unit,
@@ -26,7 +25,7 @@ export const RenderText: React.FC<renderTextQuestion> = ({content}) => {
       "isRetry": false,
       "timeToken": localStorage.getItem("tT")
     })
-    dispatch(getCleanTimeToken());
+
   }
   useEffect(() => {
     if (!location.state?.readonly) {
@@ -41,6 +40,8 @@ export const RenderText: React.FC<renderTextQuestion> = ({content}) => {
     return () => {
       if (!location.state?.readonly) {
         fetchResult();
+        localStorage.removeItem("tT")
+        dispatch(getCleanTimeToken());
       }
     }
   }, [])

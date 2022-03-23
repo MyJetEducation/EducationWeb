@@ -89,7 +89,6 @@ export const RenderGame = () => {
     })
     return data
   }
-
   useEffect(() => {
     dispatch(setDisabledBtn(true))
     if (showResult) {
@@ -100,11 +99,7 @@ export const RenderGame = () => {
   useEffect(() => {
     dispatch(getTimeTokenAsync(tutorial, unit, id))
     return () => {
-      if (!location.state?.retry) {
-        dispatch(getTimeTokenAsync(tutorial, unit, id))
-        fetchResult()
-        dispatch(getCleanTimeToken())
-      }
+      fetchResult()
       localStorage.removeItem("value")
       localStorage.removeItem("tT")
     }

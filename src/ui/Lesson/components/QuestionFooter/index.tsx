@@ -19,6 +19,11 @@ export const QuestionFooter:React.FC<questionFooterProps> = ({ disabled, length,
   const handleClickNextQuestion = () => {
     onClickNext && onClickNext(id);
   }
+
+  const handleSubmit = () => {
+
+  }
+  
   return (
       <div className={s.wrap}>
         <div className={s.progressLine}>
@@ -41,6 +46,7 @@ export const QuestionFooter:React.FC<questionFooterProps> = ({ disabled, length,
           >
             {btnName}
           </Button>
+
           <div className={s.time}>
             {time}
           </div>

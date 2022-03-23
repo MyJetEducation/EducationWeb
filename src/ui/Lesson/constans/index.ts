@@ -689,6 +689,26 @@ const caseText_unit_5 = `
 
 `;
 
+// text for task-4 tutorial-1
+
+const caseText_unit_1_before = `
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, fuga, maxime? Adipisci, amet aut culpa cupiditate deleniti eos esse impedit maiores natus perferendis quis quisquam quo veritatis, voluptas voluptatem voluptatibus.
+`;
+const caseText_unit_2_before = `
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, fuga, maxime? Adipisci, amet aut culpa cupiditate deleniti eos esse impedit maiores natus perferendis quis quisquam quo veritatis, voluptas voluptatem voluptatibus.
+`;
+const caseText_unit_3_before = `
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, fuga, maxime? Adipisci, amet aut culpa cupiditate deleniti eos esse impedit maiores natus perferendis quis quisquam quo veritatis, voluptas voluptatem voluptatibus.
+`;
+const caseText_unit_4_before = `
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, fuga, maxime? Adipisci, amet aut culpa cupiditate deleniti eos esse impedit maiores natus perferendis quis quisquam quo veritatis, voluptas voluptatem voluptatibus.
+
+`;
+const caseText_unit_5_before = `
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, fuga, maxime? Adipisci, amet aut culpa cupiditate deleniti eos esse impedit maiores natus perferendis quis quisquam quo veritatis, voluptas voluptatem voluptatibus.
+
+`;
+
 //content for tutorial-1
 export const TUT_1_LESSON_CONTENT_UNIT_1 = {
   "1": {
@@ -875,6 +895,7 @@ export const TUT_1_LESSON_CONTENT_UNIT_1 = {
         {
           id: 1,
           html_text: caseText_unit_1,
+          before_text: caseText_unit_1_before,
           title: "Do you think it will help to attain goal easier?",
           answer: [
             {
@@ -1218,6 +1239,7 @@ export const TUT_1_LESSON_CONTENT_UNIT_2 = {
     icon: testIcon,
     description: {
       type: "case",
+      before_text: caseText_unit_2_before,
       data: [
         {
           id: 1,
@@ -1569,6 +1591,7 @@ export const TUT_1_LESSON_CONTENT_UNIT_3 = {
         {
           id: 1,
           html_text: caseText_unit_3,
+          before_text: caseText_unit_3_before,
           title: "Do you think it will help to attain goal easier?",
           answer: [
             {
@@ -1916,6 +1939,7 @@ export const TUT_1_LESSON_CONTENT_UNIT_4 = {
         {
           id: 1,
           html_text: caseText_unit_4,
+          before_text: caseText_unit_4_before,
           title: "Do you think it will help to attain goal easier?",
           answer: [
             {
@@ -2263,6 +2287,7 @@ export const TUT_1_LESSON_CONTENT_UNIT_5 = {
         {
           id: 1,
           html_text: caseText_unit_5,
+          before_text: caseText_unit_5_before,
           title: "Do you think it will help to attain goal easier?",
           answer: [
             {
