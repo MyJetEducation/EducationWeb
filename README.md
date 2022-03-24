@@ -1,3 +1,1 @@
-# EducationWeb
-UI for MyJetEducation
-
+Init branch
