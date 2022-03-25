@@ -1,5 +1,5 @@
 import { useEffect, FC, useRef } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 
 const Modal: FC = ({ children }) => {
   const modalRoot = document.getElementById('portal');
@@ -12,7 +12,7 @@ const Modal: FC = ({ children }) => {
     };
   }, [modalRoot]);
 
-  return ReactDOM.createPortal(children, element.current);
+  return createPortal(children, element.current);
 };
 
 export default Modal;

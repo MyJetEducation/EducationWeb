@@ -7,7 +7,7 @@ interface Props {}
 const PublicContainer: FC<Props> = observer((props) => {
   const { children } = props;
 
-  return <FlexContainer>{children}</FlexContainer>;
+  return <FlexContainer flex="1">{children}</FlexContainer>;
 });
 
 export default PublicContainer;

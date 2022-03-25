@@ -1,5 +1,10 @@
 import Dashboard from '../pages/Dashboard';
 import HomeLanding from '../pages/HomeLanding';
+import AboutUsPage from '../pages/InfoPages/AboutUsPage';
+import FaqPage from '../pages/InfoPages/FaqPage';
+import LessonsPage from '../pages/InfoPages/LessonsPage';
+import MissionPage from '../pages/InfoPages/MissionPage';
+import WhyUsPage from '../pages/InfoPages/WhyUsPage';
 import PageNotFound from '../pages/PageNotFound';
 import SingIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
@@ -20,6 +25,44 @@ const routesList = [
     strict: true,
     layoutType: RouteLayoutType.Public,
   },
+  // -
+  {
+    component: AboutUsPage,
+    path: Page.PUBLIC.ABOUT_US,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Public,
+  },
+  {
+    component: MissionPage,
+    path: Page.PUBLIC.MISSION,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Public,
+  },
+  {
+    component: WhyUsPage,
+    path: Page.PUBLIC.WHY_US,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Public,
+  },
+  {
+    component: LessonsPage,
+    path: Page.PUBLIC.LESSONS,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Public,
+  },
+
+  {
+    component: FaqPage,
+    path: Page.PUBLIC.FAQ,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Public,
+  },
+  // ----
   {
     component: SingIn,
     path: Page.SIGN_IN,

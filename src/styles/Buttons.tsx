@@ -8,18 +8,22 @@ interface PrimaryButtonProps {
 }
 
 export const PrimaryButton = styled(ButtonWithoutStyles)<PrimaryButtonProps>`
-  padding: ${props => props.padding || '4px 8px'};
+  padding: ${props => props.padding || '12px 16px'};
   width: ${props => props.width};
-  background-color: ${props => props.backgroundColor || '#00ffdd'};
-  border-radius: 4px;
+  background-color: ${props => props.backgroundColor || '#000'};
+  border-radius: 12px;
   transition: background-color 0.2s ease;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
 
   &:hover {
-    background-color: #9ffff2;
+    background-color: #161616;
   }
 
   &:focus {
-    background-color: #21b3a4;
+    background-color: #313131;
   }
 
   &:disabled {

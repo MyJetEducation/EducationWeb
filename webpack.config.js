@@ -24,7 +24,7 @@ module.exports = (env, argv) => {
           exclude: /node_modules/,
         },
         {
-          test: /\.(png|jpe?g|gif|ico|woff|woff2)$/i,
+          test: /\.(png|jpe?g|gif|ico|otf|woff|woff2)$/i,
           use: ['file-loader'],
         },
         {

@@ -1,26 +1,11 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 interface PrimaryTextType {
   color?: string;
   fontWeight?: 'bold' | 'normal' | number;
   fontStyle?: 'italic' | 'normal';
-  fontSize?:
-    | '8px'
-    | '10px'
-    | '11px'
-    | '12px'
-    | '13px'
-    | '14px'
-    | '16px'
-    | '17px'
-    | '18px'
-    | '20px'
-    | '22px'
-    | '24px'
-    | '26px'
-    | '30px'
-    | '32px'
-    | '40px';
+  fontSize?: '16px' | '18px' | '28px' | '40px';
   lineHeight?: string;
   marginRight?: string;
   marginBottom?: string;
@@ -36,55 +21,85 @@ interface PrimaryTextType {
 }
 
 export const PrimaryTextSpan = styled.span<PrimaryTextType>`
-  font-style: ${props => props.fontStyle};
-  font-weight: ${props => props.fontWeight || 'normal'};
-  font-size: ${props => props.fontSize || '14px'};
-  line-height: ${props => props.lineHeight || '120%'};
-  color: ${props => props.color || '#FFFCCC'};
-  margin-right: ${props => props.marginRight};
-  margin-bottom: ${props => props.marginBottom};
-  text-decoration: ${props => props.textDecoration};
-  text-transform: ${props => props.textTransform};
-  white-space: ${props => props.whiteSpace};
-  text-align: ${props => props.textAlign};
-  text-overflow: ${props => props.textOverflow};
-  overflow: ${props => props.overflow};
-  max-width: ${props => props.maxWidth};
-  letter-spacing: ${props => props.letterSpacing};
+  font-style: ${(props) => props.fontStyle};
+  font-weight: ${(props) => props.fontWeight || 'normal'};
+  font-size: ${(props) => props.fontSize || '16px'};
+  line-height: ${(props) => props.lineHeight || '120%'};
+  color: ${(props) => props.color || '#777C85'};
+  margin-right: ${(props) => props.marginRight};
+  margin-bottom: ${(props) => props.marginBottom};
+  text-decoration: ${(props) => props.textDecoration};
+  text-transform: ${(props) => props.textTransform};
+  white-space: ${(props) => props.whiteSpace};
+  text-align: ${(props) => props.textAlign};
+  text-overflow: ${(props) => props.textOverflow};
+  overflow: ${(props) => props.overflow};
+  max-width: ${(props) => props.maxWidth};
+  letter-spacing: ${(props) => props.letterSpacing};
 `;
 
 export const PrimaryTextParagraph = styled.p<PrimaryTextType>`
-  font-style: ${props => props.fontStyle};
-  font-weight: ${props => props.fontWeight};
-  font-size: ${props => props.fontSize || '16px'};
-  line-height: ${props => props.lineHeight || '120%'};
-  color: ${props => props.color || '#FFFCCC'};
-  margin-right: ${props => props.marginRight};
-  margin-bottom: ${props => props.marginBottom || '0'};
-  text-decoration: ${props => props.textDecoration};
-  text-transform: ${props => props.textTransform};
-  white-space: ${props => props.whiteSpace};
-  text-align: ${props => props.textAlign};
-  text-overflow: ${props => props.textOverflow};
-  overflow: ${props => props.overflow};
-  width: ${props => props.width};
-  max-width: ${props => props.maxWidth};
+  font-style: ${(props) => props.fontStyle};
+  font-weight: ${(props) => props.fontWeight};
+  font-size: ${(props) => props.fontSize || '16px'};
+  line-height: ${(props) => props.lineHeight || '120%'};
+  color: ${(props) => props.color || '#777C85'};
+  margin-right: ${(props) => props.marginRight};
+  margin-bottom: ${(props) => props.marginBottom || '0'};
+  text-decoration: ${(props) => props.textDecoration};
+  text-transform: ${(props) => props.textTransform};
+  white-space: ${(props) => props.whiteSpace};
+  text-align: ${(props) => props.textAlign};
+  text-overflow: ${(props) => props.textOverflow};
+  overflow: ${(props) => props.overflow};
+  width: ${(props) => props.width};
+  max-width: ${(props) => props.maxWidth};
 `;
 
 export const QuoteText = styled(PrimaryTextSpan)<
   PrimaryTextType & { isGrowth?: boolean }
 >`
-  font-style: ${props => props.fontStyle || 'normal'};
-  font-weight: ${props => props.fontWeight || 'normal'};
-  font-size: ${props => props.fontSize || '16px'};
-  line-height: ${props => props.lineHeight || '120%'};
-  color: ${props => (props.isGrowth ? '#3BFF8A' : '#FF557E')};
-  margin-right: ${props => props.marginRight};
-  margin-bottom: ${props => props.marginBottom};
-  text-decoration: ${props => props.textDecoration};
-  text-transform: ${props => props.textTransform};
-  text-align: ${props => props.textAlign};
-  text-overflow: ${props => props.textOverflow};
-  overflow: ${props => props.overflow};
-  max-width: ${props => props.maxWidth};
+  font-style: ${(props) => props.fontStyle || 'normal'};
+  font-weight: ${(props) => props.fontWeight || 'normal'};
+  font-size: ${(props) => props.fontSize || '16px'};
+  line-height: ${(props) => props.lineHeight || '120%'};
+  color: ${(props) => (props.isGrowth ? '#3BFF8A' : '#FF557E')};
+  margin-right: ${(props) => props.marginRight};
+  margin-bottom: ${(props) => props.marginBottom};
+  text-decoration: ${(props) => props.textDecoration};
+  text-transform: ${(props) => props.textTransform};
+  text-align: ${(props) => props.textAlign};
+  text-overflow: ${(props) => props.textOverflow};
+  overflow: ${(props) => props.overflow};
+  max-width: ${(props) => props.maxWidth};
+`;
+
+export const TextLink = styled(Link)`
+  color: #777c85;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.4s ease;
+
+  &:hover {
+    color: #000000;
+    text-decoration: none;
+  }
+`;
+
+export const BorderLink = styled(Link)`
+  color: #000000;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: 2px solid #000000;
+  transition: all 0.4s ease;
+
+  &:hover {
+    color: #777c85;
+    text-decoration: none;
+    border-color: #777c85;
+  }
 `;

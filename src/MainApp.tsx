@@ -10,6 +10,7 @@ import { autorun } from 'mobx';
 import Helmet from 'react-helmet';
 import { setFullHeightProperty } from './helpers/setFullHeightProperty';
 import PageTemplateContainer from './containers/PageTemplateContainer';
+import { fonts } from './styles/fonts';
 
 declare const window: any;
 
@@ -47,12 +48,12 @@ const MainApp: FC = () => {
 
       <Global
         styles={css`
-          @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=cyrillic,cyrillic-ext');
           ${reboot};
+          ${fonts};
 
           html {
             font-size: 14px;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Gilroy', sans-serif;
           }
           body {
             overflow: hidden;

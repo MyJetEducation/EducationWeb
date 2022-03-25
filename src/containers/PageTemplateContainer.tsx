@@ -5,10 +5,19 @@ import { FlexContainer } from '../styles/FlexContainer';
 
 const PageTemplateContainer: FC = ({ children }) => {
   return (
-    <FlexContainer flex="1" flexDirection="column" height={`calc(${FULL_VH})`} alignItems="center">
+    <FlexContainer
+      flex="1"
+      flexDirection="column"
+      height={`calc(${FULL_VH})`}
+      alignItems="center"
+    >
       <NavBar />
 
-      <FlexContainer flexDirection="column" overflow="auto" flex="1" width={CONTENT_WIDTH}>
+      <FlexContainer
+        overflow="auto"
+        flex="1"
+        width={CONTENT_WIDTH}
+      >
         {children}
       </FlexContainer>
     </FlexContainer>
