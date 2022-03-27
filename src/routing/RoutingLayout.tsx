@@ -9,6 +9,7 @@ import { Observer } from 'mobx-react-lite';
 import Page from './Pages';
 import { Redirect } from 'react-router-dom';
 import PublicContainer from '../containers/PublicContainer';
+import SignFlowContainer from '../containers/SignFlowContainer';
 
 const RoutingLayout: FC = () => {
   const location = useLocation();
@@ -50,10 +51,11 @@ const RoutingLayout: FC = () => {
 
     case RouteLayoutType.SignFlow:
       return (
-        <FlexContainer height="100%" width="100%">
+        <SignFlowContainer>
           {!location.search && (
             <Redirect to={location.pathname.replace(/\/+$/, '')} />
           )}
+
           <Observer>
             {() => (
               <>
@@ -64,7 +66,7 @@ const RoutingLayout: FC = () => {
               </>
             )}
           </Observer>
-        </FlexContainer>
+        </SignFlowContainer>
       );
 
     default:

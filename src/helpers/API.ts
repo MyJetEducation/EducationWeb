@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { UserAuthenticate } from '../types/UserInfo';
 import AUTH_API_LIST from './apiListAuth';
 import requestOptions from '../constants/requestOptions';
+import API_LIST from './apiList';
 
 class API {
   private convertParamsToFormData = (params: { [key: string]: any }) => {
@@ -30,12 +31,23 @@ class API {
   /* 
   ---  Clients Request
   */
-
-  authenticate = async (credentials: UserAuthenticate, authUrl: string) => {
+  authenticate = async (credentials: UserAuthenticate) => {
     const response = await axios.post<any>(
-      `${API_AUTH_STRING || authUrl}${AUTH_API_LIST.AUTH.SIGN_IN}`,
+      `${API_STRING}${AUTH_API_LIST.AUTH.SIGN_IN}`,
       credentials,
       this.clientRequestOptions
+    );
+    return response.data;
+  };
+
+  /*
+  --- Background Request
+  */
+  registerConfirm = async (hash: string) => {
+    const response = await axios.post<any>(
+      `${API_STRING}${AUTH_API_LIST.REGISTER.REGISTER_CONFIRM}`,
+      { hash },
+      this.backgroundRequestOptions
     );
     return response.data;
   };

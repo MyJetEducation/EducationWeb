@@ -1,4 +1,5 @@
 import Dashboard from '../pages/Dashboard';
+import ForgotPassword from '../pages/ForgotPassword';
 import HomeLanding from '../pages/HomeLanding';
 import AboutUsPage from '../pages/InfoPages/AboutUsPage';
 import FaqPage from '../pages/InfoPages/FaqPage';
@@ -6,6 +7,8 @@ import LessonsPage from '../pages/InfoPages/LessonsPage';
 import MissionPage from '../pages/InfoPages/MissionPage';
 import WhyUsPage from '../pages/InfoPages/WhyUsPage';
 import PageNotFound from '../pages/PageNotFound';
+import RegisterConfirm from '../pages/RegisterConfirm';
+import ResetPassord from '../pages/ResetPassord';
 import SingIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Page from './Pages';
@@ -64,12 +67,42 @@ const routesList = [
   },
   // ----
   {
+    component: RegisterConfirm,
+    path: Page.REGISTER_CONFIRM,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.SignFlow,
+  },
+  {
     component: SingIn,
     path: Page.SIGN_IN,
     exact: true,
     strict: true,
     layoutType: RouteLayoutType.SignFlow,
   },
+  {
+    component: SignUp,
+    path: Page.SIGN_UP,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.SignFlow,
+  },
+
+  {
+    component: ForgotPassword,
+    path: Page.FORGOT_PASSWORD,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.SignFlow,
+  },
+  {
+    component: ResetPassord,
+    path: Page.RESET_PASSWORD,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.SignFlow,
+  },
+
   {
     component: SignUp,
     path: Page.SIGN_UP,

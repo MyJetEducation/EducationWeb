@@ -11,6 +11,10 @@ const Page = {
 
   SIGN_IN: '/sign-in',
   SIGN_UP: '/sign-up',
+  REGISTER_CONFIRM: '/register-confirm',
+  FORGOT_PASSWORD: '/forgot-password',
+  RESET_PASSWORD: '/reset-password',
+
   ONBOARDING: '/onboarding',
 
   DASHBOARD: '/dashboard',

@@ -9,7 +9,15 @@ import NavBarAccount from './NavBarAccount/NavBarAccount';
 import NavBarNavigation from './NavBarNavigation';
 
 const NavBar = () => {
-  const isAuthPages = useRouteMatch([Page.SIGN_IN, Page.SIGN_UP])?.isExact;
+  
+  const isAuthPages = useRouteMatch([
+    Page.SIGN_IN,
+    Page.SIGN_UP,
+    Page.REGISTER_CONFIRM,
+    Page.FORGOT_PASSWORD,
+    Page.RESET_PASSWORD,
+  ])?.isExact;
+
   return (
     <NavBarWrapper
       height="80px"

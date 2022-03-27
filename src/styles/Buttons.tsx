@@ -8,9 +8,9 @@ interface PrimaryButtonProps {
 }
 
 export const PrimaryButton = styled(ButtonWithoutStyles)<PrimaryButtonProps>`
-  padding: ${props => props.padding || '12px 16px'};
-  width: ${props => props.width};
-  background-color: ${props => props.backgroundColor || '#000'};
+  padding: ${(props) => props.padding || '12px 16px'};
+  width: ${(props) => props.width};
+  background-color: ${(props) => props.backgroundColor || '#000'};
   border-radius: 12px;
   transition: background-color 0.2s ease;
   color: #fff;
@@ -22,39 +22,74 @@ export const PrimaryButton = styled(ButtonWithoutStyles)<PrimaryButtonProps>`
     background-color: #161616;
   }
 
-  &:focus {
+  &:active {
     background-color: #313131;
   }
 
   &:disabled {
-    background-color: rgba(255, 255, 255, 0.04);
+    background-color: #777c85;
     & span {
-      color: rgba(255, 255, 255, 0.4);
+      color: #fff;
     }
     & svg {
-      fill: rgba(255, 255, 255, 0.4);
+      fill: #fff;
     }
   }
 `;
 
-export const SecondaryButton = styled(ButtonWithoutStyles)`
-  padding: 4px 8px;
-  background-color: rgba(255, 255, 255, 0.12);
-  border-radius: 4px;
+interface SecondaryButtonProps {
+  padding?: string;
+  borderColor?: string;
+  width?: string;
+  marginBottom?: string;
+}
+
+export const SecondaryButton = styled(ButtonWithoutStyles)<SecondaryButtonProps>`
+  margin-bottom: ${(props) => props.marginBottom};
+  padding: ${(props) => props.padding || '12px 16px'};
+  width: ${(props) => props.width};
+  border: 2px solid ${(props) => props.borderColor || '#000'};
+  border-radius: 12px;
   transition: background-color 0.2s ease;
-
-  &:focus {
-    background-color: rgba(0, 0, 0, 0.24);
-  }
-
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
   &:hover {
-    background-color: rgba(255, 255, 255, 0.24);
+    border-color: #000;
+    background-color: #000;
+    color: #fff;
   }
+
+  &:active {
+    border-color: #2b2b2b;
+    background-color: #2b2b2b;
+    color: #fff;
+  }
+
+  
 
   &:disabled {
-    background-color: rgba(255, 255, 255, 0.04);
+    border-color: #c0c4c9;
     & span {
-      color: rgba(255, 255, 255, 0.4);
+      color: #c0c4c9;
     }
+  }
+`;
+
+
+interface TextAccentButtonProps {
+  fontSize?: string;
+}
+export const TextAccentButton = styled(ButtonWithoutStyles)<TextAccentButtonProps>`
+  color: #374DFB;
+  font-weight: 400;
+  font-size: ${props => props.fontSize || '12px'};
+  text-decoration: none;
+  transition: all 0.4s ease;
+
+  &:hover {
+    text-decoration: none;
+    color: #374DFB;
   }
 `;

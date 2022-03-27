@@ -5,7 +5,7 @@ interface PrimaryTextType {
   color?: string;
   fontWeight?: 'bold' | 'normal' | number;
   fontStyle?: 'italic' | 'normal';
-  fontSize?: '16px' | '18px' | '28px' | '40px';
+  fontSize?: '12px' | '16px' | '18px' | '28px' | '40px';
   lineHeight?: string;
   marginRight?: string;
   marginBottom?: string;
@@ -84,6 +84,22 @@ export const TextLink = styled(Link)`
   &:hover {
     color: #000000;
     text-decoration: none;
+  }
+`;
+
+interface TextAccentLinkProps {
+  fontSize?: string;
+}
+export const TextAccentLink = styled(Link)<TextAccentLinkProps>`
+  color: #374DFB;
+  font-weight: 400;
+  font-size: ${props => props.fontSize || '12px'};
+  text-decoration: none;
+  transition: all 0.4s ease;
+
+  &:hover {
+    text-decoration: none;
+    color: #374DFB;
   }
 `;
 

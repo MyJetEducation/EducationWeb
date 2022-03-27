@@ -99,4 +99,8 @@ export class MainAppStore implements MainAppStoreProps {
   };
 
   // actions
+
+  sendRegisterConfirm = async (hash: string) => {
+    const response = await API.registerConfirm(hash);
+  }
 }
