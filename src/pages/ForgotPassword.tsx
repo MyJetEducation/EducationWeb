@@ -53,8 +53,7 @@ const ForgotPassword = () => {
               name={Fields.EMAIL}
               labelText={t('Email')}
             />
-
-            <PrimaryButton>{t('Send reset linkt')}</PrimaryButton>
+            <PrimaryButton>{t('Send reset link')}</PrimaryButton>
           </AuthForm>
           <PrimaryTextSpan fontSize="12px" fontWeight={400}>
             {t('Already have an account?')}&nbsp;

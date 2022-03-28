@@ -106,10 +106,10 @@ module.exports = (env, argv) => {
         },
       }),
       new webpack.DefinePlugin({
-        WS_HOST: JSON.stringify('http://api.dfnt.work/signalr'),
+        WS_HOST: JSON.stringify('https://api.dfnt.work/signalr'),
         API_STRING: ['production', 'none'].includes(argv.mode)
           ? JSON.stringify('')
-          : JSON.stringify('http://api.dfnt.work'),
+          : JSON.stringify('https://api.dfnt.work'),
         IS_LIVE: ['production', 'none'].includes(argv.mode),
         IS_LOCAL: argv.is_local === 'true',
         BUILD_VERSION: JSON.stringify(process.env.BUILD_VERSION),

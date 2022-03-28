@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStores } from '../../../hooks/useStores';
 import { FlexContainer } from '../../../styles/FlexContainer';
+import NavBarAccountProfile from './NavBarAccountProfile';
 import NavBarAuthBtn from './NavBarAuthBtn';
 
 const NavBarAccount = () => {
@@ -11,7 +12,11 @@ const NavBarAccount = () => {
   return (
     <>
       <FlexContainer alignItems="center">
-        <NavBarAuthBtn />
+        {mainAppStore.isAuthorized ? (
+          <NavBarAccountProfile />
+        ) : (
+          <NavBarAuthBtn />
+        )}
       </FlexContainer>
     </>
   );

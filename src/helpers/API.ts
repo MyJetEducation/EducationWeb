@@ -45,8 +45,7 @@ class API {
   */
   registerConfirm = async (hash: string) => {
     const response = await axios.post<any>(
-      `${API_STRING}${AUTH_API_LIST.REGISTER.REGISTER_CONFIRM}`,
-      { hash },
+      `${API_STRING}${AUTH_API_LIST.REGISTER.REGISTER_CONFIRM}`, {},
       this.backgroundRequestOptions
     );
     return response.data;
