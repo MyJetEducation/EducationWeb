@@ -114,8 +114,9 @@ export const BorderLink = styled(Link)`
   transition: all 0.4s ease;
 
   &:hover {
-    color: #777c85;
+    color: #fff;
     text-decoration: none;
-    border-color: #777c85;
+    border-color: #000;
+    background-color: #000;
   }
 `;

@@ -40,4 +40,3 @@ declare const BUILD_VERSION: string;
 declare const IS_LOCAL: boolean;
 
 declare module 'global';
-declare module 'react-qr-code';

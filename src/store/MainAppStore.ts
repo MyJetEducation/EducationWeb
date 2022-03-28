@@ -3,23 +3,17 @@ import {
   LOCAL_STORAGE_REFRESH_TOKEN_KEY,
   LOCAL_STORAGE_TOKEN_KEY,
 } from './../constants/global';
-import { UserAuthenticate, UserRegistration } from '../types/UserInfo';
 import { HubConnection } from '@aspnet/signalr';
-import { action, makeAutoObservable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import API from '../helpers/API';
-import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
-import initConnection from '../services/websocketService';
-import Topics from '../constants/websocketTopics';
 import Axios, { AxiosRequestConfig } from 'axios';
 import RequestHeaders from '../constants/headers';
 import { RootStore } from './RootStore';
-import Fields from '../constants/fields';
-import mixpanel from 'mixpanel-browser';
 
 import { CountriesEnum } from '../enums/CountriesEnum';
 import injectInerceptors from '../http/interceptors';
 import { languagesList } from '../constants/languagesList';
-import { debugLevel } from '../constants/debugConstants';
+import { logger } from '../helpers/ConsoleLoggerTool';
 
 interface MainAppStoreProps {
   token: string;
@@ -46,9 +40,9 @@ export class MainAppStore implements MainAppStoreProps {
 
   isLoading = true;
   isOnboarding = false;
-  
+
   websocketConnectionTries = 0;
-  
+
   rootStore: RootStore;
   signalRReconnectTimeOut = '';
   lang = CountriesEnum.EN;
@@ -98,9 +92,38 @@ export class MainAppStore implements MainAppStoreProps {
     });
   };
 
-  // actions
+  // async actions
 
   sendRegisterConfirm = async (hash: string) => {
-    const response = await API.registerConfirm(hash);
-  }
+    try {
+      const response = await API.registerConfirm(hash);
+    } catch (error) {}
+  };
+
+  postRefreshToken = async () => {
+    try {
+      const response = await API.refreshToken(this.refreshToken);
+      logger(response);
+      if (response.refreshToken) {
+        this.setRefreshToken(response.refreshToken);
+        this.setTokenHandler(response.token);
+      }
+    } catch (error) {
+      logger(error);
+    }
+  };
+
+  signOut = () => {};
+
+  // store action
+  setTokenHandler = (token: string) => {
+    localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
+    Axios.defaults.headers[RequestHeaders.AUTHORIZATION] = token;
+    this.token = token;
+  };
+
+  setRefreshToken = (refreshToken: string) => {
+    localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, refreshToken);
+    this.refreshToken = refreshToken;
+  };
 }

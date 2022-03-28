@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { UserAuthenticate } from '../types/UserInfo';
 import AUTH_API_LIST from './apiListAuth';
 import requestOptions from '../constants/requestOptions';
-import API_LIST from './apiList';
+import { RefreshTokenDTO } from '../types/RefreshTokenTypes';
 
 class API {
   private convertParamsToFormData = (params: { [key: string]: any }) => {
@@ -34,8 +34,7 @@ class API {
   authenticate = async (credentials: UserAuthenticate) => {
     const response = await axios.post<any>(
       `${API_STRING}${AUTH_API_LIST.AUTH.SIGN_IN}`,
-      credentials,
-      this.clientRequestOptions
+      credentials
     );
     return response.data;
   };
@@ -45,8 +44,22 @@ class API {
   */
   registerConfirm = async (hash: string) => {
     const response = await axios.post<any>(
-      `${API_STRING}${AUTH_API_LIST.REGISTER.REGISTER_CONFIRM}`, {},
-      this.backgroundRequestOptions
+      `${API_STRING}${AUTH_API_LIST.REGISTER.REGISTER_CONFIRM}`,
+      JSON.stringify(hash),
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    return response.data;
+  };
+
+  refreshToken = async (refreshToken: string) => {
+    const response = await axios.post<RefreshTokenDTO>(
+      `${API_STRING}${AUTH_API_LIST.AUTH.REFRESH_TOKEN}`,
+      JSON.stringify(refreshToken),
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
     );
     return response.data;
   };
