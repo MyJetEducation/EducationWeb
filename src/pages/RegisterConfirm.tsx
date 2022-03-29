@@ -20,6 +20,7 @@ const RegisterConfirm = () => {
 
     logger(hash);
   }, []);
+  
   return (
     <FlexContainer
       width="100%"
