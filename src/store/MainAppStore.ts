@@ -114,11 +114,15 @@ export class MainAppStore implements MainAppStoreProps {
     }
   };
 
-  signOut = () => {};
+  signIn = () => {}
+  
   signUp = async (values: UserRegistration) => {
     const response = await API.signUp(values);
     return response.status
   };
+
+  signOut = () => {};
+  
 
 
   // store action

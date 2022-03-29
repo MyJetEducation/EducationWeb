@@ -1,26 +1,33 @@
-import React from 'react';
-import {useTranslation} from 'react-i18next';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Divider from '../components/Divider';
 import LabelInput from '../components/Form/LabelInput';
 import Fields from '../constants/fields';
 import Page from '../routing/Pages';
-import {PrimaryButton, SecondaryButton} from '../styles/Buttons';
-import {FlexContainer} from '../styles/FlexContainer';
-import {AuthForm} from '../styles/FormControls';
-import {PrimaryTextSpan, TextAccentLink} from '../styles/TextsElements';
+import {
+  PrimaryButton,
+  SecondaryButton,
+  TextAccentButton,
+} from '../styles/Buttons';
+import { FlexContainer } from '../styles/FlexContainer';
+import { AuthForm } from '../styles/FormControls';
+import { PrimaryTextSpan, TextAccentLink } from '../styles/TextsElements';
 
-import {UserRegistration} from '../types/UserInfo';
+import { UserRegistration } from '../types/UserInfo';
 import validationInputTexts from '../constants/validationInputTexts';
 import * as yup from 'yup';
 
 import CheckListPassword from '../components/Form/CheckListPassword';
-import {useFormik} from 'formik';
-import {useStores} from "../hooks/useStores";
-import {OperationApiResponseCodes} from "../enums/OperationApiResponseCodes";
+import { useFormik } from 'formik';
+import { useStores } from '../hooks/useStores';
+import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
+import LoaderForComponent from '../components/LoaderForComponent';
 
 const SignUp = () => {
-  const {t} = useTranslation();
-  const {mainAppStore} = useStores();
+  const { t } = useTranslation();
+  const { mainAppStore } = useStores();
+  const [isSuccess, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object().shape<UserRegistration>({
     userName: yup
@@ -48,17 +55,19 @@ const SignUp = () => {
   };
 
   const handleSubmitForm = async () => {
+    setIsLoading(true);
     try {
       const result = await mainAppStore.signUp(values);
       if (result === OperationApiResponseCodes.Ok) {
-        //TODO: redirect on confirm page
+        setSuccess(true);
       }
+      setIsLoading(false);
     } catch (error) {
-
+      //TODO: bad request solution ???
+      setIsLoading(false);
     }
-
   };
-  
+
   const {
     values,
     validateForm,
@@ -67,7 +76,6 @@ const SignUp = () => {
     handleChange,
     errors,
     touched,
-    isSubmitting,
     isValid,
     submitForm,
   } = useFormik({
@@ -78,8 +86,6 @@ const SignUp = () => {
     validateOnBlur: true,
     validateOnChange: true,
   });
-  
-  
 
   const handlerClickSubmit = async () => {
     const curErrors = await validateForm();
@@ -96,8 +102,12 @@ const SignUp = () => {
       width="100%"
       flexDirection="column"
       alignItems="center"
-      padding="72px 0 32px"
+      justifyContent={isSuccess ? 'center' : 'flex-start'}
+      padding={isSuccess ? '16px' : '72px 0 32px'}
+      position="relative"
     >
+      <LoaderForComponent isLoading={isLoading} />
+
       <PrimaryTextSpan
         textAlign="center"
         fontSize="40px"
@@ -105,80 +115,109 @@ const SignUp = () => {
         color="#000"
         marginBottom="24px"
       >
-        {t('Create an account')}
+        {isSuccess ? t('Verify your email') : t('Create an account')}
       </PrimaryTextSpan>
 
-      <FlexContainer width="460px" marginBottom="48px">
-        <PrimaryTextSpan textAlign="center" lineHeight="24px">
-          {t(
-            'Простая обучающая программа по финансовым знаниям, инструментам и управления деньгами.'
-          )}
-        </PrimaryTextSpan>
-      </FlexContainer>
-
-      <AuthForm noValidate onSubmit={handleSubmit}>
-        <FlexContainer alignItems="center" justifyContent="space-between">
-          <FlexContainer width="calc(50% - 12px)">
-            <LabelInput
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.firstName}
-              id={Fields.FIRST_NAME}
-              name={Fields.FIRST_NAME}
-              labelText={t('First Name')}
-            />
-          </FlexContainer>
-          <FlexContainer width="calc(50% - 12px)">
-            <LabelInput
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.lastName}
-              id={Fields.LAST_NAME}
-              name={Fields.LAST_NAME}
-              labelText={t('Last Name')}
-            />
-          </FlexContainer>
+      {isSuccess ? (
+        <FlexContainer width="580px" flexDirection="column" alignItems="center">
+          <PrimaryTextSpan
+            textAlign="center"
+            lineHeight="24px"
+            marginBottom="28px"
+            fontSize="16px"
+          >
+            {t('We`ve sent an email to')}
+            <PrimaryTextSpan color="#000"> {values.userName} </PrimaryTextSpan>
+            {t(
+              'to verify your email address and activate your account. The link in email will expire in 24 hours'
+            )}
+          </PrimaryTextSpan>
+          <PrimaryTextSpan fontSize="16px" fontWeight={400}>
+            {t('Can`t find email.')}&nbsp;
+            <TextAccentButton fontSize="16px">
+              {t('Resend verification email')}
+            </TextAccentButton>
+          </PrimaryTextSpan>
         </FlexContainer>
+      ) : (
+        <>
+          <FlexContainer width="460px" marginBottom="48px">
+            <PrimaryTextSpan textAlign="center" lineHeight="24px">
+              {t(
+                'Простая обучающая программа по финансовым знаниям, инструментам и управления деньгами.'
+              )}
+            </PrimaryTextSpan>
+          </FlexContainer>
 
-        <LabelInput
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={values.userName}
-          id={Fields.EMAIL}
-          name={Fields.USER_NAME}
-          labelText={t('Email')}
-        />
-        <LabelInput
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={values.password}
-          id={Fields.PASSWORD}
-          name={Fields.PASSWORD}
-          labelText={t('Password')}
-          type="password"
-        />
+          <AuthForm noValidate onSubmit={handleSubmit}>
+            <FlexContainer alignItems="center" justifyContent="space-between">
+              <FlexContainer width="calc(50% - 10px)">
+                <LabelInput
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.firstName}
+                  id={Fields.FIRST_NAME}
+                  name={Fields.FIRST_NAME}
+                  labelText={t('First Name')}
+                />
+              </FlexContainer>
+              <FlexContainer width="calc(50% - 10px)">
+                <LabelInput
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.lastName}
+                  id={Fields.LAST_NAME}
+                  name={Fields.LAST_NAME}
+                  labelText={t('Last Name')}
+                />
+              </FlexContainer>
+            </FlexContainer>
 
-        <CheckListPassword password={values.password}/>
-        <PrimaryButton
-          onClick={handlerClickSubmit}
-          type="button"
-          disabled={!isValid}
-        >
-          {t('Create an account')}
-        </PrimaryButton>
+            <LabelInput
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.userName}
+              id={Fields.EMAIL}
+              name={Fields.USER_NAME}
+              labelText={t('Email')}
+            />
+            <LabelInput
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.password}
+              id={Fields.PASSWORD}
+              name={Fields.PASSWORD}
+              labelText={t('Password')}
+              type="password"
+            />
 
-        <Divider label={t('Or continue with')} margin="24px 0"/>
-      </AuthForm>
+            <CheckListPassword password={values.password} />
+            <PrimaryButton
+              onClick={handlerClickSubmit}
+              type="button"
+              disabled={!isValid}
+            >
+              {t('Create an account')}
+            </PrimaryButton>
 
-      <FlexContainer width="340px" flexDirection="column" marginBottom="24px">
-        <SecondaryButton marginBottom="16px">Facebook</SecondaryButton>
-        <SecondaryButton>Google</SecondaryButton>
-      </FlexContainer>
+            <Divider label={t('Or continue with')} margin="24px 0" />
+          </AuthForm>
 
-      <PrimaryTextSpan fontSize="12px" fontWeight={400}>
-        {t('Already have an account?')}&nbsp;
-        <TextAccentLink to={Page.SIGN_IN}>{t('Log In')}</TextAccentLink>
-      </PrimaryTextSpan>
+          <FlexContainer
+            width="340px"
+            flexDirection="column"
+            marginBottom="24px"
+          >
+            <SecondaryButton marginBottom="16px">Facebook</SecondaryButton>
+            <SecondaryButton>Google</SecondaryButton>
+          </FlexContainer>
+
+          <PrimaryTextSpan fontSize="12px" fontWeight={400}>
+            {t('Already have an account?')}&nbsp;
+            <TextAccentLink to={Page.SIGN_IN}>{t('Log In')}</TextAccentLink>
+          </PrimaryTextSpan>
+        </>
+      )}
     </FlexContainer>
   );
 };
