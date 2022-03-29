@@ -1,25 +1,29 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import Divider from '../components/Divider';
 import LabelInput from '../components/Form/LabelInput';
 import Fields from '../constants/fields';
 import Page from '../routing/Pages';
-import { PrimaryButton, SecondaryButton } from '../styles/Buttons';
-import { FlexContainer } from '../styles/FlexContainer';
-import { AuthForm } from '../styles/FormControls';
-import { PrimaryTextSpan, TextAccentLink } from '../styles/TextsElements';
+import {PrimaryButton, SecondaryButton} from '../styles/Buttons';
+import {FlexContainer} from '../styles/FlexContainer';
+import {AuthForm} from '../styles/FormControls';
+import {PrimaryTextSpan, TextAccentLink} from '../styles/TextsElements';
 
-import { UserRegistration } from '../types/UserInfo';
+import {UserRegistration} from '../types/UserInfo';
 import validationInputTexts from '../constants/validationInputTexts';
 import * as yup from 'yup';
 
 import CheckListPassword from '../components/Form/CheckListPassword';
-import { useFormik } from 'formik';
+import {useFormik} from 'formik';
+import {useStores} from "../hooks/useStores";
+import {OperationApiResponseCodes} from "../enums/OperationApiResponseCodes";
+
 const SignUp = () => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
+  const {mainAppStore} = useStores();
 
   const validationSchema = yup.object().shape<UserRegistration>({
-    email: yup
+    userName: yup
       .string()
       .required(t(validationInputTexts.EMAIL))
       .email(t(validationInputTexts.EMAIL)),
@@ -32,21 +36,29 @@ const SignUp = () => {
         /^(?=.*\d)(?=.*[a-zA-Z])/,
         t(validationInputTexts.PASSWORD_MATCH)
       ),
-    userName: yup.string(),
     firstName: yup.string(),
     lastName: yup.string(),
   });
 
   const initialValues: UserRegistration = {
-    email: '',
     password: '',
     userName: '',
     firstName: '',
     lastName: '',
   };
 
-  const handleSubmitForm = () => {};
+  const handleSubmitForm = async () => {
+    try {
+      const result = await mainAppStore.signUp(values);
+      if (result === OperationApiResponseCodes.Ok) {
+        //TODO: redirect on confirm page
+      }
+    } catch (error) {
 
+    }
+
+  };
+  
   const {
     values,
     validateForm,
@@ -66,6 +78,8 @@ const SignUp = () => {
     validateOnBlur: true,
     validateOnChange: true,
   });
+  
+  
 
   const handlerClickSubmit = async () => {
     const curErrors = await validateForm();
@@ -103,20 +117,35 @@ const SignUp = () => {
       </FlexContainer>
 
       <AuthForm noValidate onSubmit={handleSubmit}>
+        <FlexContainer alignItems="center" justifyContent="space-between">
+          <FlexContainer width="calc(50% - 12px)">
+            <LabelInput
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.firstName}
+              id={Fields.FIRST_NAME}
+              name={Fields.FIRST_NAME}
+              labelText={t('First Name')}
+            />
+          </FlexContainer>
+          <FlexContainer width="calc(50% - 12px)">
+            <LabelInput
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.lastName}
+              id={Fields.LAST_NAME}
+              name={Fields.LAST_NAME}
+              labelText={t('Last Name')}
+            />
+          </FlexContainer>
+        </FlexContainer>
+
         <LabelInput
           onBlur={handleBlur}
           onChange={handleChange}
           value={values.userName}
-          id={Fields.USER_NAME}
-          name={Fields.USER_NAME}
-          labelText={t('Full Name')}
-        />
-        <LabelInput
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={values.email}
           id={Fields.EMAIL}
-          name={Fields.EMAIL}
+          name={Fields.USER_NAME}
           labelText={t('Email')}
         />
         <LabelInput
@@ -129,7 +158,7 @@ const SignUp = () => {
           type="password"
         />
 
-        <CheckListPassword password="" />
+        <CheckListPassword password={values.password}/>
         <PrimaryButton
           onClick={handlerClickSubmit}
           type="button"
@@ -138,7 +167,7 @@ const SignUp = () => {
           {t('Create an account')}
         </PrimaryButton>
 
-        <Divider label={t('Or continue with')} margin="24px 0" />
+        <Divider label={t('Or continue with')} margin="24px 0"/>
       </AuthForm>
 
       <FlexContainer width="340px" flexDirection="column" marginBottom="24px">

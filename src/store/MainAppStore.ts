@@ -14,6 +14,7 @@ import { CountriesEnum } from '../enums/CountriesEnum';
 import injectInerceptors from '../http/interceptors';
 import { languagesList } from '../constants/languagesList';
 import { logger } from '../helpers/ConsoleLoggerTool';
+import {UserRegistration} from "../types/UserInfo";
 
 interface MainAppStoreProps {
   token: string;
@@ -114,6 +115,11 @@ export class MainAppStore implements MainAppStoreProps {
   };
 
   signOut = () => {};
+  signUp = async (values: UserRegistration) => {
+    const response = await API.signUp(values);
+    return response.status
+  };
+
 
   // store action
   setTokenHandler = (token: string) => {

@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { UserAuthenticate } from '../types/UserInfo';
+import {UserAuthenticate, UserRegistration, UserRegistrationDTO} from '../types/UserInfo';
 import AUTH_API_LIST from './apiListAuth';
 import requestOptions from '../constants/requestOptions';
 import { RefreshTokenDTO } from '../types/RefreshTokenTypes';
@@ -34,6 +34,14 @@ class API {
   authenticate = async (credentials: UserAuthenticate) => {
     const response = await axios.post<any>(
       `${API_STRING}${AUTH_API_LIST.AUTH.SIGN_IN}`,
+      credentials
+    );
+    return response.data;
+  };
+
+  signUp = async (credentials: UserRegistration) => {
+    const response = await axios.post<UserRegistrationDTO>(
+      `${API_STRING}${AUTH_API_LIST.REGISTER.SIGN_UP}`,
       credentials
     );
     return response.data;

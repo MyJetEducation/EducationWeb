@@ -13,5 +13,9 @@ export interface UserRegistration {
   password: string;
   firstName: string;
   lastName: string;
-  email: string;
+}
+
+export interface UserRegistrationDTO {
+  status: OperationApiResponseCodes
+  data: {}
 }
