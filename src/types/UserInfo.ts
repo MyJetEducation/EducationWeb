@@ -1,4 +1,8 @@
-import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
+
+export interface EmailConfirmationDTO {
+  token: string;
+  refreshToken: string;
+}
 
 export interface UserAuthEmailSend {
   hash: string;
@@ -13,9 +17,4 @@ export interface UserRegistration {
   password: string;
   firstName: string;
   lastName: string;
-}
-
-export interface UserRegistrationDTO {
-  status: OperationApiResponseCodes
-  data: {}
 }

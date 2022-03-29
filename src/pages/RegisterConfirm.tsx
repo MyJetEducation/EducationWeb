@@ -1,26 +1,53 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import Preloader from '../components/Preloader';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
+import LoaderForComponent from '../components/LoaderForComponent';
+import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 import { logger } from '../helpers/ConsoleLoggerTool';
 import { useSearchParams } from '../hooks/useSearchParams';
 import { useStores } from '../hooks/useStores';
+import Page from '../routing/Pages';
+import { PrimaryButton } from '../styles/Buttons';
 import { FlexContainer } from '../styles/FlexContainer';
 import { PrimaryTextSpan } from '../styles/TextsElements';
 
-// ? hash = string
 const RegisterConfirm = () => {
-  const { hash } = useSearchParams<{ hash: string; }>();
-
+  const { hash } = useSearchParams<{ hash: string }>();
+  const { t } = useTranslation();
+  const { push } = useHistory();
   const { mainAppStore } = useStores();
-  
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSuccess, setSuccess] = useState(false);
+
+  const confirmRegistration = async (token: string) => {
+    try {
+      const response = await mainAppStore.sendRegisterConfirm(token);
+      if (response === OperationApiResponseCodes.Ok) {
+        setSuccess(true);
+      }
+
+      //TODO: bad case request ????
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  const handleClickConfirm = () => {
+    if (!isSuccess) {
+      push(Page.SIGN_UP);
+      return;
+    }
+    //TODO: Add key value "is_new_user" true/fasle and push to payment page
+    push(Page.DASHBOARD);
+  };
+
   useEffect(() => {
     if (hash) {
-      mainAppStore.sendRegisterConfirm(hash);
+      confirmRegistration(hash);
     }
-
-    logger(hash);
   }, []);
-  
+
   return (
     <FlexContainer
       width="100%"
@@ -28,8 +55,55 @@ const RegisterConfirm = () => {
       justifyContent="center"
       alignItems="center"
       padding="16px"
+      position="relative"
     >
-      <Preloader />
+      {!isLoading && isSuccess && (
+        <FlexContainer
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <PrimaryTextSpan
+            textAlign="center"
+            fontSize="40px"
+            fontWeight={600}
+            color="#000"
+            marginBottom="56px"
+          >
+            {t('Registration confirmed!')}
+          </PrimaryTextSpan>
+          <FlexContainer width="340px">
+            <PrimaryButton onClick={handleClickConfirm} width="100%">
+              {t('Continue')}
+            </PrimaryButton>
+          </FlexContainer>
+        </FlexContainer>
+      )}
+
+      {!isLoading && !isSuccess && (
+        <FlexContainer
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <PrimaryTextSpan
+            textAlign="center"
+            fontSize="40px"
+            fontWeight={600}
+            color="#000"
+            marginBottom="56px"
+          >
+            {t('Something went wrong')}
+          </PrimaryTextSpan>
+          <FlexContainer width="340px">
+            <PrimaryButton onClick={handleClickConfirm} width="100%">
+              {t('Continue')}
+            </PrimaryButton>
+          </FlexContainer>
+        </FlexContainer>
+      )}
+
+      <LoaderForComponent isLoading={isLoading} />
     </FlexContainer>
   );
 };

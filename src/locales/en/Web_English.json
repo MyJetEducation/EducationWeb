@@ -35,5 +35,7 @@
     "Change password": "Change password",
     "to verify your email address and activate your account. The link in email will expire in 24 hours": "to verify your email address and activate your account. The link in email will expire in 24 hours",
     "Verify your email": "Verify your email",
-    "Resend verification email": "Resend verification email"
+    "Resend verification email": "Resend verification email",
+    "Registration confirmed!": "Registration confirmed!",
+    "Continue": "Continue"
 }

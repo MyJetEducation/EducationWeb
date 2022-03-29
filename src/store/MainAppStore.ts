@@ -14,7 +14,8 @@ import { CountriesEnum } from '../enums/CountriesEnum';
 import injectInerceptors from '../http/interceptors';
 import { languagesList } from '../constants/languagesList';
 import { logger } from '../helpers/ConsoleLoggerTool';
-import {UserRegistration} from "../types/UserInfo";
+import { UserRegistration } from '../types/UserInfo';
+import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 
 interface MainAppStoreProps {
   token: string;
@@ -96,9 +97,13 @@ export class MainAppStore implements MainAppStoreProps {
   // async actions
 
   sendRegisterConfirm = async (hash: string) => {
-    try {
-      const response = await API.registerConfirm(hash);
-    } catch (error) {}
+    const response = await API.registerConfirm(hash);
+    if (response.status === OperationApiResponseCodes.Ok) {
+      this.setTokenHandler(response.data?.token || '');
+      this.setRefreshToken(response.data?.refreshToken || '');
+      this.setIsAuthorized(true);
+    }
+    return response.status;
   };
 
   postRefreshToken = async () => {
@@ -114,16 +119,19 @@ export class MainAppStore implements MainAppStoreProps {
     }
   };
 
-  signIn = () => {}
-  
+  signIn = () => {};
+
   signUp = async (values: UserRegistration) => {
     const response = await API.signUp(values);
-    return response.status
+    return response.status;
   };
 
-  signOut = () => {};
-  
+  signOut = () => {
 
+    this.setRefreshToken('');
+    this.setTokenHandler('');
+    this.setIsAuthorized(false);
+  };
 
   // store action
   setTokenHandler = (token: string) => {
@@ -135,5 +143,9 @@ export class MainAppStore implements MainAppStoreProps {
   setRefreshToken = (refreshToken: string) => {
     localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, refreshToken);
     this.refreshToken = refreshToken;
+  };
+
+  setIsAuthorized = (isAuth: boolean) => {
+    this.isAuthorized = isAuth;
   };
 }

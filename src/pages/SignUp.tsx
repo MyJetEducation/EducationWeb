@@ -22,6 +22,7 @@ import { useFormik } from 'formik';
 import { useStores } from '../hooks/useStores';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 import LoaderForComponent from '../components/LoaderForComponent';
+import apiResponseCodeMessages from '../constants/apiResponseCodeMessages';
 
 const SignUp = () => {
   const { t } = useTranslation();
@@ -43,8 +44,14 @@ const SignUp = () => {
         /^(?=.*\d)(?=.*[a-zA-Z])/,
         t(validationInputTexts.PASSWORD_MATCH)
       ),
-    firstName: yup.string(),
-    lastName: yup.string(),
+    firstName: yup
+      .string()
+      .required(t(validationInputTexts.REQUIRED_FIELD))
+      .min(2, t(validationInputTexts.TEXT_MIN_CHARACTERS)),
+    lastName: yup
+      .string()
+      .required(t(validationInputTexts.REQUIRED_FIELD))
+      .min(2, t(validationInputTexts.TEXT_MIN_CHARACTERS)),
   });
 
   const initialValues: UserRegistration = {
@@ -58,8 +65,23 @@ const SignUp = () => {
     setIsLoading(true);
     try {
       const result = await mainAppStore.signUp(values);
-      if (result === OperationApiResponseCodes.Ok) {
-        setSuccess(true);
+
+      switch (result) {
+        case OperationApiResponseCodes.Ok:
+          setSuccess(true);
+          break;
+
+        case OperationApiResponseCodes.UserAlreadyExists:
+        case OperationApiResponseCodes.NotValidEmail:
+          setFieldError(Fields.USER_NAME, t(apiResponseCodeMessages[result]));
+          break;
+
+        case OperationApiResponseCodes.NotValidPassword:
+          setFieldError(Fields.PASSWORD, t(apiResponseCodeMessages[result]));
+          break;
+          
+        default:
+          break;
       }
       setIsLoading(false);
     } catch (error) {
@@ -74,6 +96,7 @@ const SignUp = () => {
     handleSubmit,
     handleBlur,
     handleChange,
+    setFieldError,
     errors,
     touched,
     isValid,
@@ -176,6 +199,8 @@ const SignUp = () => {
             <LabelInput
               onBlur={handleBlur}
               onChange={handleChange}
+              hasError={!!(touched.userName && errors.userName)}
+              errorText={errors.userName}
               value={values.userName}
               id={Fields.EMAIL}
               name={Fields.USER_NAME}

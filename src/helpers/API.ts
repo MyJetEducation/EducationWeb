@@ -1,8 +1,13 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import {UserAuthenticate, UserRegistration, UserRegistrationDTO} from '../types/UserInfo';
+import {
+  EmailConfirmationDTO,
+  UserAuthenticate,
+  UserRegistration,
+} from '../types/UserInfo';
 import AUTH_API_LIST from './apiListAuth';
 import requestOptions from '../constants/requestOptions';
 import { RefreshTokenDTO } from '../types/RefreshTokenTypes';
+import { ApiResponseType } from '../types/ApiResponseType';
 
 class API {
   private convertParamsToFormData = (params: { [key: string]: any }) => {
@@ -40,7 +45,7 @@ class API {
   };
 
   signUp = async (credentials: UserRegistration) => {
-    const response = await axios.post<UserRegistrationDTO>(
+    const response = await axios.post<ApiResponseType<any>>(
       `${API_STRING}${AUTH_API_LIST.REGISTER.SIGN_UP}`,
       credentials
     );
@@ -51,7 +56,7 @@ class API {
   --- Background Request
   */
   registerConfirm = async (hash: string) => {
-    const response = await axios.post<any>(
+    const response = await axios.post<ApiResponseType<EmailConfirmationDTO>>(
       `${API_STRING}${AUTH_API_LIST.REGISTER.REGISTER_CONFIRM}`,
       JSON.stringify(hash),
       {
