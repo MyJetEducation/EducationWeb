@@ -14,7 +14,6 @@ import { AuthForm } from '../styles/FormControls';
 import { PrimaryTextSpan, TextAccentLink } from '../styles/TextsElements';
 
 import { UserRegistration } from '../types/UserInfo';
-import validationInputTexts from '../constants/validationInputTexts';
 import * as yup from 'yup';
 
 import CheckListPassword from '../components/Form/CheckListPassword';
@@ -31,34 +30,22 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object().shape<UserRegistration>({
-    userName: yup
-      .string()
-      .required(t(validationInputTexts.EMAIL))
-      .email(t(validationInputTexts.EMAIL)),
+    userName: yup.string().required().email(),
     password: yup
       .string()
-      .required(t(validationInputTexts.REQUIRED_FIELD))
-      .min(8, t(validationInputTexts.PASSWORD_MIN_CHARACTERS))
-      .max(31, t(validationInputTexts.PASSWORD_MAX_CHARACTERS))
-      .matches(
-        /^(?=.*\d)(?=.*[a-zA-Z])/,
-        t(validationInputTexts.PASSWORD_MATCH)
-      ),
-    firstName: yup
-      .string()
-      .required(t(validationInputTexts.REQUIRED_FIELD))
-      .min(2, t(validationInputTexts.TEXT_MIN_CHARACTERS)),
-    lastName: yup
-      .string()
-      .required(t(validationInputTexts.REQUIRED_FIELD))
-      .min(2, t(validationInputTexts.TEXT_MIN_CHARACTERS)),
+      .required()
+      .min(8)
+      .max(31)
+      .matches(/^(?=.*\d)(?=.*[a-zA-Z0-9])/),
+    firstName: yup.string().required().min(2),
+    lastName: yup.string().required().min(2),
   });
 
   const initialValues: UserRegistration = {
-    password: '',
-    userName: '',
     firstName: '',
     lastName: '',
+    userName: '',
+    password: '',
   };
 
   const handleSubmitForm = async () => {
@@ -79,7 +66,7 @@ const SignUp = () => {
         case OperationApiResponseCodes.NotValidPassword:
           setFieldError(Fields.PASSWORD, t(apiResponseCodeMessages[result]));
           break;
-          
+
         default:
           break;
       }
