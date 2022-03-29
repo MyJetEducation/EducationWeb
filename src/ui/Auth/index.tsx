@@ -55,7 +55,6 @@ export const Auth = () => {
     if (formFields.userName.length >= 1 && formFields.password.length >= 1) {
       setDisabled(false)
     }
-
   }, [formFields.userName, formFields.password]);
 
   const handleBlurEmail = () => {
@@ -74,7 +73,6 @@ export const Auth = () => {
     }
   }, [error, invalidUser])
 
-
   useEffect(() => {
     dispatch(resetUser())
   }, [])
@@ -82,7 +80,6 @@ export const Auth = () => {
   const handleLocate = () => {
     window.location.reload()
   }
-
   return (
     <div className={s.wrap}>
       <h3 className={s.title}>Log In</h3>

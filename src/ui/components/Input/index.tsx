@@ -50,7 +50,9 @@ export const Input: React.FC<inputProps> = (
   }
 
   const handleClickShowPassword = () => {
-    onChangeShowPass && onChangeShowPass((prevState: any) => !prevState)
+    if (value.length > 0) {
+      onChangeShowPass && onChangeShowPass((prevState: any) => !prevState)
+    }
   }
 
 
