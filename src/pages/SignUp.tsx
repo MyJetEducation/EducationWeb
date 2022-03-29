@@ -14,6 +14,7 @@ import validationInputTexts from '../constants/validationInputTexts';
 import * as yup from 'yup';
 
 import CheckListPassword from '../components/Form/CheckListPassword';
+import { useFormik } from 'formik';
 const SignUp = () => {
   const { t } = useTranslation();
 
@@ -44,6 +45,38 @@ const SignUp = () => {
     lastName: '',
   };
 
+  const handleSubmitForm = () => {};
+
+  const {
+    values,
+    validateForm,
+    handleSubmit,
+    handleBlur,
+    handleChange,
+    errors,
+    touched,
+    isSubmitting,
+    isValid,
+    submitForm,
+  } = useFormik({
+    initialValues,
+    onSubmit: handleSubmitForm,
+    validationSchema,
+    validateOnMount: true,
+    validateOnBlur: true,
+    validateOnChange: true,
+  });
+
+  const handlerClickSubmit = async () => {
+    const curErrors = await validateForm();
+    const curErrorsKeys = Object.keys(curErrors);
+    if (curErrorsKeys.length) {
+      const el = document.getElementById(curErrorsKeys[0]);
+      if (el) el.focus();
+    }
+    submitForm();
+  };
+
   return (
     <FlexContainer
       width="100%"
@@ -69,18 +102,27 @@ const SignUp = () => {
         </PrimaryTextSpan>
       </FlexContainer>
 
-      <AuthForm>
+      <AuthForm noValidate onSubmit={handleSubmit}>
         <LabelInput
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={values.userName}
           id={Fields.USER_NAME}
           name={Fields.USER_NAME}
           labelText={t('Full Name')}
         />
         <LabelInput
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={values.email}
           id={Fields.EMAIL}
           name={Fields.EMAIL}
           labelText={t('Email')}
         />
         <LabelInput
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={values.password}
           id={Fields.PASSWORD}
           name={Fields.PASSWORD}
           labelText={t('Password')}
@@ -88,7 +130,13 @@ const SignUp = () => {
         />
 
         <CheckListPassword password="" />
-        <PrimaryButton>{t('Create an account')}</PrimaryButton>
+        <PrimaryButton
+          onClick={handlerClickSubmit}
+          type="button"
+          disabled={!isValid}
+        >
+          {t('Create an account')}
+        </PrimaryButton>
 
         <Divider label={t('Or continue with')} margin="24px 0" />
       </AuthForm>
