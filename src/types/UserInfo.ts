@@ -7,6 +7,11 @@ export interface UserProfileType {
 }
 
 
+export interface RecoveryPasswordType {
+  hash: string;
+  password: string;
+  confirmPassword?: string;
+}
 
 export interface UserAuthEmailSend {
   hash: string;

@@ -22,6 +22,7 @@ import { useStores } from '../hooks/useStores';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 import LoaderForComponent from '../components/LoaderForComponent';
 import apiResponseCodeMessages from '../constants/apiResponseCodeMessages';
+import validationInputTexts from '../constants/validationInputTexts';
 
 const SignUp = () => {
   const { t } = useTranslation();
@@ -30,15 +31,27 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object().shape<UserRegistration>({
-    userName: yup.string().required().email(),
+    userName: yup
+      .string()
+      .required(t(validationInputTexts.REQUIRED_FIELD))
+      .email(t(validationInputTexts.EMAIL)),
     password: yup
       .string()
-      .required()
-      .min(8)
-      .max(31)
-      .matches(/^(?=.*\d)(?=.*[a-zA-Z0-9])/),
-    firstName: yup.string().required().min(2),
-    lastName: yup.string().required().min(2),
+      .required(t(validationInputTexts.REQUIRED_FIELD))
+      .min(8, t(validationInputTexts.PASSWORD_MIN_CHARACTERS))
+      .max(31, t(validationInputTexts.PASSWORD_MAX_CHARACTERS))
+      .matches(
+        /^(?=.*\d)(?=.*[a-zA-Z0-9])/,
+        t(validationInputTexts.PASSWORD_MATCH)
+      ),
+    firstName: yup
+      .string()
+      .required(t(validationInputTexts.REQUIRED_FIELD))
+      .min(2, t(validationInputTexts.TEXT_MIN_CHARACTERS)),
+    lastName: yup
+      .string()
+      .required(t(validationInputTexts.REQUIRED_FIELD))
+      .min(2, t(validationInputTexts.TEXT_MIN_CHARACTERS)),
   });
 
   const initialValues: UserRegistration = {
@@ -160,7 +173,7 @@ const SignUp = () => {
           </FlexContainer>
 
           <AuthForm noValidate onSubmit={handleSubmit}>
-            <FlexContainer alignItems="center" justifyContent="space-between">
+            <FlexContainer alignItems="flex-start" justifyContent="space-between">
               <FlexContainer width="calc(50% - 10px)">
                 <LabelInput
                   onBlur={handleBlur}
@@ -169,6 +182,8 @@ const SignUp = () => {
                   id={Fields.FIRST_NAME}
                   name={Fields.FIRST_NAME}
                   labelText={t('First Name')}
+                  hasError={!!(touched.firstName && errors.firstName)}
+                  errorText={errors.firstName}
                 />
               </FlexContainer>
               <FlexContainer width="calc(50% - 10px)">
@@ -179,6 +194,8 @@ const SignUp = () => {
                   id={Fields.LAST_NAME}
                   name={Fields.LAST_NAME}
                   labelText={t('Last Name')}
+                  hasError={!!(touched.lastName && errors.lastName)}
+                  errorText={errors.lastName}
                 />
               </FlexContainer>
             </FlexContainer>
@@ -186,12 +203,12 @@ const SignUp = () => {
             <LabelInput
               onBlur={handleBlur}
               onChange={handleChange}
-              hasError={!!(touched.userName && errors.userName)}
-              errorText={errors.userName}
               value={values.userName}
               id={Fields.USER_NAME}
               name={Fields.USER_NAME}
               labelText={t('Email')}
+              hasError={!!(touched.userName && errors.userName)}
+              errorText={errors.userName}
             />
             <LabelInput
               onBlur={handleBlur}
@@ -201,6 +218,8 @@ const SignUp = () => {
               name={Fields.PASSWORD}
               labelText={t('Password')}
               type="password"
+              hasError={!!(touched.password && errors.password)}
+              errorText={errors.password}
             />
 
             <CheckListPassword password={values.password} />
@@ -233,6 +252,5 @@ const SignUp = () => {
     </FlexContainer>
   );
 };
-
 
 export default SignUp;

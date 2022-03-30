@@ -13,7 +13,7 @@ const Page = {
   SIGN_UP: '/sign-up',
   REGISTER_CONFIRM: '/register-confirm',
   FORGOT_PASSWORD: '/forgot-password',
-  RESET_PASSWORD: '/reset-password',
+  RESET_PASSWORD: '/password-recovery',
 
   ONBOARDING: '/onboarding',
 

@@ -16,6 +16,7 @@ import LoaderForComponent from '../components/LoaderForComponent';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 import apiResponseCodeMessages from '../constants/apiResponseCodeMessages';
 import { useHistory } from 'react-router-dom';
+import validationInputTexts from '../constants/validationInputTexts';
 
 const SignIn = () => {
   const { t } = useTranslation();
@@ -24,13 +25,19 @@ const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object().shape<UserAuthenticate>({
-    userName: yup.string().required().email(),
+    userName: yup
+      .string()
+      .required(t(validationInputTexts.REQUIRED_FIELD))
+      .email(t(validationInputTexts.EMAIL)),
     password: yup
       .string()
-      .required()
-      .min(8)
-      .max(31)
-      .matches(/^(?=.*\d)(?=.*[a-zA-Z0-9])/),
+      .required(t(validationInputTexts.REQUIRED_FIELD))
+      .min(8, t(validationInputTexts.PASSWORD_MIN_CHARACTERS))
+      .max(31, t(validationInputTexts.PASSWORD_MAX_CHARACTERS))
+      .matches(
+        /^(?=.*\d)(?=.*[a-zA-Z0-9])/,
+        t(validationInputTexts.PASSWORD_MATCH)
+      ),
   });
 
   const initialValues: UserAuthenticate = {
@@ -46,7 +53,7 @@ const SignIn = () => {
       switch (result) {
         case OperationApiResponseCodes.Ok:
           push(Page.DASHBOARD);
-          return null
+          return null;
 
         case OperationApiResponseCodes.UserAlreadyExists:
         case OperationApiResponseCodes.NotValidEmail:
@@ -59,7 +66,6 @@ const SignIn = () => {
 
         default:
           break;
-
       }
       setIsLoading(false);
     } catch (error) {
@@ -136,6 +142,8 @@ const SignIn = () => {
             name={Fields.PASSWORD}
             labelText={t('Password')}
             type="password"
+            hasError={!!(touched.password && errors.password)}
+            errorText={errors.password}
           />
 
           <FlexContainer

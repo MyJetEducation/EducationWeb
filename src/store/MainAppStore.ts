@@ -156,11 +156,6 @@ export class MainAppStore implements MainAppStoreProps {
     this.reset();
   };
 
-  forgotPassword = async (values: UserForgotPassword) => {
-    const response = await API.forgotPassword(values.userName);
-    return response.status;
-  };
-
   // store action
   setTokenHandler = (token: string) => {
     localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);

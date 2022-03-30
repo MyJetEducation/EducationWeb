@@ -7,13 +7,15 @@ import { PrimaryButton, TextAccentButton } from '../styles/Buttons';
 import { FlexContainer } from '../styles/FlexContainer';
 import { AuthForm } from '../styles/FormControls';
 import { PrimaryTextSpan, TextAccentLink } from '../styles/TextsElements';
-import {useFormik} from "formik";
-import {OperationApiResponseCodes} from "../enums/OperationApiResponseCodes";
-import apiResponseCodeMessages from "../constants/apiResponseCodeMessages";
-import {useStores} from "../hooks/useStores";
-import * as yup from "yup";
-import {UserForgotPassword} from "../types/UserInfo";
-import LoaderForComponent from "../components/LoaderForComponent";
+import { useFormik } from 'formik';
+import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
+import apiResponseCodeMessages from '../constants/apiResponseCodeMessages';
+import { useStores } from '../hooks/useStores';
+import * as yup from 'yup';
+import { UserForgotPassword } from '../types/UserInfo';
+import LoaderForComponent from '../components/LoaderForComponent';
+import validationInputTexts from '../constants/validationInputTexts';
+import API from '../helpers/API';
 
 const ForgotPassword = () => {
   const { t } = useTranslation();
@@ -22,7 +24,10 @@ const ForgotPassword = () => {
   const [isSent, setSent] = useState(false);
 
   const validationSchema = yup.object().shape<UserForgotPassword>({
-    userName: yup.string().required().email(),
+    userName: yup
+      .string()
+      .required(t(validationInputTexts.REQUIRED_FIELD))
+      .email(t(validationInputTexts.EMAIL)),
   });
 
   const initialValues: UserForgotPassword = {
@@ -32,27 +37,27 @@ const ForgotPassword = () => {
   const handleSubmitForm = async () => {
     setIsLoading(true);
     try {
-      const result = await mainAppStore.forgotPassword(values);
-      switch (result) {
+      const result =  await API.forgotPassword(values.userName);
+
+      switch (result.status) {
         case OperationApiResponseCodes.Ok:
           setSent(true);
-          setIsLoading(false);
-          return null
+          break;
 
         case OperationApiResponseCodes.UserAlreadyExists:
         case OperationApiResponseCodes.NotValidEmail:
-          setFieldError(Fields.USER_NAME, t(apiResponseCodeMessages[result]));
+          setFieldError(Fields.USER_NAME, t(apiResponseCodeMessages[result.status]));
           break;
+
         default:
           break;
-
       }
-
+      setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
     }
   };
-  console.log("####: isLoading", isLoading);
+
   const {
     values,
     validateForm,
@@ -88,9 +93,9 @@ const ForgotPassword = () => {
       width="100%"
       flexDirection="column"
       alignItems="center"
-      padding={'72px 0 32px'}
-      justifyContent={'flex-start'}
-      position={"relative"}
+      padding={isSent ? '16px' : '72px 0 32px'}
+      justifyContent={isSent ? 'center' : 'flex-start'}
+      position="relative"
     >
       <LoaderForComponent isLoading={isLoading} />
       <PrimaryTextSpan

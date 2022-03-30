@@ -18,6 +18,7 @@ interface Props {
   hasError?: boolean;
   autoComplete?: string;
   errorText?: string;
+  tabIndex?: number;
 }
 
 const LabelInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
@@ -32,6 +33,7 @@ const LabelInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
     hasError,
     autoComplete,
     errorText,
+    tabIndex,
   } = props;
 
   const [showPassword, setShowPassword] = useState(false);
@@ -59,6 +61,7 @@ const LabelInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
           required
           hasError={hasError}
           autoComplete={autoComplete}
+          tabIndex={tabIndex}
         ></Input>
         <Label>{labelText}</Label>
 

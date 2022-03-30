@@ -1,8 +1,11 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import {
   EmailConfirmationDTO,
+  RecoveryPasswordType,
   UserAuthenticate,
-  UserAuthenticateDTO, UserForgotPassword,
+  UserAuthenticateDTO,
+  UserForgotPassword,
+  UserProfileType,
   UserRegistration,
 } from '../types/UserInfo';
 import AUTH_API_LIST from './apiListAuth';
@@ -57,11 +60,19 @@ class API {
 
   forgotPassword = async (email: string) => {
     const response = await axios.post<ApiResponseType<any>>(
-      `${API_STRING}${AUTH_API_LIST.RECOVERY_CHANGE_PASSWORD.RECOVERY}`,
+      `${API_STRING}${AUTH_API_LIST.REGISTER.RECOVERY_PASSWORD}`,
       JSON.stringify(email),
       {
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
       }
+    );
+    return response.data;
+  };
+
+  recoveryPassword = async (credentials: RecoveryPasswordType) => {
+    const response = await axios.post<ApiResponseType<any>>(
+      `${API_STRING}${AUTH_API_LIST.REGISTER.CHANGE_PASSWORD}`,
+      credentials
     );
     return response.data;
   };
@@ -98,14 +109,12 @@ class API {
     return response.data;
   };
 
-
   getTutorials = async () => {
     const response = await axios.post<ApiResponseType<TutorialsListType>>(
       `${API_STRING}${API_LIST.DASHBOARD.TUTORIALS_LIST}`
     );
     return response.data;
-  }
-
+  };
 }
 
 export default new API();

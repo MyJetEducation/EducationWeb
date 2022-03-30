@@ -21,8 +21,8 @@ const RegisterConfirm = () => {
 
   const confirmRegistration = async (token: string) => {
     try {
-      const response = await mainAppStore.sendRegisterConfirm(token);
-      if (response === OperationApiResponseCodes.Ok) {
+      const result = await mainAppStore.sendRegisterConfirm(token);
+      if (result === OperationApiResponseCodes.Ok) {
         setSuccess(true);
       }
       setIsLoading(false);
