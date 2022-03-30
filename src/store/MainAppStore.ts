@@ -64,7 +64,8 @@ export class MainAppStore implements MainAppStoreProps {
     this.token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY) || '';
     this.refreshToken =
       localStorage.getItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY) || '';
-    Axios.defaults.headers[RequestHeaders.AUTHORIZATION] = this.token;
+    Axios.defaults.headers[RequestHeaders.AUTHORIZATION] =
+      'Bearer ' + this.token;
     Axios.defaults.timeout = this.connectTimeOut;
 
     const newLang =
@@ -96,6 +97,15 @@ export class MainAppStore implements MainAppStoreProps {
 
   // async actions
 
+  initApp = async () => {
+    if (!this.token) {
+      return;
+    }
+    // TODO: check fist request for init
+    this.setIsAuthorized(true);
+    await this.rootStore.userProfileStore.getUserAccount();
+  };
+
   sendRegisterConfirm = async (hash: string) => {
     const response = await API.registerConfirm(hash);
     if (response.status === OperationApiResponseCodes.Ok) {
@@ -110,22 +120,24 @@ export class MainAppStore implements MainAppStoreProps {
     try {
       const response = await API.refreshToken(this.refreshToken);
       logger(response);
-      if (response.refreshToken) {
-        this.setRefreshToken(response.refreshToken);
-        this.setTokenHandler(response.token);
+      if (response.status === OperationApiResponseCodes.Ok) {
+        this.setRefreshToken(response.data.refreshToken);
+        this.setTokenHandler(response.data.token);
       }
     } catch (error) {
       logger(error);
+      this.setRefreshToken('');
+      this.setTokenHandler('');
     }
   };
 
   signIn = async (values: UserAuthenticate) => {
     const response = await API.authenticate(values);
     if (response.status === OperationApiResponseCodes.Ok) {
-
       this.setTokenHandler(response.data?.token || '');
       this.setRefreshToken(response.data?.refreshToken || '');
 
+      await this.initApp();
       this.setIsAuthorized(true);
     }
     return response.status;
@@ -140,12 +152,14 @@ export class MainAppStore implements MainAppStoreProps {
     this.setRefreshToken('');
     this.setTokenHandler('');
     this.setIsAuthorized(false);
+
+    this.reset();
   };
 
   // store action
   setTokenHandler = (token: string) => {
     localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
-    Axios.defaults.headers[RequestHeaders.AUTHORIZATION] = token;
+    Axios.defaults.headers[RequestHeaders.AUTHORIZATION] = 'Bearer ' + token;
     this.token = token;
   };
 
@@ -156,5 +170,15 @@ export class MainAppStore implements MainAppStoreProps {
 
   setIsAuthorized = (isAuth: boolean) => {
     this.isAuthorized = isAuth;
+  };
+
+  setIsLoading = (loading: boolean) => {
+    this.isLoading = loading;
+  };
+
+  // reset stores
+  reset = () => {
+    this.rootStore.userProfileStore.reset();
+    this.rootStore.tutorialStore.reset();
   };
 }

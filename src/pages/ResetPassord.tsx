@@ -10,7 +10,7 @@ import { PrimaryTextSpan } from '../styles/TextsElements';
 
 const ResetPassord = () => {
   const { t } = useTranslation();
-  const [isSent, setSent] = useState(false);
+  const [isSent, setSent] = useState(true);
 
   return (
     <FlexContainer

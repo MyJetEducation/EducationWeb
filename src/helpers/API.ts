@@ -3,12 +3,15 @@ import {
   EmailConfirmationDTO,
   UserAuthenticate,
   UserAuthenticateDTO,
+  UserProfileType,
   UserRegistration,
 } from '../types/UserInfo';
 import AUTH_API_LIST from './apiListAuth';
 import requestOptions from '../constants/requestOptions';
 import { RefreshTokenDTO } from '../types/RefreshTokenTypes';
 import { ApiResponseType } from '../types/ApiResponseType';
+import API_LIST from './apiList';
+import { TutorialsListType } from '../types/TutorialTypes';
 
 class API {
   private convertParamsToFormData = (params: { [key: string]: any }) => {
@@ -68,7 +71,7 @@ class API {
   };
 
   refreshToken = async (refreshToken: string) => {
-    const response = await axios.post<RefreshTokenDTO>(
+    const response = await axios.post<ApiResponseType<RefreshTokenDTO>>(
       `${API_STRING}${AUTH_API_LIST.AUTH.REFRESH_TOKEN}`,
       JSON.stringify(refreshToken),
       {
@@ -77,6 +80,22 @@ class API {
     );
     return response.data;
   };
+
+  getUserProfile = async () => {
+    const response = await axios.post<ApiResponseType<UserProfileType>>(
+      `${API_STRING}${API_LIST.USER_ACCOUNT.GET}`
+    );
+    return response.data;
+  };
+
+
+  getTutorials = async () => {
+    const response = await axios.post<ApiResponseType<TutorialsListType>>(
+      `${API_STRING}${API_LIST.DASHBOARD.TUTORIALS_LIST}`
+    );
+    return response.data;
+  }
+
 }
 
 export default new API();

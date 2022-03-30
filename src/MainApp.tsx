@@ -19,6 +19,12 @@ const MainApp: FC = () => {
   const { i18n } = useTranslation();
 
   useEffect(() => {
+    (async () => {
+      try {
+        await mainAppStore.initApp();
+      } catch (error) {}
+    })();
+
     const windowResize = window.addEventListener('resize', () => {
       setFullHeightProperty();
     });
@@ -41,7 +47,9 @@ const MainApp: FC = () => {
       </Helmet>
 
       <Router>
-        <RoutingLayout />
+        <PageTemplateContainer>
+          <RoutingLayout />
+        </PageTemplateContainer>
       </Router>
 
       <Global
@@ -55,6 +63,14 @@ const MainApp: FC = () => {
           }
           body {
             overflow: hidden;
+          }
+          &::-webkit-scrollbar {
+            width: 6px;
+            background-color: transparent;
+          }
+          &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: #c1c7cf;
           }
         `}
       />

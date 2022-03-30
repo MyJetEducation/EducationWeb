@@ -5,8 +5,13 @@ import { PrimaryTextSpan } from '../../../styles/TextsElements';
 import SvgIcon from '../../SvgIcon';
 import IconCurrency from '../../../assets/svg_no_compress/icon-currency.svg';
 import { numberFormat } from '../../../helpers/numberFormat';
+import { useStores } from '../../../hooks/useStores';
+import { observer } from 'mobx-react-lite';
+import { getAccountInitials } from '../../../helpers/getAccountInitials';
 
-const NavBarAccountProfile = () => {
+const NavBarAccountProfile = observer(() => {
+  const { userProfileStore } = useStores();
+
   return (
     <FlexContainer alignItems="center">
       <FlexContainer alignItems="center" marginRight="20px">
@@ -26,13 +31,21 @@ const NavBarAccountProfile = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <PrimaryTextSpan fontSize="16px" color="#000" fontWeight={600}>
-            RG
+          <PrimaryTextSpan
+            fontSize="16px"
+            color="#000"
+            fontWeight={600}
+            textTransform="uppercase"
+          >
+            {getAccountInitials(
+              userProfileStore.userAccount?.firstName,
+              userProfileStore.userAccount?.lastName
+            )}
           </PrimaryTextSpan>
         </FlexContainer>
       </ButtonWithoutStyles>
     </FlexContainer>
   );
-};
+});
 
 export default NavBarAccountProfile;

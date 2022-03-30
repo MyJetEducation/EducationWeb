@@ -8,7 +8,6 @@ import { Observer } from 'mobx-react-lite';
 import { Redirect } from 'react-router-dom';
 import PublicContainer from '../containers/PublicContainer';
 import SignFlowContainer from '../containers/SignFlowContainer';
-import PageTemplateContainer from '../containers/PageTemplateContainer';
 
 const RoutingLayout: FC = () => {
   const location = useLocation();
@@ -31,62 +30,56 @@ const RoutingLayout: FC = () => {
   switch (layoutType) {
     case RouteLayoutType.Authorized:
       return (
-        <PageTemplateContainer>
-          <AuthorizedContainer>
-            <Observer>
-              {() => (
-                <>
-                  {!location.search && (
-                    <Redirect to={location.pathname.replace(/\/+$/, '')} />
-                  )}
-                  <Switch>{allRoutes}</Switch>
-                </>
-              )}
-            </Observer>
-          </AuthorizedContainer>
-        </PageTemplateContainer>
+        <AuthorizedContainer>
+          <Observer>
+            {() => (
+              <>
+                {!location.search && (
+                  <Redirect to={location.pathname.replace(/\/+$/, '')} />
+                )}
+                <Switch>{allRoutes}</Switch>
+              </>
+            )}
+          </Observer>
+        </AuthorizedContainer>
       );
 
     case RouteLayoutType.SignFlow:
       return (
-        <PageTemplateContainer>
-          <SignFlowContainer>
-            {!location.search && (
-              <Redirect to={location.pathname.replace(/\/+$/, '')} />
+        <SignFlowContainer>
+          {!location.search && (
+            <Redirect to={location.pathname.replace(/\/+$/, '')} />
+          )}
+          <Observer>
+            {() => (
+              <>
+                {!location.search && (
+                  <Redirect to={location.pathname.replace(/\/+$/, '')} />
+                )}
+                <Switch>{allRoutes}</Switch>
+              </>
             )}
-            <Observer>
-              {() => (
-                <>
-                  {!location.search && (
-                    <Redirect to={location.pathname.replace(/\/+$/, '')} />
-                  )}
-                  <Switch>{allRoutes}</Switch>
-                </>
-              )}
-            </Observer>
-          </SignFlowContainer>
-        </PageTemplateContainer>
+          </Observer>
+        </SignFlowContainer>
       );
 
     default:
       return (
-        <PageTemplateContainer>
-          <PublicContainer>
-            {!location.search && (
-              <Redirect to={location.pathname.replace(/\/+$/, '')} />
+        <PublicContainer>
+          {!location.search && (
+            <Redirect to={location.pathname.replace(/\/+$/, '')} />
+          )}
+          <Observer>
+            {() => (
+              <>
+                {!location.search && (
+                  <Redirect to={location.pathname.replace(/\/+$/, '')} />
+                )}
+                <Switch>{allRoutes}</Switch>
+              </>
             )}
-            <Observer>
-              {() => (
-                <>
-                  {!location.search && (
-                    <Redirect to={location.pathname.replace(/\/+$/, '')} />
-                  )}
-                  <Switch>{allRoutes}</Switch>
-                </>
-              )}
-            </Observer>
-          </PublicContainer>
-        </PageTemplateContainer>
+          </Observer>
+        </PublicContainer>
       );
   }
 };

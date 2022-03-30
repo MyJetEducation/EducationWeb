@@ -5,7 +5,7 @@ interface PrimaryTextType {
   color?: string;
   fontWeight?: 'bold' | 'normal' | number;
   fontStyle?: 'italic' | 'normal';
-  fontSize?: '12px' | '16px' | '18px' | '28px' | '40px';
+  fontSize?: '12px' | '16px' | '18px' | '20px' | '28px' | '32px' | '40px';
   lineHeight?: string;
   marginRight?: string;
   marginBottom?: string;
@@ -91,15 +91,15 @@ interface TextAccentLinkProps {
   fontSize?: string;
 }
 export const TextAccentLink = styled(Link)<TextAccentLinkProps>`
-  color: #374DFB;
+  color: #374dfb;
   font-weight: 400;
-  font-size: ${props => props.fontSize || '12px'};
+  font-size: ${(props) => props.fontSize || '12px'};
   text-decoration: none;
   transition: all 0.4s ease;
 
   &:hover {
     text-decoration: none;
-    color: #374DFB;
+    color: #374dfb;
   }
 `;
 
@@ -119,4 +119,11 @@ export const BorderLink = styled(Link)`
     border-color: #000;
     background-color: #000;
   }
+`;
+
+export const PageTitle = styled(PrimaryTextSpan)`
+  color: #000000;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
 `;

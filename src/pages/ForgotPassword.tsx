@@ -10,7 +10,7 @@ import { PrimaryTextSpan, TextAccentLink } from '../styles/TextsElements';
 
 const ForgotPassword = () => {
   const { t } = useTranslation();
-  const [isSent, setSent] = useState(false);
+  const [isSent, setSent] = useState(true);
 
   return (
     <FlexContainer

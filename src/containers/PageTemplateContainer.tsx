@@ -14,12 +14,14 @@ const PageTemplateContainer: FC = ({ children }) => {
       <NavBar />
 
       <FlexContainer
-        flexDirection="column"
-        overflow="auto"
         flex="1"
-        width={CONTENT_WIDTH}
+        overflow="auto"
+        justifyContent="center"
+        width="100%"
       >
-        {children}
+        <FlexContainer flexDirection="column" width={CONTENT_WIDTH}>
+          {children}
+        </FlexContainer>
       </FlexContainer>
     </FlexContainer>
   );

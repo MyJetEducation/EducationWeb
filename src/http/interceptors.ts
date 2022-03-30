@@ -31,35 +31,73 @@ const injectInerceptors = (mainAppStore: MainAppStore) => {
     async function (error) {
       const originalRequest = error.config;
 
+      const repeatRequest = (callback: any) => {
+        callback(originalRequest);
+      };
+
       switch (error.response?.status) {
         case 401: {
-          // refresh token
-          logger('refresh token');
-          if (mainAppStore.refreshToken) {
-            return new Promise(function (resolve, reject) {
-              mainAppStore
-                .postRefreshToken()
-                .then(() => {
-                  axios.defaults.headers[RequestHeaders.AUTHORIZATION] =
-                    mainAppStore.token;
+          if (!mainAppStore.isAuthorized) {
+            return Promise.reject(error);
+          } else {
+            if (mainAppStore.refreshToken && !originalRequest._retry) {
+              if (isRefreshing) {
+                try {
+                  const token = await new Promise(function (resolve, reject) {
+                    failedQueue.push({ resolve, reject });
+                  });
+                  originalRequest.headers[RequestHeaders.AUTHORIZATION] =
+                    'Bearer ' + token;
+                  return await axios(originalRequest);
+                } catch (err) {
+                  return await Promise.reject(err);
+                }
+              }
 
-                  error.config.headers[RequestHeaders.AUTHORIZATION] =
-                    mainAppStore.token;
-                  originalRequest._retry = false;
+              originalRequest._retry = true;
+              isRefreshing = true;
 
-                  resolve(axios(originalRequest));
-                })
-                .catch((err) => {
-                  mainAppStore.setRefreshToken('');
-                  reject(err);
-                });
-            });
+              return new Promise(function (resolve, reject) {
+                mainAppStore
+                  .postRefreshToken()
+                  .then(() => {
+                    axios.defaults.headers[RequestHeaders.AUTHORIZATION] =
+                      'Bearer ' + mainAppStore.token;
+
+                    error.config.headers[RequestHeaders.AUTHORIZATION] =
+                      'Bearer ' + mainAppStore.token;
+                    originalRequest._retry = false;
+
+                    processQueue(null, mainAppStore.token);
+                    resolve(axios(originalRequest));
+                  })
+                  .catch((err) => {
+                    mainAppStore.setRefreshToken('');
+                    processQueue(err, null);
+                    reject(err);
+                  })
+                  .finally(() => {
+                    isRefreshing = false;
+                  });
+              });
+            } else {
+              mainAppStore.requestReconnectCounter = 0;
+              mainAppStore.signOut();
+            }
           }
           break;
         }
 
         case 403: {
-          mainAppStore.signOut();
+          if (!mainAppStore.isAuthorized) {
+            return Promise.reject(error);
+          } else {
+            failedQueue.forEach((prom) => {
+              prom.reject();
+            });
+            mainAppStore.requestReconnectCounter = 0;
+            mainAppStore.signOut();
+          }
           break;
         }
 
