@@ -123,7 +123,7 @@ const SignIn = () => {
           hasError={!!(touched.userName && errors.userName)}
           errorText={errors.userName}
           value={values.userName}
-          id={Fields.EMAIL}
+          id={Fields.USER_NAME}
           name={Fields.USER_NAME}
           labelText={t('Email')}
         />

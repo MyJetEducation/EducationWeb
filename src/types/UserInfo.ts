@@ -23,6 +23,11 @@ export interface UserAuthenticateDTO {
   token: string;
   refreshToken: string;
 }
+
+export interface UserForgotPassword {
+  userName: string;
+}
+
 export interface UserRegistration {
   userName: string;
   password: string;
