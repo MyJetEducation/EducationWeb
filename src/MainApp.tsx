@@ -41,9 +41,7 @@ const MainApp: FC = () => {
       </Helmet>
 
       <Router>
-        <PageTemplateContainer>
-          <RoutingLayout />
-        </PageTemplateContainer>
+        <RoutingLayout />
       </Router>
 
       <Global

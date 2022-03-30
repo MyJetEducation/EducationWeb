@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import {
   EmailConfirmationDTO,
   UserAuthenticate,
+  UserAuthenticateDTO,
   UserRegistration,
 } from '../types/UserInfo';
 import AUTH_API_LIST from './apiListAuth';
@@ -37,7 +38,7 @@ class API {
   ---  Clients Request
   */
   authenticate = async (credentials: UserAuthenticate) => {
-    const response = await axios.post<any>(
+    const response = await axios.post<ApiResponseType<UserAuthenticateDTO>>(
       `${API_STRING}${AUTH_API_LIST.AUTH.SIGN_IN}`,
       credentials
     );

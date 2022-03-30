@@ -25,8 +25,6 @@ const RegisterConfirm = () => {
       if (response === OperationApiResponseCodes.Ok) {
         setSuccess(true);
       }
-
-      //TODO: bad case request ????
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);

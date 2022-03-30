@@ -4,6 +4,11 @@ export interface EmailConfirmationDTO {
   refreshToken: string;
 }
 
+export interface UserAuthenticateDTO {
+  token: string;
+  refreshToken: string;
+}
+
 export interface UserAuthEmailSend {
   hash: string;
 }

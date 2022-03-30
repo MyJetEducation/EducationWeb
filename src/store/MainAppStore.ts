@@ -14,7 +14,7 @@ import { CountriesEnum } from '../enums/CountriesEnum';
 import injectInerceptors from '../http/interceptors';
 import { languagesList } from '../constants/languagesList';
 import { logger } from '../helpers/ConsoleLoggerTool';
-import { UserRegistration } from '../types/UserInfo';
+import { UserAuthenticate, UserRegistration } from '../types/UserInfo';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 
 interface MainAppStoreProps {
@@ -119,7 +119,17 @@ export class MainAppStore implements MainAppStoreProps {
     }
   };
 
-  signIn = () => {};
+  signIn = async (values: UserAuthenticate) => {
+    const response = await API.authenticate(values);
+    if (response.status === OperationApiResponseCodes.Ok) {
+
+      this.setTokenHandler(response.data?.token || '');
+      this.setRefreshToken(response.data?.refreshToken || '');
+
+      this.setIsAuthorized(true);
+    }
+    return response.status;
+  };
 
   signUp = async (values: UserRegistration) => {
     const response = await API.signUp(values);
@@ -127,7 +137,6 @@ export class MainAppStore implements MainAppStoreProps {
   };
 
   signOut = () => {
-
     this.setRefreshToken('');
     this.setTokenHandler('');
     this.setIsAuthorized(false);
