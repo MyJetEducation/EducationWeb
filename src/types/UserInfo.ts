@@ -17,6 +17,10 @@ export interface UserAuthenticate {
   password: string;
 }
 
+export interface UserForgotPassword {
+  userName: string;
+}
+
 export interface UserRegistration {
   userName: string;
   password: string;

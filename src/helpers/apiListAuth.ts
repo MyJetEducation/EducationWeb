@@ -6,6 +6,9 @@ const AUTH_API_LIST = {
   REGISTER: {
     SIGN_UP: "/api/v1/register/create",
     REGISTER_CONFIRM: "/api/v1/register/confirm",
+  },
+  RECOVERY_CHANGE_PASSWORD: {
+    RECOVERY: "/api/v1/register/recovery"
   }
 };
 

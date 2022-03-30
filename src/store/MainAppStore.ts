@@ -14,7 +14,7 @@ import { CountriesEnum } from '../enums/CountriesEnum';
 import injectInerceptors from '../http/interceptors';
 import { languagesList } from '../constants/languagesList';
 import { logger } from '../helpers/ConsoleLoggerTool';
-import { UserAuthenticate, UserRegistration } from '../types/UserInfo';
+import {UserAuthenticate, UserForgotPassword, UserRegistration} from '../types/UserInfo';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 
 interface MainAppStoreProps {
@@ -140,6 +140,11 @@ export class MainAppStore implements MainAppStoreProps {
     this.setRefreshToken('');
     this.setTokenHandler('');
     this.setIsAuthorized(false);
+  };
+
+  forgotPassword = async (values: UserForgotPassword) => {
+    const response = await API.forgotPassword(values.userName);
+    return response.status;
   };
 
   // store action

@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import {
   EmailConfirmationDTO,
   UserAuthenticate,
-  UserAuthenticateDTO,
+  UserAuthenticateDTO, UserForgotPassword,
   UserRegistration,
 } from '../types/UserInfo';
 import AUTH_API_LIST from './apiListAuth';
@@ -49,6 +49,17 @@ class API {
     const response = await axios.post<ApiResponseType<any>>(
       `${API_STRING}${AUTH_API_LIST.REGISTER.SIGN_UP}`,
       credentials
+    );
+    return response.data;
+  };
+
+  forgotPassword = async (email: string) => {
+    const response = await axios.post<ApiResponseType<any>>(
+      `${API_STRING}${AUTH_API_LIST.RECOVERY_CHANGE_PASSWORD.RECOVERY}`,
+      JSON.stringify(email),
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
     );
     return response.data;
   };
