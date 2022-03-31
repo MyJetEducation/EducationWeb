@@ -26,6 +26,7 @@ const NavBar = () => {
       alignItems="center"
     >
       <FlexContainer
+        padding="0 20px"
         width={CONTENT_WIDTH}
         alignItems="center"
         justifyContent="space-between"

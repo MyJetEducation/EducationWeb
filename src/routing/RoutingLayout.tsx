@@ -8,6 +8,7 @@ import { Observer } from 'mobx-react-lite';
 import { Redirect } from 'react-router-dom';
 import PublicContainer from '../containers/PublicContainer';
 import SignFlowContainer from '../containers/SignFlowContainer';
+import FullScreenLoader from '../components/Preloader/FullScreenLoader';
 
 const RoutingLayout: FC = () => {
   const location = useLocation();
@@ -34,6 +35,7 @@ const RoutingLayout: FC = () => {
           <Observer>
             {() => (
               <>
+                <FullScreenLoader isLoading={mainAppStore.isLoading} />
                 {!location.search && (
                   <Redirect to={location.pathname.replace(/\/+$/, '')} />
                 )}

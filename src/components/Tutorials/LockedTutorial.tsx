@@ -17,7 +17,7 @@ const LockedTutorial = ({ title, number }: Props) => {
     >
       <PrimaryTextSpan
         color="#000"
-        fontWeight={600}
+        fontWeight={500}
         lineHeight="26px"
         fontSize="20px"
       >

@@ -101,9 +101,12 @@ export class MainAppStore implements MainAppStoreProps {
     if (!this.token) {
       return;
     }
+    this.setIsLoading(true);
     // TODO: check fist request for init
     this.setIsAuthorized(true);
     await this.rootStore.userProfileStore.getUserAccount();
+
+    this.setIsLoading(false);
   };
 
   sendRegisterConfirm = async (hash: string) => {

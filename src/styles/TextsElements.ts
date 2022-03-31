@@ -123,7 +123,7 @@ export const BorderLink = styled(Link)`
 
 export const PageTitle = styled(PrimaryTextSpan)`
   color: #000000;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 40px;
   line-height: 48px;
 `;

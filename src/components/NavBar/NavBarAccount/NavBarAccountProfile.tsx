@@ -34,7 +34,7 @@ const NavBarAccountProfile = observer(() => {
           <PrimaryTextSpan
             fontSize="16px"
             color="#000"
-            fontWeight={600}
+            fontWeight={500}
             textTransform="uppercase"
           >
             {getAccountInitials(

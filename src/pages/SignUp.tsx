@@ -134,7 +134,7 @@ const SignUp = () => {
       <PrimaryTextSpan
         textAlign="center"
         fontSize="40px"
-        fontWeight={600}
+        fontWeight={500}
         color="#000"
         marginBottom="24px"
       >

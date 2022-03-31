@@ -25,11 +25,12 @@ const StartedTutorial = ({ title, number }: Props) => {
         backgroundColor="#374DFB"
         borderRadius="32px"
         flexDirection="column"
+        zIndex="2"
       >
         <PrimaryTextSpan
           color="#fff"
           fontSize="32px"
-          fontWeight={600}
+          fontWeight={500}
           lineHeight="40px"
           marginBottom="16px"
         >
@@ -86,12 +87,69 @@ const StartedTutorial = ({ title, number }: Props) => {
       {/* END Tutorial description */}
 
       {/* Units */}
-      <FlexContainer>
-        units
-      </FlexContainer>
+      <UnitsListWrapper
+        padding="48px 0 0 "
+        zIndex="1"
+        borderRadius="0 0 32px 32px"
+        border="2px solid #C0C4C9"
+        flexDirection="column"
+      >
+        <UnitListItem
+          width="100%"
+          padding="20px 32px"
+          justifyContent="space-between"
+        >
+          <PrimaryTextSpan>
+            Unit 1. You need a goal! Your goal by S.M.A.R.T.
+          </PrimaryTextSpan>
+          <PrimaryTextSpan>43 min</PrimaryTextSpan>
+        </UnitListItem>
+
+        <UnitListItem
+          width="100%"
+          padding="20px 32px"
+          justifyContent="space-between"
+        >
+          <PrimaryTextSpan>
+            Unit 1. You need a goal! Your goal by S.M.A.R.T.
+          </PrimaryTextSpan>
+          <PrimaryTextSpan>43 min</PrimaryTextSpan>
+        </UnitListItem>
+
+        <UnitListItem
+          width="100%"
+          padding="20px 32px"
+          justifyContent="space-between"
+        >
+          <PrimaryTextSpan>
+            Unit 1. You need a goal! Your goal by S.M.A.R.T.
+          </PrimaryTextSpan>
+          <PrimaryTextSpan>43 min</PrimaryTextSpan>
+        </UnitListItem>
+      </UnitsListWrapper>
       {/* Units */}
     </FlexContainer>
   );
 };
 
 export default StartedTutorial;
+
+const UnitsListWrapper = styled(FlexContainer)`
+  transform: translateY(-32px);
+  border-top: none;
+`;
+
+const UnitListItem = styled(FlexContainer)`
+  position: relative;
+  &:not(&:last-of-type) {
+    &:after {
+      content: '';
+      bottom: 0;
+      left: 20px;
+      width: calc(100% - 40px);
+      height: 1px;
+      background: #e0e5eb;
+      position: absolute;
+    }
+  }
+`;

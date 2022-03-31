@@ -95,7 +95,7 @@ export default NavBarNavigation;
 const NavigationLink = styled(NavLink)`
   display: inline-block;
   color: #000000;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   font-size: 16px;
   position: relative;
