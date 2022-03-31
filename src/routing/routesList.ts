@@ -6,11 +6,14 @@ import FaqPage from '../pages/InfoPages/FaqPage';
 import LessonsPage from '../pages/InfoPages/LessonsPage';
 import MissionPage from '../pages/InfoPages/MissionPage';
 import WhyUsPage from '../pages/InfoPages/WhyUsPage';
+import Market from '../pages/Market';
+import Notes from '../pages/Notes';
 import PageNotFound from '../pages/PageNotFound';
 import RegisterConfirm from '../pages/RegisterConfirm';
 import ResetPassord from '../pages/ResetPassord';
 import SingIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import Tools from '../pages/Tools';
 import Page from './Pages';
 
 export enum RouteLayoutType {
@@ -111,6 +114,7 @@ const routesList = [
     layoutType: RouteLayoutType.SignFlow,
   },
 
+  // inner pages
   {
     component: Dashboard,
     path: Page.DASHBOARD,
@@ -118,6 +122,32 @@ const routesList = [
     strict: true,
     layoutType: RouteLayoutType.Authorized,
   },
+
+  {
+    component: Tools,
+    path: Page.INNER.TOOL,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Authorized,
+  },
+
+  {
+    component: Notes,
+    path: Page.INNER.NOTES,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Authorized,
+  },
+
+  {
+    component: Market,
+    path: Page.INNER.MARKET,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Authorized,
+  },
+
+  // END inner pages
 
   {
     component: PageNotFound,
