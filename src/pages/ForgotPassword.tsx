@@ -13,9 +13,9 @@ import apiResponseCodeMessages from '../constants/apiResponseCodeMessages';
 import { useStores } from '../hooks/useStores';
 import * as yup from 'yup';
 import { UserForgotPassword } from '../types/UserInfo';
-import LoaderForComponent from '../components/LoaderForComponent';
 import validationInputTexts from '../constants/validationInputTexts';
 import API from '../helpers/API';
+import FullScreenLoader from '../components/Preloader/FullScreenLoader';
 
 const ForgotPassword = () => {
   const { t } = useTranslation();
@@ -37,7 +37,7 @@ const ForgotPassword = () => {
   const handleSubmitForm = async () => {
     setIsLoading(true);
     try {
-      const result =  await API.forgotPassword(values.userName);
+      const result = await API.forgotPassword(values.userName);
 
       switch (result.status) {
         case OperationApiResponseCodes.Ok:
@@ -46,7 +46,10 @@ const ForgotPassword = () => {
 
         case OperationApiResponseCodes.UserAlreadyExists:
         case OperationApiResponseCodes.NotValidEmail:
-          setFieldError(Fields.USER_NAME, t(apiResponseCodeMessages[result.status]));
+          setFieldError(
+            Fields.USER_NAME,
+            t(apiResponseCodeMessages[result.status])
+          );
           break;
 
         default:
@@ -97,7 +100,7 @@ const ForgotPassword = () => {
       justifyContent={isSent ? 'center' : 'flex-start'}
       position="relative"
     >
-      <LoaderForComponent isLoading={isLoading} />
+      <FullScreenLoader isLoading={isLoading} />
       <PrimaryTextSpan
         textAlign="center"
         fontSize="40px"

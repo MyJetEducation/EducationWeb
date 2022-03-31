@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import LoaderForComponent from '../components/LoaderForComponent';
+import FullScreenLoader from '../components/Preloader/FullScreenLoader';
+import LoaderForComponent from '../components/Preloader/LoaderForComponent';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 import { logger } from '../helpers/ConsoleLoggerTool';
 import { useSearchParams } from '../hooks/useSearchParams';
@@ -101,7 +102,7 @@ const RegisterConfirm = () => {
         </FlexContainer>
       )}
 
-      <LoaderForComponent isLoading={isLoading} />
+      <FullScreenLoader isLoading={isLoading} />
     </FlexContainer>
   );
 };

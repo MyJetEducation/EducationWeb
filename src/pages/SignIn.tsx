@@ -12,11 +12,11 @@ import { PrimaryTextSpan, TextAccentLink } from '../styles/TextsElements';
 import { UserAuthenticate } from '../types/UserInfo';
 import * as yup from 'yup';
 import { useStores } from '../hooks/useStores';
-import LoaderForComponent from '../components/LoaderForComponent';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 import apiResponseCodeMessages from '../constants/apiResponseCodeMessages';
 import { useHistory } from 'react-router-dom';
 import validationInputTexts from '../constants/validationInputTexts';
+import FullScreenLoader from '../components/Preloader/FullScreenLoader';
 
 const SignIn = () => {
   const { t } = useTranslation();
@@ -55,6 +55,7 @@ const SignIn = () => {
           push(Page.DASHBOARD);
           return null;
 
+        case OperationApiResponseCodes.UserNotFound:
         case OperationApiResponseCodes.UserAlreadyExists:
         case OperationApiResponseCodes.NotValidEmail:
           setFieldError(Fields.USER_NAME, t(apiResponseCodeMessages[result]));
@@ -111,7 +112,7 @@ const SignIn = () => {
       padding="72px 0 32px"
       position="relative"
     >
-      <LoaderForComponent isLoading={isLoading} />
+      <FullScreenLoader isLoading={isLoading} />
       <PrimaryTextSpan
         textAlign="center"
         fontSize="40px"

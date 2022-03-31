@@ -1,6 +1,5 @@
-import styled from '@emotion/styled';
 import React from 'react';
-import { FlexContainer } from '../styles/FlexContainer';
+import { LoaderWrap } from '../../styles/Preloader';
 import Preloader from './Preloader';
 
 interface Props {
@@ -30,11 +29,3 @@ const LoaderForComponent = ({ isLoading }: Props) => {
 };
 
 export default LoaderForComponent;
-
-const LoaderWrap = styled(FlexContainer)`
-  background-color: rgba(255, 255, 255);
-  @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-    background-color: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(4px);
-  }
-`;

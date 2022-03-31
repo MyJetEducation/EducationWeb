@@ -20,9 +20,9 @@ import CheckListPassword from '../components/Form/CheckListPassword';
 import { useFormik } from 'formik';
 import { useStores } from '../hooks/useStores';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
-import LoaderForComponent from '../components/LoaderForComponent';
 import apiResponseCodeMessages from '../constants/apiResponseCodeMessages';
 import validationInputTexts from '../constants/validationInputTexts';
+import FullScreenLoader from '../components/Preloader/FullScreenLoader';
 
 const SignUp = () => {
   const { t } = useTranslation();
@@ -129,7 +129,7 @@ const SignUp = () => {
       padding={isSuccess ? '16px' : '72px 0 32px'}
       position="relative"
     >
-      <LoaderForComponent isLoading={isLoading} />
+      <FullScreenLoader isLoading={isLoading} />
 
       <PrimaryTextSpan
         textAlign="center"
@@ -173,7 +173,10 @@ const SignUp = () => {
           </FlexContainer>
 
           <AuthForm noValidate onSubmit={handleSubmit}>
-            <FlexContainer alignItems="flex-start" justifyContent="space-between">
+            <FlexContainer
+              alignItems="flex-start"
+              justifyContent="space-between"
+            >
               <FlexContainer width="calc(50% - 10px)">
                 <LabelInput
                   onBlur={handleBlur}

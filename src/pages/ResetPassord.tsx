@@ -15,9 +15,10 @@ import { useFormik } from 'formik';
 import API from '../helpers/API';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 import apiResponseCodeMessages from '../constants/apiResponseCodeMessages';
-import LoaderForComponent from '../components/LoaderForComponent';
+import LoaderForComponent from '../components/Preloader/LoaderForComponent';
 import { useHistory } from 'react-router-dom';
 import Page from '../routing/Pages';
+import FullScreenLoader from '../components/Preloader/FullScreenLoader';
 
 const ResetPassord = () => {
   const { hash } = useSearchParams<{ hash: string }>();
@@ -125,7 +126,7 @@ const ResetPassord = () => {
       justifyContent={isSent ? 'center' : 'flex-start'}
       position="relative"
     >
-      <LoaderForComponent isLoading={isLoading} />
+      <FullScreenLoader isLoading={isLoading} />
       <PrimaryTextSpan
         textAlign="center"
         fontSize="40px"
