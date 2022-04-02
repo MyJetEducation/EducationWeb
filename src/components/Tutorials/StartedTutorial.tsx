@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlexContainer } from '../../styles/FlexContainer';
 import { PrimaryTextSpan } from '../../styles/TextsElements';
@@ -8,7 +8,15 @@ import IconUnits from '../../assets/svg/unit/icon-units.svg';
 import IconDuration from '../../assets/svg/unit/icon-duration.svg';
 import IconVideo from '../../assets/svg/unit/icon-video.svg';
 import IconTests from '../../assets/svg/unit/icon-tests.svg';
+import IconCheck from '../../assets/svg/unit/icon-check.svg';
+import IconCheckError from '../../assets/svg/unit/icon-check-error.svg';
+
 import SvgIcon from '../SvgIcon';
+import { AccentButton } from '../../styles/Buttons';
+import { css } from '@emotion/core';
+import { ButtonWithoutStyles } from '../../styles/ButtonWithoutStyles';
+import { UnitListMArker } from '../../styles/Units';
+import { ProgessBar } from '../../styles/ProgressBar';
 
 interface Props {
   title: string;
@@ -17,8 +25,19 @@ interface Props {
 
 const StartedTutorial = ({ title, number }: Props) => {
   const { t } = useTranslation();
+
+  // state component
+  const [isOpenUnitList, setIsOpenUnitList] = useState(false);
+  const isFirstItem = false;
+  const activeUnit = 1;
+  // end state component
+
+  const handleClickOpenList = () => {
+    setIsOpenUnitList(!isOpenUnitList);
+  };
+
   return (
-    <FlexContainer flexDirection="column" width="100%" marginBottom="24px">
+    <FlexContainer flexDirection="column" width="100%" marginBottom="0px">
       {/* Tutorial description */}
       <FlexContainer
         padding="32px"
@@ -44,14 +63,17 @@ const StartedTutorial = ({ title, number }: Props) => {
           This Discipline will teach how to manage your finance. Help you to
           build successful strategy to grow up your earnings...
         </PrimaryTextSpan>
-
-        <FlexContainer
+        {/*  */}
+        {/* <FlexContainer
           height="2px"
           width="100%"
           backgroundColor="rgba(255,255,255,0.2)"
           marginBottom="16px"
-        />
-
+        /> */}
+        <FlexContainer marginBottom="16px">
+          <ProgessBar progress={10} />
+        </FlexContainer>
+        {/*  */}
         <FlexContainer width="100%" justifyContent="space-between">
           <FlexContainer marginRight="4px" alignItems="center">
             <FlexContainer marginRight="12px">
@@ -99,7 +121,7 @@ const StartedTutorial = ({ title, number }: Props) => {
           padding="20px 32px"
           justifyContent="space-between"
         >
-          <PrimaryTextSpan>
+          <PrimaryTextSpan fontWeight="bold">
             Unit 1. You need a goal! Your goal by S.M.A.R.T.
           </PrimaryTextSpan>
           <PrimaryTextSpan>43 min</PrimaryTextSpan>
@@ -110,7 +132,7 @@ const StartedTutorial = ({ title, number }: Props) => {
           padding="20px 32px"
           justifyContent="space-between"
         >
-          <PrimaryTextSpan>
+          <PrimaryTextSpan fontWeight="bold">
             Unit 1. You need a goal! Your goal by S.M.A.R.T.
           </PrimaryTextSpan>
           <PrimaryTextSpan>43 min</PrimaryTextSpan>
@@ -121,10 +143,96 @@ const StartedTutorial = ({ title, number }: Props) => {
           padding="20px 32px"
           justifyContent="space-between"
         >
-          <PrimaryTextSpan>
+          <PrimaryTextSpan fontWeight="bold">
             Unit 1. You need a goal! Your goal by S.M.A.R.T.
           </PrimaryTextSpan>
           <PrimaryTextSpan>43 min</PrimaryTextSpan>
+        </UnitListItem>
+
+        <UnitListItem
+          width="100%"
+          padding="20px 32px"
+          flexDirection="column"
+          isActive={activeUnit === 1}
+          isFirstItem={isFirstItem}
+        >
+          <ButtonWithoutStyles onClick={handleClickOpenList}>
+            <FlexContainer justifyContent="space-between">
+              <FlexContainer alignItems="center">
+                <UnitListMArker isOpen={isOpenUnitList} />
+                <PrimaryTextSpan fontWeight="bold" color="#000">
+                  Unit 1. You need a goal! Your goal by S.M.A.R.T.
+                </PrimaryTextSpan>
+              </FlexContainer>
+              <PrimaryTextSpan>43 min</PrimaryTextSpan>
+            </FlexContainer>
+          </ButtonWithoutStyles>
+
+          {isOpenUnitList && (
+            <FlexContainer flexDirection="column" padding="8px 0 0 22px">
+              <FlexContainer
+                padding="8px 0"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <FlexContainer alignItems="center">
+                  <FlexContainer marginRight="10px">
+                    <SvgIcon {...IconUnits} fillColor="#C0C4C9" />
+                  </FlexContainer>
+                  <PrimaryTextSpan color="#000" fontSize="16px">
+                    1.1 Text: Your goal by S.M.A.R.T. and life cases
+                  </PrimaryTextSpan>
+                </FlexContainer>
+
+                <PrimaryTextSpan color="#777C85" fontSize="16px">
+                  ≈5 min
+                </PrimaryTextSpan>
+              </FlexContainer>
+
+              <FlexContainer
+                padding="8px 0"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <FlexContainer alignItems="center">
+                  <FlexContainer marginRight="10px">
+                    <SvgIcon {...IconUnits} fillColor="#C0C4C9" />
+                  </FlexContainer>
+                  <PrimaryTextSpan color="#000" fontSize="16px">
+                    1.1 Text: Your goal by S.M.A.R.T. and life cases
+                  </PrimaryTextSpan>
+                </FlexContainer>
+
+                <PrimaryTextSpan color="#777C85" fontSize="16px">
+                  ≈5 min
+                </PrimaryTextSpan>
+              </FlexContainer>
+
+              <FlexContainer
+                padding="8px 0"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <FlexContainer alignItems="center">
+                  <FlexContainer marginRight="10px">
+                    <SvgIcon {...IconUnits} fillColor="#C0C4C9" />
+                  </FlexContainer>
+                  <PrimaryTextSpan color="#000" fontSize="16px">
+                    1.1 Text: Your goal by S.M.A.R.T. and life cases
+                  </PrimaryTextSpan>
+                </FlexContainer>
+
+                <PrimaryTextSpan color="#777C85" fontSize="16px">
+                  ≈5 min
+                </PrimaryTextSpan>
+              </FlexContainer>
+            </FlexContainer>
+          )}
+
+          {/* is active unit */}
+          <FlexContainer justifyContent="center" padding="24px 0 0">
+            <AccentButton width="300px">{`${t('Start')} Unit 1`}</AccentButton>
+          </FlexContainer>
         </UnitListItem>
       </UnitsListWrapper>
       {/* Units */}
@@ -139,10 +247,14 @@ const UnitsListWrapper = styled(FlexContainer)`
   border-top: none;
 `;
 
-const UnitListItem = styled(FlexContainer)`
+const UnitListItem = styled(FlexContainer)<{
+  isActive?: boolean;
+  isFirstItem?: boolean;
+}>`
   position: relative;
   &:not(&:last-of-type) {
     &:after {
+      display: ${(props) => (props.isActive ? 'none' : 'block')};
       content: '';
       bottom: 0;
       left: 20px;
@@ -152,4 +264,21 @@ const UnitListItem = styled(FlexContainer)`
       position: absolute;
     }
   }
+
+  ${(props) =>
+    props.isActive &&
+    css`
+      box-shadow: 0 0 0 2px #374dfb;
+      border-radius: 32px;
+    `}
+
+  ${(props) =>
+    props.isActive &&
+    props.isFirstItem &&
+    css`
+      padding-top: 44px;
+      border-top: none;
+      border-radius: 0 0 32px 32px;
+      margin-top: -40px;
+    `}
 `;
