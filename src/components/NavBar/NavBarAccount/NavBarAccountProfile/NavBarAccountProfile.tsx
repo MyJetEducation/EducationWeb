@@ -1,16 +1,26 @@
-import React from 'react';
-import { ButtonWithoutStyles } from '../../../styles/ButtonWithoutStyles';
-import { FlexContainer } from '../../../styles/FlexContainer';
-import { PrimaryTextSpan } from '../../../styles/TextsElements';
-import SvgIcon from '../../SvgIcon';
-import IconCurrency from '../../../assets/svg_no_compress/icon-currency.svg';
-import { numberFormat } from '../../../helpers/numberFormat';
-import { useStores } from '../../../hooks/useStores';
+import React, { useState } from 'react';
+import { ButtonWithoutStyles } from '../../../../styles/ButtonWithoutStyles';
+import { FlexContainer } from '../../../../styles/FlexContainer';
+import { PrimaryTextSpan } from '../../../../styles/TextsElements';
+import SvgIcon from '../../../SvgIcon';
+import IconCurrency from '../../../../assets/svg_no_compress/icon-currency.svg';
+import { numberFormat } from '../../../../helpers/numberFormat';
+import { useStores } from '../../../../hooks/useStores';
 import { observer } from 'mobx-react-lite';
-import { getAccountInitials } from '../../../helpers/getAccountInitials';
+import { getAccountInitials } from '../../../../helpers/getAccountInitials';
+import NavBarAccInnerMenu from './NavBarAccInnerMenu';
 
 const NavBarAccountProfile = observer(() => {
   const { userProfileStore } = useStores();
+
+  const [isActiveMenu, toggleMenu] = useState(false);
+
+  const handleOpenMenu = () => {
+    toggleMenu(true);
+  };
+  const handleCloseMenu = () => {
+    toggleMenu(false);
+  };
 
   return (
     <FlexContainer alignItems="center">
@@ -22,7 +32,7 @@ const NavBarAccountProfile = observer(() => {
           {numberFormat(1200)}
         </PrimaryTextSpan>
       </FlexContainer>
-      <ButtonWithoutStyles>
+      <ButtonWithoutStyles onClick={handleOpenMenu}>
         <FlexContainer
           width="40px"
           height="40px"
@@ -44,6 +54,8 @@ const NavBarAccountProfile = observer(() => {
           </PrimaryTextSpan>
         </FlexContainer>
       </ButtonWithoutStyles>
+
+      <NavBarAccInnerMenu isActive={isActiveMenu} onClose={handleCloseMenu} />
     </FlexContainer>
   );
 });

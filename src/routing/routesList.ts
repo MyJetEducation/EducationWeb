@@ -1,3 +1,7 @@
+import AccountSettings from '../pages/Account/AccountSettings';
+import Payments from '../pages/Account/Payments';
+import Profile from '../pages/Account/Profile';
+import Referrals from '../pages/Account/Referrals';
 import Dashboard from '../pages/Dashboard';
 import ForgotPassword from '../pages/ForgotPassword';
 import HomeLanding from '../pages/HomeLanding';
@@ -146,6 +150,38 @@ const routesList = [
     strict: true,
     layoutType: RouteLayoutType.Authorized,
   },
+
+
+  // account
+  {
+    component: Profile,
+    path: Page.ACCOUNT.PROFILE,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Authorized,
+  },
+  {
+    component: AccountSettings,
+    path: Page.ACCOUNT.SETTINGS,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Authorized,
+  },
+  {
+    component: Payments,
+    path: Page.ACCOUNT.PAYMENTS,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Authorized,
+  },
+  {
+    component: Referrals,
+    path: Page.ACCOUNT.REFERRALS,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Authorized,
+  },
+  // account
 
   // END inner pages
 
