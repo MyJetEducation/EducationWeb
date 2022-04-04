@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {FlexContainer} from '../../../styles/FlexContainer';
-import {PrimaryTextParagraph, PrimaryTextSpan} from "../../../styles/TextsElements";
+import {FlexContainer} from '../../styles/FlexContainer';
+import {PrimaryTextParagraph, PrimaryTextSpan} from "../../styles/TextsElements";
 
-import IconSkill from '../../../assets/svg/skill-icon.svg';
-import SvgIcon from "../../SvgIcon";
+import IconSkill from '../../assets/svg/icon-skill.svg';
+import SvgIcon from "../SvgIcon";
 import {useTranslation} from "react-i18next";
 
 const StatsSB = () => {
@@ -113,7 +113,7 @@ const StatsSB = () => {
             top={"8px"}
             right={"8px"}
           >
-            <SvgIcon {...IconSkill} fillColor="#A8B0BA" strokeColor="#A8B0BA"/>
+            <SvgIcon {...IconSkill} fillColor="#A8B0BA" />
           </FlexContainer>
           <PrimaryTextSpan
             color={"#000"}

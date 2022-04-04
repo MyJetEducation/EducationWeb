@@ -16,6 +16,12 @@ const API_LIST = {
     TUTORIAL: '/api/v1/education/dashboard/tutorial',
     PROGRESS: '/api/v1/education/dashboard/progress',
   },
+
+  USER_PROFILE: {
+    PROGRESS: '/api/v1/userprofile/progress',
+    STATUS: '/api/v1/userprofile/status',
+    ACHIEVEMENTS: '/api/v1/userprofile/achievements',
+  },
 };
 
 Object.freeze(API_LIST);

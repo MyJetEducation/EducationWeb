@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {FlexContainer} from '../../../styles/FlexContainer';
-import {PrimaryTextParagraph} from "../../../styles/TextsElements";
+import {FlexContainer} from '../../styles/FlexContainer';
+import {PrimaryTextParagraph} from "../../styles/TextsElements";
 import {useTranslation} from "react-i18next";
 
 const ProgressSB = () => {

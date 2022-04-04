@@ -1,15 +1,15 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import AchievementSB from '../components/SideBar/AchivementSB';
+import ProgressSB from '../components/SideBar/ProgressSB';
+import StatsSB from '../components/SideBar/StatsSB';
 import LockedTutorial from '../components/Tutorials/LockedTutorial';
 import StartedTutorial from '../components/Tutorials/StartedTutorial';
 import { useStores } from '../hooks/useStores';
 import { PrimaryButton } from '../styles/Buttons';
 import { FlexContainer } from '../styles/FlexContainer';
 import { PageTitle, PrimaryTextSpan } from '../styles/TextsElements';
-import StatsSB from "../components/SideBar/StatsSB";
-import AchievementSB from "../components/SideBar/AchivementSB";
-import ProgressSB from "../components/SideBar/ProgressSB";
 
 const Dashboard = observer(() => {
   const { t } = useTranslation();
@@ -63,13 +63,10 @@ const Dashboard = observer(() => {
         {/* content */}
 
         {/* Sidebar */}
-        <FlexContainer
-          flexDirection={"column"}
-          width="300px"
-        >
-          <StatsSB/>
-          <AchievementSB/>
-          <ProgressSB/>
+        <FlexContainer flexDirection={'column'} width="300px">
+          <StatsSB />
+          <AchievementSB />
+          <ProgressSB />
         </FlexContainer>
         {/* Sidebar */}
       </FlexContainer>

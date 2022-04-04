@@ -14,6 +14,7 @@ import { RefreshTokenDTO } from '../types/RefreshTokenTypes';
 import { ApiResponseType } from '../types/ApiResponseType';
 import API_LIST from './apiList';
 import { TutorialsListType } from '../types/TutorialTypes';
+import { AchievementsTypes } from '../types/AchievementsTypes';
 
 class API {
   private convertParamsToFormData = (params: { [key: string]: any }) => {
@@ -112,6 +113,13 @@ class API {
   getTutorials = async () => {
     const response = await axios.post<ApiResponseType<TutorialsListType>>(
       `${API_STRING}${API_LIST.DASHBOARD.TUTORIALS_LIST}`
+    );
+    return response.data;
+  };
+
+  getAchievements = async () => {
+    const response = await axios.post<ApiResponseType<AchievementsTypes>>(
+      `${API_STRING}${API_LIST.USER_PROFILE.ACHIEVEMENTS}`
     );
     return response.data;
   };
