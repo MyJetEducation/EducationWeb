@@ -5,7 +5,7 @@ interface PrimaryTextType {
   color?: string;
   fontWeight?: 'bold' | 'normal' | number;
   fontStyle?: 'italic' | 'normal';
-  fontSize?: '12px' | '14px' | '16px' | '18px' | '20px' | '24px' | '28px' | '32px' | '40px';
+  fontSize?: '12px' | '14px' | '16px' | '18px' | '20px' | '24px' | '28px' | '32px' | '40px' | '48px';
   lineHeight?: string;
   marginRight?: string;
   marginBottom?: string;
@@ -24,7 +24,7 @@ export const PrimaryTextSpan = styled.span<PrimaryTextType>`
   font-style: ${(props) => props.fontStyle};
   font-weight: ${(props) => props.fontWeight || 'normal'};
   font-size: ${(props) => props.fontSize || '16px'};
-  line-height: ${(props) => props.lineHeight || '120%'};
+  line-height: ${(props) => props.lineHeight || '24px'};
   color: ${(props) => props.color || '#777C85'};
   margin-right: ${(props) => props.marginRight};
   margin-bottom: ${(props) => props.marginBottom};
