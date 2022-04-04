@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStores } from '../../../hooks/useStores';
@@ -5,7 +6,7 @@ import { FlexContainer } from '../../../styles/FlexContainer';
 import NavBarAccountProfile from './NavBarAccountProfile/NavBarAccountProfile';
 import NavBarAuthBtn from './NavBarAuthBtn';
 
-const NavBarAccount = () => {
+const NavBarAccount = observer(() => {
   const { t } = useTranslation();
   const { mainAppStore } = useStores();
 
@@ -20,6 +21,6 @@ const NavBarAccount = () => {
       </FlexContainer>
     </>
   );
-};
+});
 
 export default NavBarAccount;

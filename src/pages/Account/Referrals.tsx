@@ -1,10 +1,11 @@
 import React from 'react';
+import AccountSettingsContainer from '../../containers/AccountSettingsContainer';
 
 const Referrals = () => {
   return (
-    <div>
+    <AccountSettingsContainer pageTitle="Referrals">
       referrals
-    </div>
+    </AccountSettingsContainer>
   );
 };
 

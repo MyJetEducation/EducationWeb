@@ -30,12 +30,11 @@ const NavBarAccInnerMenu = ({ isActive, onClose }: NavBarAccInnerMenuProps) => {
   }
 
   const { t } = useTranslation();
-  const { userProfileStore } = useStores();
+  const { mainAppStore, userProfileStore } = useStores();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleClickLogOut = () => {
-    ///
-
+    mainAppStore.signOut();
     onClose();
   };
 

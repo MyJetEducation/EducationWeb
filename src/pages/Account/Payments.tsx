@@ -1,10 +1,11 @@
 import React from 'react';
+import AccountSettingsContainer from '../../containers/AccountSettingsContainer';
 
 const Payments = () => {
   return (
-    <div>
+    <AccountSettingsContainer pageTitle="Payments">
       payments
-    </div>
+    </AccountSettingsContainer>
   );
 };
 
