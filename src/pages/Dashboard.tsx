@@ -7,6 +7,9 @@ import { useStores } from '../hooks/useStores';
 import { PrimaryButton } from '../styles/Buttons';
 import { FlexContainer } from '../styles/FlexContainer';
 import { PageTitle, PrimaryTextSpan } from '../styles/TextsElements';
+import StatsSB from "../components/SideBar/StatsSB";
+import AchievementSB from "../components/SideBar/AchivementSB";
+import ProgressSB from "../components/SideBar/ProgressSB";
 
 const Dashboard = observer(() => {
   const { t } = useTranslation();
@@ -60,8 +63,13 @@ const Dashboard = observer(() => {
         {/* content */}
 
         {/* Sidebar */}
-        <FlexContainer background="#eee" width="300px">
-          sidebar
+        <FlexContainer
+          flexDirection={"column"}
+          width="300px"
+        >
+          <StatsSB/>
+          <AchievementSB/>
+          <ProgressSB/>
         </FlexContainer>
         {/* Sidebar */}
       </FlexContainer>
