@@ -5,7 +5,7 @@ interface PrimaryTextType {
   color?: string;
   fontWeight?: 'bold' | 'normal' | number;
   fontStyle?: 'italic' | 'normal';
-  fontSize?: '12px' | '16px' | '18px' | '20px' | '28px' | '32px' | '40px';
+  fontSize?: '12px' | '14px' | '16px' | '18px' | '20px' | '28px' | '32px' | '40px';
   lineHeight?: string;
   marginRight?: string;
   marginBottom?: string;
