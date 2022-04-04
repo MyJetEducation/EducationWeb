@@ -1,13 +1,42 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { FlexContainer } from '../../styles/FlexContainer';
-import { PrimaryTextParagraph } from '../../styles/TextsElements';
+import {
+  PrimaryTextParagraph,
+  PrimaryTextSpan,
+} from '../../styles/TextsElements';
 import { useTranslation } from 'react-i18next';
 import AchieventItem from '../AchieventItem';
 import { AchievementsEnum } from '../../enums/AchievementsEnum';
+import { useStores } from '../../hooks/useStores';
+import { observer } from 'mobx-react-lite';
+import LoaderForComponent from '../Preloader/LoaderForComponent';
 
-const AchievementSB = () => {
+const AchievementSB = observer(() => {
   const { t } = useTranslation();
+  const { userProfileStore } = useStores();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getAchievements = async () => {
+    setIsLoading(true);
+    try {
+      const result = await userProfileStore.getAchievement();
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  const achievemetList = useMemo(() => {
+    const list = userProfileStore.userAchievements.slice(0, 3);
+    return list;
+  }, [userProfileStore.userAchievements]);
+
+  useEffect(() => {
+    getAchievements();
+  }, []);
+
   return (
     <FlexContainer
       width="100%"
@@ -17,23 +46,46 @@ const AchievementSB = () => {
       flexDirection="column"
       marginBottom="20px"
     >
-      <PrimaryTextParagraph
-        fontSize="18px"
-        lineHeight="156%"
-        fontWeight="bold"
-        color="#000"
+      <FlexContainer
+        alignItems="center"
+        justifyContent="space-between"
         marginBottom="16px"
       >
-        {t('Achievements')}
-      </PrimaryTextParagraph>
-
-      <FlexContainer alignItems="flex-start" justifyContent="space-between">
-        <AchieventItem isActive={true} name={AchievementsEnum.TakeYourTime} />
-        <AchieventItem isActive={true} name={AchievementsEnum.Spender} />
-        <AchieventItem isActive={true} name={AchievementsEnum.AllTheKingsMen} />
+        <PrimaryTextParagraph
+          fontSize="18px"
+          lineHeight="156%"
+          fontWeight={600}
+          color="#000"
+          marginRight="12px"
+        >
+          {t('Achievements')}
+        </PrimaryTextParagraph>
+        <PrimaryTextSpan color="#A8B0BA" fontSize="18px" fontWeight={600}>{`${
+          userProfileStore.totalActiveAchievementsCount
+        } ${t('of')} ${
+          userProfileStore.totalAchievementsCount
+        }`}</PrimaryTextSpan>
       </FlexContainer>
+
+      <FlexContainer
+        alignItems="flex-start"
+        justifyContent={
+          achievemetList.length < 3 ? 'flex-start' : 'space-between'
+        }
+      >
+        {achievemetList.map((el: AchievementsEnum) => (
+          <AchieventItem
+            marginRight={achievemetList.length < 3 ? '12px' : ''}
+            key={el}
+            isActive={true}
+            name={el}
+          />
+        ))}
+      </FlexContainer>
+
+      <LoaderForComponent isLoading={isLoading} />
     </FlexContainer>
   );
-};
+});
 
 export default AchievementSB;

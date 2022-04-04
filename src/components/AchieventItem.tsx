@@ -366,9 +366,10 @@ export const ACHIEVEMENTS = [
 interface Props {
   name: AchievementsEnum;
   isActive?: boolean;
+  marginRight?: string;
 }
 
-const AchieventItem = ({ name, isActive = false }: Props) => {
+const AchieventItem = ({ name, isActive = false, marginRight = '' }: Props) => {
   const achievementName = useMemo(() => {
     return ACHIEVEMENTS.find((el) => el.id === name)?.name || '';
   }, [name]);
@@ -379,8 +380,6 @@ const AchieventItem = ({ name, isActive = false }: Props) => {
 
   const bgColorByType = useMemo(() => {
     const type = ACHIEVEMENTS.find((el) => el.id === name)?.type;
-
-    console.log(type);
     if (!isActive) {
       return '#F1F4F8';
     }
@@ -401,7 +400,12 @@ const AchieventItem = ({ name, isActive = false }: Props) => {
   }, [name, isActive]);
 
   return (
-    <FlexContainer width="56px" flexDirection="column" justifyContent="center">
+    <FlexContainer
+      width="56px"
+      flexDirection="column"
+      justifyContent="center"
+      marginRight={marginRight}
+    >
       <AchievementIconWrap backgroundColor={bgColorByType}>
         <img src={achievementImage} alt="" />
       </AchievementIconWrap>
