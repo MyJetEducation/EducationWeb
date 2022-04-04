@@ -60,28 +60,17 @@ const MENU = {
 const NavBarNavigation = observer(() => {
   const { t } = useTranslation();
   const { mainAppStore } = useStores();
-  const [menuList, setMenuList] = useState<any>(MENU.PUBLIC);
-
-  const isPublicPage = useRouteMatch([...Object.values(Page.PUBLIC), Page.HOME])
-    ?.isExact;
 
   const activeMenu = useMemo(() => {
-    if (isPublicPage) {
-      return MENU.PUBLIC;
-    }
     if (mainAppStore.isAuthorized) {
       return MENU.INNER;
     }
     return MENU.PUBLIC;
-  }, [isPublicPage]);
-
-  useEffect(() => {
-    setMenuList(activeMenu);
-  }, [isPublicPage]);
+  }, [mainAppStore.isAuthorized]);
 
   return (
     <FlexContainer>
-      {menuList.data.map((item: any) => (
+      {activeMenu.data.map((item: any) => (
         <NavigationLink activeClassName="active" key={item.name} to={item.page}>
           {t(`${item.name}`)}
         </NavigationLink>

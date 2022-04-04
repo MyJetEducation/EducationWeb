@@ -1,3 +1,4 @@
+import css from '@emotion/css';
 import styled from '@emotion/styled';
 
 export interface FlexContainerProps {
@@ -19,7 +20,6 @@ export interface FlexContainerProps {
   maxWidth?: string;
   padding?: string;
   margin?: string;
-  backgroundImage?: string;
   backgroundColor?: string;
   background?: string;
   textColor?: string;
@@ -60,7 +60,6 @@ export const FlexContainer = styled.div<FlexContainerProps>`
   flex-wrap: ${(props) => props.flexWrap};
   flex-direction: ${(props) => props.flexDirection};
   background-color: ${(props) => props.backgroundColor};
-  background-image: url('${(props) => props.backgroundImage}');
   background: ${(props) => props.background};
   color: ${(props) => props.textColor};
   top: ${(props) => props.top};

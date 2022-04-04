@@ -121,9 +121,55 @@ export const BorderLink = styled(Link)`
   }
 `;
 
+interface PrimaryLinkProps {
+  backgroundColor?: string;
+  padding?: string;
+  width?: string;
+}
+export const PrimaryLink = styled(Link)<PrimaryLinkProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${(props) => props.padding || '12px 16px'};
+  width: ${(props) => props.width || '300px'};
+  background-color: ${(props) => props.backgroundColor || '#000'};
+  border-radius: 12px;
+  transition: background-color 0.2s ease;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-decoration: none;
+  text-align: center;
+
+  &:hover {
+    background-color: #161616;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  &:active {
+    background-color: #313131;
+  }
+
+  &:disabled {
+    background-color: #777c85;
+    & span {
+      color: #fff;
+    }
+    & svg {
+      fill: #fff;
+    }
+  }
+`;
+
 export const PageTitle = styled(PrimaryTextSpan)`
   color: #000000;
   font-weight: 500;
   font-size: 40px;
   line-height: 48px;
+`;
+
+export const AccentTextSpan = styled.span`
+  color: #374DFB;
 `;
