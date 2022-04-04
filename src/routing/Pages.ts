@@ -9,6 +9,19 @@ const Page = {
     FAQ: '/faq',
   },
 
+  INNER: {
+    TOOL: '/tools',
+    NOTES: '/notes',
+    MARKET: '/market',
+  },
+
+  ACCOUNT: {
+    PROFILE: '/profile',
+    SETTINGS: '/account-settings',
+    PAYMENTS: '/payments',
+    REFERRALS: '/referrals',
+  },
+
   SIGN_IN: '/sign-in',
   SIGN_UP: '/sign-up',
   REGISTER_CONFIRM: '/register-confirm',

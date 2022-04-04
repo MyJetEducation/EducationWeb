@@ -1,54 +1,90 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import { observer } from 'mobx-react-lite';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useRouteMatch } from 'react-router-dom';
+import { useStores } from '../../hooks/useStores';
 import Page from '../../routing/Pages';
 import { FlexContainer } from '../../styles/FlexContainer';
 
-const PUBLIC_MENU_LIST = [
-  {
-    name: 'About Us',
-    page: Page.PUBLIC.ABOUT_US,
+const MENU = {
+  PUBLIC: {
+    type: 'public',
+    data: [
+      {
+        name: 'About Us',
+        page: Page.PUBLIC.ABOUT_US,
+      },
+      {
+        name: 'Mission',
+        page: Page.PUBLIC.MISSION,
+      },
+      {
+        name: 'Why Us?',
+        page: Page.PUBLIC.WHY_US,
+      },
+      {
+        name: 'Lessons',
+        page: Page.PUBLIC.LESSONS,
+      },
+      {
+        name: 'FAQ',
+        page: Page.PUBLIC.FAQ,
+      },
+    ],
   },
-  {
-    name: 'Mission',
-    page: Page.PUBLIC.MISSION,
-  },
-  {
-    name: 'Why Us?',
-    page: Page.PUBLIC.WHY_US,
-  },
-  {
-    name: 'Lessons',
-    page: Page.PUBLIC.LESSONS,
-  },
-  {
-    name: 'FAQ',
-    page: Page.PUBLIC.FAQ,
-  },
-];
 
-const NavBarNavigation = () => {
+  INNER: {
+    type: 'inner',
+    data: [
+      {
+        name: 'Education',
+        page: Page.DASHBOARD,
+      },
+      {
+        name: 'Tools',
+        page: Page.INNER.TOOL,
+      },
+      {
+        name: 'Notes',
+        page: Page.INNER.NOTES,
+      },
+      {
+        name: 'Market',
+        page: Page.INNER.MARKET,
+      },
+    ],
+  },
+};
+
+const NavBarNavigation = observer(() => {
   const { t } = useTranslation();
-  // TODO: add change menu by page type and auth user
+  const { mainAppStore } = useStores();
+
+  const activeMenu = useMemo(() => {
+    if (mainAppStore.isAuthorized) {
+      return MENU.INNER;
+    }
+    return MENU.PUBLIC;
+  }, [mainAppStore.isAuthorized]);
 
   return (
     <FlexContainer>
-      {PUBLIC_MENU_LIST.map((item) => (
+      {activeMenu.data.map((item: any) => (
         <NavigationLink activeClassName="active" key={item.name} to={item.page}>
           {t(`${item.name}`)}
         </NavigationLink>
       ))}
     </FlexContainer>
   );
-};
+});
 
 export default NavBarNavigation;
 
 const NavigationLink = styled(NavLink)`
   display: inline-block;
   color: #000000;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   font-size: 16px;
   position: relative;

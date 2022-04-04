@@ -13,7 +13,7 @@ const Logo = observer(() => {
     <LogoLink to={mainAppStore.isAuthorized ? Page.DASHBOARD : Page.HOME}>
       <PrimaryTextSpan
         color="#000"
-        fontWeight={600}
+        fontWeight={500}
         fontSize="28px"
         textTransform="uppercase"
       >

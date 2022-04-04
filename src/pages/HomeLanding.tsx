@@ -22,7 +22,7 @@ const HomeLanding = () => {
       >
         <PrimaryTextSpan
           textAlign="center"
-          fontWeight={600}
+          fontWeight={500}
           fontSize="40px"
           lineHeight="48px"
           color="#000000"
@@ -32,7 +32,7 @@ const HomeLanding = () => {
         </PrimaryTextSpan>
         <PrimaryTextSpan
           textAlign="center"
-          fontWeight={600}
+          fontWeight={500}
           fontSize="18px"
           lineHeight="28px"
         >
@@ -47,7 +47,7 @@ const HomeLanding = () => {
           textAlign="center"
           fontSize="18px"
           color="#000000"
-          fontWeight={600}
+          fontWeight={500}
           marginBottom="32px"
         >
           {t('There are 3 steps that we provide for you:')}
@@ -69,7 +69,7 @@ const HomeLanding = () => {
           >
             <PrimaryTextSpan
               color="#000000"
-              fontWeight={600}
+              fontWeight={500}
               fontSize="40px"
               lineHeight="48px"
             >
@@ -78,7 +78,7 @@ const HomeLanding = () => {
             <PrimaryTextSpan
               color="#000000"
               fontSize="18px"
-              fontWeight={600}
+              fontWeight={500}
               lineHeight="28px"
             >
               {t('You get instructions how to rule your finance')}
@@ -96,7 +96,7 @@ const HomeLanding = () => {
           >
             <PrimaryTextSpan
               color="#000000"
-              fontWeight={600}
+              fontWeight={500}
               fontSize="40px"
               lineHeight="48px"
             >
@@ -105,7 +105,7 @@ const HomeLanding = () => {
             <PrimaryTextSpan
               color="#000000"
               fontSize="18px"
-              fontWeight={600}
+              fontWeight={500}
               lineHeight="28px"
             >
               {t('You change your habits with our support')}
@@ -123,7 +123,7 @@ const HomeLanding = () => {
           >
             <PrimaryTextSpan
               color="#000000"
-              fontWeight={600}
+              fontWeight={500}
               fontSize="40px"
               lineHeight="48px"
             >
@@ -132,7 +132,7 @@ const HomeLanding = () => {
             <PrimaryTextSpan
               color="#000000"
               fontSize="18px"
-              fontWeight={600}
+              fontWeight={500}
               lineHeight="28px"
             >
               {t(

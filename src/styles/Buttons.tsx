@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { ButtonWithoutStyles } from './ButtonWithoutStyles';
-
+import IconBtnArrow from "../assets/images/icon-btn-arrow.png";
 interface PrimaryButtonProps {
   padding?: string;
   backgroundColor?: string;
@@ -67,8 +67,6 @@ export const SecondaryButton = styled(ButtonWithoutStyles)<SecondaryButtonProps>
     color: #fff;
   }
 
-  
-
   &:disabled {
     border-color: #c0c4c9;
     & span {
@@ -77,6 +75,46 @@ export const SecondaryButton = styled(ButtonWithoutStyles)<SecondaryButtonProps>
   }
 `;
 
+interface AccentButtonProps {
+  padding?: string;
+  borderColor?: string;
+  width?: string;
+  marginBottom?: string;
+}
+
+export const AccentButton = styled(ButtonWithoutStyles)<AccentButtonProps>`
+  margin-bottom: ${(props) => props.marginBottom};
+  padding: ${(props) => props.padding || '12px 16px'};
+  min-width: ${(props) => props.width};
+  background: ${(props) => props.borderColor || '#374DFB'};
+  border-radius: 12px;
+  transition: background-color 0.2s ease;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  background-image: ${`url(${IconBtnArrow})`};
+  background-repeat: no-repeat;
+  background-position: 96% center;
+  background-size: 16px;
+
+  &:hover {
+    background-color: #4357f4;
+    color: #fff;
+  }
+
+  &:active {
+    background-color: #283ff0;
+    color: #fff;
+  }
+
+  &:disabled {
+    border-color: #c0c4c9;
+    & span {
+      color: #c0c4c9;
+    }
+  }
+`;
 
 interface TextAccentButtonProps {
   fontSize?: string;

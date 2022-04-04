@@ -52,11 +52,9 @@
     "Max 31 symbols": "Max 31 symbols",
     "Min one number and one letter": "Min one number and one letter",
     "Min 2 characters": "Min 2 characters",
-    "Stats": "Stats",
-    "Task Score": "Task Score",
-    "Tasks": "Tasks,",
-    "Habit": "Habit",
-    "Skill": "Skill",
-    "Achievements": "Achievements",
-    "Your Progress": "Your Progress"
+    "Profile": "Profile",
+    "Account settings": "Account settings",
+    "Payments": "Payments",
+    "Referrals": "Referrals",
+    "Log out": "Log out"
 }

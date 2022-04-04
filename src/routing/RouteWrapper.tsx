@@ -16,7 +16,7 @@ const RouteWrapper: FC<Props> = observer((props) => {
   const { component: Component, layoutType, ...otherProps } = props;
   const { mainAppStore } = useStores();
 
-  if (layoutType !== RouteLayoutType.Public) {
+  if (!mainAppStore.isLoading && layoutType !== RouteLayoutType.Public) {
     if (mainAppStore.isAuthorized && layoutType === RouteLayoutType.SignFlow) {
       return <Redirect to={Page.DASHBOARD} />;
     } else if (

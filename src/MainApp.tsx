@@ -3,7 +3,6 @@ import { Global, css } from '@emotion/core';
 import { reboot } from './styles/reboot';
 import RoutingLayout from './routing/RoutingLayout';
 import { BrowserRouter as Router } from 'react-router-dom';
-import 'react-dates/lib/css/_datepicker.css';
 import { useStores } from './hooks/useStores';
 import { useTranslation } from 'react-i18next';
 import { autorun } from 'mobx';

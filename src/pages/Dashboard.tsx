@@ -34,7 +34,7 @@ const Dashboard = observer(() => {
         <PrimaryTextSpan
           color="#777C85"
           fontSize="18px"
-          fontWeight={600}
+          fontWeight={500}
           lineHeight="28px"
         >
           {t('Now, you are ready to start you course')}
