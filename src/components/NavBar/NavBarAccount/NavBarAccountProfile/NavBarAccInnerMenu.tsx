@@ -129,38 +129,6 @@ const NavBarAccInnerMenu = ({ isActive, onClose }: NavBarAccInnerMenuProps) => {
                   {t('Account settings')}
                 </PrimaryTextSpan>
               </ProfileNavLink>
-              <ProfileNavLink
-                to={Page.ACCOUNT.PAYMENTS}
-                activeClassName="active"
-                onClick={onClose}
-              >
-                <FlexContainer marginRight="12px">
-                  <SvgIcon {...IconPayments} fillColor="#777C85" />
-                </FlexContainer>
-                <PrimaryTextSpan
-                  color="#777C85"
-                  fontSize="16px"
-                  fontWeight={500}
-                >
-                  {t('Payments')}
-                </PrimaryTextSpan>
-              </ProfileNavLink>
-              <ProfileNavLink
-                to={Page.ACCOUNT.REFERRALS}
-                activeClassName="active"
-                onClick={onClose}
-              >
-                <FlexContainer marginRight="12px">
-                  <SvgIcon {...IconReferrals} fillColor="#777C85" />
-                </FlexContainer>
-                <PrimaryTextSpan
-                  color="#777C85"
-                  fontSize="16px"
-                  fontWeight={500}
-                >
-                  {t('Referrals')}
-                </PrimaryTextSpan>
-              </ProfileNavLink>
             </FlexContainer>
             {/*  */}
             <FlexContainer background="#E0E5EB" height="1px" width="100%" />

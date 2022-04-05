@@ -66,22 +66,6 @@ const AccountSettingsNav = () => {
             {t('Account settings')}
           </PrimaryTextSpan>
         </ProfileNavLink>
-        <ProfileNavLink to={Page.ACCOUNT.PAYMENTS} activeClassName="active">
-          <FlexContainer marginRight="12px">
-            <SvgIcon {...IconPayments} fillColor="#777C85" />
-          </FlexContainer>
-          <PrimaryTextSpan color="#777C85" fontSize="18px" fontWeight={500}>
-            {t('Payments')}
-          </PrimaryTextSpan>
-        </ProfileNavLink>
-        <ProfileNavLink to={Page.ACCOUNT.REFERRALS} activeClassName="active">
-          <FlexContainer marginRight="12px">
-            <SvgIcon {...IconReferrals} fillColor="#777C85" />
-          </FlexContainer>
-          <PrimaryTextSpan color="#777C85" fontSize="18px" fontWeight={500}>
-            {t('Referrals')}
-          </PrimaryTextSpan>
-        </ProfileNavLink>
       </FlexContainer>
       {/*  */}
 
