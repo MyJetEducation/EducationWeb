@@ -10,6 +10,7 @@ import Helmet from 'react-helmet';
 import { setFullHeightProperty } from './helpers/setFullHeightProperty';
 import PageTemplateContainer from './containers/PageTemplateContainer';
 import { fonts } from './styles/fonts';
+import { OperationApiResponseCodes } from './enums/OperationApiResponseCodes';
 
 declare const window: any;
 
@@ -36,6 +37,26 @@ const MainApp: FC = () => {
 
     return () => {
       removeEventListener('resize', windowResize);
+    };
+  }, []);
+
+  const postUserLog = async () => {
+    try {
+      const result = await mainAppStore.postUserTimeLog();
+      if (result === OperationApiResponseCodes.InvalidTimeToken) {
+        mainAppStore.setTokenLogHandler('');
+        mainAppStore.getUserTimeToken();
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    const timerLog = setInterval(() => {
+      postUserLog();
+    }, 10000);
+
+    return () => {
+      clearInterval(timerLog);
     };
   }, []);
 

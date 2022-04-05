@@ -22,6 +22,11 @@ const API_LIST = {
     STATUS: '/api/v1/userprofile/status',
     ACHIEVEMENTS: '/api/v1/userprofile/achievements',
   },
+
+  USER_TIMER: {
+    GET_TOKEN: '/api/v1/time/user-time/get',
+    LOG: '/api/v1/time/user-time/log',
+  },
 };
 
 Object.freeze(API_LIST);

@@ -2,6 +2,7 @@ import {
   LOCAL_STORAGE_LANGUAGE,
   LOCAL_STORAGE_REFRESH_TOKEN_KEY,
   LOCAL_STORAGE_TOKEN_KEY,
+  LOCAL_STORAGE_TOKEN_USER_LOG,
 } from './../constants/global';
 import { HubConnection } from '@aspnet/signalr';
 import { makeAutoObservable } from 'mobx';
@@ -14,12 +15,18 @@ import { CountriesEnum } from '../enums/CountriesEnum';
 import injectInerceptors from '../http/interceptors';
 import { languagesList } from '../constants/languagesList';
 import { logger } from '../helpers/ConsoleLoggerTool';
-import {UserAuthenticate, UserForgotPassword, UserRegistration} from '../types/UserInfo';
+import {
+  UserAuthenticate,
+  UserForgotPassword,
+  UserRegistration,
+} from '../types/UserInfo';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 
 interface MainAppStoreProps {
   token: string;
   refreshToken: string;
+
+  tokenLog: string;
 
   isAuthorized: boolean;
   activeSession?: HubConnection;
@@ -36,6 +43,8 @@ interface MainAppStoreProps {
 export class MainAppStore implements MainAppStoreProps {
   token = '';
   refreshToken = '';
+
+  tokenLog = '';
 
   isAuthorized = false;
   activeSession?: HubConnection;
@@ -61,6 +70,7 @@ export class MainAppStore implements MainAppStoreProps {
     });
     this.rootStore = rootStore;
 
+    this.tokenLog = localStorage.getItem(LOCAL_STORAGE_TOKEN_USER_LOG) || '';
     this.token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY) || '';
     this.refreshToken =
       localStorage.getItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY) || '';
@@ -97,6 +107,23 @@ export class MainAppStore implements MainAppStoreProps {
 
   // async actions
 
+  // user loggers
+  getUserTimeToken = async () => {
+    if (this.tokenLog) {
+      return;
+    }
+    const response = await API.getUserTimeToken();
+    if (response.status === OperationApiResponseCodes.Ok) {
+      this.setTokenLogHandler(response.data);
+    }
+  };
+
+  postUserTimeLog = async () => {
+    const response = await API.postUserTimeLog(this.tokenLog);
+    return response.status;
+  };
+  // end user loggers
+
   initApp = async () => {
     if (!this.token) {
       return;
@@ -105,7 +132,7 @@ export class MainAppStore implements MainAppStoreProps {
     // TODO: check fist request for init
     this.setIsAuthorized(true);
     await this.rootStore.userProfileStore.getUserAccount();
-
+    await this.getUserTimeToken();
     this.setIsLoading(false);
   };
 
@@ -164,6 +191,11 @@ export class MainAppStore implements MainAppStoreProps {
     localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
     Axios.defaults.headers[RequestHeaders.AUTHORIZATION] = 'Bearer ' + token;
     this.token = token;
+  };
+
+  setTokenLogHandler = (token: string) => {
+    localStorage.setItem(LOCAL_STORAGE_TOKEN_USER_LOG, token);
+    this.tokenLog = token;
   };
 
   setRefreshToken = (refreshToken: string) => {

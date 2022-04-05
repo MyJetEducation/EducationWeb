@@ -15,7 +15,7 @@ import { ApiResponseType } from '../types/ApiResponseType';
 import API_LIST from './apiList';
 import { TutorialsListType } from '../types/TutorialTypes';
 import { AchievementsTypes } from '../types/AchievementsTypes';
-import {DashboardProgressTypes} from "../types/StatsTypes";
+import { DashboardProgressTypes } from '../types/StatsTypes';
 
 class API {
   private convertParamsToFormData = (params: { [key: string]: any }) => {
@@ -128,6 +128,24 @@ class API {
   getDashboardProgress = async () => {
     const response = await axios.post<ApiResponseType<DashboardProgressTypes>>(
       `${API_STRING}${API_LIST.DASHBOARD.PROGRESS}`
+    );
+    return response.data;
+  };
+
+  getUserTimeToken = async () => {
+    const response = await axios.post<ApiResponseType<string>>(
+      `${API_STRING}${API_LIST.USER_TIMER.GET_TOKEN}`
+    );
+    return response.data;
+  };
+
+  postUserTimeLog = async (token: string) => {
+    const response = await axios.post<ApiResponseType<any>>(
+      `${API_STRING}${API_LIST.USER_TIMER.LOG}`,
+      JSON.stringify(token),
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
     );
     return response.data;
   };
