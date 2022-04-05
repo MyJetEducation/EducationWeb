@@ -15,6 +15,7 @@ import { ApiResponseType } from '../types/ApiResponseType';
 import API_LIST from './apiList';
 import { TutorialsListType } from '../types/TutorialTypes';
 import { AchievementsTypes } from '../types/AchievementsTypes';
+import {DashboardProgressTypes} from "../types/StatsTypes";
 
 class API {
   private convertParamsToFormData = (params: { [key: string]: any }) => {
@@ -120,6 +121,13 @@ class API {
   getAchievements = async () => {
     const response = await axios.post<ApiResponseType<AchievementsTypes>>(
       `${API_STRING}${API_LIST.USER_PROFILE.ACHIEVEMENTS}`
+    );
+    return response.data;
+  };
+
+  getDashboardProgress = async () => {
+    const response = await axios.post<ApiResponseType<DashboardProgressTypes>>(
+      `${API_STRING}${API_LIST.DASHBOARD.PROGRESS}`
     );
     return response.data;
   };

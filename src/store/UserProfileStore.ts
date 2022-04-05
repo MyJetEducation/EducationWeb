@@ -5,6 +5,7 @@ import API from '../helpers/API';
 import { AchievementsTypes } from '../types/AchievementsTypes';
 import { UserAuthenticate, UserProfileType } from '../types/UserInfo';
 import { RootStore } from './RootStore';
+import {HabitItemType} from "../types/StatsTypes";
 
 interface UserProfileStoreProps {
   rootStore: RootStore;
@@ -12,6 +13,9 @@ interface UserProfileStoreProps {
 
   unReceivedAchievements: AchievementsEnum[];
   userAchievements: AchievementsEnum[];
+
+  habit: HabitItemType | null;
+  skillProgress: number
 }
 
 export class UserProfileStore implements UserProfileStoreProps {
@@ -21,11 +25,13 @@ export class UserProfileStore implements UserProfileStoreProps {
   userAchievements: AchievementsEnum[] = [];
   unReceivedAchievements: AchievementsEnum[] = [];
 
+  habit: HabitItemType | null = null;
+  skillProgress = 0
+
   constructor(rootStore: RootStore) {
     makeAutoObservable(this, {
       rootStore: false,
     });
-
     this.rootStore = rootStore;
   }
 
@@ -47,6 +53,16 @@ export class UserProfileStore implements UserProfileStoreProps {
     return response.status;
   };
 
+  getDashboardProgress = async () => {
+    const response = await API.getDashboardProgress();
+    if (response.status === OperationApiResponseCodes.Ok) {
+      this.setHabit(response.data.habit);
+      this.setUserAchievements(response.data.achievements);
+      this.setSkillProgress(response.data.skillProgress);
+    }
+    return response.status;
+  };
+
   // store actions
 
   setUserAchievements = (list: AchievementsEnum[]) => {
@@ -59,6 +75,14 @@ export class UserProfileStore implements UserProfileStoreProps {
   setUserAccount = (acc: UserProfileType | null) => {
     this.userAccount = acc;
   };
+
+  setHabit = (item: HabitItemType | null) => {
+    this.habit = item
+  }
+
+  setSkillProgress = (progress: number) => {
+    this.skillProgress = progress
+  }
 
   // computed
   get totalAchievementsCount() {
@@ -73,5 +97,7 @@ export class UserProfileStore implements UserProfileStoreProps {
   // reset store
   reset = () => {
     this.setUserAccount(null);
+    this.setHabit(null);
+    this.setSkillProgress(0);
   };
 }

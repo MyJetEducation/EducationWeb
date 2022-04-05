@@ -8,7 +8,7 @@ export enum ProgressBarTypesEnum {
   ERROR = 'error',
 }
 
-interface ProgessBarProps {
+interface ProgressBarProps {
   progress: number;
   type: ProgressBarTypesEnum;
 }
@@ -20,7 +20,7 @@ const ProgressColorByType = {
   [ProgressBarTypesEnum.ERROR]: '#F50537',
 };
 
-export const ProgressBar = styled(FlexContainer)<ProgessBarProps>`
+export const ProgressBar = styled(FlexContainer)<ProgressBarProps>`
   width: 100%;
   height: 4px;
   background-color: ${(props) =>

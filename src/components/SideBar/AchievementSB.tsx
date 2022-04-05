@@ -45,6 +45,7 @@ const AchievementSB = observer(() => {
       padding="20px 32px"
       flexDirection="column"
       marginBottom="20px"
+      position="relative"
     >
       <FlexContainer
         alignItems="center"
