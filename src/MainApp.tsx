@@ -51,9 +51,19 @@ const MainApp: FC = () => {
   };
 
   useEffect(() => {
-    const timerLog = setInterval(() => {
-      postUserLog();
-    }, 10000);
+    let timerLog: NodeJS.Timer;
+
+    autorun(() => {
+      if (mainAppStore.isAuthorized) {
+        timerLog = setInterval(() => {
+          postUserLog();
+        }, 10000);
+      } else {
+        if (timerLog) {
+          clearInterval(timerLog);
+        }
+      }
+    });
 
     return () => {
       clearInterval(timerLog);
