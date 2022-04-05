@@ -1,10 +1,11 @@
 import React from 'react';
-import {FlexContainer} from "../../styles/FlexContainer";
-import {PrimaryTextSpan} from "../../styles/TextsElements";
-import {useTranslation} from "react-i18next";
+import { FlexContainer } from '../../styles/FlexContainer';
+import { PrimaryTextSpan } from '../../styles/TextsElements';
+import { useTranslation } from 'react-i18next';
+import { TitleH1 } from '../../styles/Titles';
 
 const LessonsPage = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   return (
     <FlexContainer padding="58px 0" flex="1" flexDirection="column">
       <FlexContainer
@@ -12,16 +13,9 @@ const LessonsPage = () => {
         alignItems="center"
         marginBottom="36px"
       >
-        <PrimaryTextSpan
-          textAlign="center"
-          color="#000"
-          fontWeight={500}
-          fontSize="40px"
-          lineHeight="48px"
-          marginBottom="36px"
-        >
+        <TitleH1 textAlign="center" marginBottom="36px">
           {t('Lessons')}
-        </PrimaryTextSpan>
+        </TitleH1>
 
         <PrimaryTextSpan
           color="#000"
@@ -35,89 +29,93 @@ const LessonsPage = () => {
       </FlexContainer>
 
       <FlexContainer
-        justifyContent={"space-between"}
-        maxWidth={"780px"}
-        width={"100%"}
-        margin={"0 auto 40px"}
+        justifyContent={'space-between'}
+        maxWidth={'780px'}
+        width={'100%'}
+        margin={'0 auto 40px'}
       >
         <PrimaryTextSpan
-          fontSize={"28px"}
-          lineHeight={"36px"}
+          fontSize={'28px'}
+          lineHeight={'36px'}
           fontWeight={600}
-          color={"#000"}
-          whiteSpace={"nowrap"}
+          color={'#000'}
+          whiteSpace={'nowrap'}
         >
           1 ступень,
         </PrimaryTextSpan>
-        <FlexContainer
-          flexDirection={"column"}
-          maxWidth={"540px"}
-        >
-          <PrimaryTextSpan
-            marginBottom={"34px"}
-          >
-            базовая, это основы финансовой грамотности в современном мире, состоит из 9 дисциплин. Вы проходите эти дисциплины в игровой форме. Материал подаем исходя из того, какая у вас потребность в знаниях сейчас, и что вы хотите от нашего проекта. По мере прохождения дисциплин вы зарабатываете игровые деньги, за которые можете осуществлять покупки у нас в проекте. Также вы зарабатываете статусы в проекте и ачивменты, которые имеют как ментальную, так и финансовую ценность.
+        <FlexContainer flexDirection={'column'} maxWidth={'540px'}>
+          <PrimaryTextSpan marginBottom={'34px'}>
+            базовая, это основы финансовой грамотности в современном мире,
+            состоит из 9 дисциплин. Вы проходите эти дисциплины в игровой форме.
+            Материал подаем исходя из того, какая у вас потребность в знаниях
+            сейчас, и что вы хотите от нашего проекта. По мере прохождения
+            дисциплин вы зарабатываете игровые деньги, за которые можете
+            осуществлять покупки у нас в проекте. Также вы зарабатываете статусы
+            в проекте и ачивменты, которые имеют как ментальную, так и
+            финансовую ценность.
           </PrimaryTextSpan>
           <PrimaryTextSpan>
-            9 дисциплин состоят из 15 уроков. Уроки состоят из текстовых материалов, видео, тестов, квизов, игр. Пройти каждый урок можно в том случае, если вдумчиво ответить на все вопросы. Каждый урок занимает менее 15 минут вашего времени и оставляет информационный шлейф, который нужно спокойно обдумать. Мы рекомендуем проходить по одному уроку каждый день, чтоб повысить качество усвоения материала. Через каждые 10 уроков, перед 11-м,  вы проходите экзамен, за прохождение которого можете получить редкие ачивменты и награды.
+            9 дисциплин состоят из 15 уроков. Уроки состоят из текстовых
+            материалов, видео, тестов, квизов, игр. Пройти каждый урок можно в
+            том случае, если вдумчиво ответить на все вопросы. Каждый урок
+            занимает менее 15 минут вашего времени и оставляет информационный
+            шлейф, который нужно спокойно обдумать. Мы рекомендуем проходить по
+            одному уроку каждый день, чтоб повысить качество усвоения материала.
+            Через каждые 10 уроков, перед 11-м, вы проходите экзамен, за
+            прохождение которого можете получить редкие ачивменты и награды.
           </PrimaryTextSpan>
         </FlexContainer>
       </FlexContainer>
 
       <FlexContainer
-        justifyContent={"space-between"}
-        maxWidth={"780px"}
-        width={"100%"}
-        margin={"0 auto"}
+        justifyContent={'space-between'}
+        maxWidth={'780px'}
+        width={'100%'}
+        margin={'0 auto'}
       >
         <PrimaryTextSpan
-          fontSize={"28px"}
-          lineHeight={"36px"}
+          fontSize={'28px'}
+          lineHeight={'36px'}
           fontWeight={600}
-          color={"#000"}
-          whiteSpace={"nowrap"}
+          color={'#000'}
+          whiteSpace={'nowrap'}
         >
           2 ступень,
         </PrimaryTextSpan>
-        <FlexContainer
-          flexDirection={"column"}
-          maxWidth={"540px"}
-        >
-          <PrimaryTextSpan
-            marginBottom={"40px"}
-          >
-            с углублением в разрешение различных задач клиента, доступна только после прохождения базовых знаний. В мире является нормальной практика отсечения неквалифицированных инвесторов с целью сбережения их денег центральными банками разных стран. Такая практика стала нормальной с недавних пор. Причина в том, что мошенники завлекают людей тратить деньги на инвестиции, когда они даже не понимают как грамотно инвестировать. Поэтому мы допускаем клиентов к обсуждению финансовых вопросов удостоверившись, что базовые знания по современной финансовой грамотности получены и прохождение было успешным.
+        <FlexContainer flexDirection={'column'} maxWidth={'540px'}>
+          <PrimaryTextSpan marginBottom={'40px'}>
+            с углублением в разрешение различных задач клиента, доступна только
+            после прохождения базовых знаний. В мире является нормальной
+            практика отсечения неквалифицированных инвесторов с целью сбережения
+            их денег центральными банками разных стран. Такая практика стала
+            нормальной с недавних пор. Причина в том, что мошенники завлекают
+            людей тратить деньги на инвестиции, когда они даже не понимают как
+            грамотно инвестировать. Поэтому мы допускаем клиентов к обсуждению
+            финансовых вопросов удостоверившись, что базовые знания по
+            современной финансовой грамотности получены и прохождение было
+            успешным.
           </PrimaryTextSpan>
         </FlexContainer>
-
-
-
       </FlexContainer>
       <FlexContainer
-        maxWidth={"780px"}
-        margin={"0 auto 22px"}
-        width={"100%"}
-        justifyContent={"flex-start"}
+        maxWidth={'780px'}
+        margin={'0 auto 22px'}
+        width={'100%'}
+        justifyContent={'flex-start'}
       >
         <PrimaryTextSpan
-          fontSize={"28px"}
-          lineHeight={"36px"}
+          fontSize={'28px'}
+          lineHeight={'36px'}
           fontWeight={600}
-          color={"#000"}
-          maxWidth={"400px"}
+          color={'#000'}
+          maxWidth={'400px'}
         >
           Всех клиентов мы разделили на три группы.
         </PrimaryTextSpan>
       </FlexContainer>
 
-      <FlexContainer
-        width={"100%"}
-        justifyContent="flex-end"
-      >
-        <FlexContainer
-          flexDirection={"column"}
-          maxWidth={"660px"}
-        >
+      <FlexContainer width={'100%'} justifyContent="flex-end">
+        <FlexContainer flexDirection={'column'} maxWidth={'660px'}>
           <FlexContainer marginBottom="22px" alignItems="flex-start">
             <PrimaryTextSpan
               fontSize="28px"
@@ -129,7 +127,7 @@ const LessonsPage = () => {
               1.
             </PrimaryTextSpan>
             <PrimaryTextSpan fontSize="16px" color="#000" lineHeight="24px">
-              Те, кто хотят  зарабатывать больше денег
+              Те, кто хотят зарабатывать больше денег
             </PrimaryTextSpan>
           </FlexContainer>
 
@@ -144,7 +142,8 @@ const LessonsPage = () => {
               2.
             </PrimaryTextSpan>
             <PrimaryTextSpan fontSize="16px" color="#000" lineHeight="24px">
-              Те, кто хотят научиться грамотно распоряжаться своими деньгами и приумножать их
+              Те, кто хотят научиться грамотно распоряжаться своими деньгами и
+              приумножать их
             </PrimaryTextSpan>
           </FlexContainer>
 
@@ -159,13 +158,12 @@ const LessonsPage = () => {
               3.
             </PrimaryTextSpan>
             <PrimaryTextSpan fontSize="16px" color="#000" lineHeight="24px">
-              Состоятельные люди, которым нужны знания по современным инвестициям и сопровождение инвестиционными идеями от специалистов
+              Состоятельные люди, которым нужны знания по современным
+              инвестициям и сопровождение инвестиционными идеями от специалистов
             </PrimaryTextSpan>
           </FlexContainer>
         </FlexContainer>
       </FlexContainer>
-
-
     </FlexContainer>
   );
 };

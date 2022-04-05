@@ -409,7 +409,7 @@ const AchievementItem = ({ name, isActive = false, marginRight = '' }: Props) =>
       <AchievementIconWrap backgroundColor={bgColorByType}>
         <img src={achievementImage} alt="" />
       </AchievementIconWrap>
-      <PrimaryTextSpan color="#777C85" fontSize="12px" textAlign="center">
+      <PrimaryTextSpan color="#777C85" fontSize="12px" lineHeight="12px" textAlign="center">
         {achievementName}
       </PrimaryTextSpan>
     </FlexContainer>

@@ -39,6 +39,7 @@ const StatsSB = observer(() => {
       flexDirection={"column"}
       marginBottom={"20px"}
       position={"relative"}
+      overflow="hidden"
     >
       <PrimaryTextParagraph
         fontSize={"18px"}

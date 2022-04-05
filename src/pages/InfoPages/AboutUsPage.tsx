@@ -7,6 +7,7 @@ import {
   PrimaryLink,
   PrimaryTextSpan,
 } from '../../styles/TextsElements';
+import { TitleH1, TitleH2 } from '../../styles/Titles';
 
 const AboutUsPage = () => {
   const { t } = useTranslation();
@@ -18,16 +19,9 @@ const AboutUsPage = () => {
         alignItems="center"
         marginBottom="56px"
       >
-        <PrimaryTextSpan
-          textAlign="center"
-          color="#000"
-          fontWeight={500}
-          fontSize="40px"
-          lineHeight="48px"
-          marginBottom="36px"
-        >
+        <TitleH1 textAlign="center" marginBottom="36px">
           {t('About Us')}
-        </PrimaryTextSpan>
+        </TitleH1>
 
         <PrimaryTextSpan
           textAlign="center"
@@ -46,29 +40,15 @@ const AboutUsPage = () => {
 
       <FlexContainer flexDirection="column" width="100%" marginBottom="52px">
         <FlexContainer justifyContent="center">
-          <PrimaryTextSpan
-            textAlign="center"
-            color="#000"
-            fontWeight={500}
-            fontSize="40px"
-            lineHeight="48px"
-            marginBottom="36px"
-          >
+          <TitleH1 textAlign="center" marginBottom="36px">
             Что у нас есть?
-          </PrimaryTextSpan>
+          </TitleH1>
         </FlexContainer>
 
         <FlexContainer flexDirection="column" alignItems="center">
           <FlexContainer marginBottom="30px">
             <FlexContainer width="240px">
-              <PrimaryTextSpan
-                color="#000"
-                fontSize="28px"
-                lineHeight="36px"
-                fontWeight={500}
-              >
-                Про знания
-              </PrimaryTextSpan>
+              <TitleH2>Про знания</TitleH2>
             </FlexContainer>
             <FlexContainer width="calc(100% - 240px)" flexDirection="column">
               {/*  */}
@@ -134,14 +114,7 @@ const AboutUsPage = () => {
 
           <FlexContainer>
             <FlexContainer width="240px">
-              <PrimaryTextSpan
-                color="#000"
-                fontSize="28px"
-                lineHeight="36px"
-                fontWeight={500}
-              >
-                Про бизнес:
-              </PrimaryTextSpan>
+              <TitleH2>Про бизнес:</TitleH2>
             </FlexContainer>
             <FlexContainer width="calc(100% - 240px)" flexDirection="column">
               {/*  */}

@@ -4,6 +4,7 @@ import SvgIcon from '../../components/SvgIcon';
 import Page from '../../routing/Pages';
 import { FlexContainer } from '../../styles/FlexContainer';
 import { PrimaryLink, PrimaryTextSpan } from '../../styles/TextsElements';
+import { TitleH1 } from '../../styles/Titles';
 
 const MissionPage = () => {
   const { t } = useTranslation();
@@ -14,15 +15,7 @@ const MissionPage = () => {
         alignItems="center"
         marginBottom="36px"
       >
-        <PrimaryTextSpan
-          textAlign="center"
-          color="#000"
-          fontWeight={500}
-          fontSize="40px"
-          lineHeight="48px"
-        >
-          {t('Mission')}
-        </PrimaryTextSpan>
+        <TitleH1 textAlign="center">{t('Mission')}</TitleH1>
       </FlexContainer>
 
       <FlexContainer width="100%" justifyContent="flex-end" marginBottom="44px">
