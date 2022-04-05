@@ -9,6 +9,7 @@ interface PrimaryTextType {
   lineHeight?: string;
   marginRight?: string;
   marginBottom?: string;
+  padding?: string;
   textDecoration?: 'underline';
   textTransform?: 'capitalize' | 'lowercase' | 'uppercase';
   whiteSpace?: 'nowrap' | 'pre' | 'normal';
@@ -28,6 +29,7 @@ export const PrimaryTextSpan = styled.span<PrimaryTextType>`
   color: ${(props) => props.color || '#777C85'};
   margin-right: ${(props) => props.marginRight};
   margin-bottom: ${(props) => props.marginBottom};
+  padding: ${(props) => props.padding};
   text-decoration: ${(props) => props.textDecoration};
   text-transform: ${(props) => props.textTransform};
   white-space: ${(props) => props.whiteSpace};
@@ -46,6 +48,7 @@ export const PrimaryTextParagraph = styled.p<PrimaryTextType>`
   color: ${(props) => props.color || '#777C85'};
   margin-right: ${(props) => props.marginRight};
   margin-bottom: ${(props) => props.marginBottom || '0'};
+  padding: ${(props) => props.padding};
   text-decoration: ${(props) => props.textDecoration};
   text-transform: ${(props) => props.textTransform};
   white-space: ${(props) => props.whiteSpace};
@@ -66,6 +69,7 @@ export const QuoteText = styled(PrimaryTextSpan)<
   color: ${(props) => (props.isGrowth ? '#3BFF8A' : '#FF557E')};
   margin-right: ${(props) => props.marginRight};
   margin-bottom: ${(props) => props.marginBottom};
+  padding: ${(props) => props.padding};
   text-decoration: ${(props) => props.textDecoration};
   text-transform: ${(props) => props.textTransform};
   text-align: ${(props) => props.textAlign};

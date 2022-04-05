@@ -6,7 +6,7 @@ import {
   PrimaryTextSpan,
 } from '../../styles/TextsElements';
 import { useTranslation } from 'react-i18next';
-import AchieventItem from '../AchieventItem';
+import AchievementItem from '../AchievementItem';
 import { AchievementsEnum } from '../../enums/AchievementsEnum';
 import { useStores } from '../../hooks/useStores';
 import { observer } from 'mobx-react-lite';
@@ -28,7 +28,7 @@ const AchievementSB = observer(() => {
     }
   };
 
-  const achievemetList = useMemo(() => {
+  const achievementList = useMemo(() => {
     const list = userProfileStore.userAchievements.slice(0, 3);
     return list;
   }, [userProfileStore.userAchievements]);
@@ -70,12 +70,12 @@ const AchievementSB = observer(() => {
       <FlexContainer
         alignItems="flex-start"
         justifyContent={
-          achievemetList.length < 3 ? 'flex-start' : 'space-between'
+          achievementList.length < 3 ? 'flex-start' : 'space-between'
         }
       >
-        {achievemetList.map((el: AchievementsEnum) => (
-          <AchieventItem
-            marginRight={achievemetList.length < 3 ? '12px' : ''}
+        {achievementList.map((el: AchievementsEnum) => (
+          <AchievementItem
+            marginRight={achievementList.length < 3 ? '12px' : ''}
             key={el}
             isActive={true}
             name={el}

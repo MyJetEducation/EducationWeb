@@ -40,6 +40,8 @@ const AccountSettingsNav = () => {
               >
                 {`${userProfileStore.userAccount?.firstName} ${userProfileStore.userAccount?.lastName}`}
               </PrimaryTextSpan>
+
+              {/* Статус будем получать с бэка*/}
               <StatusBadge>Status</StatusBadge>
             </>
           )}

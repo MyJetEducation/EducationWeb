@@ -369,7 +369,7 @@ interface Props {
   marginRight?: string;
 }
 
-const AchieventItem = ({ name, isActive = false, marginRight = '' }: Props) => {
+const AchievementItem = ({ name, isActive = false, marginRight = '' }: Props) => {
   const achievementName = useMemo(() => {
     return ACHIEVEMENTS.find((el) => el.id === name)?.name || '';
   }, [name]);
@@ -416,7 +416,7 @@ const AchieventItem = ({ name, isActive = false, marginRight = '' }: Props) => {
   );
 };
 
-export default AchieventItem;
+export default AchievementItem;
 
 const AchievementIconWrap = styled(FlexContainer)`
   height: 56px;

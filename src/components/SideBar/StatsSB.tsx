@@ -15,7 +15,7 @@ const StatsSB = () => {
       height={"216px"}
       borderRadius={"32px"}
       border={"2px solid #E0E5EB"}
-      padding={"21px 16px 16px 32px"}
+      padding={"21px 16px 16px 18px"}
       flexDirection={"column"}
       marginBottom={"20px"}
     >
@@ -25,9 +25,9 @@ const StatsSB = () => {
         fontWeight={"bold"}
         color={"#000"}
         marginBottom={"13px"}
+        padding={"0 0 0 14px"}
       >
         {t('Stats')}
-
       </PrimaryTextParagraph>
       <FlexContainer
         flexWrap={"wrap"}
@@ -35,14 +35,16 @@ const StatsSB = () => {
         <FlexContainer
           flexDirection={"column"}
           width={"108px"}
-          marginRight={"20px"}
+          padding={"0 0 0 14px"}
+          marginRight={"14px"}
+          marginBottom={"9px"}
         >
           <PrimaryTextSpan
             color={"#0BCA1E"}
             fontSize={"32px"}
             lineHeight={"125%"}
             fontWeight={600}
-
+            marginBottom={"-7px"}
           >
             90%
           </PrimaryTextSpan>
@@ -58,6 +60,7 @@ const StatsSB = () => {
         </FlexContainer>
         <FlexContainer
           width={"108px"}
+          padding={"0 0 0 14px"}
           flexDirection={"column"}
         >
           <PrimaryTextSpan
@@ -65,6 +68,7 @@ const StatsSB = () => {
             fontSize={"32px"}
             lineHeight={"125%"}
             fontWeight={600}
+            marginBottom={"-7px"}
           >
             6
           </PrimaryTextSpan>
@@ -80,14 +84,16 @@ const StatsSB = () => {
 
         <FlexContainer
           width={"108px"}
-          marginRight={"0px"}
           flexDirection={"column"}
+          padding={"0 0 0 14px"}
+          marginRight={"14px"}
         >
           <PrimaryTextSpan
             color={"#000"}
             fontSize={"32px"}
             lineHeight={"125%"}
             fontWeight={600}
+            marginBottom={"-7px"}
           >
             1
           </PrimaryTextSpan>
@@ -120,6 +126,7 @@ const StatsSB = () => {
             fontSize={"32px"}
             lineHeight={"125%"}
             fontWeight={600}
+            marginBottom={"-7px"}
           >
             1
           </PrimaryTextSpan>

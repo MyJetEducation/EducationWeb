@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import AchievementSB from '../components/SideBar/AchivementSB';
+import AchievementSB from '../components/SideBar/AchievementSB';
 import ProgressSB from '../components/SideBar/ProgressSB';
 import StatsSB from '../components/SideBar/StatsSB';
 import LockedTutorial from '../components/Tutorials/LockedTutorial';
