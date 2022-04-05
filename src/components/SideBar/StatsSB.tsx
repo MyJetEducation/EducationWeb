@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {FlexContainer} from '../../styles/FlexContainer';
 import {PrimaryTextParagraph, PrimaryTextSpan} from "../../styles/TextsElements";
@@ -6,9 +6,29 @@ import {PrimaryTextParagraph, PrimaryTextSpan} from "../../styles/TextsElements"
 import IconSkill from '../../assets/svg/icon-skill.svg';
 import SvgIcon from "../SvgIcon";
 import {useTranslation} from "react-i18next";
+import {useStores} from "../../hooks/useStores";
+import LoaderForComponent from "../Preloader/LoaderForComponent";
+import {observer} from "mobx-react-lite";
 
-const StatsSB = () => {
+const StatsSB = observer(() => {
   const { t } = useTranslation();
+  const { userProfileStore } = useStores();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getProgress = async () => {
+    setIsLoading(true);
+    try {
+      const result = userProfileStore.getDashboardProgress();
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProgress()
+  }, [])
+
   return (
     <FlexContainer
       width={"100%"}
@@ -18,6 +38,7 @@ const StatsSB = () => {
       padding={"21px 16px 16px 18px"}
       flexDirection={"column"}
       marginBottom={"20px"}
+      position={"relative"}
     >
       <PrimaryTextParagraph
         fontSize={"18px"}
@@ -46,7 +67,7 @@ const StatsSB = () => {
             fontWeight={600}
             marginBottom={"-7px"}
           >
-            90%
+            {userProfileStore.testScore}%
           </PrimaryTextSpan>
           <PrimaryTextSpan
             color={"#0BCA1E"}
@@ -70,7 +91,7 @@ const StatsSB = () => {
             fontWeight={600}
             marginBottom={"-7px"}
           >
-            6
+            {userProfileStore.taskCount}
           </PrimaryTextSpan>
           <PrimaryTextSpan
             color={"#000"}
@@ -95,7 +116,7 @@ const StatsSB = () => {
             fontWeight={600}
             marginBottom={"-7px"}
           >
-            1
+            {userProfileStore.habit?.index}
           </PrimaryTextSpan>
           <PrimaryTextSpan
             color={"#000"}
@@ -128,7 +149,7 @@ const StatsSB = () => {
             fontWeight={600}
             marginBottom={"-7px"}
           >
-            1
+            {userProfileStore.skillProgress}
           </PrimaryTextSpan>
           <PrimaryTextSpan
             color={"#000"}
@@ -140,8 +161,9 @@ const StatsSB = () => {
           </PrimaryTextSpan>
         </FlexContainer>
       </FlexContainer>
+      <LoaderForComponent isLoading={isLoading} />
     </FlexContainer>
   )
-}
+})
 
 export default StatsSB;

@@ -1,10 +1,9 @@
-import { makeAutoObservable } from 'mobx';
-import { AchievementsEnum } from '../enums/AchievementsEnum';
-import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
+import {makeAutoObservable} from 'mobx';
+import {AchievementsEnum} from '../enums/AchievementsEnum';
+import {OperationApiResponseCodes} from '../enums/OperationApiResponseCodes';
 import API from '../helpers/API';
-import { AchievementsTypes } from '../types/AchievementsTypes';
-import { UserAuthenticate, UserProfileType } from '../types/UserInfo';
-import { RootStore } from './RootStore';
+import {UserProfileType} from '../types/UserInfo';
+import {RootStore} from './RootStore';
 import {HabitItemType} from "../types/StatsTypes";
 
 interface UserProfileStoreProps {
@@ -14,8 +13,10 @@ interface UserProfileStoreProps {
   unReceivedAchievements: AchievementsEnum[];
   userAchievements: AchievementsEnum[];
 
+  testScore: number;
+  taskCount: number;
   habit: HabitItemType | null;
-  skillProgress: number
+  skillProgress: number;
 }
 
 export class UserProfileStore implements UserProfileStoreProps {
@@ -25,8 +26,10 @@ export class UserProfileStore implements UserProfileStoreProps {
   userAchievements: AchievementsEnum[] = [];
   unReceivedAchievements: AchievementsEnum[] = [];
 
+  testScore = 0;
+  taskCount = 0;
   habit: HabitItemType | null = null;
-  skillProgress = 0
+  skillProgress = 0;
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this, {
@@ -56,6 +59,8 @@ export class UserProfileStore implements UserProfileStoreProps {
   getDashboardProgress = async () => {
     const response = await API.getDashboardProgress();
     if (response.status === OperationApiResponseCodes.Ok) {
+      this.setTestScore(response.data.testScore);
+      this.setTaskCount(response.data.taskScore);
       this.setHabit(response.data.habit);
       this.setUserAchievements(response.data.achievements);
       this.setSkillProgress(response.data.skillProgress);
@@ -76,6 +81,14 @@ export class UserProfileStore implements UserProfileStoreProps {
     this.userAccount = acc;
   };
 
+  setTestScore = (progress: number) => {
+    this.testScore = progress
+  }
+
+  setTaskCount = (progress: number) => {
+    this.taskCount = progress
+  }
+
   setHabit = (item: HabitItemType | null) => {
     this.habit = item
   }
@@ -90,6 +103,7 @@ export class UserProfileStore implements UserProfileStoreProps {
       this.userAchievements.length + this.unReceivedAchievements.length || 0
     );
   }
+
   get totalActiveAchievementsCount() {
     return this.userAchievements.length || 0;
   }
@@ -97,6 +111,8 @@ export class UserProfileStore implements UserProfileStoreProps {
   // reset store
   reset = () => {
     this.setUserAccount(null);
+    this.setTaskCount(0);
+    this.setTestScore(0);
     this.setHabit(null);
     this.setSkillProgress(0);
   };

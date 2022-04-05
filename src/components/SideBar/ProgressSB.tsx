@@ -86,7 +86,7 @@ const ProgressSB = observer(() => {
         <FlexContainer flexDirection={'column'}>
           <ProgressBar
             marginBottom={'13px'}
-            progress={userProfileStore.skillProgress}
+            progress={userProfileStore.skillProgress || 0}
             type={ProgressBarTypesEnum.PRIMARY}
           />
           <FlexContainer justifyContent={'space-between'}>
