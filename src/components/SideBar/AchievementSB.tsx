@@ -77,7 +77,7 @@ const AchievementSB = observer(() => {
       >
         {achievementList.map((el: AchievementsEnum) => (
           <AchievementItem
-            marginRight={achievementList.length < 3 ? '12px' : ''}
+            marginRight={achievementList.length < 3 ? '24px' : ''}
             key={el}
             isActive={true}
             name={el}

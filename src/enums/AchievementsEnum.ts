@@ -49,3 +49,11 @@ export enum AchievementsEnum {
   Trinity = 'Trinity',
   Stability = 'Stability',
 }
+
+export enum AchievementsTypeEnum {
+  STANDART = 'standard',
+  RARE = 'rare',
+  SUPER_RARE = 'superRare',
+  ULTRA_RARE = 'ultraRare',
+  UNIQUE = 'unique',
+}

@@ -1,5 +1,13 @@
 import React, { useMemo } from 'react';
 
+import { FlexContainer } from '../styles/FlexContainer';
+import { PrimaryTextSpan } from '../styles/TextsElements';
+import styled from '@emotion/styled-base';
+import {
+  AchievementsEnum,
+  AchievementsTypeEnum,
+} from '../enums/AchievementsEnum';
+
 import starter from '../assets/images/achievements/motivation.png';
 import ignition from '../assets/images/achievements/achievement.png';
 import voila from '../assets/images/achievements/success.png';
@@ -49,20 +57,8 @@ import split from '../assets/images/achievements/split.png';
 import dwarf from '../assets/images/achievements/dwarf.png';
 import stability from '../assets/images/achievements/stability.png';
 import notSoHard from '../assets/images/achievements/notSoHard.png';
-import { FlexContainer } from '../styles/FlexContainer';
-import { PrimaryTextSpan } from '../styles/TextsElements';
-import styled from '@emotion/styled-base';
-import { AchievementsEnum } from '../enums/AchievementsEnum';
 
-enum AchievementsTypeEnum {
-  STANDART = 'standard',
-  RARE = 'rare',
-  SUPER_RARE = 'superRare',
-  ULTRA_RARE = 'ultraRare',
-  UNIQUE = 'unique',
-}
-
-export const ACHIEVEMENTS = [
+export const ACHIEVEMENTS_DATA = [
   {
     id: AchievementsEnum.Starter,
     type: AchievementsTypeEnum.STANDART,
@@ -369,17 +365,21 @@ interface Props {
   marginRight?: string;
 }
 
-const AchievementItem = ({ name, isActive = false, marginRight = '' }: Props) => {
+const AchievementItem = ({
+  name,
+  isActive = false,
+  marginRight = '',
+}: Props) => {
   const achievementName = useMemo(() => {
-    return ACHIEVEMENTS.find((el) => el.id === name)?.name || '';
+    return ACHIEVEMENTS_DATA.find((el) => el.id === name)?.name || '';
   }, [name]);
 
   const achievementImage = useMemo(() => {
-    return ACHIEVEMENTS.find((el) => el.id === name)?.icon || '';
+    return ACHIEVEMENTS_DATA.find((el) => el.id === name)?.icon || '';
   }, [name]);
 
   const bgColorByType = useMemo(() => {
-    const type = ACHIEVEMENTS.find((el) => el.id === name)?.type;
+    const type = ACHIEVEMENTS_DATA.find((el) => el.id === name)?.type;
     if (!isActive) {
       return '#F1F4F8';
     }
@@ -409,7 +409,12 @@ const AchievementItem = ({ name, isActive = false, marginRight = '' }: Props) =>
       <AchievementIconWrap backgroundColor={bgColorByType}>
         <img src={achievementImage} alt="" />
       </AchievementIconWrap>
-      <PrimaryTextSpan color="#777C85" fontSize="12px" lineHeight="12px" textAlign="center">
+      <PrimaryTextSpan
+        color="#777C85"
+        fontSize="12px"
+        lineHeight="12px"
+        textAlign="center"
+      >
         {achievementName}
       </PrimaryTextSpan>
     </FlexContainer>
@@ -425,7 +430,6 @@ const AchievementIconWrap = styled(FlexContainer)`
   justify-content: center;
   align-items: center;
   margin-bottom: 8px;
-
   img {
     max-width: 32px;
     height: auto;
