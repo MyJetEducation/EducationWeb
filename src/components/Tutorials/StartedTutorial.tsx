@@ -16,7 +16,7 @@ import { AccentButton } from '../../styles/Buttons';
 import { css } from '@emotion/core';
 import { ButtonWithoutStyles } from '../../styles/ButtonWithoutStyles';
 import { UnitListMArker } from '../../styles/Units';
-import { ProgessBar } from '../../styles/ProgressBar';
+import { ProgressBar, ProgressBarTypesEnum } from '../../styles/ProgressBar';
 
 interface Props {
   title: string;
@@ -71,7 +71,7 @@ const StartedTutorial = ({ title, number }: Props) => {
           marginBottom="16px"
         /> */}
         <FlexContainer marginBottom="16px">
-          <ProgessBar progress={10} />
+          <ProgressBar progress={10} type={ProgressBarTypesEnum.DEFAULT} />
         </FlexContainer>
         {/*  */}
         <FlexContainer width="100%" justifyContent="space-between">
