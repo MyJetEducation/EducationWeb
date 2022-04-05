@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import Page from '../../routing/Pages';
 import { FlexContainer } from '../../styles/FlexContainer';
-import { PrimaryTextSpan } from '../../styles/TextsElements';
+import { PrimaryLink, PrimaryTextSpan } from '../../styles/TextsElements';
 
 const WhyUsPage = () => {
   const { t } = useTranslation();
@@ -34,6 +35,10 @@ const WhyUsPage = () => {
           Основатель проекта имеет историю рабочего взаимодействия с людьми из
           разных стран, которые зачастую ищут ответы на вопросы:
         </PrimaryTextSpan>
+      </FlexContainer>
+
+      <FlexContainer justifyContent="center" width="100%">
+        <PrimaryLink to={Page.SIGN_UP}>{t('Let`s start')}</PrimaryLink>
       </FlexContainer>
     </FlexContainer>
   );
