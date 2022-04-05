@@ -18,7 +18,19 @@ const MainApp: FC = () => {
   const { mainAppStore } = useStores();
   const { i18n } = useTranslation();
 
+  const postUserLog = async () => {
+    try {
+      const result = await mainAppStore.postUserTimeLog();
+      if (result !== OperationApiResponseCodes.Ok) {
+        mainAppStore.setTokenLogHandler('');
+        mainAppStore.getUserTimeToken();
+      }
+    } catch (error) {}
+  };
+
   useEffect(() => {
+    let timerLog: NodeJS.Timer;
+
     (async () => {
       try {
         await mainAppStore.initApp();
@@ -33,29 +45,19 @@ const MainApp: FC = () => {
       if (mainAppStore.lang) {
         i18n.changeLanguage(mainAppStore.lang);
       }
+      if (mainAppStore.isAuthorized) {
+        timerLog = setInterval(() => {
+          postUserLog();
+        }, 10000);
+      } else {
+        if (timerLog) {
+          clearInterval(timerLog);
+        }
+      }
     });
 
     return () => {
       removeEventListener('resize', windowResize);
-    };
-  }, []);
-
-  const postUserLog = async () => {
-    try {
-      const result = await mainAppStore.postUserTimeLog();
-      if (result === OperationApiResponseCodes.InvalidTimeToken) {
-        mainAppStore.setTokenLogHandler('');
-        mainAppStore.getUserTimeToken();
-      }
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    const timerLog = setInterval(() => {
-      postUserLog();
-    }, 10000);
-
-    return () => {
       clearInterval(timerLog);
     };
   }, []);
