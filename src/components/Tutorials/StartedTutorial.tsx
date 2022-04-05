@@ -11,7 +11,7 @@ import IconTests from '../../assets/svg/unit/icon-tests.svg';
 import IconCheck from '../../assets/svg/unit/icon-check.svg';
 import IconCheckError from '../../assets/svg/unit/icon-check-error.svg';
 
-import IconTutorialDone from '../../assets/svg_no_compress/icon-tutorial-done.svg';
+import IconTutorialDone from '../../assets/svg/unit/icon-tutorial-done.svg';
 
 import SvgIcon from '../SvgIcon';
 import { AccentButton } from '../../styles/Buttons';
