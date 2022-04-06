@@ -35,9 +35,11 @@ const injectInerceptors = (mainAppStore: MainAppStore) => {
         callback(originalRequest);
       };
 
+      console.log('error');
       switch (error.response?.status) {
         case 401: {
           if (!mainAppStore.isAuthorized) {
+            mainAppStore.setIsLoading(false);
             return Promise.reject(error);
           } else {
             if (mainAppStore.refreshToken && !originalRequest._retry) {
@@ -50,6 +52,7 @@ const injectInerceptors = (mainAppStore: MainAppStore) => {
                     'Bearer ' + token;
                   return await axios(originalRequest);
                 } catch (err) {
+                  mainAppStore.setIsLoading(false);
                   return await Promise.reject(err);
                 }
               }
@@ -78,10 +81,12 @@ const injectInerceptors = (mainAppStore: MainAppStore) => {
                   })
                   .finally(() => {
                     isRefreshing = false;
+                    mainAppStore.setIsLoading(false);
                   });
               });
             } else {
               mainAppStore.requestReconnectCounter = 0;
+              mainAppStore.setIsLoading(false);
               mainAppStore.signOut();
             }
           }
@@ -90,12 +95,14 @@ const injectInerceptors = (mainAppStore: MainAppStore) => {
 
         case 403: {
           if (!mainAppStore.isAuthorized) {
+            mainAppStore.setIsLoading(false);
             return Promise.reject(error);
           } else {
             failedQueue.forEach((prom) => {
               prom.reject();
             });
             mainAppStore.requestReconnectCounter = 0;
+            mainAppStore.setIsLoading(false);
             mainAppStore.signOut();
           }
           break;
