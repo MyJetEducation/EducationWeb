@@ -133,8 +133,14 @@ export class MainAppStore implements MainAppStoreProps {
     this.setIsAuthorized(true);
     await this.rootStore.userProfileStore.getUserAccount();
     await this.getUserTimeToken();
+    await this.getKeyValuesList();
     this.setIsLoading(false);
   };
+
+  getKeyValuesList = async () => {
+    const response = await API.getKeyValuesList();
+    console.log(response)
+  }
 
   sendRegisterConfirm = async (hash: string) => {
     const response = await API.registerConfirm(hash);

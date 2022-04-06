@@ -14,17 +14,7 @@ import { HABIT_LIST } from '../../constants/Data/HabitListData';
 const ProgressSB = observer(() => {
   const { t } = useTranslation();
   const { userProfileStore } = useStores();
-  const [isLoading, setIsLoading] = useState(false);
 
-  const getProgress = async () => {
-    setIsLoading(true);
-    try {
-      const result = userProfileStore.getDashboardProgress();
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-    }
-  };
   const habitName = useMemo(() => {
     if (!userProfileStore.habit) {
       return '';
@@ -34,10 +24,6 @@ const ProgressSB = observer(() => {
         ?.title || 'Habit'
     );
   }, [userProfileStore.habit]);
-
-  useEffect(() => {
-    getProgress();
-  }, []);
 
   return (
     <FlexContainer
@@ -108,7 +94,6 @@ const ProgressSB = observer(() => {
           </FlexContainer>
         </FlexContainer>
       </FlexContainer>
-      <LoaderForComponent isLoading={isLoading} />
     </FlexContainer>
   );
 });

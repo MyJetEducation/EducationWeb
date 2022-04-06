@@ -18,7 +18,8 @@ const Dashboard = observer(() => {
 
   const loadDashboard = async () => {
     try {
-      const result = await tutorialStore.getTutorialsList();
+      await userProfileStore.getDashboardProgress();
+      await tutorialStore.getTutorialsList();
     } catch (error) {}
   };
 
