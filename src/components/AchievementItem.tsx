@@ -64,34 +64,34 @@ export const ACHIEVEMENTS_DATA = [
     type: AchievementsTypeEnum.STANDART,
     name: 'Starter',
     icon: starter,
-    description: 'закончил профилирование',
+    description: 'Finished profiling',
   },
   {
     id: AchievementsEnum.Ignition,
     type: AchievementsTypeEnum.STANDART,
     name: 'Ignition',
     icon: ignition,
-    description: 'начал первый урок',
+    description: 'Started to learn first unit',
   },
   {
     id: AchievementsEnum.Voila,
     type: AchievementsTypeEnum.STANDART,
     name: 'Voila',
     icon: voila,
-    description: 'закончил последний урок по первой дисциплине',
+    description: 'Finished last unit of First Tutorial',
   },
   {
     id: AchievementsEnum.Welcome,
     type: AchievementsTypeEnum.STANDART,
     name: 'Welcome',
     icon: welcome,
-    description: 'впервые пригласил друга',
   },
   {
     id: AchievementsEnum.Complaisance,
     type: AchievementsTypeEnum.STANDART,
     name: 'Complaisance',
     icon: complaisance,
+    description: 'Completed profile'
   },
   {
     id: AchievementsEnum.FirstTouch,
@@ -104,6 +104,7 @@ export const ACHIEVEMENTS_DATA = [
     type: AchievementsTypeEnum.STANDART,
     name: 'Eyescatter',
     icon: Eyescatter,
+    description: 'First time on marketplace (not onboarding)'
   },
   {
     id: AchievementsEnum.PjFry,
@@ -116,42 +117,49 @@ export const ACHIEVEMENTS_DATA = [
     type: AchievementsTypeEnum.STANDART,
     name: 'So easy..',
     icon: soEasy,
+    description: 'Used local currency for the first time (Not onboarding)'
   },
   {
     id: AchievementsEnum.Habitant,
     type: AchievementsTypeEnum.STANDART,
     name: 'Habitant',
     icon: habitant,
+    description: 'Mastered one habit'
   },
   {
     id: AchievementsEnum.GreenArrow,
     type: AchievementsTypeEnum.STANDART,
     name: 'Green Arrow',
     icon: greenArrow,
+    description: 'For the first failed true/false test'
   },
   {
     id: AchievementsEnum.NowIKnow,
     type: AchievementsTypeEnum.RARE,
     name: 'Now I know',
     icon: nowIKnow,
+    description: 'Passed the first tutorial with 100% result'
   },
   {
     id: AchievementsEnum.TakeYourTime,
     type: AchievementsTypeEnum.RARE,
     name: 'Take your time',
     icon: takeYourTime,
+    description: 'Spent 3 hours online during one day'
   },
   {
     id: AchievementsEnum.ALongWay,
     type: AchievementsTypeEnum.RARE,
     name: 'A long way',
     icon: ALongWay,
+    description: 'Spent 50 days in the service'
   },
   {
     id: AchievementsEnum.IveSeenThis,
     type: AchievementsTypeEnum.RARE,
     name: "I've seen this",
     icon: iHaveSeenThis,
+    description: 'Completed all units of the same type'
   },
   {
     id: AchievementsEnum.Bender,
@@ -164,6 +172,7 @@ export const ACHIEVEMENTS_DATA = [
     type: AchievementsTypeEnum.RARE,
     name: 'The Seeker',
     icon: theSeeker,
+    description: 'Got all standard achievements'
   },
   {
     id: AchievementsEnum.TheGreatChanger,
@@ -194,18 +203,21 @@ export const ACHIEVEMENTS_DATA = [
     type: AchievementsTypeEnum.RARE,
     name: 'Bad Luck',
     icon: badLuck,
+    description: 'For 10 resets'
   },
   {
     id: AchievementsEnum.Unstoppable,
     type: AchievementsTypeEnum.RARE,
     name: 'Unstoppable',
     icon: unstoppable,
+    description: 'Passed more than one Unit per day'
   },
   {
     id: AchievementsEnum.Paradox,
     type: AchievementsTypeEnum.RARE,
     name: 'Paradox',
     icon: paradox,
+    description: 'Failed the task three times (i.e. after 2 resets)'
   },
   {
     id: AchievementsEnum.Spender,
@@ -218,42 +230,49 @@ export const ACHIEVEMENTS_DATA = [
     type: AchievementsTypeEnum.RARE,
     name: 'Trinity',
     icon: trinity,
+    description: 'Passed true/false test after 2 attempts'
   },
   {
     id: AchievementsEnum.Bullseye,
     type: AchievementsTypeEnum.SUPER_RARE,
     name: 'Bullseye',
     icon: bullseye,
+    description: 'Passed all lessons of the same type with 100% result'
   },
   {
     id: AchievementsEnum.Insister,
     type: AchievementsTypeEnum.SUPER_RARE,
     name: 'Insister',
     icon: insister,
+    description: 'Returned to previous tutorials to bring them to 100% result'
   },
   {
     id: AchievementsEnum.PerfectTiming,
     type: AchievementsTypeEnum.SUPER_RARE,
     name: 'Perfect timing',
     icon: perfectTiming,
+    description: 'Spent 100 days in the service'
   },
   {
     id: AchievementsEnum.DoubleQuick,
     type: AchievementsTypeEnum.SUPER_RARE,
     name: 'Double Quick',
     icon: doubleQuick,
+    description: 'Made a purchase at least once a week for 4 weeks in a row'
   },
   {
     id: AchievementsEnum.RareCollector,
     type: AchievementsTypeEnum.SUPER_RARE,
     name: 'Rare collector',
     icon: rareCollector,
+    description: 'Got all rare achievements'
   },
   {
     id: AchievementsEnum.Flash,
     type: AchievementsTypeEnum.SUPER_RARE,
     name: 'Flash',
     icon: flash,
+    description: 'Spent all tokens in one online session'
   },
   {
     id: AchievementsEnum.YouCantHide,
@@ -272,18 +291,21 @@ export const ACHIEVEMENTS_DATA = [
     type: AchievementsTypeEnum.SUPER_RARE,
     name: 'The habit master',
     icon: theHabitMaster,
+    description: 'Mastered all the habits'
   },
   {
     id: AchievementsEnum.CheckMe,
     type: AchievementsTypeEnum.ULTRA_RARE,
     name: 'Check me',
     icon: checkMe,
+    description: 'Got all statuses'
   },
   {
     id: AchievementsEnum.SuperRareCollector,
     type: AchievementsTypeEnum.ULTRA_RARE,
     name: 'Super Rare collector',
     icon: superRareCollector,
+    description: 'Got all super rare achievements'
   },
   {
     id: AchievementsEnum.AllTheKingsMen,
@@ -296,6 +318,7 @@ export const ACHIEVEMENTS_DATA = [
     type: AchievementsTypeEnum.ULTRA_RARE,
     name: 'Round-the-world',
     icon: roundTheWorld,
+    description: 'Spent 365 days in the service'
   },
   {
     id: AchievementsEnum.DayByDay,
@@ -314,18 +337,21 @@ export const ACHIEVEMENTS_DATA = [
     type: AchievementsTypeEnum.UNIQUE,
     name: 'Ultra rare collector',
     icon: ultraRareCollector,
+    description: 'Got all ultra rare achievements'
   },
   {
     id: AchievementsEnum.Curious,
     type: AchievementsTypeEnum.UNIQUE,
     name: 'Curious',
     icon: curious,
+    description: 'Got all achievements (except unique ones)'
   },
   {
     id: AchievementsEnum.TaDam,
     type: AchievementsTypeEnum.UNIQUE,
     name: 'Ta-Dam!',
     icon: taDam,
+    description: 'Got a unique achievement'
   },
   {
     id: AchievementsEnum.MyPride,
@@ -338,6 +364,7 @@ export const ACHIEVEMENTS_DATA = [
     type: AchievementsTypeEnum.UNIQUE,
     name: 'Split',
     icon: split,
+    description: 'Passed everything at once with at least 80% result'
   },
   {
     id: AchievementsEnum.Dwarf,
@@ -350,12 +377,14 @@ export const ACHIEVEMENTS_DATA = [
     type: AchievementsTypeEnum.SUPER_RARE,
     name: 'Stability',
     icon: stability,
+    description: 'Pass all units with the same result on the first try'
   },
   {
     id: AchievementsEnum.NotSoHard,
     type: AchievementsTypeEnum.UNIQUE,
     name: 'Not so hard',
     icon: notSoHard,
+    description: 'Got all unique achievements'
   },
 ];
 
