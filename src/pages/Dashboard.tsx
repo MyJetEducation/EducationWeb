@@ -10,6 +10,7 @@ import { useStores } from '../hooks/useStores';
 import { PrimaryButton } from '../styles/Buttons';
 import { FlexContainer } from '../styles/FlexContainer';
 import { PageTitle, PrimaryTextSpan } from '../styles/TextsElements';
+import TutorialProgressSB from "../components/SideBar/TutorialProgressSB";
 
 const Dashboard = observer(() => {
   const { t } = useTranslation();
@@ -64,6 +65,7 @@ const Dashboard = observer(() => {
 
         {/* Sidebar */}
         <FlexContainer flexDirection={'column'} width="300px">
+          <TutorialProgressSB count={1} tutorial={[]}/>
           <StatsSB />
           <AchievementSB />
           <ProgressSB />
