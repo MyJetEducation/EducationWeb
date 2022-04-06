@@ -1,3 +1,5 @@
+import { TutorialEnum } from "../enums/TutorialsEnum";
+
 export interface TutorialsListItemType {
   tutorial: string;
   started: boolean;
@@ -29,7 +31,7 @@ export interface UnitType {
 }
 
 export interface TutorialItemType {
-  tutorial: string;
+  tutorial: TutorialEnum;
   taskScore: number;
   finished: boolean;
   units: UnitType[];

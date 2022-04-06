@@ -10,7 +10,7 @@ import { useStores } from '../hooks/useStores';
 import { PrimaryButton } from '../styles/Buttons';
 import { FlexContainer } from '../styles/FlexContainer';
 import { PageTitle, PrimaryTextSpan } from '../styles/TextsElements';
-import TutorialProgressSB from "../components/SideBar/TutorialProgressSB";
+import TutorialProgressSB from '../components/SideBar/TutorialProgressSB';
 
 const Dashboard = observer(() => {
   const { t } = useTranslation();
@@ -47,8 +47,9 @@ const Dashboard = observer(() => {
         {/* content */}
         <FlexContainer width="620px" flexDirection="column">
           {tutorialStore.tutorials?.map((item, i) =>
-            item.started ? (
+            item.started && !item.finished ? (
               <StartedTutorial
+                isDone={item.finished}
                 key={item.tutorial}
                 title={item.tutorial}
                 number={i + 1}
@@ -66,7 +67,7 @@ const Dashboard = observer(() => {
 
         {/* Sidebar */}
         <FlexContainer flexDirection={'column'} width="300px">
-          <TutorialProgressSB count={1} tutorial={[]}/>
+          <TutorialProgressSB count={1} tutorial={[]} />
           <StatsSB />
           <AchievementSB />
           <ProgressSB />

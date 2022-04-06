@@ -23,16 +23,16 @@ import { ProgressBar, ProgressBarTypesEnum } from '../../styles/ProgressBar';
 interface Props {
   title: string;
   number: number;
+  isDone: boolean;
 }
 
-const StartedTutorial = ({ title, number }: Props) => {
+const StartedTutorial = ({ isDone, title, number }: Props) => {
   const { t } = useTranslation();
 
   // state component
   const [isOpenUnitList, setIsOpenUnitList] = useState(false);
   const isFirstItem = false;
   const activeUnit = 1;
-  const isDone = true;
   // end state component
 
   // colors
@@ -57,9 +57,11 @@ const StartedTutorial = ({ title, number }: Props) => {
         zIndex="2"
       >
         <FlexContainer alignItems="center" marginBottom="16px">
-          <FlexContainer marginRight="12px">
-            <SvgIcon {...IconTutorialDone} fillColor="#0BCA1E" />
-          </FlexContainer>
+          {isDone && (
+            <FlexContainer marginRight="12px">
+              <SvgIcon {...IconTutorialDone} fillColor="#0BCA1E" />
+            </FlexContainer>
+          )}
           <PrimaryTextSpan
             color={isDone ? '#0BCA1E' : '#fff'}
             fontSize="32px"

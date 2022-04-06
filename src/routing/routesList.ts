@@ -1,4 +1,5 @@
 import AccountSettings from '../pages/Account/AccountSettings';
+import Achievements from '../pages/Account/Achievements';
 import Payments from '../pages/Account/Payments';
 import Profile from '../pages/Account/Profile';
 import Referrals from '../pages/Account/Referrals';
@@ -157,6 +158,13 @@ const routesList = [
     component: Profile,
     path: Page.ACCOUNT.PROFILE,
     exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Authorized,
+  },
+  {
+    component: Achievements,
+    path: Page.ACCOUNT.ACHIEMENTS,
+    exact: false,
     strict: true,
     layoutType: RouteLayoutType.Authorized,
   },

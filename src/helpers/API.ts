@@ -18,6 +18,7 @@ import { AchievementsTypes } from '../types/AchievementsTypes';
 import { DashboardProgressTypes } from '../types/StatsTypes';
 import { KeyValueType } from '../types/keyValuesTypes';
 import { KeyValueEnum } from '../enums/keyValueEnum';
+import { TutorialEnum } from '../enums/TutorialsEnum';
 
 class API {
   private convertParamsToFormData = (params: { [key: string]: any }) => {
@@ -142,6 +143,14 @@ class API {
   getTutorials = async () => {
     const response = await axios.post<ApiResponseType<TutorialsListType>>(
       `${API_STRING}${API_LIST.DASHBOARD.TUTORIALS_LIST}`
+    );
+    return response.data;
+  };
+
+  getTutorial = async (tutorial: TutorialEnum) => {
+    const response = await axios.post<ApiResponseType<TutorialsListType>>(
+      `${API_STRING}${API_LIST.DASHBOARD.TUTORIAL}`,
+      { tutorial }
     );
     return response.data;
   };

@@ -17,6 +17,7 @@ const Page = {
 
   ACCOUNT: {
     PROFILE: '/profile',
+    ACHIEMENTS: '/profile/achievements',
     SETTINGS: '/account-settings',
     PAYMENTS: '/payments',
     REFERRALS: '/referrals',
