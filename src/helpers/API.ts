@@ -16,6 +16,8 @@ import API_LIST from './apiList';
 import { TutorialsListType } from '../types/TutorialTypes';
 import { AchievementsTypes } from '../types/AchievementsTypes';
 import { DashboardProgressTypes } from '../types/StatsTypes';
+import { KeyValueType } from '../types/keyValuesTypes';
+import { KeyValueEnum } from '../enums/keyValueEnum';
 
 class API {
   private convertParamsToFormData = (params: { [key: string]: any }) => {
@@ -82,6 +84,32 @@ class API {
   /*
   --- Background Request
   */
+
+  // key values
+  getKeyValuesList = async () => {
+    const response = await axios.post<ApiResponseType<TutorialsListType>>(
+      `${API_STRING}${API_LIST.KEY_VALUE.LIST}`
+    );
+    return response.data;
+  };
+
+  setKeyValues = async (items: KeyValueType[]) => {
+    const response = await axios.post<ApiResponseType<TutorialsListType>>(
+      `${API_STRING}${API_LIST.KEY_VALUE.UPDATE}`,
+      { items }
+    );
+    return response.data;
+  };
+
+  deleteKeyValues = async (keys: KeyValueEnum[]) => {
+    const response = await axios.post<ApiResponseType<TutorialsListType>>(
+      `${API_STRING}${API_LIST.KEY_VALUE.DELETE}`,
+      { keys }
+    );
+    return response.data;
+  };
+  // end key values
+
   registerConfirm = async (hash: string) => {
     const response = await axios.post<ApiResponseType<EmailConfirmationDTO>>(
       `${API_STRING}${AUTH_API_LIST.REGISTER.REGISTER_CONFIRM}`,
