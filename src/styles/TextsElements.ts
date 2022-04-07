@@ -169,7 +169,7 @@ export const PrimaryLink = styled(Link)<PrimaryLinkProps>`
 
 export const PageTitle = styled(PrimaryTextSpan)`
   color: #000000;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 40px;
   line-height: 48px;
 `;

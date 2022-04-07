@@ -1,20 +1,17 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 
-import { FlexContainer } from '../../styles/FlexContainer';
-import {
-  PrimaryTextParagraph,
-  PrimaryTextSpan,
-} from '../../styles/TextsElements';
-import { useTranslation } from 'react-i18next';
+import {FlexContainer} from '../../styles/FlexContainer';
+import {PrimaryTextParagraph, PrimaryTextSpan,} from '../../styles/TextsElements';
+import {useTranslation} from 'react-i18next';
 import AchievementItem from '../AchievementItem';
-import { AchievementsEnum } from '../../enums/AchievementsEnum';
-import { useStores } from '../../hooks/useStores';
-import { observer } from 'mobx-react-lite';
+import {AchievementsEnum} from '../../enums/AchievementsEnum';
+import {useStores} from '../../hooks/useStores';
+import {observer} from 'mobx-react-lite';
 import LoaderForComponent from '../Preloader/LoaderForComponent';
 
 const AchievementSB = observer(() => {
   const { t } = useTranslation();
-  const { userProfileStore } = useStores();
+  const {userProfileStore} = useStores();
 
   const [isLoading, setIsLoading] = useState(false);
 
