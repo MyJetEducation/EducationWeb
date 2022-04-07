@@ -1,4 +1,5 @@
 import React from 'react';
+import { FlexContainer } from '../../styles/FlexContainer';
 import { LoaderWrap } from '../../styles/Preloader';
 import Preloader from './Preloader';
 
@@ -11,20 +12,14 @@ const LoaderForComponent = ({ isLoading }: Props) => {
     return null;
   }
   return (
-    <LoaderWrap
-      position="absolute"
-      top="0"
-      right="0"
-      bottom="0"
-      left="0"
-      zIndex="9"
+    <FlexContainer
       width="100%"
-      height="100%"
       justifyContent="center"
       alignItems="center"
+      padding="32px"
     >
       <Preloader />
-    </LoaderWrap>
+    </FlexContainer>
   );
 };
 

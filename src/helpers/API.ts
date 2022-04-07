@@ -13,12 +13,12 @@ import requestOptions from '../constants/requestOptions';
 import { RefreshTokenDTO } from '../types/RefreshTokenTypes';
 import { ApiResponseType } from '../types/ApiResponseType';
 import API_LIST from './apiList';
-import { TutorialsListType } from '../types/TutorialTypes';
+import { TutorialItemType, TutorialsListType } from '../types/TutorialTypes';
 import { AchievementsTypes } from '../types/AchievementsTypes';
 import { DashboardProgressTypes } from '../types/StatsTypes';
-import { KeyValueType } from '../types/keyValuesTypes';
-import { KeyValueEnum } from '../enums/keyValueEnum';
 import { TutorialEnum } from '../enums/TutorialsEnum';
+import { KeyValueType } from '../types/KeyValuesTypes';
+import { KeyValueEnum } from '../enums/KeyValueEnum';
 
 class API {
   private convertParamsToFormData = (params: { [key: string]: any }) => {
@@ -148,7 +148,7 @@ class API {
   };
 
   getTutorial = async (tutorial: TutorialEnum) => {
-    const response = await axios.post<ApiResponseType<TutorialsListType>>(
+    const response = await axios.post<ApiResponseType<TutorialItemType>>(
       `${API_STRING}${API_LIST.DASHBOARD.TUTORIAL}`,
       { tutorial }
     );

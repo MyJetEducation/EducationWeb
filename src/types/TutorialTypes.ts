@@ -1,7 +1,8 @@
-import { TutorialEnum } from "../enums/TutorialsEnum";
+import { NumberSchema } from 'yup';
+import { TutorialEnum } from '../enums/TutorialsEnum';
 
 export interface TutorialsListItemType {
-  tutorial: string;
+  tutorial: TutorialEnum;
   started: boolean;
   finished: boolean;
 }
@@ -30,9 +31,35 @@ export interface UnitType {
   tasks: TaskType[];
 }
 
+export interface TaskFataType {
+  id: number;
+  title: string;
+  duration: string;
+}
+
+export interface UnitDataType {
+  id: number;
+  title: string;
+  duration: string;
+  tasks: TaskFataType[];
+}
+
 export interface TutorialItemType {
   tutorial: TutorialEnum;
   taskScore: number;
   finished: boolean;
   units: UnitType[];
+}
+
+export interface TutorialDataType {
+  tutorial: TutorialEnum;
+  title: string;
+  description: string;
+  info: {
+    units: number;
+    duration: string;
+    videos: number;
+    tests: number;
+  };
+  units: UnitDataType[];
 }

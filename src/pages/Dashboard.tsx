@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import AchievementSB from '../components/SideBar/AchievementSB';
 import ProgressSB from '../components/SideBar/ProgressSB';
@@ -11,16 +11,24 @@ import { PrimaryButton } from '../styles/Buttons';
 import { FlexContainer } from '../styles/FlexContainer';
 import { PageTitle, PrimaryTextSpan } from '../styles/TextsElements';
 import TutorialProgressSB from '../components/SideBar/TutorialProgressSB';
+import LoaderForComponent from '../components/Preloader/LoaderForComponent';
+import TutorialsList from '../components/Tutorials/TutorialsList';
 
 const Dashboard = observer(() => {
   const { t } = useTranslation();
   const { userProfileStore, tutorialStore } = useStores();
 
+  const [isTutorialsLoading, setTutorialLoading] = useState(false);
+
   const loadDashboard = async () => {
+    setTutorialLoading(true);
     try {
       await userProfileStore.getDashboardProgress();
       await tutorialStore.getTutorialsList();
-    } catch (error) {}
+      setTutorialLoading(false);
+    } catch (error) {
+      setTutorialLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -45,29 +53,18 @@ const Dashboard = observer(() => {
 
       <FlexContainer width="100%" justifyContent="space-between">
         {/* content */}
-        <FlexContainer width="620px" flexDirection="column">
-          {tutorialStore.tutorials?.map((item, i) =>
-            item.started && !item.finished ? (
-              <StartedTutorial
-                isDone={item.finished}
-                key={item.tutorial}
-                title={item.tutorial}
-                number={i + 1}
-              />
-            ) : (
-              <LockedTutorial
-                key={item.tutorial}
-                title={item.tutorial}
-                number={i + 1}
-              />
-            )
-          )}
+        <FlexContainer
+          width="620px"
+          flexDirection="column"
+          marginRight="20px"
+          flex="1"
+        >
+          <TutorialsList isLoading={isTutorialsLoading} />
         </FlexContainer>
         {/* content */}
 
         {/* Sidebar */}
         <FlexContainer flexDirection={'column'} width="300px">
-          <TutorialProgressSB count={1} tutorial={[]} />
           <StatsSB />
           <AchievementSB />
           <ProgressSB />

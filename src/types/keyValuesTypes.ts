@@ -1,4 +1,4 @@
-import { KeyValueEnum } from "../enums/keyValueEnum";
+import { KeyValueEnum } from "../enums/KeyValueEnum";
 
 export interface KeyValueType {
   key: KeyValueEnum;

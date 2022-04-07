@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
+import { TutorialEnum } from '../enums/TutorialsEnum';
 import API from '../helpers/API';
 import {
   TutorialItemType,
@@ -28,12 +29,20 @@ export class TutorialStore implements TutorialStoreProps {
   }
 
   // async
+
+  getTutorial = async (tutorial: TutorialEnum) => {
+    const response = await API.getTutorial(tutorial);
+    if (response.status === OperationApiResponseCodes.Ok) {
+      this.setActiveTutorial(response.data);
+    }
+    return response.status;
+  };
+
   getTutorialsList = async () => {
     const response = await API.getTutorials();
     if (response.status === OperationApiResponseCodes.Ok) {
       this.setTutorials(response.data.tutorials);
     }
-
     return response.status;
   };
 
@@ -44,6 +53,13 @@ export class TutorialStore implements TutorialStoreProps {
 
   setActiveTutorial = (tutoral: TutorialItemType | null) => {
     this.activeTutorial = tutoral;
+  };
+
+  // computed
+  get startedTutorial() {
+    return this.tutorials?.find(
+      (tutorial) => tutorial.started && !tutorial.finished
+    );
   }
 
   // reset store
