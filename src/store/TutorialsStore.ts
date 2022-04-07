@@ -1,4 +1,6 @@
+import { UnitWithDataType } from './../types/TutorialTypes';
 import { makeAutoObservable } from 'mobx';
+import UNITS_DATA from '../constants/Data/UnitsData/UnitsData';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 import { TutorialEnum } from '../enums/TutorialsEnum';
 import API from '../helpers/API';
@@ -12,6 +14,7 @@ interface TutorialStoreProps {
   rootStore: RootStore;
   tutorials: TutorialsListItemType[] | null;
   activeTutorial: TutorialItemType | null;
+  unitsWithData: UnitWithDataType[] | null;
 }
 
 export class TutorialStore implements TutorialStoreProps {
@@ -60,6 +63,22 @@ export class TutorialStore implements TutorialStoreProps {
     return this.tutorials?.find(
       (tutorial) => tutorial.started && !tutorial.finished
     );
+  }
+
+  get unitsWithData() {
+    if (this.activeTutorial === null) {
+      return null;
+    }
+    const unitsData = UNITS_DATA[this.activeTutorial.tutorial];
+
+    return this.activeTutorial.units.map((unit) => {
+      const data = unitsData.units.find((el) => el.id === unit.unit) || null;
+
+      return {
+        unit,
+        data,
+      };
+    });
   }
 
   // reset store

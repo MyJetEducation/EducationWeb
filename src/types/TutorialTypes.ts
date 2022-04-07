@@ -1,4 +1,4 @@
-import { NumberSchema } from 'yup';
+import { TaskTypeEnum } from '../enums/TaskTypeEnum';
 import { TutorialEnum } from '../enums/TutorialsEnum';
 
 export interface TutorialsListItemType {
@@ -31,17 +31,18 @@ export interface UnitType {
   tasks: TaskType[];
 }
 
-export interface TaskFataType {
+export interface TaskDataType {
   id: number;
   title: string;
   duration: string;
+  type?: TaskTypeEnum;
 }
 
 export interface UnitDataType {
   id: number;
   title: string;
   duration: string;
-  tasks: TaskFataType[];
+  tasks: TaskDataType[];
 }
 
 export interface TutorialItemType {
@@ -63,3 +64,12 @@ export interface TutorialDataType {
   };
   units: UnitDataType[];
 }
+
+export interface UnitWithDataType {
+  unit: UnitType;
+  data: UnitDataType | null;
+}
+
+export type UnitsDataType = {
+  [key in TutorialEnum]: TutorialDataType;
+};

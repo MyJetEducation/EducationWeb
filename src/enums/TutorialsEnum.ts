@@ -1,5 +1,4 @@
 export enum TutorialEnum {
-  None,
   PersonalFinance = 'PersonalFinance',
   BehavioralFinance = 'BehavioralFinance',
   FinancialServices = 'FinancialServices',

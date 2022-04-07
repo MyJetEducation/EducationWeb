@@ -5,7 +5,7 @@ import AchievementSB from '../components/SideBar/AchievementSB';
 import ProgressSB from '../components/SideBar/ProgressSB';
 import StatsSB from '../components/SideBar/StatsSB';
 import LockedTutorial from '../components/Tutorials/LockedTutorial';
-import StartedTutorial from '../components/Tutorials/StartedTutorial';
+import StartedTutorial from '../components/Tutorials/StartedTutorial/StartedTutorial';
 import { useStores } from '../hooks/useStores';
 import { PrimaryButton } from '../styles/Buttons';
 import { FlexContainer } from '../styles/FlexContainer';
