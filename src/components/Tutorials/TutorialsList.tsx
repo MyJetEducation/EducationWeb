@@ -29,7 +29,6 @@ const TutorialsList = observer(({ isLoading }: Props) => {
 
   return (
     <>
-    {console.log(tutorialStore.unitsWithData)}
       {tutorialStore.tutorials?.map((item, i) =>
         tutorialStore.startedTutorial?.tutorial === item.tutorial ? (
           <StartedTutorial

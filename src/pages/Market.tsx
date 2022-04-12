@@ -1,7 +1,36 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import MarketItem from '../components/MarketItem';
+import AccountSettingsNav from '../components/SideBar/AccountSettingsNav';
+import { FlexContainer } from '../styles/FlexContainer';
+import { PageTitle } from '../styles/TextsElements';
 
 const Market = () => {
-  return <div>Market</div>;
+  const { t } = useTranslation();
+  return (
+    <FlexContainer flex="1" padding="32px 20px">
+      <FlexContainer width="100%" justifyContent="space-between">
+        {/* content */}
+        <FlexContainer flexDirection="column">
+          {/*  */}
+          <FlexContainer marginBottom="24px">
+            <PageTitle>{t('Market')}</PageTitle>
+          </FlexContainer>
+          {/*  */}
+          <FlexContainer width="640px" flexDirection="column">
+            <MarketItem />
+          </FlexContainer>
+        </FlexContainer>
+        {/* content */}
+
+        {/* Sidebar */}
+        <FlexContainer flexDirection={'column'} width="220px">
+          sidebar
+        </FlexContainer>
+        {/* Sidebar */}
+      </FlexContainer>
+    </FlexContainer>
+  );
 };
 
 export default Market;
