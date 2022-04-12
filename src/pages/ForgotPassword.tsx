@@ -8,48 +8,38 @@ import { FlexContainer } from '../styles/FlexContainer';
 import { AuthForm } from '../styles/FormControls';
 import { PrimaryTextSpan, TextAccentLink } from '../styles/TextsElements';
 import { useFormik } from 'formik';
-import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
-import apiResponseCodeMessages from '../constants/apiResponseCodeMessages';
 import { useStores } from '../hooks/useStores';
 import * as yup from 'yup';
 import { UserForgotPassword } from '../types/UserInfo';
 import validationInputTexts from '../constants/validationInputTexts';
 import API from '../helpers/API';
 import FullScreenLoader from '../components/Preloader/FullScreenLoader';
+import { OperationAuthApiResponseCodes } from '../enums/OperationAuthApiResponseCodes';
 
 const ForgotPassword = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-  const { mainAppStore } = useStores();
   const [isSent, setSent] = useState(false);
 
   const validationSchema = yup.object().shape<UserForgotPassword>({
-    userName: yup
+    email: yup
       .string()
       .required(t(validationInputTexts.REQUIRED_FIELD))
       .email(t(validationInputTexts.EMAIL)),
   });
 
   const initialValues: UserForgotPassword = {
-    userName: '',
+    email: '',
   };
 
   const handleSubmitForm = async () => {
     setIsLoading(true);
     try {
-      const result = await API.forgotPassword(values.userName);
+      const result = await API.forgotPassword(values.email);
 
-      switch (result.status) {
-        case OperationApiResponseCodes.Ok:
+      switch (result.result) {
+        case OperationAuthApiResponseCodes.OK:
           setSent(true);
-          break;
-
-        case OperationApiResponseCodes.UserAlreadyExists:
-        case OperationApiResponseCodes.NotValidEmail:
-          setFieldError(
-            Fields.USER_NAME,
-            t(apiResponseCodeMessages[result.status])
-          );
           break;
 
         default:
@@ -115,7 +105,7 @@ const ForgotPassword = () => {
         <>
           <PrimaryTextSpan lineHeight="24px" marginBottom="28px">
             {t('We`ve sent an email to')}&nbsp;
-            <PrimaryTextSpan color="#000">{values.userName}</PrimaryTextSpan>
+            <PrimaryTextSpan color="#000">{values.email}</PrimaryTextSpan>
             <br />
             {t('Click the link in the email to reset the password')}
           </PrimaryTextSpan>
@@ -132,11 +122,11 @@ const ForgotPassword = () => {
             <LabelInput
               onBlur={handleBlur}
               onChange={handleChange}
-              hasError={!!(touched.userName && errors.userName)}
-              errorText={errors.userName}
-              value={values.userName}
-              id={Fields.USER_NAME}
-              name={Fields.USER_NAME}
+              hasError={!!(touched.email && errors.email)}
+              errorText={errors.email}
+              value={values.email}
+              id={Fields.EMAIL}
+              name={Fields.EMAIL}
               labelText={t('Email')}
             />
             <PrimaryButton

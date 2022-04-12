@@ -1,17 +1,20 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
-import {FlexContainer} from '../../styles/FlexContainer';
-import {PrimaryTextParagraph, PrimaryTextSpan,} from '../../styles/TextsElements';
-import {useTranslation} from 'react-i18next';
+import { FlexContainer } from '../../styles/FlexContainer';
+import {
+  PrimaryTextParagraph,
+  PrimaryTextSpan,
+} from '../../styles/TextsElements';
+import { useTranslation } from 'react-i18next';
 import AchievementItem from '../AchievementItem';
-import {AchievementsEnum} from '../../enums/AchievementsEnum';
-import {useStores} from '../../hooks/useStores';
-import {observer} from 'mobx-react-lite';
+import { AchievementsEnum } from '../../enums/AchievementsEnum';
+import { useStores } from '../../hooks/useStores';
+import { observer } from 'mobx-react-lite';
 import LoaderForComponent from '../Preloader/LoaderForComponent';
 
 const AchievementSB = observer(() => {
   const { t } = useTranslation();
-  const {userProfileStore} = useStores();
+  const { userProfileStore } = useStores();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,7 +29,10 @@ const AchievementSB = observer(() => {
   };
 
   const achievementList = useMemo(() => {
-    const list = userProfileStore.userAchievements.slice(0, 3);
+    let list: AchievementsEnum[] = [];
+    if (Array.isArray(userProfileStore.userAchievements)) {
+      list = userProfileStore.userAchievements?.slice(0, 3);
+    }
     return list;
   }, [userProfileStore.userAchievements]);
 
@@ -72,7 +78,7 @@ const AchievementSB = observer(() => {
           achievementList.length < 3 ? 'flex-start' : 'space-between'
         }
       >
-        {achievementList.map((el: AchievementsEnum) => (
+        {achievementList?.map((el: AchievementsEnum) => (
           <AchievementItem
             marginRight={achievementList.length < 3 ? '24px' : ''}
             key={el}

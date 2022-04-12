@@ -1,10 +1,10 @@
-import {makeAutoObservable} from 'mobx';
-import {AchievementsEnum} from '../enums/AchievementsEnum';
-import {OperationApiResponseCodes} from '../enums/OperationApiResponseCodes';
+import { makeAutoObservable } from 'mobx';
+import { AchievementsEnum } from '../enums/AchievementsEnum';
+import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 import API from '../helpers/API';
-import {UserProfileType} from '../types/UserInfo';
-import {RootStore} from './RootStore';
-import {HabitItemType} from "../types/StatsTypes";
+import { UserProfileType } from '../types/UserInfo';
+import { RootStore } from './RootStore';
+import { HabitItemType } from '../types/StatsTypes';
 
 interface UserProfileStoreProps {
   rootStore: RootStore;
@@ -71,10 +71,10 @@ export class UserProfileStore implements UserProfileStoreProps {
   // store actions
 
   setUserAchievements = (list: AchievementsEnum[]) => {
-    this.userAchievements = list;
+    this.userAchievements = list || [];
   };
   setUnReceivedAchievements = (list: AchievementsEnum[]) => {
-    this.unReceivedAchievements = list;
+    this.unReceivedAchievements = list || [];
   };
 
   setUserAccount = (acc: UserProfileType | null) => {
@@ -82,20 +82,20 @@ export class UserProfileStore implements UserProfileStoreProps {
   };
 
   setTestScore = (progress: number) => {
-    this.testScore = progress
-  }
+    this.testScore = progress;
+  };
 
   setTaskCount = (progress: number) => {
-    this.taskCount = progress
-  }
+    this.taskCount = progress;
+  };
 
   setHabit = (item: HabitItemType | null) => {
-    this.habit = item
-  }
+    this.habit = item;
+  };
 
   setSkillProgress = (progress: number) => {
-    this.skillProgress = progress
-  }
+    this.skillProgress = progress;
+  };
 
   // computed
   get totalAchievementsCount() {

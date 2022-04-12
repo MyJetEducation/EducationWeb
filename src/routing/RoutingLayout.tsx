@@ -55,6 +55,7 @@ const RoutingLayout: FC = () => {
           <Observer>
             {() => (
               <>
+                <FullScreenLoader isLoading={mainAppStore.isLoading} />
                 {!location.search && (
                   <Redirect to={location.pathname.replace(/\/+$/, '')} />
                 )}
@@ -74,6 +75,7 @@ const RoutingLayout: FC = () => {
           <Observer>
             {() => (
               <>
+                <FullScreenLoader isLoading={mainAppStore.isLoading} />
                 {!location.search && (
                   <Redirect to={location.pathname.replace(/\/+$/, '')} />
                 )}

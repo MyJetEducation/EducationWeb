@@ -38,7 +38,7 @@ const AccountSettingsNav = () => {
                 fontSize="24px"
                 marginBottom="2px"
               >
-                {`${userProfileStore.userAccount?.firstName} ${userProfileStore.userAccount?.lastName}`}
+                {`${userProfileStore.userAccount?.firstName || ''} ${userProfileStore.userAccount?.lastName || ''}`}
               </PrimaryTextSpan>
 
               {/* Статус будем получать с бэка*/}

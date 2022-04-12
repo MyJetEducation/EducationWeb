@@ -106,7 +106,9 @@ module.exports = (env, argv) => {
         },
       }),
       new webpack.DefinePlugin({
-        WS_HOST: JSON.stringify('https://api.dfnt.work/signalr'),
+        API_AUTH_STRING: ['production', 'none'].includes(argv.mode)
+          ? JSON.stringify('')
+          : JSON.stringify('https://wallet-api-test.simple-spot.biz'),
         API_STRING: ['production', 'none'].includes(argv.mode)
           ? JSON.stringify('')
           : JSON.stringify('https://api.dfnt.work'),
