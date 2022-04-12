@@ -12,7 +12,7 @@ import PageTemplateContainer from './containers/PageTemplateContainer';
 import { fonts } from './styles/fonts';
 import { OperationApiResponseCodes } from './enums/OperationApiResponseCodes';
 import MarketItem from "./components/MarketItem";
-import Onboarding from "./components/Onboarding/Onboarding";
+import ObHint from "./components/Onboarding/ObHint";
 
 declare const window: any;
 
@@ -88,13 +88,16 @@ const MainApp: FC = () => {
             font-size: 14px;
             font-family: 'Gilroy', sans-serif;
           }
+
           body {
             overflow: hidden;
           }
+
           &::-webkit-scrollbar {
             width: 6px;
             background-color: transparent;
           }
+
           &::-webkit-scrollbar-thumb {
             border-radius: 4px;
             background-color: #c1c7cf;

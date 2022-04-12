@@ -1,65 +1,40 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import Modal from "../Modal";
 import {FlexContainer} from "../../styles/FlexContainer";
-import {PrimaryTextSpan} from "../../styles/TextsElements";
+import ObHint from "./ObHint";
+import {useStores} from "../../hooks/useStores";
+import {observer} from "mobx-react-lite";
+import OnboardingTurData from "../../constants/Data/OnboardingTurData";
 
-import maskot from "../../assets/images/maskot.png";
+const Onboarding = observer(() => {
+  const [active, setActive] = useState(1);
+  const {mainAppStore} = useStores();
+  if (!mainAppStore.isOnboarding) {
+    return null
+  }
 
-interface OnboardingProps {
-  text: string
-}
+  const handleClickNextStep = () => {
+    const currentIndex = OnboardingTurData.findIndex((el) => el.id === active) + 1;
+    if (OnboardingTurData.length !== currentIndex) {
+      setActive(active + 1);
+    }
+  }
 
-const Onboarding = (props: OnboardingProps) => {
   return (
-    <FlexContainer
-      width="268px"
-      flexDirection="column"
-    >
+    <Modal>
       <FlexContainer
+        position="fixed"
+        zIndex="8"
         width="100%"
-        backgroundColor="#000"
-        borderRadius="32px"
-        height="fir-content"
-        padding="20px"
-        marginBottom="-40px"
+        height="100%"
+        top="0"
+        left="0"
+        backgroundColor="rgba(241, 244, 248, 0.5)"
       >
-        <PrimaryTextSpan
-          fontWeight={700}
-          fontSize="18px"
-          lineHeight="28px"
-          color="#FFFFFF"
-        >
-          Let's make our first purchase. It's free
-        </PrimaryTextSpan>
+        <ObHint text={"sdfsdf"} onClickNext={handleClickNextStep}/>
       </FlexContainer>
-      <FlexContainer
-        width="100%"
-        justifyContent="center"
-        zIndex="-1"
-        position="relative"
-      >
-        <FlexContainer
-          position="absolute"
-          top="46px"
-          left="46px"
-          width="14px"
-          height="14px"
-          borderRadius="50%"
-          backgroundColor="#000"
-        />
-        <FlexContainer
-          position="absolute"
-          top="66px"
-          left="66px"
-          width="6px"
-          height="6px"
-          borderRadius="50%"
-          backgroundColor="#000"
-        />
-        <img src={maskot} alt="maskot"/>
-      </FlexContainer>
-
-    </FlexContainer>
+    </Modal>
   )
-}
+})
 
 export default Onboarding;
