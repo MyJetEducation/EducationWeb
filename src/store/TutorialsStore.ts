@@ -81,6 +81,16 @@ export class TutorialStore implements TutorialStoreProps {
     });
   }
 
+  get activeUnit() {
+    let unit = this.activeTutorial?.units.find(
+      (el) => el.hasProgress && !el.finished
+    );
+    if (!unit) {
+      unit = this.activeTutorial?.units[0];
+    }
+    return unit;
+  }
+
   // reset store
   reset = () => {
     this.setTutorials(null);

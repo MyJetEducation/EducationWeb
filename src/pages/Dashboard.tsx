@@ -39,7 +39,7 @@ const Dashboard = observer(() => {
     <FlexContainer flex="1" flexDirection="column" padding="32px 20px">
       <FlexContainer flexDirection="column" marginBottom="24px">
         <PageTitle>
-          {`${t('Welcome')}, ${userProfileStore.userAccount?.firstName}`}
+          {`${t('Welcome')}, ${userProfileStore.userAccount?.firstName || ''}`}
         </PageTitle>
         <PrimaryTextSpan
           color="#777C85"

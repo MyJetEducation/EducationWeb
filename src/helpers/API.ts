@@ -11,7 +11,7 @@ import {
 import AUTH_API_LIST from './apiListAuth';
 import requestOptions from '../constants/requestOptions';
 import { RefreshTokenDTO } from '../types/RefreshTokenTypes';
-import { ApiResponseType } from '../types/ApiResponseType';
+import { ApiAuthResponseType, ApiResponseType } from '../types/ApiResponseType';
 import API_LIST from './apiList';
 import { TutorialItemType, TutorialsListType } from '../types/TutorialTypes';
 import { AchievementsTypes } from '../types/AchievementsTypes';
@@ -48,28 +48,25 @@ class API {
   ---  Clients Request
   */
   authenticate = async (credentials: UserAuthenticate) => {
-    const response = await axios.post<ApiResponseType<UserAuthenticateDTO>>(
-      `${API_STRING}${AUTH_API_LIST.AUTH.SIGN_IN}`,
+    const response = await axios.post<ApiAuthResponseType<UserAuthenticateDTO>>(
+      `${API_AUTH_STRING}${AUTH_API_LIST.AUTH.SIGN_IN}`,
       credentials
     );
     return response.data;
   };
 
   signUp = async (credentials: UserRegistration) => {
-    const response = await axios.post<ApiResponseType<any>>(
-      `${API_STRING}${AUTH_API_LIST.REGISTER.SIGN_UP}`,
+    const response = await axios.post<ApiAuthResponseType<UserAuthenticateDTO>>(
+      `${API_AUTH_STRING}${AUTH_API_LIST.REGISTER.SIGN_UP}`,
       credentials
     );
     return response.data;
   };
 
   forgotPassword = async (email: string) => {
-    const response = await axios.post<ApiResponseType<any>>(
-      `${API_STRING}${AUTH_API_LIST.REGISTER.RECOVERY_PASSWORD}`,
-      JSON.stringify(email),
-      {
-        headers: { 'Content-Type': 'application/json' },
-      }
+    const response = await axios.post<ApiAuthResponseType<any>>(
+      `${API_AUTH_STRING}${AUTH_API_LIST.REGISTER.RECOVERY_PASSWORD}`,
+      { email }
     );
     return response.data;
   };
@@ -78,6 +75,14 @@ class API {
     const response = await axios.post<ApiResponseType<any>>(
       `${API_STRING}${AUTH_API_LIST.REGISTER.CHANGE_PASSWORD}`,
       credentials
+    );
+    return response.data;
+  };
+
+  signOut = async (token: string) => {
+    const response = await axios.post<ApiAuthResponseType<any>>(
+      `${API_AUTH_STRING}${AUTH_API_LIST.AUTH.SIGN_OUT}`,
+      { token }
     );
     return response.data;
   };
@@ -123,18 +128,15 @@ class API {
   };
 
   refreshToken = async (refreshToken: string) => {
-    const response = await axios.post<ApiResponseType<RefreshTokenDTO>>(
-      `${API_STRING}${AUTH_API_LIST.AUTH.REFRESH_TOKEN}`,
-      JSON.stringify(refreshToken),
-      {
-        headers: { 'Content-Type': 'application/json' },
-      }
+    const response = await axios.post<ApiAuthResponseType<RefreshTokenDTO>>(
+      `${API_AUTH_STRING}${AUTH_API_LIST.AUTH.REFRESH_TOKEN}`,
+      { refreshToken }
     );
     return response.data;
   };
 
   getUserProfile = async () => {
-    const response = await axios.post<ApiResponseType<UserProfileType>>(
+    const response = await axios.get<ApiResponseType<UserProfileType>>(
       `${API_STRING}${API_LIST.USER_ACCOUNT.GET}`
     );
     return response.data;

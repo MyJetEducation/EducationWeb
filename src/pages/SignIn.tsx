@@ -17,6 +17,7 @@ import apiResponseCodeMessages from '../constants/apiResponseCodeMessages';
 import { useHistory } from 'react-router-dom';
 import validationInputTexts from '../constants/validationInputTexts';
 import FullScreenLoader from '../components/Preloader/FullScreenLoader';
+import { OperationAuthApiResponseCodes } from '../enums/OperationAuthApiResponseCodes';
 
 const SignIn = () => {
   const { t } = useTranslation();
@@ -25,7 +26,7 @@ const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object().shape<UserAuthenticate>({
-    userName: yup
+    email: yup
       .string()
       .required(t(validationInputTexts.REQUIRED_FIELD))
       .email(t(validationInputTexts.EMAIL)),
@@ -41,7 +42,7 @@ const SignIn = () => {
   });
 
   const initialValues: UserAuthenticate = {
-    userName: '',
+    email: '',
     password: '',
   };
 
@@ -51,19 +52,9 @@ const SignIn = () => {
       const result = await mainAppStore.signIn(values);
 
       switch (result) {
-        case OperationApiResponseCodes.Ok:
+        case OperationAuthApiResponseCodes.OK:
           push(Page.DASHBOARD);
           return null;
-
-        case OperationApiResponseCodes.UserNotFound:
-        case OperationApiResponseCodes.UserAlreadyExists:
-        case OperationApiResponseCodes.NotValidEmail:
-          setFieldError(Fields.USER_NAME, t(apiResponseCodeMessages[result]));
-          break;
-
-        case OperationApiResponseCodes.NotValidPassword:
-          setFieldError(Fields.PASSWORD, t(apiResponseCodeMessages[result]));
-          break;
 
         default:
           break;
@@ -127,11 +118,11 @@ const SignIn = () => {
         <LabelInput
           onBlur={handleBlur}
           onChange={handleChange}
-          hasError={!!(touched.userName && errors.userName)}
-          errorText={errors.userName}
-          value={values.userName}
-          id={Fields.USER_NAME}
-          name={Fields.USER_NAME}
+          hasError={!!(touched.email && errors.email)}
+          errorText={errors.email}
+          value={values.email}
+          id={Fields.EMAIL}
+          name={Fields.EMAIL}
           labelText={t('Email')}
         />
         <FlexContainer position="relative" width="100%">

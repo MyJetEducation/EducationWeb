@@ -46,16 +46,22 @@ const TutorialUnitActiveItem = ({ item, isActive, isFirstItem }: Props) => {
       {isOpenUnitList && (
         <FlexContainer flexDirection="column" padding="8px 0 0 22px">
           {item.unit.tasks.map((task) => (
-            <TutorialTaskItem key={task.task} item={task} unit={item.unit.unit} />
+            <TutorialTaskItem
+              key={task.task}
+              item={task}
+              unit={item.unit.unit}
+            />
           ))}
         </FlexContainer>
       )}
       {/* tasks */}
       {/* is active unit */}
       <FlexContainer justifyContent="center" padding="24px 0 0">
-        <AccentButton width="300px">{`${t('Start')} Unit ${
-          item.unit.unit
-        }`}</AccentButton>
+        <AccentButton width="300px">
+          {`${item.unit.hasProgress ? t('Сontinue') : t('Start')} Unit ${
+            item.unit.unit
+          }`}
+        </AccentButton>
       </FlexContainer>
     </UnitListItem>
   );

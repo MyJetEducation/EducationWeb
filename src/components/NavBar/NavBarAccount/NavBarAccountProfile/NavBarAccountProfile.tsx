@@ -48,8 +48,8 @@ const NavBarAccountProfile = observer(() => {
             textTransform="uppercase"
           >
             {getAccountInitials(
-              userProfileStore.userAccount?.firstName,
-              userProfileStore.userAccount?.lastName
+              userProfileStore.userAccount?.firstName || '',
+              userProfileStore.userAccount?.lastName || ''
             )}
           </PrimaryTextSpan>
         </FlexContainer>

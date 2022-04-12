@@ -23,15 +23,18 @@ import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 import apiResponseCodeMessages from '../constants/apiResponseCodeMessages';
 import validationInputTexts from '../constants/validationInputTexts';
 import FullScreenLoader from '../components/Preloader/FullScreenLoader';
+import { OperationAuthApiResponseCodes } from '../enums/OperationAuthApiResponseCodes';
+import { useHistory } from 'react-router-dom';
 
 const SignUp = () => {
   const { t } = useTranslation();
   const { mainAppStore } = useStores();
+  const { push } = useHistory();
   const [isSuccess, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object().shape<UserRegistration>({
-    userName: yup
+    email: yup
       .string()
       .required(t(validationInputTexts.REQUIRED_FIELD))
       .email(t(validationInputTexts.EMAIL)),
@@ -44,20 +47,10 @@ const SignUp = () => {
         /^(?=.*\d)(?=.*[a-zA-Z0-9])/,
         t(validationInputTexts.PASSWORD_MATCH)
       ),
-    firstName: yup
-      .string()
-      .required(t(validationInputTexts.REQUIRED_FIELD))
-      .min(2, t(validationInputTexts.TEXT_MIN_CHARACTERS)),
-    lastName: yup
-      .string()
-      .required(t(validationInputTexts.REQUIRED_FIELD))
-      .min(2, t(validationInputTexts.TEXT_MIN_CHARACTERS)),
   });
 
   const initialValues: UserRegistration = {
-    firstName: '',
-    lastName: '',
-    userName: '',
+    email: '',
     password: '',
   };
 
@@ -65,20 +58,11 @@ const SignUp = () => {
     setIsLoading(true);
     try {
       const result = await mainAppStore.signUp(values);
-
+      console.log(result);
       switch (result) {
-        case OperationApiResponseCodes.Ok:
-          setSuccess(true);
-          break;
-
-        case OperationApiResponseCodes.UserAlreadyExists:
-        case OperationApiResponseCodes.NotValidEmail:
-          setFieldError(Fields.USER_NAME, t(apiResponseCodeMessages[result]));
-          break;
-
-        case OperationApiResponseCodes.NotValidPassword:
-          setFieldError(Fields.PASSWORD, t(apiResponseCodeMessages[result]));
-          break;
+        case OperationAuthApiResponseCodes.OK:
+          push(Page.DASHBOARD);
+          return null;
 
         default:
           break;
@@ -150,7 +134,7 @@ const SignUp = () => {
             fontSize="16px"
           >
             {t('We`ve sent an email to')}
-            <PrimaryTextSpan color="#000"> {values.userName} </PrimaryTextSpan>
+            <PrimaryTextSpan color="#000"> {values.email} </PrimaryTextSpan>
             {t(
               'to verify your email address and activate your account. The link in email will expire in 24 hours'
             )}
@@ -173,45 +157,15 @@ const SignUp = () => {
           </FlexContainer>
 
           <AuthForm noValidate onSubmit={handleSubmit}>
-            <FlexContainer
-              alignItems="flex-start"
-              justifyContent="space-between"
-            >
-              <FlexContainer width="calc(50% - 10px)">
-                <LabelInput
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.firstName}
-                  id={Fields.FIRST_NAME}
-                  name={Fields.FIRST_NAME}
-                  labelText={t('First Name')}
-                  hasError={!!(touched.firstName && errors.firstName)}
-                  errorText={errors.firstName}
-                />
-              </FlexContainer>
-              <FlexContainer width="calc(50% - 10px)">
-                <LabelInput
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.lastName}
-                  id={Fields.LAST_NAME}
-                  name={Fields.LAST_NAME}
-                  labelText={t('Last Name')}
-                  hasError={!!(touched.lastName && errors.lastName)}
-                  errorText={errors.lastName}
-                />
-              </FlexContainer>
-            </FlexContainer>
-
             <LabelInput
               onBlur={handleBlur}
               onChange={handleChange}
-              value={values.userName}
-              id={Fields.USER_NAME}
-              name={Fields.USER_NAME}
+              value={values.email}
+              id={Fields.EMAIL}
+              name={Fields.EMAIL}
               labelText={t('Email')}
-              hasError={!!(touched.userName && errors.userName)}
-              errorText={errors.userName}
+              hasError={!!(touched.email && errors.email)}
+              errorText={errors.email}
             />
             <LabelInput
               onBlur={handleBlur}

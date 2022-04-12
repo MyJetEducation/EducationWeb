@@ -1,3 +1,5 @@
+import { ApplicationTypeEnum } from '../enums/ApplicationTypeEnum';
+
 export interface UserProfileType {
   firstName: string;
   lastName: string;
@@ -5,7 +7,6 @@ export interface UserProfileType {
   phone: string;
   country: string;
 }
-
 
 export interface RecoveryPasswordType {
   hash: string;
@@ -21,8 +22,12 @@ export interface EmailConfirmationDTO {
   refreshToken: string;
 }
 export interface UserAuthenticate {
-  userName: string;
+  email: string;
   password: string;
+  captcha?: string;
+  publicKeyPem?: string;
+  application?: ApplicationTypeEnum;
+  deviceUid?: string;
 }
 export interface UserAuthenticateDTO {
   token: string;
@@ -30,12 +35,19 @@ export interface UserAuthenticateDTO {
 }
 
 export interface UserForgotPassword {
-  userName: string;
+  email: string;
 }
 
 export interface UserRegistration {
-  userName: string;
+  email: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  captcha?: string;
+  phoneCode?: string;
+  phoneBody?: string;
+  phoneIso?: string;
+  publicKeyPem?: string;
+  application?: ApplicationTypeEnum;
+  deviceUid?: string;
+  referralCode?: string;
+  marketingEmailsAllowed?: boolean;
 }

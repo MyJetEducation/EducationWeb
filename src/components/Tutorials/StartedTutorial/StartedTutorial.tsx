@@ -24,10 +24,7 @@ interface Props {
 
 const StartedTutorial = observer(({ isDone, number }: Props) => {
   const { t } = useTranslation();
-
   const { tutorialStore } = useStores();
-
-  // state component
 
   const isFirstItem = useCallback(
     (id: number) => {
@@ -41,9 +38,7 @@ const StartedTutorial = observer(({ isDone, number }: Props) => {
   );
   const isActiveUnit = useCallback(
     (id: number) => {
-      return !!tutorialStore.activeTutorial?.units.find(
-        (unit) => unit.unit === id
-      )?.hasProgress;
+      return !!(tutorialStore.activeUnit?.unit === id);
     },
     [tutorialStore.activeTutorial]
   );

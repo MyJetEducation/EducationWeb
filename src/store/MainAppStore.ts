@@ -1,4 +1,5 @@
 import {
+  LOCAL_STORAGE_DEVICE_UID,
   LOCAL_STORAGE_LANGUAGE,
   LOCAL_STORAGE_REFRESH_TOKEN_KEY,
   LOCAL_STORAGE_TOKEN_KEY,
@@ -21,11 +22,14 @@ import {
   UserRegistration,
 } from '../types/UserInfo';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
+import { v4 as uuid } from 'uuid';
+import { OperationAuthApiResponseCodes } from '../enums/OperationAuthApiResponseCodes';
 
 interface MainAppStoreProps {
+  deviceUid: string;
+
   token: string;
   refreshToken: string;
-
   tokenLog: string;
 
   isAuthorized: boolean;
@@ -41,15 +45,16 @@ interface MainAppStoreProps {
   requestReconnectCounter: number;
 }
 export class MainAppStore implements MainAppStoreProps {
+  deviceUid = '';
+
   token = '';
   refreshToken = '';
-
   tokenLog = '';
 
   isAuthorized = false;
   activeSession?: HubConnection;
 
-  isLoading = true;
+  isLoading = false;
   isOnboarding = false;
 
   websocketConnectionTries = 0;
@@ -74,6 +79,9 @@ export class MainAppStore implements MainAppStoreProps {
     this.token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY) || '';
     this.refreshToken =
       localStorage.getItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY) || '';
+
+    this.deviceUid = this.getDeviceUid();
+
     Axios.defaults.headers[RequestHeaders.AUTHORIZATION] =
       'Bearer ' + this.token;
     Axios.defaults.timeout = this.connectTimeOut;
@@ -109,9 +117,6 @@ export class MainAppStore implements MainAppStoreProps {
 
   // user loggers
   getUserTimeToken = async () => {
-    if (this.tokenLog) {
-      return;
-    }
     const response = await API.getUserTimeToken();
     if (response.status === OperationApiResponseCodes.Ok) {
       this.setTokenLogHandler(response.data);
@@ -119,6 +124,9 @@ export class MainAppStore implements MainAppStoreProps {
   };
 
   postUserTimeLog = async () => {
+    if (!this.tokenLog) {
+      return;
+    }
     const response = await API.postUserTimeLog(this.tokenLog);
     return response.status;
   };
@@ -126,12 +134,12 @@ export class MainAppStore implements MainAppStoreProps {
 
   initApp = async () => {
     if (!this.token) {
+      this.setIsLoading(false);
       return;
     }
     this.setIsLoading(true);
-    // TODO: check fist request for init
     this.setIsAuthorized(true);
-    await this.rootStore.userProfileStore.getUserAccount();
+    // await this.rootStore.userProfileStore.getUserAccount();
     await this.getUserTimeToken();
     await this.getKeyValuesList();
     this.setIsLoading(false);
@@ -139,8 +147,7 @@ export class MainAppStore implements MainAppStoreProps {
 
   getKeyValuesList = async () => {
     const response = await API.getKeyValuesList();
-    console.log(response)
-  }
+  };
 
   sendRegisterConfirm = async (hash: string) => {
     const response = await API.registerConfirm(hash);
@@ -156,7 +163,7 @@ export class MainAppStore implements MainAppStoreProps {
     try {
       const response = await API.refreshToken(this.refreshToken);
       logger(response);
-      if (response.status === OperationApiResponseCodes.Ok) {
+      if (response.result === OperationAuthApiResponseCodes.OK) {
         this.setRefreshToken(response.data.refreshToken);
         this.setTokenHandler(response.data.token);
       }
@@ -169,22 +176,29 @@ export class MainAppStore implements MainAppStoreProps {
 
   signIn = async (values: UserAuthenticate) => {
     const response = await API.authenticate(values);
-    if (response.status === OperationApiResponseCodes.Ok) {
+    if (response.result === OperationAuthApiResponseCodes.OK) {
       this.setTokenHandler(response.data?.token || '');
       this.setRefreshToken(response.data?.refreshToken || '');
-
-      await this.initApp();
       this.setIsAuthorized(true);
     }
-    return response.status;
+    return response.result;
   };
 
   signUp = async (values: UserRegistration) => {
     const response = await API.signUp(values);
-    return response.status;
+    if (response.result === OperationAuthApiResponseCodes.OK) {
+      // send refresh token
+      this.setTokenHandler(response.data?.token || '');
+      this.setRefreshToken(response.data?.refreshToken || '');
+      this.setIsAuthorized(true);
+    }
+    return response.result;
   };
 
   signOut = () => {
+    API.signOut(this.token)
+      .catch((e) => console.log(e));
+
     this.setRefreshToken('');
     this.setTokenHandler('');
     this.setIsAuthorized(false);
@@ -193,6 +207,16 @@ export class MainAppStore implements MainAppStoreProps {
   };
 
   // store action
+
+  getDeviceUid = () => {
+    let id = localStorage.getItem(LOCAL_STORAGE_DEVICE_UID) || '';
+    if (!id) {
+      id = uuid();
+      localStorage.setItem(LOCAL_STORAGE_DEVICE_UID, id);
+    }
+    return id;
+  };
+
   setTokenHandler = (token: string) => {
     localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
     Axios.defaults.headers[RequestHeaders.AUTHORIZATION] = 'Bearer ' + token;

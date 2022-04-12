@@ -1,12 +1,13 @@
 const AUTH_API_LIST = {
   AUTH: {
-    SIGN_IN: '/api/v1/auth/login',
-    REFRESH_TOKEN: '/api/v1/auth/refresh-token',
+    SIGN_IN: '/auth/v1/trader/Authenticate',
+    REFRESH_TOKEN: '/auth/v1/trader/RefreshToken',
+    SIGN_OUT: '/auth/v1/trader/Logout',
   },
   REGISTER: {
-    SIGN_UP: '/api/v1/register/create',
+    SIGN_UP: '/auth/v1/trader/Register',
     REGISTER_CONFIRM: '/api/v1/register/confirm',
-    RECOVERY_PASSWORD: '/api/v1/register/recovery',
+    RECOVERY_PASSWORD: '/auth/v1/trader/ForgotPassword',
     CHANGE_PASSWORD: '/api/v1/register/change',
   },
 };
