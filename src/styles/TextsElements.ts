@@ -5,7 +5,7 @@ interface PrimaryTextType {
   color?: string;
   fontWeight?: 'bold' | 'normal' | number;
   fontStyle?: 'italic' | 'normal';
-  fontSize?: '12px' | '14px' | '16px' | '18px' | '20px' | '24px' | '28px' | '32px' | '40px' | '48px';
+  fontSize?: '12px' | '14px' | '16px' | '18px' | '20px' | '24px' | '28px' | '32px' | '40px' | '48px' | string;
   lineHeight?: string;
   marginRight?: string;
   marginBottom?: string;
@@ -13,7 +13,7 @@ interface PrimaryTextType {
   textDecoration?: 'underline';
   textTransform?: 'capitalize' | 'lowercase' | 'uppercase';
   whiteSpace?: 'nowrap' | 'pre' | 'normal';
-  textAlign?: 'left' | 'center' | 'right';
+  textAlign?: 'left' | 'center' | 'right' | string;
   textOverflow?: 'ellipsis';
   overflow?: 'hidden';
   width?: string;

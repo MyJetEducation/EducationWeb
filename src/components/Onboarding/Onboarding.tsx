@@ -62,10 +62,7 @@ const Onboarding = observer(() => {
       backgroundColor="rgba(222, 226, 231, 0.857)"
       justifyContent="center"
     >
-      <FlexContainer
-        width={CONTENT_WIDTH}
-        position="relative"
-      >
+      <FlexContainer width={CONTENT_WIDTH} position="relative">
         <ObHint
           position={onBoardingStore.activeHint.position}
           showNext={onBoardingStore.activeHint.showNext}

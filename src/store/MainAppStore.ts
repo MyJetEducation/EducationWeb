@@ -36,7 +36,6 @@ interface MainAppStoreProps {
   activeSession?: HubConnection;
 
   isLoading: boolean;
-  isOnboarding: boolean;
 
   signalRReconnectTimeOut: string;
   lang: CountriesEnum;
@@ -55,7 +54,6 @@ export class MainAppStore implements MainAppStoreProps {
   activeSession?: HubConnection;
 
   isLoading = true;
-  isOnboarding = true;
 
   websocketConnectionTries = 0;
 
@@ -196,8 +194,7 @@ export class MainAppStore implements MainAppStoreProps {
   };
 
   signOut = () => {
-    API.signOut(this.token)
-      .catch((e) => console.log(e));
+    API.signOut(this.token).catch((e) => console.log(e));
 
     this.setRefreshToken('');
     this.setTokenHandler('');
