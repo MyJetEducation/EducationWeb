@@ -1,23 +1,36 @@
-import React from "react";
-import {FlexContainer} from "../../styles/FlexContainer";
-import {PrimaryTextSpan} from "../../styles/TextsElements";
-import {ButtonWithoutStyles} from "../../styles/ButtonWithoutStyles";
+import React from 'react';
+import { FlexContainer } from '../../styles/FlexContainer';
+import { PrimaryTextSpan } from '../../styles/TextsElements';
+import { ButtonWithoutStyles } from '../../styles/ButtonWithoutStyles';
 
-import maskot from "../../assets/images/maskot.png";
-import ArrowIcon from "../../assets/svg/arrow-icon.svg";
-import SvgIcon from "../SvgIcon";
+import maskot from '../../assets/images/maskot.png';
+import ArrowIcon from '../../assets/svg/arrow-icon.svg';
+import SvgIcon from '../SvgIcon';
+import { useTranslation } from 'react-i18next';
 
 interface OnboardingProps {
-  text: string,
-  onClickNext: () => void
+  text: string;
+  showNext: boolean;
+  position?: {
+    top?: string;
+    bottom?: string;
+    left?: string;
+    right?: string;
+  };
+  onClickNext: () => void;
 }
 
-const ObHint = ({text, onClickNext}: OnboardingProps) => {
-
+const ObHint = ({ text, showNext, position, onClickNext }: OnboardingProps) => {
+  const { t } = useTranslation();
   return (
     <FlexContainer
       width="268px"
       flexDirection="column"
+      position="absolute"
+      top={position?.top || ''}
+      left={position?.left || ''}
+      bottom={position?.bottom || ''}
+      right={position?.right || ''}
     >
       <FlexContainer
         width="100%"
@@ -36,25 +49,22 @@ const ObHint = ({text, onClickNext}: OnboardingProps) => {
           color="#FFFFFF"
           marginBottom="12px"
         >
-          {text}
+          {t(text)}
         </PrimaryTextSpan>
-        <ButtonWithoutStyles
-          onClick={onClickNext}
-        >
-          <FlexContainer
-            alignItems="center"
-          >
-            <PrimaryTextSpan
-              fontWeight={500}
-              color="#FFFFFF"
-              marginRight="8px"
-            >
-              Next
-            </PrimaryTextSpan>
-            <SvgIcon {...ArrowIcon}fillColor="#fff"/>
-          </FlexContainer>
-
-        </ButtonWithoutStyles>
+        {showNext && (
+          <ButtonWithoutStyles onClick={onClickNext}>
+            <FlexContainer alignItems="center">
+              <PrimaryTextSpan
+                fontWeight={500}
+                color="#FFFFFF"
+                marginRight="8px"
+              >
+                {t('Next')}
+              </PrimaryTextSpan>
+              <SvgIcon {...ArrowIcon} fillColor="#fff" />
+            </FlexContainer>
+          </ButtonWithoutStyles>
+        )}
       </FlexContainer>
       <FlexContainer
         width="100%"
@@ -80,11 +90,10 @@ const ObHint = ({text, onClickNext}: OnboardingProps) => {
           borderRadius="50%"
           backgroundColor="#000"
         />
-        <img src={maskot} alt="maskot"/>
+        <img src={maskot} alt="maskot" />
       </FlexContainer>
-
     </FlexContainer>
-  )
-}
+  );
+};
 
 export default ObHint;

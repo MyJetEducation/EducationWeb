@@ -14,7 +14,7 @@ import LoaderForComponent from '../Preloader/LoaderForComponent';
 
 const AchievementSB = observer(() => {
   const { t } = useTranslation();
-  const { userProfileStore } = useStores();
+  const { userProfileStore, onBoardingStore } = useStores();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,53 +42,56 @@ const AchievementSB = observer(() => {
 
   return (
     <FlexContainer
-      width="100%"
-      borderRadius="32px"
-      border="2px solid #E0E5EB"
-      padding="20px 32px"
-      flexDirection="column"
+      className={onBoardingStore.classNameList('hint_2')}
       marginBottom="20px"
-      position="relative"
-      overflow="hidden"
     >
       <FlexContainer
-        alignItems="center"
-        justifyContent="space-between"
-        marginBottom="16px"
+        width="100%"
+        borderRadius="32px"
+        border="2px solid #E0E5EB"
+        padding="20px 32px"
+        flexDirection="column"
+        position="relative"
       >
-        <PrimaryTextParagraph
-          fontSize="18px"
-          lineHeight="156%"
-          fontWeight={600}
-          color="#000"
-          marginRight="12px"
+        <FlexContainer
+          alignItems="center"
+          justifyContent="space-between"
+          marginBottom="16px"
         >
-          {t('Achievements')}
-        </PrimaryTextParagraph>
-        <PrimaryTextSpan color="#A8B0BA" fontSize="18px" fontWeight={600}>{`${
-          userProfileStore.totalActiveAchievementsCount
-        } ${t('of')} ${
-          userProfileStore.totalAchievementsCount
-        }`}</PrimaryTextSpan>
-      </FlexContainer>
+          <PrimaryTextParagraph
+            fontSize="18px"
+            lineHeight="156%"
+            fontWeight={600}
+            color="#000"
+            marginRight="12px"
+          >
+            {t('Achievements')}
+          </PrimaryTextParagraph>
+          <PrimaryTextSpan color="#A8B0BA" fontSize="18px" fontWeight={600}>{`${
+            userProfileStore.totalActiveAchievementsCount
+          } ${t('of')} ${
+            userProfileStore.totalAchievementsCount
+          }`}</PrimaryTextSpan>
+        </FlexContainer>
 
-      <FlexContainer
-        alignItems="flex-start"
-        justifyContent={
-          achievementList.length < 3 ? 'flex-start' : 'space-between'
-        }
-      >
-        {achievementList?.map((el: AchievementsEnum) => (
-          <AchievementItem
-            marginRight={achievementList.length < 3 ? '24px' : ''}
-            key={el}
-            isActive={true}
-            name={el}
-          />
-        ))}
-      </FlexContainer>
+        <FlexContainer
+          alignItems="flex-start"
+          justifyContent={
+            achievementList.length < 3 ? 'flex-start' : 'space-between'
+          }
+        >
+          {achievementList?.map((el: AchievementsEnum) => (
+            <AchievementItem
+              marginRight={achievementList.length < 3 ? '24px' : ''}
+              key={el}
+              isActive={true}
+              name={el}
+            />
+          ))}
+        </FlexContainer>
 
-      <LoaderForComponent isLoading={isLoading} />
+        <LoaderForComponent isLoading={isLoading} />
+      </FlexContainer>
     </FlexContainer>
   );
 });

@@ -11,7 +11,7 @@ import { getAccountInitials } from '../../../../helpers/getAccountInitials';
 import NavBarAccInnerMenu from './NavBarAccInnerMenu';
 
 const NavBarAccountProfile = observer(() => {
-  const { userProfileStore } = useStores();
+  const { userProfileStore, onBoardingStore } = useStores();
 
   const [isActiveMenu, toggleMenu] = useState(false);
 
@@ -24,7 +24,11 @@ const NavBarAccountProfile = observer(() => {
 
   return (
     <FlexContainer alignItems="center">
-      <FlexContainer alignItems="center" marginRight="20px">
+      <FlexContainer
+        alignItems="center"
+        marginRight="20px"
+        className={onBoardingStore.classNameList('hint_5')}
+      >
         <FlexContainer marginRight="4px">
           <SvgIcon {...IconCurrency} />
         </FlexContainer>
@@ -32,7 +36,10 @@ const NavBarAccountProfile = observer(() => {
           {numberFormat(1200)}
         </PrimaryTextSpan>
       </FlexContainer>
-      <ButtonWithoutStyles onClick={handleOpenMenu}>
+      <ButtonWithoutStyles
+        onClick={handleOpenMenu}
+        className={onBoardingStore.classNameList('hint_1')}
+      >
         <FlexContainer
           width="40px"
           height="40px"

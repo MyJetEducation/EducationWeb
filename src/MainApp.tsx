@@ -11,8 +11,9 @@ import { setFullHeightProperty } from './helpers/setFullHeightProperty';
 import PageTemplateContainer from './containers/PageTemplateContainer';
 import { fonts } from './styles/fonts';
 import { OperationApiResponseCodes } from './enums/OperationApiResponseCodes';
-import MarketItem from "./components/MarketItem";
-import ObHint from "./components/Onboarding/ObHint";
+import MarketItem from './components/MarketItem';
+import ObHint from './components/Onboarding/ObHint';
+import { OBStyles } from './styles/OnboardingStyles';
 
 declare const window: any;
 
@@ -70,17 +71,15 @@ const MainApp: FC = () => {
         <title>DOFINFO</title>
       </Helmet>
 
-
-
       <Router>
         <PageTemplateContainer>
           <RoutingLayout />
         </PageTemplateContainer>
       </Router>
 
-
       <Global
         styles={css`
+          ${OBStyles};
           ${reboot};
           ${fonts};
 

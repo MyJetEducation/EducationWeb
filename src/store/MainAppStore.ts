@@ -54,7 +54,7 @@ export class MainAppStore implements MainAppStoreProps {
   isAuthorized = false;
   activeSession?: HubConnection;
 
-  isLoading = false;
+  isLoading = true;
   isOnboarding = true;
 
   websocketConnectionTries = 0;

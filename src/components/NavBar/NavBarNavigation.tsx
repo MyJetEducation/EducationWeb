@@ -40,6 +40,7 @@ const MENU = {
       {
         name: 'Education',
         page: Page.DASHBOARD,
+        className: 'hint_9',
       },
       {
         name: 'Tools',
@@ -52,14 +53,15 @@ const MENU = {
       {
         name: 'Market',
         page: Page.INNER.MARKET,
+        className: 'hint_6',
       },
     ],
   },
 };
-
+// className="ob_item active_hint hint_5"
 const NavBarNavigation = observer(() => {
   const { t } = useTranslation();
-  const { mainAppStore } = useStores();
+  const { mainAppStore, onBoardingStore } = useStores();
 
   const activeMenu = useMemo(() => {
     if (mainAppStore.isAuthorized) {
@@ -71,7 +73,12 @@ const NavBarNavigation = observer(() => {
   return (
     <FlexContainer>
       {activeMenu.data.map((item: any) => (
-        <NavigationLink activeClassName="active" key={item.name} to={item.page}>
+        <NavigationLink
+          activeClassName="active"
+          className={onBoardingStore.classNameList(item.className || '')}
+          key={item.name}
+          to={item.page}
+        >
           {t(`${item.name}`)}
         </NavigationLink>
       ))}
