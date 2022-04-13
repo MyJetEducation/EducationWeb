@@ -108,6 +108,10 @@ export class UserProfileStore implements UserProfileStoreProps {
     return this.userAchievements.length || 0;
   }
 
+  get totalDeActiveAchievementsCount() {
+    return this.unReceivedAchievements.length || 0;
+  }
+
   // reset store
   reset = () => {
     this.setUserAccount(null);

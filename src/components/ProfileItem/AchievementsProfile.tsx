@@ -7,6 +7,7 @@ import {AchievementsEnum} from "../../enums/AchievementsEnum";
 import AchievementItem from "../AchievementItem";
 import {useStores} from "../../hooks/useStores";
 import LoaderForComponent from "../Preloader/LoaderForComponent";
+import {TextAccentLink} from "../../styles/TextsElements";
 import {observer} from "mobx-react-lite";
 
 const AchievementsProfile = observer(() => {
@@ -49,10 +50,12 @@ const AchievementsProfile = observer(() => {
         padding="21px 32px"
         flexDirection="column"
       >
-        <FlexContainer>
+        <FlexContainer
+          alignItems="center"
+          marginBottom="13px"
+        >
           <PrimaryTextSpan
             color="#000"
-            marginBottom="13px"
             fontWeight={700}
             fontSize="18px"
             lineHeight="28px"
@@ -88,7 +91,12 @@ const AchievementsProfile = observer(() => {
         </FlexContainer>
 
 
-
+        <TextAccentLink
+          to={"/profile/achievements"}
+          fontSize="14px"
+        >
+          {t('Show all')}
+        </TextAccentLink>
       </FlexContainer>
       <LoaderForComponent isLoading={isLoading} />
     </FlexContainer>

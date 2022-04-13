@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import React, {useMemo} from 'react';
 
-import { FlexContainer } from '../styles/FlexContainer';
-import { PrimaryTextSpan } from '../styles/TextsElements';
+import {FlexContainer} from '../styles/FlexContainer';
+import {PrimaryTextSpan} from '../styles/TextsElements';
 import styled from '@emotion/styled-base';
 import {
   AchievementsEnum,
@@ -392,19 +392,40 @@ interface Props {
   name: AchievementsEnum;
   isActive?: boolean;
   marginRight?: string;
+  marginBottom?: string;
+  description?: string;
+  fontSize?: string,
+  width?: string,
+  textAlign?: string,
+  lineHeight?: string,
+  fontWeight?: number,
+  color?: string
 }
 
-const AchievementItem = ({
-  name,
-  isActive = false,
-  marginRight = '',
-}: Props) => {
+const AchievementItem = (
+  {
+    name,
+    isActive = false,
+    marginRight = '',
+    marginBottom = '',
+    width = '56px',
+    fontSize = '12px',
+    lineHeight = '12px',
+    textAlign = 'center',
+    fontWeight = 400,
+    color = '#777C85',
+    description
+  }: Props) => {
   const achievementName = useMemo(() => {
     return ACHIEVEMENTS_DATA.find((el) => el.id === name)?.name || '';
   }, [name]);
 
   const achievementImage = useMemo(() => {
     return ACHIEVEMENTS_DATA.find((el) => el.id === name)?.icon || '';
+  }, [name]);
+
+  const achievementDescription = useMemo(() => {
+    return ACHIEVEMENTS_DATA.find((el) => el.id === name)?.description || '';
   }, [name]);
 
   const bgColorByType = useMemo(() => {
@@ -427,25 +448,38 @@ const AchievementItem = ({
         return '#F1F4F8';
     }
   }, [name, isActive]);
-
   return (
     <FlexContainer
-      width="56px"
+      width={width}
       flexDirection="column"
       justifyContent="center"
+      marginBottom={marginBottom}
       marginRight={marginRight}
     >
       <AchievementIconWrap backgroundColor={bgColorByType}>
-        <img src={achievementImage} alt="" />
+        <img src={achievementImage} alt="achievement Image"/>
       </AchievementIconWrap>
       <PrimaryTextSpan
-        color="#777C85"
-        fontSize="12px"
-        lineHeight="12px"
-        textAlign="center"
+        color={color}
+        fontSize={fontSize}
+        fontWeight={fontWeight}
+        lineHeight={lineHeight}
+        textAlign={textAlign}
       >
         {achievementName}
       </PrimaryTextSpan>
+      {
+        description && (
+          <PrimaryTextSpan
+            color="#777C85"
+            fontSize="14px"
+            lineHeight="21px"
+            textAlign={textAlign}
+          >
+            {achievementDescription}
+          </PrimaryTextSpan>
+        )
+      }
     </FlexContainer>
   );
 };
@@ -459,6 +493,7 @@ const AchievementIconWrap = styled(FlexContainer)`
   justify-content: center;
   align-items: center;
   margin-bottom: 8px;
+
   img {
     max-width: 32px;
     height: auto;
