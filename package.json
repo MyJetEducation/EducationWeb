@@ -1,12 +1,11 @@
 {
-  "name": "simple-trading-web-terminal",
+  "name": "simple-app-education",
   "version": "1.0.0",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.js --mode=development --is_local=true",
     "devLocal": "webpack --config webpack.config.js --mode=development",
     "buildProd": "webpack --config webpack.config.js --mode=production --display-error-details",
-    "buildTest": "webpack --config webpack.config.js --mode=none --display-error-details",
-    "test": "jest"
+    "buildTest": "webpack --config webpack.config.js --mode=none --display-error-details"
   },
   "devDependencies": {
     "@babel/core": "^7.7.0",
@@ -37,9 +36,6 @@
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.6.3",
-    "jest-localstorage-mock": "^2.4.6",
-    "jest-svg-transformer": "^1.0.0",
     "prettier": "^2.0.5",
     "source-map-loader": "^0.2.4",
     "style-loader": "^2.0.0",
