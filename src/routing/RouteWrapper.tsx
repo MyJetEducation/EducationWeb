@@ -17,7 +17,12 @@ const RouteWrapper: FC<Props> = observer((props) => {
   const { mainAppStore } = useStores();
 
   if (!mainAppStore.isLoading && layoutType !== RouteLayoutType.Public) {
-    if (mainAppStore.isAuthorized && layoutType === RouteLayoutType.SignFlow) {
+    if (
+      mainAppStore.isAuthorized &&
+      [RouteLayoutType.SignFlow, RouteLayoutType.NotAuthorizedPublic].includes(
+        layoutType
+      )
+    ) {
       return <Redirect to={Page.DASHBOARD} />;
     } else if (
       !mainAppStore.isAuthorized &&

@@ -22,6 +22,7 @@ import Tools from '../pages/Tools';
 import Page from './Pages';
 
 export enum RouteLayoutType {
+  NotAuthorizedPublic,
   Authorized,
   SignFlow,
   Public,
@@ -34,7 +35,7 @@ const routesList = [
     path: Page.HOME,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.Public,
+    layoutType: RouteLayoutType.NotAuthorizedPublic,
   },
   // -
   {
@@ -42,28 +43,28 @@ const routesList = [
     path: Page.PUBLIC.ABOUT_US,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.Public,
+    layoutType: RouteLayoutType.NotAuthorizedPublic,
   },
   {
     component: MissionPage,
     path: Page.PUBLIC.MISSION,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.Public,
+    layoutType: RouteLayoutType.NotAuthorizedPublic,
   },
   {
     component: WhyUsPage,
     path: Page.PUBLIC.WHY_US,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.Public,
+    layoutType: RouteLayoutType.NotAuthorizedPublic,
   },
   {
     component: LessonsPage,
     path: Page.PUBLIC.LESSONS,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.Public,
+    layoutType: RouteLayoutType.NotAuthorizedPublic,
   },
 
   {
@@ -71,7 +72,7 @@ const routesList = [
     path: Page.PUBLIC.FAQ,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.Public,
+    layoutType: RouteLayoutType.NotAuthorizedPublic,
   },
   // ----
   {
