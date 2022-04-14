@@ -24,6 +24,8 @@ import {
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 import { v4 as uuid } from 'uuid';
 import { OperationAuthApiResponseCodes } from '../enums/OperationAuthApiResponseCodes';
+import { KeyValueType } from '../types/KeyValuesTypes';
+import { KeyValueEnum } from '../enums/KeyValueEnum';
 
 interface MainAppStoreProps {
   deviceUid: string;
@@ -42,6 +44,8 @@ interface MainAppStoreProps {
 
   websocketConnectionTries: number;
   requestReconnectCounter: number;
+
+  keyValues: KeyValueType[];
 }
 export class MainAppStore implements MainAppStoreProps {
   deviceUid = '';
@@ -60,6 +64,8 @@ export class MainAppStore implements MainAppStoreProps {
   rootStore: RootStore;
   signalRReconnectTimeOut = '';
   lang = CountriesEnum.EN;
+
+  keyValues: KeyValueType[] = [];
 
   connectTimeOut = IS_LOCAL ? 10000 : 5000;
   requestReconnectCounter = 0;
@@ -131,6 +137,7 @@ export class MainAppStore implements MainAppStoreProps {
   // end user loggers
 
   initApp = async () => {
+    logger(' === init app === ');
     if (!this.token) {
       this.setIsLoading(false);
       return;
@@ -138,14 +145,34 @@ export class MainAppStore implements MainAppStoreProps {
     this.setIsLoading(true);
     this.setIsAuthorized(true);
     // await this.rootStore.userProfileStore.getUserAccount();
-    await this.getUserTimeToken();
-    await this.getKeyValuesList();
+    await this.getKeyValues();
+    this.rootStore.onBoardingStore.checkAvailableOB();
     this.setIsLoading(false);
   };
 
-  getKeyValuesList = async () => {
-    const response = await API.getKeyValuesList();
+  // KEY VALUES
+  getKeyValues = async () => {
+    try {
+      const response = await API.getKeyValues([...Object.values(KeyValueEnum)]);
+      if (response.status === OperationApiResponseCodes.Ok) {
+        this.keyValues = response?.data?.items || [];
+      }
+    } catch (error) {}
   };
+
+  setKeyValue = async (data: KeyValueType) => {
+    try {
+      await API.setKeyValues([data]);
+    } catch (error) {}
+  };
+
+  setKeyValues = async (data: KeyValueType[]) => {
+    try {
+      await API.setKeyValues(data);
+    } catch (error) {}
+  };
+
+  // END KEY VALUES
 
   sendRegisterConfirm = async (hash: string) => {
     const response = await API.registerConfirm(hash);
@@ -178,6 +205,8 @@ export class MainAppStore implements MainAppStoreProps {
       this.setTokenHandler(response.data?.token || '');
       this.setRefreshToken(response.data?.refreshToken || '');
       this.setIsAuthorized(true);
+
+      this.initApp();
     }
     return response.result;
   };
@@ -189,17 +218,14 @@ export class MainAppStore implements MainAppStoreProps {
       this.setTokenHandler(response.data?.token || '');
       this.setRefreshToken(response.data?.refreshToken || '');
       this.setIsAuthorized(true);
+
+      this.initApp();
     }
     return response.result;
   };
 
   signOut = () => {
     API.signOut(this.token).catch((e) => console.log(e));
-
-    this.setRefreshToken('');
-    this.setTokenHandler('');
-    this.setIsAuthorized(false);
-
     this.reset();
   };
 
@@ -240,7 +266,14 @@ export class MainAppStore implements MainAppStoreProps {
 
   // reset stores
   reset = () => {
+    this.setRefreshToken('');
+    this.setTokenHandler('');
+    this.setTokenLogHandler('');
+    this.setIsAuthorized(false);
+    this.keyValues = [];
+
     this.rootStore.userProfileStore.reset();
     this.rootStore.tutorialStore.reset();
+    this.rootStore.onBoardingStore.reset();
   };
 }

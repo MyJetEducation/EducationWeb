@@ -30,13 +30,6 @@ export enum RouteLayoutType {
 }
 
 const routesList = [
-  {
-    component: HomeLanding,
-    path: Page.HOME,
-    exact: true,
-    strict: true,
-    layoutType: RouteLayoutType.NotAuthorizedPublic,
-  },
   // -
   {
     component: AboutUsPage,
@@ -153,7 +146,6 @@ const routesList = [
     layoutType: RouteLayoutType.Authorized,
   },
 
-
   // account
   {
     component: Profile,
@@ -200,6 +192,14 @@ const routesList = [
     exact: true,
     strict: true,
     layoutType: RouteLayoutType.Public,
+  },
+
+  {
+    component: HomeLanding,
+    path: Page.HOME,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.NotAuthorizedPublic,
   },
 ];
 

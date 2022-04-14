@@ -17,7 +17,7 @@ import { TutorialItemType, TutorialsListType } from '../types/TutorialTypes';
 import { AchievementsTypes } from '../types/AchievementsTypes';
 import { DashboardProgressTypes } from '../types/StatsTypes';
 import { TutorialEnum } from '../enums/TutorialsEnum';
-import { KeyValueType } from '../types/KeyValuesTypes';
+import { GetKeyValuesType, KeyValueType } from '../types/KeyValuesTypes';
 import { KeyValueEnum } from '../enums/KeyValueEnum';
 
 class API {
@@ -95,6 +95,14 @@ class API {
   getKeyValuesList = async () => {
     const response = await axios.post<ApiResponseType<TutorialsListType>>(
       `${API_STRING}${API_LIST.KEY_VALUE.LIST}`
+    );
+    return response.data;
+  };
+
+  getKeyValues = async (keys: KeyValueEnum[]) => {
+    const response = await axios.post<ApiResponseType<GetKeyValuesType>>(
+      `${API_STRING}${API_LIST.KEY_VALUE.GET}`,
+      { keys}
     );
     return response.data;
   };

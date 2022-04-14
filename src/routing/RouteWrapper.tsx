@@ -16,21 +16,40 @@ const RouteWrapper: FC<Props> = observer((props) => {
   const { component: Component, layoutType, ...otherProps } = props;
   const { mainAppStore } = useStores();
 
-  if (!mainAppStore.isLoading && layoutType !== RouteLayoutType.Public) {
-    if (
-      mainAppStore.isAuthorized &&
-      [RouteLayoutType.SignFlow, RouteLayoutType.NotAuthorizedPublic].includes(
-        layoutType
-      )
-    ) {
-      return <Redirect to={Page.DASHBOARD} />;
-    } else if (
-      !mainAppStore.isAuthorized &&
-      [RouteLayoutType.Authorized].includes(layoutType)
-    ) {
-      return <Redirect to={Page.SIGN_IN} />;
+  switch (layoutType) {
+    case RouteLayoutType.Public:
+      break;
+    case RouteLayoutType.Authorized: {
+      if (
+        !mainAppStore.isLoading &&
+        !mainAppStore.isAuthorized &&
+        !mainAppStore.token
+      ) {
+        return <Redirect to={Page.SIGN_IN} />;
+      }
+      break;
     }
+
+    case RouteLayoutType.NotAuthorizedPublic:
+      if (
+        mainAppStore.isLoading &&
+        mainAppStore.isAuthorized &&
+        mainAppStore.token
+      ) {
+        return <Redirect to={Page.DASHBOARD} />;
+      }
+      break;
+
+    case RouteLayoutType.SignFlow:
+      if (mainAppStore.isAuthorized) {
+        return <Redirect to={Page.DASHBOARD} />;
+      }
+      break;
+
+    default:
+      break;
   }
+
   return (
     <Route
       {...otherProps}

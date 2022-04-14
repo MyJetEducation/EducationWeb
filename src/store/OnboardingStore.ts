@@ -1,17 +1,26 @@
 import { makeAutoObservable } from 'mobx';
 import OnboardingTurData from '../constants/Data/OnboardingTurData';
+import { KeyValueEnum } from '../enums/KeyValueEnum';
+import { RootStore } from './RootStore';
 
 interface OnboardingStoreProps {
   isAvailable: boolean;
   activeStep: number;
+  rootStore: RootStore;
 }
 
 export class OnboardingStore implements OnboardingStoreProps {
-  isAvailable = true;
+  rootStore: RootStore;
+
+  isAvailable = false;
   activeStep = 1;
 
-  constructor() {
-    makeAutoObservable(this);
+  constructor(rootStore: RootStore) {
+    makeAutoObservable(this, {
+      rootStore: false,
+    });
+
+    this.rootStore = rootStore;
   }
 
   setNextStep = () => {
@@ -21,10 +30,31 @@ export class OnboardingStore implements OnboardingStoreProps {
     if (OnboardingTurData.length !== currentIndex) {
       this.setActiveStep(this.activeStep + 1);
     } else {
-      console.log('end');
-      this.isAvailable = false;
+      this.saveOnboardingProgress();
     }
   };
+
+  // async
+
+  checkAvailableOB = () => {
+    if (
+      this.rootStore.mainAppStore.keyValues.find(
+        (kv) => kv.key === KeyValueEnum.showOnboarding
+      )?.value !== 'false'
+    ) {
+      this.isAvailable = true;
+    }
+  };
+
+  saveOnboardingProgress = () => {
+    this.isAvailable = false;
+    this.rootStore.mainAppStore.setKeyValue({
+      key: KeyValueEnum.showOnboarding,
+      value: 'false',
+    });
+  };
+
+  // store
 
   setActiveStep = (step: number) => {
     this.activeStep = step;
@@ -49,4 +79,9 @@ export class OnboardingStore implements OnboardingStoreProps {
     }
     return '';
   };
+
+  reset = () => {
+    this.isAvailable = false;
+    this.activeStep = 1;
+  }
 }

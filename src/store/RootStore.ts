@@ -13,6 +13,6 @@ export class RootStore {
     this.mainAppStore = new MainAppStore(this);
     this.userProfileStore = new UserProfileStore(this);
     this.tutorialStore = new TutorialStore(this);
-    this.onBoardingStore = new OnboardingStore();
+    this.onBoardingStore = new OnboardingStore(this);
   }
 }

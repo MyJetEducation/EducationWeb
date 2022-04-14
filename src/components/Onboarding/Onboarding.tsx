@@ -37,11 +37,12 @@ const Onboarding = observer(() => {
 
   useEffect(() => {
     if (
-      location.pathname !== Page.DASHBOARD &&
-      onBoardingStore.activeStep === 1
+      onBoardingStore.activeStep === 1 &&
+      location.pathname !== Page.DASHBOARD
     ) {
       push(Page.DASHBOARD);
     }
+
     document.addEventListener('mousedown', handleClickDocument);
     return () => {
       document.removeEventListener('mousedown', handleClickDocument);
