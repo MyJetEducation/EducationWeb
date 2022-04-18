@@ -14,6 +14,7 @@ import { OperationApiResponseCodes } from './enums/OperationApiResponseCodes';
 import MarketItem from './components/MarketItem';
 import ObHint from './components/Onboarding/ObHint';
 import { OBStyles } from './styles/OnboardingStyles';
+import SkillsPopup from "./components/ProfileItem/Popups/SkillPopup/SkillsPopup";
 
 declare const window: any;
 

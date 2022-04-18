@@ -1,0 +1,7 @@
+.circular .CircularProgressbar-trail {
+  stroke-dasharray: 230px, 230px !important;
+}
+
+.circular .CircularProgressbar-path {
+  stroke-dasharray: 230px, 230px !important;
+}
