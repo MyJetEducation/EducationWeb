@@ -10,6 +10,7 @@ const Page = {
   },
 
   INNER: {
+    TOOL_INNER: '/tools/:toolId',
     TOOL: '/tools',
     NOTES: '/notes',
     MARKET: '/market',

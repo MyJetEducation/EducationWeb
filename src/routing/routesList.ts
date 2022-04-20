@@ -19,6 +19,7 @@ import ResetPassord from '../pages/ResetPassord';
 import SingIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Tools from '../pages/Tools';
+import ToolsInner from '../pages/ToolsInner';
 import Page from './Pages';
 
 export enum RouteLayoutType {
@@ -122,6 +123,13 @@ const routesList = [
     layoutType: RouteLayoutType.Authorized,
   },
 
+  {
+    component: ToolsInner,
+    path: Page.INNER.TOOL_INNER,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Authorized,
+  },
   {
     component: Tools,
     path: Page.INNER.TOOL,

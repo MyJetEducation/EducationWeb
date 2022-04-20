@@ -12,7 +12,7 @@ const NavBarAccount = observer(() => {
 
   return (
     <>
-      <FlexContainer alignItems="center">
+      <FlexContainer justifyContent="flex-end" alignItems="center">
         {mainAppStore.isAuthorized ? (
           <NavBarAccountProfile />
         ) : (

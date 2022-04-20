@@ -11,9 +11,9 @@ import { setFullHeightProperty } from './helpers/setFullHeightProperty';
 import PageTemplateContainer from './containers/PageTemplateContainer';
 import { fonts } from './styles/fonts';
 import { OperationApiResponseCodes } from './enums/OperationApiResponseCodes';
-import MarketItem from './components/MarketItem';
-import ObHint from './components/Onboarding/ObHint';
 import { OBStyles } from './styles/OnboardingStyles';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { ColorVars } from './styles/ColorVars';
 
 declare const window: any;
 
@@ -79,6 +79,7 @@ const MainApp: FC = () => {
 
       <Global
         styles={css`
+          ${ColorVars};
           ${OBStyles};
           ${reboot};
           ${fonts};

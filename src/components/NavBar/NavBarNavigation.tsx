@@ -71,7 +71,7 @@ const NavBarNavigation = observer(() => {
   }, [mainAppStore.isAuthorized]);
 
   return (
-    <FlexContainer>
+    <FlexContainer justifyContent="center">
       {activeMenu.data.map((item: any) => (
         <NavigationLink
           activeClassName="active"
