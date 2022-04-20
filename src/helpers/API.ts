@@ -7,11 +7,16 @@ import {
   UserForgotPassword,
   UserProfileType,
   UserRegistration,
+  UserSessionInfoResponse,
 } from '../types/UserInfo';
 import AUTH_API_LIST from './apiListAuth';
 import requestOptions from '../constants/requestOptions';
 import { RefreshTokenDTO } from '../types/RefreshTokenTypes';
-import { ApiAuthResponseType, ApiResponseType } from '../types/ApiResponseType';
+import {
+  ApiAuthResponseType,
+  ApiAuthValidResponseType,
+  ApiResponseType,
+} from '../types/ApiResponseType';
 import API_LIST from './apiList';
 import { TutorialItemType, TutorialsListType } from '../types/TutorialTypes';
 import { AchievementsTypes } from '../types/AchievementsTypes';
@@ -19,6 +24,7 @@ import { DashboardProgressTypes } from '../types/StatsTypes';
 import { TutorialEnum } from '../enums/TutorialsEnum';
 import { GetKeyValuesType, KeyValueType } from '../types/KeyValuesTypes';
 import { KeyValueEnum } from '../enums/KeyValueEnum';
+import { ApplicationTypeEnum } from '../enums/ApplicationTypeEnum';
 
 class API {
   private convertParamsToFormData = (params: { [key: string]: any }) => {
@@ -50,7 +56,7 @@ class API {
   authenticate = async (credentials: UserAuthenticate) => {
     const response = await axios.post<ApiAuthResponseType<UserAuthenticateDTO>>(
       `${API_AUTH_STRING}${AUTH_API_LIST.AUTH.SIGN_IN}`,
-      credentials
+      { ...credentials, platform: ApplicationTypeEnum.SpotWeb }
     );
     return response.data;
   };
@@ -58,7 +64,7 @@ class API {
   signUp = async (credentials: UserRegistration) => {
     const response = await axios.post<ApiAuthResponseType<UserAuthenticateDTO>>(
       `${API_AUTH_STRING}${AUTH_API_LIST.REGISTER.SIGN_UP}`,
-      credentials
+      { ...credentials, platform: ApplicationTypeEnum.SpotWeb }
     );
     return response.data;
   };
@@ -66,7 +72,7 @@ class API {
   forgotPassword = async (email: string) => {
     const response = await axios.post<ApiAuthResponseType<any>>(
       `${API_AUTH_STRING}${AUTH_API_LIST.REGISTER.RECOVERY_PASSWORD}`,
-      { email }
+      { email, platform: ApplicationTypeEnum.SpotWeb }
     );
     return response.data;
   };
@@ -74,7 +80,7 @@ class API {
   recoveryPassword = async (credentials: RecoveryPasswordType) => {
     const response = await axios.post<ApiResponseType<any>>(
       `${API_STRING}${AUTH_API_LIST.REGISTER.CHANGE_PASSWORD}`,
-      credentials
+      { ...credentials, platform: ApplicationTypeEnum.SpotWeb }
     );
     return response.data;
   };
@@ -87,9 +93,23 @@ class API {
     return response.data;
   };
 
+  requestVerify = async () => {
+    const response = await axios.post<ApiAuthValidResponseType<any>>(
+      `${API_AUTH_VALIDATION_STRING}${API_LIST.VALIDATION.REQUST_VERIFY}`,
+      { platform: ApplicationTypeEnum.SpotWeb, language: 'en' }
+    );
+    return response.data;
+  };
+
   /*
   --- Background Request
   */
+  getSessionInfo = async () => {
+    const response = await axios.get<
+      ApiAuthResponseType<UserSessionInfoResponse>
+    >(`${API_AUTH_STRING}${API_LIST.INFO.SESSION_INFO}`);
+    return response.data;
+  };
 
   // key values
   getKeyValuesList = async () => {
@@ -102,7 +122,7 @@ class API {
   getKeyValues = async (keys: KeyValueEnum[]) => {
     const response = await axios.post<ApiResponseType<GetKeyValuesType>>(
       `${API_STRING}${API_LIST.KEY_VALUE.GET}`,
-      { keys}
+      { keys }
     );
     return response.data;
   };
@@ -193,6 +213,14 @@ class API {
       {
         headers: { 'Content-Type': 'application/json' },
       }
+    );
+    return response.data;
+  };
+
+  postCodeVerify = async (code: string) => {
+    const response = await axios.post<ApiAuthValidResponseType<any>>(
+      `${API_AUTH_VALIDATION_STRING}${API_LIST.VALIDATION.EMAIL_CODE_VERIFY}`,
+      { code }
     );
     return response.data;
   };

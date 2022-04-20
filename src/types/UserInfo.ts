@@ -1,5 +1,14 @@
 import { ApplicationTypeEnum } from '../enums/ApplicationTypeEnum';
 
+export interface UserSessionInfoResponse {
+  emailVerified: boolean;
+  phoneVerified: boolean;
+  twoFactorAuthentication: boolean;
+  tokenLifetimeRemaining: string;
+  twoFactorAuthenticationEnabled: boolean;
+  ipCountry: string;
+}
+
 export interface UserProfileType {
   firstName: string;
   lastName: string;

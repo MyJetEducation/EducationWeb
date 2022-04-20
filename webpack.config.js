@@ -106,6 +106,9 @@ module.exports = (env, argv) => {
         },
       }),
       new webpack.DefinePlugin({
+        API_AUTH_VALIDATION_STRING: ['production', 'none'].includes(argv.mode)
+        ? JSON.stringify('')
+        : JSON.stringify('https://validation-api-test.simple-spot.biz'),
         API_AUTH_STRING: ['production', 'none'].includes(argv.mode)
           ? JSON.stringify('')
           : JSON.stringify('https://wallet-api-test.simple-spot.biz'),

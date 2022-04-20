@@ -1,4 +1,5 @@
 export enum ApplicationTypeEnum {
-  WebAppSimple,
-  MobileAppSimple,
+  WebAppSimple = 0,
+  MobileAppSimple = 1,
+  SpotWeb = 3,
 }

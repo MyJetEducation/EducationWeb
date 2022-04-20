@@ -67,7 +67,7 @@ export class MainAppStore implements MainAppStoreProps {
 
   keyValues: KeyValueType[] = [];
 
-  connectTimeOut = IS_LOCAL ? 10000 : 5000;
+  connectTimeOut = IS_LOCAL ? 30000 : 5000;
   requestReconnectCounter = 0;
   signalRReconectCounter = 0;
 
@@ -144,6 +144,7 @@ export class MainAppStore implements MainAppStoreProps {
     }
     this.setIsLoading(true);
     this.setIsAuthorized(true);
+    await this.rootStore.userProfileStore.initActiveSessionInfo();
     // await this.rootStore.userProfileStore.getUserAccount();
     await this.getKeyValues();
     this.rootStore.onBoardingStore.checkAvailableOB();

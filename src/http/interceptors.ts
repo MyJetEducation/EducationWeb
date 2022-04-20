@@ -3,6 +3,8 @@ import { MainAppStore } from '../store/MainAppStore';
 import API from '../helpers/API';
 import { logger } from '../helpers/ConsoleLoggerTool';
 import RequestHeaders from '../constants/headers';
+import API_LIST from '../helpers/apiList';
+import AUTH_API_LIST from '../helpers/apiListAuth';
 
 const injectInerceptors = (mainAppStore: MainAppStore) => {
   let isRefreshing = false;
@@ -17,6 +19,16 @@ const injectInerceptors = (mainAppStore: MainAppStore) => {
       }
     });
     failedQueue = [];
+  };
+
+  const getApiUrl = (url: string) => {
+    const urlString = new URL(url);
+    if (urlString.search) {
+      return urlString.href
+        .split(urlString.search)[0]
+        .split(urlString.origin)[1];
+    }
+    return urlString.href.split(urlString.origin)[1];
   };
 
   axios.interceptors.request.use((config) => {
@@ -36,6 +48,7 @@ const injectInerceptors = (mainAppStore: MainAppStore) => {
       };
 
       console.log('error');
+      console.log(getApiUrl(originalRequest?.url));
       switch (error.response?.status) {
         case 401: {
           if (!mainAppStore.isAuthorized) {
@@ -43,6 +56,14 @@ const injectInerceptors = (mainAppStore: MainAppStore) => {
             return Promise.reject(error);
           } else {
             if (mainAppStore.refreshToken && !originalRequest._retry) {
+              if (
+                getApiUrl(originalRequest?.url) ===
+                AUTH_API_LIST.AUTH.REFRESH_TOKEN
+              ) {
+                mainAppStore.signOut();
+                mainAppStore.setIsLoading(false);
+                return await Promise.reject(error);
+              }
               if (isRefreshing) {
                 try {
                   const token = await new Promise(function (resolve, reject) {

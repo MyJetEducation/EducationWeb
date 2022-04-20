@@ -1,4 +1,13 @@
 const API_LIST = {
+  VALIDATION: {
+    EMAIL_CODE_VERIFY: '/api/v1/email-verification/verify',
+    REQUST_VERIFY: '/api/v1/email-verification/request',
+  },
+
+  INFO: {
+    SESSION_INFO: '/api/v1/info/session-info',
+  },
+
   KEY_VALUE: {
     GET: '/api/v1/keyvalue/get',
     UPDATE: '/api/v1/keyvalue/put',

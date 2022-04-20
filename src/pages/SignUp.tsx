@@ -61,8 +61,8 @@ const SignUp = () => {
       console.log(result);
       switch (result) {
         case OperationAuthApiResponseCodes.OK:
-          push(Page.DASHBOARD);
-          return null;
+          setSuccess(true);
+          break;
 
         default:
           break;

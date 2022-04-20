@@ -34,6 +34,7 @@ declare module '*.css' {
 }
 
 declare const WS_HOST: string;
+declare const API_AUTH_VALIDATION_STRING: string;
 declare const API_AUTH_STRING: string;
 declare const API_STRING: string;
 declare const IS_LIVE: string;

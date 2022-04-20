@@ -3,4 +3,7 @@ export enum ColorVarsEnum {
   BG_block = '--color-bg-block',
   BG_accent = '--color-bg-accent',
   Text = '--color-text',
+  InputBorder = '--color-input-border',
+  Text_Secondary_Light = '--color-text-secondary-light',
+  Danger = '--color-danger',
 }

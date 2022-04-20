@@ -3,6 +3,7 @@ import Achievements from '../pages/Account/Achievements';
 import Payments from '../pages/Account/Payments';
 import Profile from '../pages/Account/Profile';
 import Referrals from '../pages/Account/Referrals';
+import ConfirmEmail from '../pages/ConfirmEmail';
 import Dashboard from '../pages/Dashboard';
 import ForgotPassword from '../pages/ForgotPassword';
 import HomeLanding from '../pages/HomeLanding';
@@ -186,6 +187,14 @@ const routesList = [
   {
     component: Referrals,
     path: Page.ACCOUNT.REFERRALS,
+    exact: true,
+    strict: true,
+    layoutType: RouteLayoutType.Authorized,
+  },
+
+  {
+    component: ConfirmEmail,
+    path: Page.CONFIRM_EMAIL,
     exact: true,
     strict: true,
     layoutType: RouteLayoutType.Authorized,

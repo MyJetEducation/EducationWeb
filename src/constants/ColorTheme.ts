@@ -9,6 +9,7 @@ const ColorTheme = {
     text: '#000',
     text_secondary: '#777C85',
     text_secondary_light: '#A8B0BA',
+    input_border: '#E0E5EB',
   },
 };
 

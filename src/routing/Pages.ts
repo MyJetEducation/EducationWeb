@@ -29,9 +29,9 @@ const Page = {
   REGISTER_CONFIRM: '/register-confirm',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/password-recovery',
+  CONFIRM_EMAIL: '/confirm-email',
 
   ONBOARDING: '/onboarding',
-
   DASHBOARD: '/dashboard',
 
   NOT_FOUND: '/404',

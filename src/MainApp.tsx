@@ -14,12 +14,12 @@ import { OperationApiResponseCodes } from './enums/OperationApiResponseCodes';
 import { OBStyles } from './styles/OnboardingStyles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ColorVars } from './styles/ColorVars';
-import SkillsPopup from "./components/ProfileItem/Popups/SkillPopup/SkillsPopup";
+import SkillsPopup from './components/ProfileItem/Popups/SkillPopup/SkillsPopup';
 
 declare const window: any;
 
 const MainApp: FC = () => {
-  const { mainAppStore } = useStores();
+  const { mainAppStore, userProfileStore } = useStores();
   const { i18n } = useTranslation();
 
   const postUserLog = async () => {
@@ -49,7 +49,7 @@ const MainApp: FC = () => {
       if (mainAppStore.lang) {
         i18n.changeLanguage(mainAppStore.lang);
       }
-      if (mainAppStore.isAuthorized) {
+      if (mainAppStore.isAuthorized && userProfileStore.emailVerified) {
         timerLog = setInterval(() => {
           postUserLog();
         }, 10000);

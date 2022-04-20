@@ -2,9 +2,10 @@ import { makeAutoObservable } from 'mobx';
 import { AchievementsEnum } from '../enums/AchievementsEnum';
 import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
 import API from '../helpers/API';
-import { UserProfileType } from '../types/UserInfo';
+import { UserProfileType, UserSessionInfoResponse } from '../types/UserInfo';
 import { RootStore } from './RootStore';
 import { HabitItemType } from '../types/StatsTypes';
+import { OperationAuthApiResponseCodes } from '../enums/OperationAuthApiResponseCodes';
 
 interface UserProfileStoreProps {
   rootStore: RootStore;
@@ -17,6 +18,13 @@ interface UserProfileStoreProps {
   taskCount: number;
   habit: HabitItemType | null;
   skillProgress: number;
+
+  emailVerified: boolean;
+  phoneVerified: boolean;
+  twoFactorAuthentication: boolean;
+  twoFactorAuthenticationEnabled: boolean;
+  tokenLifetimeRemaining: string;
+  ipCountry: string;
 }
 
 export class UserProfileStore implements UserProfileStoreProps {
@@ -31,6 +39,15 @@ export class UserProfileStore implements UserProfileStoreProps {
   habit: HabitItemType | null = null;
   skillProgress = 0;
 
+  // session info
+  emailVerified = false;
+  phoneVerified = false;
+  twoFactorAuthentication = false;
+  twoFactorAuthenticationEnabled = false;
+  tokenLifetimeRemaining = '';
+  ipCountry = '';
+  // END session info
+
   constructor(rootStore: RootStore) {
     makeAutoObservable(this, {
       rootStore: false,
@@ -39,6 +56,14 @@ export class UserProfileStore implements UserProfileStoreProps {
   }
 
   // async
+  initActiveSessionInfo = async () => {
+    const response = await API.getSessionInfo();
+    if (response.result !== OperationAuthApiResponseCodes.OK) {
+      return response.result;
+    }
+    this.setActiveSessionInfo(response.data);
+  };
+
   getUserAccount = async () => {
     const response = await API.getUserProfile();
     if (response.status === OperationApiResponseCodes.Ok) {
@@ -69,6 +94,19 @@ export class UserProfileStore implements UserProfileStoreProps {
   };
 
   // store actions
+
+  setCheckEmail = (state: boolean) => {
+    this.emailVerified = state;
+  };
+
+  setActiveSessionInfo = (info: UserSessionInfoResponse) => {
+    this.emailVerified = info.emailVerified;
+    this.phoneVerified = info.phoneVerified;
+    this.twoFactorAuthentication = info.twoFactorAuthentication;
+    this.twoFactorAuthenticationEnabled = info.twoFactorAuthenticationEnabled;
+    this.tokenLifetimeRemaining = info.tokenLifetimeRemaining;
+    this.ipCountry = info.ipCountry;
+  };
 
   setUserAchievements = (list: AchievementsEnum[]) => {
     this.userAchievements = list || [];
