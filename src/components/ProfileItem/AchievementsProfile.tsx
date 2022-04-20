@@ -34,6 +34,7 @@ const AchievementsProfile = observer(() => {
   useEffect(() => {
     getAchievements();
   }, []);
+
   return (
     <FlexContainer
       maxWidth="652px"

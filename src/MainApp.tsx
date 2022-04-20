@@ -14,6 +14,7 @@ import { OperationApiResponseCodes } from './enums/OperationApiResponseCodes';
 import { OBStyles } from './styles/OnboardingStyles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ColorVars } from './styles/ColorVars';
+import SkillsPopup from "./components/ProfileItem/Popups/SkillPopup/SkillsPopup";
 
 declare const window: any;
 
