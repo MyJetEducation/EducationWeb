@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ColorVarsEnum } from '../enums/ColorVarsEnum';
 import { TextAccentButton } from '../styles/Buttons';
@@ -12,22 +12,26 @@ import { OperationApiAuthValidResponseCodes } from '../enums/OperationApiAuthVal
 import { useStores } from '../hooks/useStores';
 import { useHistory, useParams } from 'react-router-dom';
 import Page from '../routing/Pages';
+import ResendCountdown from '../components/ResendCountdown';
 
 const ConfirmEmail = () => {
   const { t } = useTranslation();
   const { push } = useHistory();
   // store
-  const { userProfileStore } = useStores();
+  const { userProfileStore, mainAppStore } = useStores();
   // state
   const [code, setCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState(true);
+  const [isResend, setResend] = useState(false);
 
   // handles
   const handleResendCode = async () => {
     try {
       const response = await API.requestVerify();
-      console.log(response);
+      if (response.result === OperationApiAuthValidResponseCodes.OK) {
+        setResend(true);
+      }
     } catch (error) {}
   };
 
@@ -37,12 +41,11 @@ const ConfirmEmail = () => {
       if (response.result === OperationApiAuthValidResponseCodes.InvalidCode) {
         setIsValid(false);
       }
-
       if (response.result === OperationApiAuthValidResponseCodes.OK) {
         userProfileStore.setCheckEmail(true);
         push(Page.DASHBOARD);
+        return null;
       }
-      console.log(response);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -54,11 +57,26 @@ const ConfirmEmail = () => {
     if (!isValid) {
       setIsValid(true);
     }
-    if (!isLoading && newCode.length === 6) {
-      setIsLoading(true);
-      sendCodeVerify(newCode);
-    }
   };
+
+  const handleBackToSignIn = () => {
+    mainAppStore.signOut();
+  };
+
+  const stopResendTimer = () => setResend(false);
+
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      if (!isLoading && code.length === 6) {
+        setIsLoading(true);
+        sendCodeVerify(code);
+      }
+    }
+    return () => {
+      mounted = false;
+    };
+  }, [code]);
 
   return (
     <FlexContainer
@@ -101,7 +119,7 @@ const ConfirmEmail = () => {
             'Click the link in the email or enter the code to activate your account'
           )}
         </PrimaryTextSpan>
-        <FlexContainer marginBottom="8px">
+        <FlexContainer marginBottom="24px">
           <ReactCodeInput
             placeholder="X"
             className="input-code"
@@ -116,10 +134,21 @@ const ConfirmEmail = () => {
             inputStyleInvalid={{ color: `var(${ColorVarsEnum.Danger})` }}
           />
         </FlexContainer>
-        <PrimaryTextSpan fontSize="16px" fontWeight={400}>
+        <PrimaryTextSpan fontSize="16px" fontWeight={400} marginBottom="40px">
           {t('Can`t find email.')}&nbsp;
-          <TextAccentButton fontSize="16px" onClick={handleResendCode}>
-            {t('Resend verification email')}
+          {isResend ? (
+            <ResendCountdown onEnd={stopResendTimer} />
+          ) : (
+            <TextAccentButton fontSize="16px" onClick={handleResendCode}>
+              {t('Resend verification email')}
+            </TextAccentButton>
+          )}
+        </PrimaryTextSpan>
+
+        <PrimaryTextSpan fontSize="16px" fontWeight={400}>
+          {t('Back to')}&nbsp;
+          <TextAccentButton fontSize="16px" onClick={handleBackToSignIn}>
+            {t('Sign In')}
           </TextAccentButton>
         </PrimaryTextSpan>
       </FlexContainer>

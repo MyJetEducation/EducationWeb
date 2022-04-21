@@ -1,6 +1,6 @@
 const AUTH_API_LIST = {
   AUTH: {
-    SIGN_IN: '/auth/v1/trader/Authenticate',
+    SIGN_IN: '/auth/v1/trader/AuthenticateW2',
     REFRESH_TOKEN: '/auth/v1/trader/RefreshToken',
     SIGN_OUT: '/auth/v1/trader/Logout',
   },

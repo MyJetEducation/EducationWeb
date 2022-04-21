@@ -36,7 +36,9 @@ const AuthorizedContainer: FC<Props> = observer((props) => {
 
   return (
     <FlexContainer flex="1">
-      {onBoardingStore.isAvailable && userProfileStore.emailVerified && <Onboarding />}
+      {onBoardingStore.isAvailable && mainAppStore.isAvailableContent && (
+        <Onboarding />
+      )}
       {children}
     </FlexContainer>
   );

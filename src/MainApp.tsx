@@ -45,7 +45,7 @@ const MainApp: FC = () => {
       setFullHeightProperty();
     });
 
-    autorun(() => {
+    const disposer = autorun(() => {
       if (mainAppStore.lang) {
         i18n.changeLanguage(mainAppStore.lang);
       }
@@ -61,6 +61,7 @@ const MainApp: FC = () => {
     });
 
     return () => {
+      disposer();
       removeEventListener('resize', windowResize);
       clearInterval(timerLog);
     };
@@ -69,7 +70,7 @@ const MainApp: FC = () => {
   return (
     <>
       <Helmet>
-        <title>DOFINFO</title>
+        <title>Simple Education</title>
       </Helmet>
 
       <Router>

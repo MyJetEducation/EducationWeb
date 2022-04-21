@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useRouteMatch } from 'react-router-dom';
+import { ColorVarsEnum } from '../../enums/ColorVarsEnum';
 import { useStores } from '../../hooks/useStores';
 import Page from '../../routing/Pages';
 import { FlexContainer } from '../../styles/FlexContainer';
@@ -95,27 +96,16 @@ const NavigationLink = styled(NavLink)`
   text-decoration: none;
   font-size: 16px;
   position: relative;
+  padding: 4px 12px;
+  border-radius: 16px;
   &:not(&:last-of-type) {
-    margin-right: 26px;
-  }
-  &:after {
-    content: '';
-    width: 100%;
-    height: 4px;
-    left: 0;
-    bottom: -28px;
-    position: absolute;
-    display: inline-block;
-    transition: all 0.3s ease;
-    background-color: transparent;
+    margin-right: 12px;
   }
   &:hover {
     text-decoration: none;
     color: #2e2e2e;
   }
   &.active {
-    &:after {
-      background-color: #000000;
-    }
+    background-color: ${`var(${ColorVarsEnum.BG_block})`};
   }
 `;

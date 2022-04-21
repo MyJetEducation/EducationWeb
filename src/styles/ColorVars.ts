@@ -10,5 +10,6 @@ export const ColorVars = css`
     --color-text: ${ColorTheme['default'].text};
     --color-text-secondary-light: ${ColorTheme['default'].text_secondary_light};
     --color-danger: ${ColorTheme['default'].danger};
+    --color-accent: ${ColorTheme['default'].accent};
   }
 `;

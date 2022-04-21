@@ -4,14 +4,9 @@ import { useTranslation } from 'react-i18next';
 import AchievementSB from '../components/SideBar/AchievementSB';
 import ProgressSB from '../components/SideBar/ProgressSB';
 import StatsSB from '../components/SideBar/StatsSB';
-import LockedTutorial from '../components/Tutorials/LockedTutorial';
-import StartedTutorial from '../components/Tutorials/StartedTutorial/StartedTutorial';
 import { useStores } from '../hooks/useStores';
-import { PrimaryButton } from '../styles/Buttons';
 import { FlexContainer } from '../styles/FlexContainer';
 import { PageTitle, PrimaryTextSpan } from '../styles/TextsElements';
-import TutorialProgressSB from '../components/SideBar/TutorialProgressSB';
-import LoaderForComponent from '../components/Preloader/LoaderForComponent';
 import TutorialsList from '../components/Tutorials/TutorialsList';
 
 const Dashboard = observer(() => {

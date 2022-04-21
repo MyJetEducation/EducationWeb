@@ -56,6 +56,10 @@ const SignIn = () => {
           push(Page.DASHBOARD);
           return null;
 
+        case OperationAuthApiResponseCodes.InvalidUserNameOrPassword:
+          setFieldError(Fields.EMAIL, t(validationInputTexts.INVALID_USER_DATA));
+          break;
+
         default:
           break;
       }

@@ -201,7 +201,10 @@ export class MainAppStore implements MainAppStoreProps {
   };
 
   signIn = async (values: UserAuthenticate) => {
-    const response = await API.authenticate(values);
+    const response = await API.authenticate({
+      ...values,
+      deviceUid: this.deviceUid,
+    });
     if (response.result === OperationAuthApiResponseCodes.OK) {
       this.setTokenHandler(response.data?.token || '');
       this.setRefreshToken(response.data?.refreshToken || '');
@@ -213,7 +216,10 @@ export class MainAppStore implements MainAppStoreProps {
   };
 
   signUp = async (values: UserRegistration) => {
-    const response = await API.signUp(values);
+    const response = await API.signUp({
+      ...values,
+      deviceUid: this.deviceUid,
+    });
     if (response.result === OperationAuthApiResponseCodes.OK) {
       // send refresh token
       this.setTokenHandler(response.data?.token || '');
@@ -264,6 +270,12 @@ export class MainAppStore implements MainAppStoreProps {
   setIsLoading = (loading: boolean) => {
     this.isLoading = loading;
   };
+
+  get isAvailableContent() {
+    return !!(
+      this.isAuthorized && this.rootStore.userProfileStore.emailVerified
+    );
+  }
 
   // reset stores
   reset = () => {

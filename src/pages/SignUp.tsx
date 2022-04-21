@@ -19,8 +19,6 @@ import * as yup from 'yup';
 import CheckListPassword from '../components/Form/CheckListPassword';
 import { useFormik } from 'formik';
 import { useStores } from '../hooks/useStores';
-import { OperationApiResponseCodes } from '../enums/OperationApiResponseCodes';
-import apiResponseCodeMessages from '../constants/apiResponseCodeMessages';
 import validationInputTexts from '../constants/validationInputTexts';
 import FullScreenLoader from '../components/Preloader/FullScreenLoader';
 import { OperationAuthApiResponseCodes } from '../enums/OperationAuthApiResponseCodes';

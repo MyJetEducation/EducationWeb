@@ -96,7 +96,11 @@ class API {
   requestVerify = async () => {
     const response = await axios.post<ApiAuthValidResponseType<any>>(
       `${API_AUTH_VALIDATION_STRING}${API_LIST.VALIDATION.REQUST_VERIFY}`,
-      { platform: ApplicationTypeEnum.SpotWeb, language: 'en' }
+      {
+        platform: ApplicationTypeEnum.SpotWeb,
+        language: 'en',
+        deviceType: 'Unknown',
+      }
     );
     return response.data;
   };
