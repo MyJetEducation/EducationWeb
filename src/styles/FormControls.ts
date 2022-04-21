@@ -47,3 +47,11 @@ export const InputCode = css`
     }
   }
 `;
+
+export const CalculatorForm = styled.form`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+`;

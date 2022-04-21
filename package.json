@@ -67,6 +67,7 @@
     "react-bootstrap": "^2.2.3",
     "react-circular-progressbar": "^2.0.4",
     "react-code-input": "^3.10.1",
+    "react-currency-input-field": "^3.6.4",
     "react-dom": "^16.11.0",
     "react-helmet": "^5.2.1",
     "react-i18next": "^11.7.0",

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { ButtonWithoutStyles } from './ButtonWithoutStyles';
-import IconBtnArrow from "../assets/images/icon-btn-arrow.png";
+import IconBtnArrow from '../assets/images/icon-btn-arrow.png';
+import { ColorVarsEnum } from '../enums/ColorVarsEnum';
 interface PrimaryButtonProps {
   padding?: string;
   backgroundColor?: string;
@@ -8,14 +9,15 @@ interface PrimaryButtonProps {
 }
 
 export const PrimaryButton = styled(ButtonWithoutStyles)<PrimaryButtonProps>`
-  padding: ${(props) => props.padding || '12px 16px'};
+  padding: ${(props) => props.padding || '18px 52px'};
   width: ${(props) => props.width};
-  background-color: ${(props) => props.backgroundColor || '#000'};
+  background-color: ${(props) =>
+    props.backgroundColor || `var(${ColorVarsEnum.Primary})`};
   border-radius: 12px;
   transition: background-color 0.2s ease;
   color: #fff;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 24px;
 
   &:hover {
@@ -44,7 +46,9 @@ interface SecondaryButtonProps {
   marginBottom?: string;
 }
 
-export const SecondaryButton = styled(ButtonWithoutStyles)<SecondaryButtonProps>`
+export const SecondaryButton = styled(
+  ButtonWithoutStyles
+)<SecondaryButtonProps>`
   margin-bottom: ${(props) => props.marginBottom};
   padding: ${(props) => props.padding || '12px 16px'};
   width: ${(props) => props.width};
@@ -119,15 +123,17 @@ export const AccentButton = styled(ButtonWithoutStyles)<AccentButtonProps>`
 interface TextAccentButtonProps {
   fontSize?: string;
 }
-export const TextAccentButton = styled(ButtonWithoutStyles)<TextAccentButtonProps>`
-  color: #374DFB;
+export const TextAccentButton = styled(
+  ButtonWithoutStyles
+)<TextAccentButtonProps>`
+  color: #374dfb;
   font-weight: 400;
-  font-size: ${props => props.fontSize || '12px'};
+  font-size: ${(props) => props.fontSize || '12px'};
   text-decoration: none;
   transition: all 0.4s ease;
 
   &:hover {
     text-decoration: none;
-    color: #374DFB;
+    color: #374dfb;
   }
 `;

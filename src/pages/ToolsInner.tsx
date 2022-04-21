@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { Route, useParams } from 'react-router-dom';
 import { CALCULATORS_DATA, CHECKLISTS_DATA } from '../constants/Data/ToolsData';
 import { ColorVarsEnum } from '../enums/ColorVarsEnum';
 import { FlexContainer } from '../styles/FlexContainer';
@@ -25,17 +25,21 @@ const ToolsInner = () => {
             <FlexContainer marginBottom="50px" flexDirection="column">
               <TitleH1 marginBottom="40px">{t(`${activeTool?.name}`)}</TitleH1>
               {activeTool?.description && (
-               <Col xs="12" md="7"> <PrimaryTextParagraph
-               fontSize="16px"
-               lineHeight="24px"
-               color={`var(${ColorVarsEnum.Text})`}
-             >
-               {t(`${activeTool?.description}`)}
-             </PrimaryTextParagraph></Col>
+                <Col xs="12" md="7">
+                  {' '}
+                  <PrimaryTextParagraph
+                    fontSize="16px"
+                    lineHeight="24px"
+                    color={`var(${ColorVarsEnum.Text})`}
+                  >
+                    {t(`${activeTool?.description}`)}
+                  </PrimaryTextParagraph>
+                </Col>
               )}
             </FlexContainer>
           </Col>
         </Row>
+        {activeTool?.Content && <activeTool.Content />}
       </Container>
     </FlexContainer>
   );
