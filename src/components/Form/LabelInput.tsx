@@ -116,7 +116,7 @@ const ShowPassBtn = styled(ButtonWithoutStyles)`
   height: 20px;
   width: 20px;
   right: 16px;
-  top: 14px;
+  top: 20px;
 `;
 
 const ErropPopup = styled.span`

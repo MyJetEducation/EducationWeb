@@ -34,11 +34,11 @@ const SignUp = () => {
   const validationSchema = yup.object().shape<UserRegistration>({
     email: yup
       .string()
-      .required(t(validationInputTexts.REQUIRED_FIELD))
+      .required(t(validationInputTexts.REQUIRED_FIELD_EMAIL))
       .email(t(validationInputTexts.EMAIL)),
     password: yup
       .string()
-      .required(t(validationInputTexts.REQUIRED_FIELD))
+      .required(t(validationInputTexts.REQUIRED_FIELD_PASSWORD))
       .min(8, t(validationInputTexts.PASSWORD_MIN_CHARACTERS))
       .max(31, t(validationInputTexts.PASSWORD_MAX_CHARACTERS))
       .matches(

@@ -55,7 +55,7 @@ class API {
   */
   authenticate = async (credentials: UserAuthenticate) => {
     const response = await axios.post<ApiAuthResponseType<UserAuthenticateDTO>>(
-      `${API_AUTH_STRING}${AUTH_API_LIST.AUTH.SIGN_IN}`,
+      `${API_STRING}${AUTH_API_LIST.AUTH.SIGN_IN}`,
       { ...credentials, platform: ApplicationTypeEnum.SpotWeb }
     );
     return response.data;
@@ -63,7 +63,7 @@ class API {
 
   signUp = async (credentials: UserRegistration) => {
     const response = await axios.post<ApiAuthResponseType<UserAuthenticateDTO>>(
-      `${API_AUTH_STRING}${AUTH_API_LIST.REGISTER.SIGN_UP}`,
+      `${API_STRING}${AUTH_API_LIST.REGISTER.SIGN_UP}`,
       { ...credentials, platform: ApplicationTypeEnum.SpotWeb }
     );
     return response.data;
@@ -71,7 +71,7 @@ class API {
 
   forgotPassword = async (email: string) => {
     const response = await axios.post<ApiAuthResponseType<any>>(
-      `${API_AUTH_STRING}${AUTH_API_LIST.REGISTER.RECOVERY_PASSWORD}`,
+      `${API_STRING}${AUTH_API_LIST.REGISTER.RECOVERY_PASSWORD}`,
       { email, platform: ApplicationTypeEnum.SpotWeb }
     );
     return response.data;
@@ -87,7 +87,7 @@ class API {
 
   signOut = async (token: string) => {
     const response = await axios.post<ApiAuthResponseType<any>>(
-      `${API_AUTH_STRING}${AUTH_API_LIST.AUTH.SIGN_OUT}`,
+      `${API_STRING}${AUTH_API_LIST.AUTH.SIGN_OUT}`,
       { token }
     );
     return response.data;
@@ -111,7 +111,7 @@ class API {
   getSessionInfo = async () => {
     const response = await axios.get<
       ApiAuthResponseType<UserSessionInfoResponse>
-    >(`${API_AUTH_STRING}${API_LIST.INFO.SESSION_INFO}`);
+    >(`${API_STRING}${API_LIST.INFO.SESSION_INFO}`);
     return response.data;
   };
 
@@ -161,7 +161,7 @@ class API {
 
   refreshToken = async (refreshToken: string) => {
     const response = await axios.post<ApiAuthResponseType<RefreshTokenDTO>>(
-      `${API_AUTH_STRING}${AUTH_API_LIST.AUTH.REFRESH_TOKEN}`,
+      `${API_STRING}${AUTH_API_LIST.AUTH.REFRESH_TOKEN}`,
       { refreshToken }
     );
     return response.data;
