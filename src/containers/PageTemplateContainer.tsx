@@ -19,9 +19,7 @@ const PageTemplateContainer: FC = ({ children }) => {
         justifyContent="center"
         width="100%"
       >
-        <FlexContainer flexDirection="column" width={CONTENT_WIDTH}>
-          {children}
-        </FlexContainer>
+        {children}
       </FlexContainer>
     </FlexContainer>
   );

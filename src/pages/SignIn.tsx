@@ -18,6 +18,8 @@ import { useHistory } from 'react-router-dom';
 import validationInputTexts from '../constants/validationInputTexts';
 import FullScreenLoader from '../components/Preloader/FullScreenLoader';
 import { OperationAuthApiResponseCodes } from '../enums/OperationAuthApiResponseCodes';
+import { Col, Container, Row } from 'react-bootstrap';
+import { TitleH0, TitleH1 } from '../styles/Titles';
 
 const SignIn = () => {
   const { t } = useTranslation();
@@ -57,7 +59,10 @@ const SignIn = () => {
           return null;
 
         case OperationAuthApiResponseCodes.InvalidUserNameOrPassword:
-          setFieldError(Fields.EMAIL, t(validationInputTexts.INVALID_USER_DATA));
+          setFieldError(
+            Fields.EMAIL,
+            t(validationInputTexts.INVALID_USER_DATA)
+          );
           break;
 
         default:
@@ -101,73 +106,56 @@ const SignIn = () => {
 
   return (
     <FlexContainer
-      width="340px"
       flexDirection="column"
       alignItems="center"
       padding="72px 0 32px"
       position="relative"
+      width="100%"
     >
       <FullScreenLoader isLoading={isLoading} />
-      <PrimaryTextSpan
-        textAlign="center"
-        fontSize="40px"
-        fontWeight={500}
-        color="#000"
-        marginBottom="52px"
-      >
-        {t('Log In')}
-      </PrimaryTextSpan>
 
-      <AuthForm noValidate onSubmit={handleSubmit}>
-        <LabelInput
-          onBlur={handleBlur}
-          onChange={handleChange}
-          hasError={!!(touched.email && errors.email)}
-          errorText={errors.email}
-          value={values.email}
-          id={Fields.EMAIL}
-          name={Fields.EMAIL}
-          labelText={t('Email')}
-        />
-        <FlexContainer position="relative" width="100%">
-          <LabelInput
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={values.password}
-            id={Fields.PASSWORD}
-            name={Fields.PASSWORD}
-            labelText={t('Password')}
-            type="password"
-            hasError={!!(touched.password && errors.password)}
-            errorText={errors.password}
-          />
+      <Container>
+        <Row className="justify-content-center">
+          <Col xs="12" md="8" xl="5">
+            <FlexContainer marginBottom="70px" justifyContent="center">
+              <TitleH0>{t('Log In')}</TitleH0>
+            </FlexContainer>
+            <AuthForm noValidate onSubmit={handleSubmit}>
+              <LabelInput
+                onBlur={handleBlur}
+                onChange={handleChange}
+                hasError={!!(touched.email && errors.email)}
+                errorText={errors.email}
+                value={values.email}
+                id={Fields.EMAIL}
+                name={Fields.EMAIL}
+                labelText={t('Email')}
+              />
+              <FlexContainer position="relative" width="100%">
+                <LabelInput
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.password}
+                  id={Fields.PASSWORD}
+                  name={Fields.PASSWORD}
+                  labelText={t('Password')}
+                  type="password"
+                  hasError={!!(touched.password && errors.password)}
+                  errorText={errors.password}
+                />
+              </FlexContainer>
 
-          <FlexContainer
-            position="absolute"
-            left="calc(100% + 20px)"
-            top="14px"
-            width="max-content"
-          >
-            <TextAccentLink to={Page.FORGOT_PASSWORD}>
-              {t('Forgot password?')}
-            </TextAccentLink>
-          </FlexContainer>
-        </FlexContainer>
-        <PrimaryButton
-          onClick={handlerClickSubmit}
-          type="button"
-          disabled={!isValid}
-        >
-          {t('Login')}
-        </PrimaryButton>
-
-        <Divider label={t('Or continue with')} margin="24px 0" />
-      </AuthForm>
-
-      <FlexContainer width="100%" flexDirection="column" marginBottom="24px">
-        <SecondaryButton marginBottom="16px">Facebook</SecondaryButton>
-        <SecondaryButton>Google</SecondaryButton>
-      </FlexContainer>
+              <PrimaryButton
+                onClick={handlerClickSubmit}
+                type="button"
+                disabled={!isValid}
+              >
+                {t('Login')}
+              </PrimaryButton>
+            </AuthForm>
+          </Col>
+        </Row>
+      </Container>
 
       <PrimaryTextSpan fontSize="12px" fontWeight={400}>
         {t('Don`t have an account yet?')}&nbsp;

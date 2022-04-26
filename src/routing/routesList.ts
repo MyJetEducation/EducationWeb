@@ -24,7 +24,7 @@ import ToolsInner from '../pages/ToolsInner';
 import Page from './Pages';
 
 export enum RouteLayoutType {
-  NotAuthorizedPublic,
+  NotAuthorizedPublic = 1,
   Authorized,
   SignFlow,
   Public,
@@ -71,13 +71,6 @@ const routesList = [
   },
   // ----
   {
-    component: RegisterConfirm,
-    path: Page.REGISTER_CONFIRM,
-    exact: true,
-    strict: true,
-    layoutType: RouteLayoutType.SignFlow,
-  },
-  {
     component: SingIn,
     path: Page.SIGN_IN,
     exact: true,
@@ -91,22 +84,6 @@ const routesList = [
     strict: true,
     layoutType: RouteLayoutType.SignFlow,
   },
-
-  {
-    component: ForgotPassword,
-    path: Page.FORGOT_PASSWORD,
-    exact: true,
-    strict: true,
-    layoutType: RouteLayoutType.SignFlow,
-  },
-  {
-    component: ResetPassord,
-    path: Page.RESET_PASSWORD,
-    exact: true,
-    strict: true,
-    layoutType: RouteLayoutType.SignFlow,
-  },
-
   {
     component: SignUp,
     path: Page.SIGN_UP,

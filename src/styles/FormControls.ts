@@ -8,10 +8,12 @@ interface AuthFormProps {
 export const AuthForm = styled.form<AuthFormProps>`
   display: flex;
   flex-direction: column;
-  width: 340px;
   margin: 0;
-  padding: 0;
+  margin-bottom: 24px;
+  padding: 40px;
   margin-bottom: ${(props) => props.marginBottom};
+  background-color: var(${ColorVarsEnum.BG_block});
+  border-radius: 32px;
 `;
 
 export const InputCode = css`

@@ -10,6 +10,19 @@ interface TitleProps {
   fontWeight?: 'bold' | 'normal' | number;
 }
 
+
+export const TitleH0 = styled.h1<TitleProps>`
+  margin: 0;
+  margin-right: ${(props) => props.marginRight};
+  margin-bottom: ${(props) => props.marginBottom};
+  color: ${(props) => props.color || '#000'};
+  text-align: ${(props) => props.textAlign};
+  font-size: ${(props) => props.fontSize || '56px'};
+  font-weight: ${(props) => props.fontWeight || 500};
+  line-height: 60px;
+  text-transform: ${(props) => props.textTransform};
+`;
+
 export const TitleH1 = styled.h1<TitleProps>`
   margin: 0;
   margin-right: ${(props) => props.marginRight};

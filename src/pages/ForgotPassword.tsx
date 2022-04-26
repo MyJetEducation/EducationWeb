@@ -15,6 +15,8 @@ import validationInputTexts from '../constants/validationInputTexts';
 import API from '../helpers/API';
 import FullScreenLoader from '../components/Preloader/FullScreenLoader';
 import { OperationAuthApiResponseCodes } from '../enums/OperationAuthApiResponseCodes';
+import { Col, Container, Row } from 'react-bootstrap';
+import { TitleH0 } from '../styles/Titles';
 
 const ForgotPassword = () => {
   const { t } = useTranslation();
@@ -91,58 +93,74 @@ const ForgotPassword = () => {
       position="relative"
     >
       <FullScreenLoader isLoading={isLoading} />
-      <PrimaryTextSpan
-        textAlign="center"
-        fontSize="40px"
-        fontWeight={500}
-        color="#000"
-        marginBottom="24px"
-      >
-        {isSent ? t('Check your email') : t('Forgot password')}
-      </PrimaryTextSpan>
 
-      {isSent ? (
-        <>
-          <PrimaryTextSpan lineHeight="24px" marginBottom="28px">
-            {t('We`ve sent an email to')}&nbsp;
-            <PrimaryTextSpan color="#000">{values.email}</PrimaryTextSpan>
-            <br />
-            {t('Click the link in the email to reset the password')}
-          </PrimaryTextSpan>
-          <PrimaryTextSpan fontSize="16px" fontWeight={400}>
-            {t('Can`t find email.')}&nbsp;
-            <TextAccentButton fontSize="16px">
-              {t('Resend reset link')}
-            </TextAccentButton>
-          </PrimaryTextSpan>
-        </>
-      ) : (
-        <>
-          <AuthForm marginBottom="24px" onSubmit={handleSubmit}>
-            <LabelInput
-              onBlur={handleBlur}
-              onChange={handleChange}
-              hasError={!!(touched.email && errors.email)}
-              errorText={errors.email}
-              value={values.email}
-              id={Fields.EMAIL}
-              name={Fields.EMAIL}
-              labelText={t('Email')}
-            />
-            <PrimaryButton
-              disabled={!isValid}
-              type="button"
-              onClick={handlerClickSubmit}
-            >
-              {t('Send reset link')}
-            </PrimaryButton>
-          </AuthForm>
-          <PrimaryTextSpan fontSize="12px" fontWeight={400}>
-            {t('Already have an account?')}&nbsp;
-            <TextAccentLink to={Page.SIGN_IN}>{t('Log In')}</TextAccentLink>
-          </PrimaryTextSpan>
-        </>
-      )}
+      <Container>
+        <Row className="justify-content-center">
+          <Col xs="12" md="8" xl="5">
+            <FlexContainer marginBottom="70px" justifyContent="center">
+              <TitleH0>
+                {isSent ? t('Check your email') : t('Forgot password')}
+              </TitleH0>
+            </FlexContainer>
+
+            {isSent ? (
+              <FlexContainer justifyContent="center" flexDirection="column">
+                <PrimaryTextSpan
+                  textAlign="center"
+                  lineHeight="24px"
+                  marginBottom="20px"
+                >
+                  {t('We`ve sent an email to')}&nbsp;
+                  <PrimaryTextSpan color="#000">{values.email}</PrimaryTextSpan>
+                  <br />
+                  {t('Click the link in the email to reset the password')}
+                </PrimaryTextSpan>
+                <br />
+                <PrimaryTextSpan
+                  textAlign="center"
+                  fontSize="16px"
+                  fontWeight={400}
+                >
+                  {t('Can`t find email.')}&nbsp;
+                  <TextAccentButton fontSize="16px">
+                    {t('Resend reset link')}
+                  </TextAccentButton>
+                </PrimaryTextSpan>
+              </FlexContainer>
+            ) : (
+              <>
+                <AuthForm marginBottom="24px" onSubmit={handleSubmit}>
+                  <LabelInput
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    hasError={!!(touched.email && errors.email)}
+                    errorText={errors.email}
+                    value={values.email}
+                    id={Fields.EMAIL}
+                    name={Fields.EMAIL}
+                    labelText={t('Email')}
+                  />
+                  <PrimaryButton
+                    disabled={!isValid}
+                    type="button"
+                    onClick={handlerClickSubmit}
+                  >
+                    {t('Send reset link')}
+                  </PrimaryButton>
+                </AuthForm>
+                <FlexContainer justifyContent="center">
+                  <PrimaryTextSpan fontSize="12px" fontWeight={400}>
+                    {t('Already have an account?')}&nbsp;
+                    <TextAccentLink to={Page.SIGN_IN}>
+                      {t('Log In')}
+                    </TextAccentLink>
+                  </PrimaryTextSpan>
+                </FlexContainer>
+              </>
+            )}
+          </Col>
+        </Row>
+      </Container>
     </FlexContainer>
   );
 };
