@@ -107,13 +107,13 @@ module.exports = (env, argv) => {
       }),
       new webpack.DefinePlugin({
         API_AUTH_VALIDATION_STRING: ['production', 'none'].includes(argv.mode)
-          ? JSON.stringify('')
+          ? JSON.stringify(process.env.API_AUTH_VALIDATION_STRING)
           : JSON.stringify('https://validation-api-uat.simple-spot.biz'),
         API_AUTH_STRING: ['production', 'none'].includes(argv.mode)
-          ? JSON.stringify('')
+          ? JSON.stringify(process.env.API_AUTH_STRING)
           : JSON.stringify('https://api-uat.simple-spot.biz'),
         API_STRING: ['production', 'none'].includes(argv.mode)
-          ? JSON.stringify('')
+          ? JSON.stringify(process.env.API_STRING)
           : JSON.stringify('https://api-uat.simple-spot.biz'),
         IS_LIVE: ['production', 'none'].includes(argv.mode),
         IS_LOCAL: argv.is_local === 'true',
