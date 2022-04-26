@@ -58,7 +58,7 @@ jobs:
     - name: Build
       run: |
         CI=false
-        npm run build
+        npm run buildProd
 
     - name: Publish image azure
       uses: docker/build-push-action@v1
