@@ -55,12 +55,10 @@ jobs:
       run: |
         npm install
 
-
     - name: Build
       run: |
         CI=false
-        npm run buildProd
-
+        npm run build
 
     - name: Publish image azure
       uses: docker/build-push-action@v1
@@ -109,4 +107,8 @@ jobs:
         git config user.name github-actions
         git config user.email github-actions@github.com
         git commit -a -m "Update version of service ${{ steps.string.outputs.lowercase }}"
+<<<<<<< HEAD
         git push
+=======
+        git push
+>>>>>>> uat
