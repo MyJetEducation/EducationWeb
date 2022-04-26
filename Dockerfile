@@ -1,7 +1,5 @@
-FROM monfex/web-app-hosting:1
+FROM nginx:latest
 COPY wwwroot /app/wwwroot
+COPY default /etc/nginx/sites-enabled
 WORKDIR /app
-# COPY package.json /app
-# RUN npm install
-# COPY . .
-# EXPOSE 3000
+CMD ["nginx", "-g", "daemon off;"]
