@@ -68,6 +68,10 @@ const ConfirmEmail = () => {
   useEffect(() => {
     let mounted = true;
     if (mounted) {
+      if (!mainAppStore.isLoading && mainAppStore.isAvailableContent) {
+        push(Page.DASHBOARD);
+      }
+
       if (!isLoading && code.length === 6) {
         setIsLoading(true);
         sendCodeVerify(code);
@@ -76,7 +80,7 @@ const ConfirmEmail = () => {
     return () => {
       mounted = false;
     };
-  }, [code]);
+  }, [code, mainAppStore.isLoading]);
 
   return (
     <FlexContainer
