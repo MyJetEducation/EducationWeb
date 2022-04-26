@@ -1,4 +1,8 @@
 import ToolContent_1 from '../../components/Tools/ToolsContent/ToolContent_1';
+import ToolContent_2 from '../../components/Tools/ToolsContent/ToolContent_2';
+import ToolContent_3 from '../../components/Tools/ToolsContent/ToolContent_3';
+import ToolContent_4 from '../../components/Tools/ToolsContent/ToolContent_4';
+import ToolContent_5 from '../../components/Tools/ToolsContent/ToolContent_5';
 
 export const CALCULATORS_DATA = [
   {
@@ -13,28 +17,28 @@ export const CALCULATORS_DATA = [
     name: 'Save 1 million',
     description:
       'Let`s find out how soon you can become a millionere and how much you need to save for it monthly.',
-    Content: ToolContent_1,
+    Content: ToolContent_2,
   },
   {
     id: 'party-budget',
     name: 'Party budget',
     description:
       'Any party is a fun time but it needs to be well planned and it`s importnat to budget party beforehand. Lets budget your event together.',
-    Content: ToolContent_1,
+    Content: ToolContent_3,
   },
   {
     id: 'emergency-fund',
     name: 'Emergency Fund',
     description:
       'A typical emergency fund should cover 3-6 months of expenses. Let`s find out your current situation and how much you need to save for your Emergency Fund.',
-    Content: ToolContent_1,
+    Content: ToolContent_4,
   },
   {
     id: 'total-monthly-living-expenses',
     name: 'Total monthly living expenses',
     description:
       'Let`s count your total monthly living expenses together. This will help you structure all expenses and plan your savings.',
-    Content: ToolContent_1,
+    Content: ToolContent_5,
   },
   {
     id: 'resource-baby-budget ',

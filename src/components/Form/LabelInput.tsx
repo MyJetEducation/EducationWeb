@@ -21,6 +21,8 @@ interface LabelInputProps {
   tabIndex?: number;
   marginBottom?: string;
   format?: 'money' | 'text';
+  readOnly?: boolean;
+  prefix?: string;
 }
 
 const LabelInput = forwardRef<HTMLInputElement, LabelInputProps>(
@@ -37,8 +39,10 @@ const LabelInput = forwardRef<HTMLInputElement, LabelInputProps>(
       autoComplete,
       errorText,
       tabIndex,
+      readOnly = false,
       marginBottom = '',
       format = 'text',
+      prefix = '$',
     } = props;
 
     const [showPassword, setShowPassword] = useState(false);
@@ -56,10 +60,12 @@ const LabelInput = forwardRef<HTMLInputElement, LabelInputProps>(
         <LabelWrapper htmlFor={id}>
           {format === 'money' ? (
             <MoneyInput
+              readOnly={readOnly}
+              defaultValue={value}
               onChange={onChange}
               id={id || name}
               name={name}
-              prefix="$"
+              prefix={prefix}
               decimalSeparator="."
               required
               className={hasError ? 'hasError' : ''}
@@ -80,6 +86,7 @@ const LabelInput = forwardRef<HTMLInputElement, LabelInputProps>(
               name={name}
               onChange={onChange}
               onBlur={onBlur}
+              readOnly={readOnly}
               value={value}
               required
               isError={hasError}
@@ -158,7 +165,7 @@ const Input = styled.input<{ isError?: boolean }>`
   &:focus {
     box-shadow: 0 0 0 2px #374dfb;
     & + span {
-      transform: translateY(-32px);
+      transform: translateY(-34px);
       font-weight: 400;
       font-size: 12px;
     }
@@ -166,7 +173,7 @@ const Input = styled.input<{ isError?: boolean }>`
 
   &:valid {
     & + span {
-      transform: translateY(-32px);
+      transform: translateY(-34px);
       font-weight: 400;
       font-size: 12px;
     }
@@ -181,7 +188,7 @@ const Input = styled.input<{ isError?: boolean }>`
     font-size: 16px;
     -webkit-text-fill-color: #000 !important;
     & + span {
-      transform: translateY(-32px);
+      transform: translateY(-34px);
       font-weight: 400;
       font-size: 12px;
     }
@@ -217,7 +224,7 @@ const MoneyInput = styled(CurrencyInput)`
   &:focus {
     box-shadow: 0 0 0 2px #374dfb;
     & + span {
-      transform: translateY(-32px);
+      transform: translateY(-34px);
       font-weight: 400;
       font-size: 12px;
     }
@@ -225,7 +232,7 @@ const MoneyInput = styled(CurrencyInput)`
 
   &:valid {
     & + span {
-      transform: translateY(-32px);
+      transform: translateY(-34px);
       font-weight: 400;
       font-size: 12px;
     }
@@ -240,7 +247,7 @@ const MoneyInput = styled(CurrencyInput)`
     font-size: 16px;
     -webkit-text-fill-color: #000 !important;
     & + span {
-      transform: translateY(-32px);
+      transform: translateY(-34px);
       font-weight: 400;
       font-size: 12px;
     }
@@ -249,7 +256,7 @@ const MoneyInput = styled(CurrencyInput)`
 
 const Label = styled(PrimaryTextSpan)`
   position: absolute;
-  bottom: 14px;
+  bottom: 20px;
   left: 8px;
   padding: 0 8px;
   transform: translateY(-4px);
@@ -258,4 +265,5 @@ const Label = styled(PrimaryTextSpan)`
   font-weight: 500;
   color: #a8b0ba;
   background-color: #fff;
+  line-height: 1;
 `;
