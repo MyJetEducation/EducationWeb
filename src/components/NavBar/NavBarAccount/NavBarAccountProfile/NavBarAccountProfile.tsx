@@ -33,9 +33,10 @@ const NavBarAccountProfile = observer(() => {
           <SvgIcon {...IconCurrency} />
         </FlexContainer>
         <PrimaryTextSpan fontSize="12px" color="#000" fontWeight={400}>
-          {numberFormat(1200)}
+          {numberFormat(userProfileStore.availableTokenBalance || 0)}
         </PrimaryTextSpan>
       </FlexContainer>
+
       <ButtonWithoutStyles
         onClick={handleOpenMenu}
         className={onBoardingStore.classNameList('hint_1')}

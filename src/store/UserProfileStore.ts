@@ -14,6 +14,8 @@ interface UserProfileStoreProps {
   unReceivedAchievements: AchievementsEnum[];
   userAchievements: AchievementsEnum[];
 
+  availableTokenBalance: number | null;
+
   testScore: number;
   taskCount: number;
   habit: HabitItemType | null;
@@ -33,6 +35,8 @@ export class UserProfileStore implements UserProfileStoreProps {
 
   userAchievements: AchievementsEnum[] = [];
   unReceivedAchievements: AchievementsEnum[] = [];
+
+  availableTokenBalance: number | null = null;
 
   testScore = 0;
   taskCount = 0;
@@ -93,7 +97,18 @@ export class UserProfileStore implements UserProfileStoreProps {
     return response.status;
   };
 
+  getAvailableBalance = async () => {
+    const response = await API.getMarketAvailableTokens();
+    if (response.status == OperationApiResponseCodes.Ok) {
+      this.setAvailableTokenBalance(response.data.value);
+    }
+  }
+
   // store actions
+
+  setAvailableTokenBalance = (balance: number | null) => {
+    this.availableTokenBalance = balance;
+  }
 
   setCheckEmail = (state: boolean) => {
     this.emailVerified = state;
@@ -157,5 +172,6 @@ export class UserProfileStore implements UserProfileStoreProps {
     this.setTestScore(0);
     this.setHabit(null);
     this.setSkillProgress(0);
+    this.setAvailableTokenBalance(null);
   };
 }

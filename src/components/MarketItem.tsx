@@ -6,6 +6,7 @@ import SvgIcon from './SvgIcon';
 import CartIcon from '../assets/svg/cart-icon.svg';
 import CheckIcon from '../assets/svg/check-icon.svg';
 import { ButtonWithoutStyles } from '../styles/ButtonWithoutStyles';
+import { ColorVarsEnum } from '../enums/ColorVarsEnum';
 
 interface Props {
   className?: string;
@@ -30,7 +31,8 @@ const MarketItem = ({
     <FlexContainer className={className} width="220px">
       <FlexContainer
         padding="30px 0 16px"
-        border="2px solid #0BCA1E"
+        // border="2px solid #0BCA1E"
+        backgroundColor={`var(${ColorVarsEnum.BG_block})`}
         borderRadius="32px"
         flexDirection="column"
       >

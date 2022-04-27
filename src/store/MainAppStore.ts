@@ -145,6 +145,7 @@ export class MainAppStore implements MainAppStoreProps {
     this.setIsLoading(true);
     this.setIsAuthorized(true);
     await this.rootStore.userProfileStore.initActiveSessionInfo();
+    await this.rootStore.userProfileStore.getAvailableBalance();
     // await this.rootStore.userProfileStore.getUserAccount();
     await this.getKeyValues();
     this.rootStore.onBoardingStore.checkAvailableOB();

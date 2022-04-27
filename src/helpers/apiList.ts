@@ -20,6 +20,10 @@ const API_LIST = {
     UPDATE: '/api/edu/v1/useraccount/put',
   },
 
+  MARKET: {
+    GET_TOKENS: '/api/v1/edu/market/tokens',
+  },
+
   DASHBOARD: {
     TUTORIALS_LIST: '/api/v1/edu/dashboard/tutorials',
     TUTORIAL: '/api/v1/edu/dashboard/tutorial',

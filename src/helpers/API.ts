@@ -228,6 +228,13 @@ class API {
     );
     return response.data;
   };
+
+  getMarketAvailableTokens = async () => {
+    const response = await axios.post<ApiResponseType<{ value: number }>>(
+      `${API_STRING}${API_LIST.MARKET.GET_TOKENS}`
+    );
+    return response.data;
+  };
 }
 
 export default new API();
