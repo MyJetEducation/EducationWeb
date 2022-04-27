@@ -21,6 +21,7 @@ const NavBar = () => {
   return (
     <FlexContainer
       height="68px"
+      zIndex="3"
       justifyContent="center"
       width="100%"
       alignItems="center"

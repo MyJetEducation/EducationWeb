@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import AccountSettingsNav from '../components/SideBar/AccountSettingsNav';
 import { FlexContainer } from '../styles/FlexContainer';
 import { PageTitle } from '../styles/TextsElements';
+import CenterContainer from './CenterContainer';
 
 interface Props {
   pageTitle: string;
@@ -11,7 +12,7 @@ interface Props {
 const AccountSettingsContainer: FC<Props> = ({ children, pageTitle }) => {
   const { t } = useTranslation();
   return (
-    <FlexContainer flex="1" padding="32px 20px">
+    <CenterContainer padding="32px 0">
       <FlexContainer width="100%" justifyContent="space-between">
         {/* content */}
         <FlexContainer flexDirection="column">
@@ -32,7 +33,7 @@ const AccountSettingsContainer: FC<Props> = ({ children, pageTitle }) => {
         </FlexContainer>
         {/* Sidebar */}
       </FlexContainer>
-    </FlexContainer>
+    </CenterContainer>
   );
 };
 

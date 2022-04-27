@@ -87,8 +87,8 @@ const NavBarAccInnerMenu = ({ isActive, onClose }: NavBarAccInnerMenuProps) => {
                       fontSize="16px"
                       marginBottom="2px"
                     >
-                      {`${userProfileStore.userAccount?.firstName || ''} ${
-                        userProfileStore.userAccount?.lastName || ''
+                      {`${userProfileStore.userAccount?.firstName || 'Full'} ${
+                        userProfileStore.userAccount?.lastName || 'Name'
                       }`}
                     </PrimaryTextSpan>
                     <StatusBadge>Status</StatusBadge>

@@ -73,6 +73,6 @@ export const UnitListItem = styled(FlexContainer)<{
       padding-top: 44px;
       border-top: none;
       border-radius: 0 0 32px 32px;
-      margin-top: -40px;
+      margin-top: -44px;
     `}
 `;

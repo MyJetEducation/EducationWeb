@@ -38,7 +38,7 @@ const AccountSettingsNav = () => {
                 fontSize="24px"
                 marginBottom="2px"
               >
-                {`${userProfileStore.userAccount?.firstName || ''} ${userProfileStore.userAccount?.lastName || ''}`}
+                {`${userProfileStore.userAccount?.firstName || 'Full'} ${userProfileStore.userAccount?.lastName || 'Name'}`}
               </PrimaryTextSpan>
 
               {/* Статус будем получать с бэка*/}
@@ -90,7 +90,7 @@ const ProfileNavLink = styled(NavLink)`
   padding: 16px 20px;
   align-items: center;
   text-decoration: none;
-  border: 2px solid #fff;
+  // border: 2px solid #fff;
   border-radius: 16px;
   transition: all 0.3s ease;
 
@@ -102,7 +102,7 @@ const ProfileNavLink = styled(NavLink)`
     }
   }
   &.active {
-    border-color: #000;
+    background-color: #E0E5EB;
     span {
       color: #000;
     }

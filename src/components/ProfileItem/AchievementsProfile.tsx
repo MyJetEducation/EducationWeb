@@ -9,6 +9,7 @@ import {useStores} from "../../hooks/useStores";
 import LoaderForComponent from "../Preloader/LoaderForComponent";
 import {TextAccentLink} from "../../styles/TextsElements";
 import {observer} from "mobx-react-lite";
+import { ColorVarsEnum } from "../../enums/ColorVarsEnum";
 
 const AchievementsProfile = observer(() => {
   const {t} = useTranslation();
@@ -46,7 +47,7 @@ const AchievementsProfile = observer(() => {
       <FlexContainer
         width="100%"
         height="fit-content"
-        border="2px solid #E0E5EB"
+        backgroundColor={`var(${ColorVarsEnum.BG_block})`}
         borderRadius="32px"
         padding="21px 32px"
         flexDirection="column"

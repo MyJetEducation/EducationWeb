@@ -2,6 +2,7 @@ import React from "react";
 import {FlexContainer} from "../../styles/FlexContainer";
 import {PrimaryTextSpan} from "../../styles/TextsElements";
 import {useTranslation} from "react-i18next";
+import { ColorVarsEnum } from "../../enums/ColorVarsEnum";
 
 const LearningStatsProfile = () => {
   const {t} = useTranslation();
@@ -15,7 +16,7 @@ const LearningStatsProfile = () => {
       <FlexContainer
         width="100%"
         height="fit-content"
-        border="2px solid #E0E5EB"
+        backgroundColor={`var(${ColorVarsEnum.BG_block})`}
         borderRadius="32px"
         padding="21px 32px"
         flexDirection="column"

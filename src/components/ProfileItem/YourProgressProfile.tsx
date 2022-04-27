@@ -1,15 +1,16 @@
-import React, {useState} from "react";
-import {FlexContainer} from "../../styles/FlexContainer";
-import {PrimaryTextSpan} from "../../styles/TextsElements";
-import LoaderForComponent from "../Preloader/LoaderForComponent";
-import {useTranslation} from "react-i18next";
-import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
+import React, { useState } from 'react';
+import { FlexContainer } from '../../styles/FlexContainer';
+import { PrimaryTextSpan } from '../../styles/TextsElements';
+import LoaderForComponent from '../Preloader/LoaderForComponent';
+import { useTranslation } from 'react-i18next';
+import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import SvgIcon from "../SvgIcon";
-import IconSkill from "../../assets/svg/icon-skill.svg";
+import SvgIcon from '../SvgIcon';
+import IconSkill from '../../assets/svg/icon-skill.svg';
+import { ColorVarsEnum } from '../../enums/ColorVarsEnum';
 
 const YourProgressProfile = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   return (
     <FlexContainer
@@ -22,7 +23,7 @@ const YourProgressProfile = () => {
       <FlexContainer
         width="100%"
         height="fit-content"
-        border="2px solid #E0E5EB"
+        backgroundColor={`var(${ColorVarsEnum.BG_block})`}
         borderRadius="32px"
         padding="21px 32px"
         flexDirection="column"
@@ -38,10 +39,7 @@ const YourProgressProfile = () => {
           {t('Achievements')}
         </PrimaryTextSpan>
 
-        <FlexContainer
-
-        >
-
+        <FlexContainer>
           <FlexContainer
             flexDirection="column"
             maxWidth="144px"
@@ -76,12 +74,10 @@ const YourProgressProfile = () => {
                 fontSize="18px"
                 lineHeight="28px"
                 color="#000"
-
               >
                 Habbits
               </PrimaryTextSpan>
             </FlexContainer>
-
 
             <FlexContainer
               width="74px"
@@ -112,7 +108,7 @@ const YourProgressProfile = () => {
               <CircularProgressbar
                 value={80}
                 styles={buildStyles({
-                  pathColor: "#777C85",
+                  pathColor: '#777C85',
                   rotation: 30,
                   trailColor: 'transparent',
                 })}
@@ -128,14 +124,9 @@ const YourProgressProfile = () => {
             >
               Привычка вести учет доходов
             </PrimaryTextSpan>
-
           </FlexContainer>
 
-
-          <FlexContainer
-            flexDirection="column"
-            marginRight="32px"
-          >
+          <FlexContainer flexDirection="column" marginRight="32px">
             <FlexContainer
               width="138px"
               padding="3px 8px 2px 10px"
@@ -146,7 +137,7 @@ const YourProgressProfile = () => {
               marginBottom="22px"
             >
               <FlexContainer position={'absolute'} top={'8px'} right={'8px'}>
-                <SvgIcon {...IconSkill} fillColor="#A8B0BA"/>
+                <SvgIcon {...IconSkill} fillColor="#A8B0BA" />
               </FlexContainer>
               <FlexContainer>
                 <PrimaryTextSpan
@@ -162,24 +153,21 @@ const YourProgressProfile = () => {
                   fontSize="32px"
                   lineHeight="40px"
                   color="#A8B0BA"
-                  marginBottom={"-5px"}
+                  marginBottom={'-5px'}
                 >
                   /6
                 </PrimaryTextSpan>
               </FlexContainer>
-
 
               <PrimaryTextSpan
                 fontWeight={700}
                 fontSize="18px"
                 lineHeight="28px"
                 color="#000"
-
               >
                 Skill
               </PrimaryTextSpan>
             </FlexContainer>
-
 
             <FlexContainer
               width="74px"
@@ -209,14 +197,13 @@ const YourProgressProfile = () => {
               <CircularProgressbar
                 value={80}
                 styles={buildStyles({
-                  pathColor: "#777C85",
+                  pathColor: '#777C85',
                   rotation: 30,
                   trailColor: 'transparent',
                 })}
                 strokeWidth={6}
               />
             </FlexContainer>
-
           </FlexContainer>
 
           <FlexContainer
@@ -253,12 +240,10 @@ const YourProgressProfile = () => {
                 fontSize="18px"
                 lineHeight="28px"
                 color="#000"
-
               >
                 Knowledge
               </PrimaryTextSpan>
             </FlexContainer>
-
 
             <FlexContainer
               width="74px"
@@ -289,7 +274,7 @@ const YourProgressProfile = () => {
               <CircularProgressbar
                 value={80}
                 styles={buildStyles({
-                  pathColor: "#777C85",
+                  pathColor: '#777C85',
                   rotation: 30,
                   trailColor: 'transparent',
                 })}
@@ -305,15 +290,12 @@ const YourProgressProfile = () => {
             >
               Личные финансы
             </PrimaryTextSpan>
-
           </FlexContainer>
-
         </FlexContainer>
-
       </FlexContainer>
-      <LoaderForComponent isLoading={isLoading}/>
+      <LoaderForComponent isLoading={isLoading} />
     </FlexContainer>
-  )
-}
+  );
+};
 
-export default YourProgressProfile
+export default YourProgressProfile;
