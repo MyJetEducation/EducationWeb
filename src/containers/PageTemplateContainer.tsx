@@ -15,6 +15,7 @@ const PageTemplateContainer: FC = ({ children }) => {
 
       <FlexContainer
         flex="1"
+        flexWrap="wrap"
         overflow="auto"
         justifyContent="center"
         width="100%"

@@ -61,7 +61,8 @@ export const UnitListItem = styled(FlexContainer)<{
   ${(props) =>
     props.isActive &&
     css`
-      box-shadow: 0 0 0 2px #374dfb;
+      border: 2px solid #374dfb;
+      //box-shadow: 0 0 0 2px #374dfb;
       border-radius: 32px;
     `}
 

@@ -85,16 +85,19 @@ const ConfirmEmail = () => {
   return (
     <FlexContainer
       width="100%"
+      flex="1"
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
       padding="16px"
       position="relative"
-      backgroundColor={`var(${ColorVarsEnum.BG_accent})`}
     >
       <Global
         styles={css`
-          ${InputCode}
+          ${InputCode};
+          body {
+            background-color: ${`var(${ColorVarsEnum.BG_accent}) !important`};
+          }
         `}
       />
       {/* <FullScreenLoader isLoading={isLoading} /> */}

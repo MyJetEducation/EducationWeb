@@ -1,5 +1,6 @@
 import { Observer, observer } from 'mobx-react-lite';
 import React, { FC } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import { FlexContainer } from '../styles/FlexContainer';
 
 interface Props {}

@@ -11,6 +11,7 @@ import { AchievementsEnum } from '../../enums/AchievementsEnum';
 import { useStores } from '../../hooks/useStores';
 import { observer } from 'mobx-react-lite';
 import LoaderForComponent from '../Preloader/LoaderForComponent';
+import { ColorVarsEnum } from '../../enums/ColorVarsEnum';
 
 const AchievementSB = observer(() => {
   const { t } = useTranslation();
@@ -48,7 +49,7 @@ const AchievementSB = observer(() => {
       <FlexContainer
         width="100%"
         borderRadius="32px"
-        border="2px solid #E0E5EB"
+        backgroundColor={`var(${ColorVarsEnum.BG_block})`}
         padding="20px 32px"
         flexDirection="column"
         position="relative"

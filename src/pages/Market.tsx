@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import MarketItem from '../components/MarketItem';
 import AccountSettingsNav from '../components/SideBar/AccountSettingsNav';
+import CenterContainer from '../containers/CenterContainer';
 import { useStores } from '../hooks/useStores';
 import { FlexContainer } from '../styles/FlexContainer';
 import { PageTitle } from '../styles/TextsElements';
@@ -18,7 +19,7 @@ const Market = observer(() => {
     }, 2000);
   };
   return (
-    <FlexContainer flex="1" padding="32px 20px">
+    <CenterContainer padding="32px 0">
       <FlexContainer width="100%" justifyContent="space-between">
         {/* content */}
         <FlexContainer flexDirection="column">
@@ -43,7 +44,7 @@ const Market = observer(() => {
         </FlexContainer>
         {/* Sidebar */}
       </FlexContainer>
-    </FlexContainer>
+    </CenterContainer>
   );
 });
 

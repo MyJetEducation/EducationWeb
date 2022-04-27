@@ -4,7 +4,11 @@ import { FlexContainer } from '../styles/FlexContainer';
 
 const SignFlowContainer: FC = ({ children }) => {
   return (
-    <FlexContainer flex="1" justifyContent="center" backgroundColor={`var(${ColorVarsEnum.BG_accent})`}>
+    <FlexContainer
+      flex="1"
+      justifyContent="center"
+      backgroundColor={`var(${ColorVarsEnum.BG_accent})`}
+    >
       {children}
     </FlexContainer>
   );

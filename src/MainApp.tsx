@@ -8,13 +8,13 @@ import { useTranslation } from 'react-i18next';
 import { autorun } from 'mobx';
 import Helmet from 'react-helmet';
 import { setFullHeightProperty } from './helpers/setFullHeightProperty';
-import PageTemplateContainer from './containers/PageTemplateContainer';
 import { fonts } from './styles/fonts';
 import { OperationApiResponseCodes } from './enums/OperationApiResponseCodes';
 import { OBStyles } from './styles/OnboardingStyles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ColorVars } from './styles/ColorVars';
 import SkillsPopup from './components/ProfileItem/Popups/SkillPopup/SkillsPopup';
+import PageTemplateContainer from './containers/PageTemplateContainer';
 
 declare const window: any;
 

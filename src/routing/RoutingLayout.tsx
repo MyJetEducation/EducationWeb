@@ -10,6 +10,7 @@ import PublicContainer from '../containers/PublicContainer';
 import SignFlowContainer from '../containers/SignFlowContainer';
 import FullScreenLoader from '../components/Preloader/FullScreenLoader';
 import Page from './Pages';
+import NavBar from '../components/NavBar/NavBar';
 
 const RoutingLayout: FC = () => {
   const location = useLocation();

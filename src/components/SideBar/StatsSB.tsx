@@ -11,6 +11,7 @@ import SvgIcon from '../SvgIcon';
 import { useTranslation } from 'react-i18next';
 import { useStores } from '../../hooks/useStores';
 import { observer } from 'mobx-react-lite';
+import { ColorVarsEnum } from '../../enums/ColorVarsEnum';
 
 const StatsSB = observer(() => {
   const { t } = useTranslation();
@@ -25,11 +26,11 @@ const StatsSB = observer(() => {
         width="100%"
         height="216px"
         borderRadius="32px"
-        border="2px solid #E0E5EB"
         padding="21px 16px 16px 18px"
         flexDirection="column"
         position="relative"
         overflow="hidden"
+        backgroundColor={`var(${ColorVarsEnum.BG_block})`}
       >
         <PrimaryTextParagraph
           fontSize="18px"

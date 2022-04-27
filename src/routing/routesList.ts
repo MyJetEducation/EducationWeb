@@ -38,28 +38,28 @@ const routesList = [
     path: Page.PUBLIC.ABOUT_US,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.NotAuthorizedPublic,
+    layoutType: RouteLayoutType.Public,
   },
   {
     component: MissionPage,
     path: Page.PUBLIC.MISSION,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.NotAuthorizedPublic,
+    layoutType: RouteLayoutType.Public,
   },
   {
     component: WhyUsPage,
     path: Page.PUBLIC.WHY_US,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.NotAuthorizedPublic,
+    layoutType: RouteLayoutType.Public,
   },
   {
     component: LessonsPage,
     path: Page.PUBLIC.LESSONS,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.NotAuthorizedPublic,
+    layoutType: RouteLayoutType.Public,
   },
 
   {
@@ -67,7 +67,7 @@ const routesList = [
     path: Page.PUBLIC.FAQ,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.NotAuthorizedPublic,
+    layoutType: RouteLayoutType.Public,
   },
   // ----
   {
