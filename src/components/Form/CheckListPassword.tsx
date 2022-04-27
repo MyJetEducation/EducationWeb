@@ -34,38 +34,47 @@ const CheckListPassword = ({ password = '' }: Props) => {
 
   return (
     <FlexContainer flexDirection="column">
-      <FlexContainer alignItems="center" marginBottom="8px">
+      <FlexContainer alignItems="center" marginBottom="2px">
         <FlexContainer marginRight="10px">
           <SvgIcon
             {...IconMarkList}
             fillColor={isDone.count ? '#374DFB' : '#777C85'}
           />
         </FlexContainer>
-        <PrimaryTextSpan color={isDone.count ? '#000' : '#777C85'}>
+        <PrimaryTextSpan
+          fontSize="12px"
+          color={isDone.count ? '#000' : '#777C85'}
+        >
           {t('be between 8 to 31 characters')}
         </PrimaryTextSpan>
       </FlexContainer>
       {/*  */}
-      <FlexContainer alignItems="center" marginBottom="8px">
+      <FlexContainer alignItems="center" marginBottom="2px">
         <FlexContainer marginRight="10px">
           <SvgIcon
             {...IconMarkList}
             fillColor={isDone.letters ? '#374DFB' : '#777C85'}
           />
         </FlexContainer>
-        <PrimaryTextSpan color={isDone.letters ? '#000' : '#777C85'}>
+        <PrimaryTextSpan
+          fontSize="12px"
+          color={isDone.letters ? '#000' : '#777C85'}
+        >
           {t('contain at least one letter (a-z)')}
         </PrimaryTextSpan>
       </FlexContainer>
       {/*  */}
-      <FlexContainer alignItems="center" marginBottom="24px">
+      <FlexContainer alignItems="center" marginBottom="20px">
         <FlexContainer marginRight="10px">
           <SvgIcon
             {...IconMarkList}
             fillColor={isDone.numbers ? '#374DFB' : '#777C85'}
           />
         </FlexContainer>
-        <PrimaryTextSpan color={isDone.numbers ? '#000' : '#777C85'}>
+        <PrimaryTextSpan
+          fontSize="12px"
+          color={isDone.numbers ? '#000' : '#777C85'}
+        >
           {t('contain at least one number (0-9)')}
         </PrimaryTextSpan>
       </FlexContainer>

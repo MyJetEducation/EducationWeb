@@ -3,6 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Route, useParams } from 'react-router-dom';
 import { CALCULATORS_DATA, CHECKLISTS_DATA } from '../constants/Data/ToolsData';
+import CenterContainer from '../containers/CenterContainer';
 import { ColorVarsEnum } from '../enums/ColorVarsEnum';
 import { FlexContainer } from '../styles/FlexContainer';
 import { PrimaryTextParagraph } from '../styles/TextsElements';
@@ -18,7 +19,7 @@ const ToolsInner = () => {
   }, [toolId]);
 
   return (
-    <FlexContainer flex="1" padding="44px 0">
+    <CenterContainer padding="44px 0" backgroundColor="#fff">
       <Container>
         <Row>
           <Col>
@@ -41,7 +42,7 @@ const ToolsInner = () => {
         </Row>
         {activeTool?.Content && <activeTool.Content />}
       </Container>
-    </FlexContainer>
+    </CenterContainer>
   );
 };
 

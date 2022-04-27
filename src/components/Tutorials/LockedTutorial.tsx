@@ -11,7 +11,7 @@ const LockedTutorial = ({ title, number }: Props) => {
     <FlexContainer
       width="100%"
       marginBottom="24px"
-      backgroundColor="#F1F4F8"
+      backgroundColor="#E0E5EB"
       borderRadius="32px"
       padding="36px 32px"
     >

@@ -2,6 +2,7 @@
   "Log In": "Log In",
   "Login": "Login",
   "Sign Up": "Sign Up",
+  "Everything you really should know about personal finance": "Everything you really should know about personal finance",
   "Or continue with": "Or continue with",
   "Forgot password?": "Forgot password?",
   "Create an account": "Create an account",
@@ -229,5 +230,6 @@
   "Mortgage or rent payment monthly": "Mortgage or rent payment monthly",
   "Food monthly": "Food monthly",
   "Transport expenses monthly": "Transport expenses monthly",
-  "Insurance": "Insurance"
+  "Insurance": "Insurance",
+  "Get started": "Get started"
 }

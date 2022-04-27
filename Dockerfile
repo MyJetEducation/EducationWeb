@@ -1,7 +1,5 @@
-FROM node:16.13.1
+FROM nginx:latest
+COPY wwwroot /app/wwwroot
+COPY default /etc/nginx/conf.d/default.conf
 WORKDIR /app
-COPY package.json /app
-RUN npm install
-COPY . .
-EXPOSE 3000
-CMD [ "npm", "start" ]
+CMD ["nginx", "-g", "daemon off;"]

@@ -16,6 +16,7 @@ import TutorialHeaderItem from './TutorialHeaderItem';
 import TutorialUnitActiveItem from './TutorialUnitActiveItem';
 import TutorialUnitItem from './TutorialUnitItem';
 import { UnitWithDataType } from '../../../types/TutorialTypes';
+import { ColorVarsEnum } from '../../../enums/ColorVarsEnum';
 
 interface Props {
   number: number;
@@ -63,7 +64,8 @@ const StartedTutorial = observer(({ isDone, number }: Props) => {
             padding="48px 0 0 "
             zIndex="1"
             borderRadius="0 0 32px 32px"
-            border="2px solid #C0C4C9"
+            //border="2px solid #C0C4C9"
+            backgroundColor={`var(${ColorVarsEnum.BG_block})`}
             flexDirection="column"
           >
             {tutorialStore.unitsWithData.map((el: UnitWithDataType) => (

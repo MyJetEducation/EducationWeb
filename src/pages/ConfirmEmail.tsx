@@ -68,6 +68,10 @@ const ConfirmEmail = () => {
   useEffect(() => {
     let mounted = true;
     if (mounted) {
+      if (!mainAppStore.isLoading && mainAppStore.isAvailableContent) {
+        push(Page.DASHBOARD);
+      }
+
       if (!isLoading && code.length === 6) {
         setIsLoading(true);
         sendCodeVerify(code);
@@ -76,21 +80,24 @@ const ConfirmEmail = () => {
     return () => {
       mounted = false;
     };
-  }, [code]);
+  }, [code, mainAppStore.isLoading]);
 
   return (
     <FlexContainer
       width="100%"
+      flex="1"
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
       padding="16px"
       position="relative"
-      backgroundColor={`var(${ColorVarsEnum.BG_accent})`}
     >
       <Global
         styles={css`
-          ${InputCode}
+          ${InputCode};
+          body {
+            background-color: ${`var(${ColorVarsEnum.BG_accent}) !important`};
+          }
         `}
       />
       {/* <FullScreenLoader isLoading={isLoading} /> */}

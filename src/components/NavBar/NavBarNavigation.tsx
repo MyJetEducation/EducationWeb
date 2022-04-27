@@ -68,9 +68,12 @@ const NavBarNavigation = observer(() => {
     if (mainAppStore.isAuthorized) {
       return MENU.INNER;
     }
-    return MENU.PUBLIC;
+    return null;
   }, [mainAppStore.isAuthorized]);
 
+  if (!activeMenu) {
+    return null;
+  }
   return (
     <FlexContainer justifyContent="center">
       {activeMenu.data.map((item: any) => (

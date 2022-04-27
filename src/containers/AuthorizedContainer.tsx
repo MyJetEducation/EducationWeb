@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { FlexContainer } from '../styles/FlexContainer';
 import { observer } from 'mobx-react-lite';
 import Onboarding from '../components/Onboarding/Onboarding';
@@ -6,6 +6,7 @@ import { useStores } from '../hooks/useStores';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import Page from '../routing/Pages';
 import { autorun } from 'mobx';
+import { ColorVarsEnum } from '../enums/ColorVarsEnum';
 
 interface Props {}
 
@@ -35,11 +36,17 @@ const AuthorizedContainer: FC<Props> = observer((props) => {
   ]);
 
   return (
-    <FlexContainer flex="1">
+    <FlexContainer flex="1" justifyContent="center">
       {onBoardingStore.isAvailable && mainAppStore.isAvailableContent && (
         <Onboarding />
       )}
-      {children}
+      <FlexContainer
+        flexDirection="column"
+        flex="1"
+        backgroundColor={`var(${ColorVarsEnum.BG_accent})`}
+      >
+        {children}
+      </FlexContainer>
     </FlexContainer>
   );
 });

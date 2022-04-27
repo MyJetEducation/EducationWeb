@@ -15,13 +15,12 @@ const PageTemplateContainer: FC = ({ children }) => {
 
       <FlexContainer
         flex="1"
+        flexWrap="wrap"
         overflow="auto"
         justifyContent="center"
         width="100%"
       >
-        <FlexContainer flexDirection="column" width={CONTENT_WIDTH}>
-          {children}
-        </FlexContainer>
+        {children}
       </FlexContainer>
     </FlexContainer>
   );

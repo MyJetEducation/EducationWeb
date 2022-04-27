@@ -1,11 +1,8 @@
 import React from 'react';
+import CenterContainer from '../containers/CenterContainer';
 
 const Notes = () => {
-  return (
-    <div>
-      Notes
-    </div>
-  );
+  return <CenterContainer>Notes</CenterContainer>;
 };
 
 export default Notes;

@@ -6,7 +6,7 @@ on:
       - "[0-9]+.[0-9]+.[0-9]+"
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     #strategy:
     #  matrix:
@@ -52,12 +52,18 @@ jobs:
         node-version: 16.x
 
     - name: Install
-      run: |
-        npm install
+      run: npm install
+      env:
+        API_AUTH_VALIDATION_STRING: https://validation-api-uat.simple-spot.biz
+        API_STRING: https://api-uat.simple-spot.biz
+
     - name: Build
-      run: |
-        CI=false
-        npm run build
+      run: npm run buildProd
+      env:
+        API_AUTH_VALIDATION_STRING: https://validation-api-uat.simple-spot.biz
+        API_STRING: https://api-uat.simple-spot.biz
+        
+
     - name: Publish image azure
       uses: docker/build-push-action@v1
       with:
@@ -71,7 +77,7 @@ jobs:
 
   update_version_master:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
 
     - uses: actions/checkout@v2

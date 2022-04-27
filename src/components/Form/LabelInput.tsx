@@ -147,13 +147,14 @@ const Input = styled.input<{ isError?: boolean }>`
   background-color: transparent;
   width: 100%;
   caret-color: #374dfb;
-  padding: 12px 16px 12px;
+  padding: 24px 16px 12px;
   color: #000;
   height: 60px;
   font-size: 16px;
   line-height: 24px;
   border-radius: 12px;
   transition: box-shadow 0.3s ease;
+  background-color: #fff;
 
   &:hover {
     box-shadow: 0 0 0 1px #c0cbda;
@@ -165,7 +166,7 @@ const Input = styled.input<{ isError?: boolean }>`
   &:focus {
     box-shadow: 0 0 0 2px #374dfb;
     & + span {
-      transform: translateY(-34px);
+      transform: translateY(-18px);
       font-weight: 400;
       font-size: 12px;
     }
@@ -173,7 +174,7 @@ const Input = styled.input<{ isError?: boolean }>`
 
   &:valid {
     & + span {
-      transform: translateY(-34px);
+      transform: translateY(-18px);
       font-weight: 400;
       font-size: 12px;
     }
@@ -188,7 +189,7 @@ const Input = styled.input<{ isError?: boolean }>`
     font-size: 16px;
     -webkit-text-fill-color: #000 !important;
     & + span {
-      transform: translateY(-34px);
+      transform: translateY(-18px);
       font-weight: 400;
       font-size: 12px;
     }
@@ -202,13 +203,14 @@ const MoneyInput = styled(CurrencyInput)`
   background-color: transparent;
   width: 100%;
   caret-color: #374dfb;
-  padding: 12px 16px 12px;
+  padding: 24px 16px 12px;
   color: #000;
   height: 60px;
   font-size: 16px;
   line-height: 24px;
   border-radius: 12px;
   transition: box-shadow 0.3s ease;
+  background-color: #fff;
 
   &.hasError {
     box-shadow: 0 0 0 1px #f50537 !important;
@@ -224,7 +226,7 @@ const MoneyInput = styled(CurrencyInput)`
   &:focus {
     box-shadow: 0 0 0 2px #374dfb;
     & + span {
-      transform: translateY(-34px);
+      transform: translateY(-18px);
       font-weight: 400;
       font-size: 12px;
     }
@@ -232,7 +234,7 @@ const MoneyInput = styled(CurrencyInput)`
 
   &:valid {
     & + span {
-      transform: translateY(-34px);
+      transform: translateY(-18px);
       font-weight: 400;
       font-size: 12px;
     }
@@ -247,7 +249,7 @@ const MoneyInput = styled(CurrencyInput)`
     font-size: 16px;
     -webkit-text-fill-color: #000 !important;
     & + span {
-      transform: translateY(-34px);
+      transform: translateY(-18px);
       font-weight: 400;
       font-size: 12px;
     }
@@ -264,6 +266,4 @@ const Label = styled(PrimaryTextSpan)`
   font-size: 16px;
   font-weight: 500;
   color: #a8b0ba;
-  background-color: #fff;
-  line-height: 1;
 `;

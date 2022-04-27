@@ -8,6 +8,8 @@ import { useStores } from '../hooks/useStores';
 import { FlexContainer } from '../styles/FlexContainer';
 import { PageTitle, PrimaryTextSpan } from '../styles/TextsElements';
 import TutorialsList from '../components/Tutorials/TutorialsList';
+import { CONTENT_WIDTH } from '../constants/global';
+import CenterContainer from '../containers/CenterContainer';
 
 const Dashboard = observer(() => {
   const { t } = useTranslation();
@@ -31,8 +33,8 @@ const Dashboard = observer(() => {
   }, []);
 
   return (
-    <FlexContainer flex="1" flexDirection="column" padding="32px 20px">
-      <FlexContainer flexDirection="column" marginBottom="24px">
+    <CenterContainer padding="72px 0">
+      <FlexContainer flexDirection="column" marginBottom="24px" width="100%">
         <PageTitle>
           {`${t('Welcome')}, ${userProfileStore.userAccount?.firstName || ''}`}
         </PageTitle>
@@ -66,7 +68,7 @@ const Dashboard = observer(() => {
         </FlexContainer>
         {/* Sidebar */}
       </FlexContainer>
-    </FlexContainer>
+    </CenterContainer>
   );
 });
 

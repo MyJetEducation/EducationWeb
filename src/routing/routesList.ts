@@ -24,7 +24,7 @@ import ToolsInner from '../pages/ToolsInner';
 import Page from './Pages';
 
 export enum RouteLayoutType {
-  NotAuthorizedPublic,
+  NotAuthorizedPublic = 1,
   Authorized,
   SignFlow,
   Public,
@@ -38,28 +38,28 @@ const routesList = [
     path: Page.PUBLIC.ABOUT_US,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.NotAuthorizedPublic,
+    layoutType: RouteLayoutType.Public,
   },
   {
     component: MissionPage,
     path: Page.PUBLIC.MISSION,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.NotAuthorizedPublic,
+    layoutType: RouteLayoutType.Public,
   },
   {
     component: WhyUsPage,
     path: Page.PUBLIC.WHY_US,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.NotAuthorizedPublic,
+    layoutType: RouteLayoutType.Public,
   },
   {
     component: LessonsPage,
     path: Page.PUBLIC.LESSONS,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.NotAuthorizedPublic,
+    layoutType: RouteLayoutType.Public,
   },
 
   {
@@ -67,16 +67,9 @@ const routesList = [
     path: Page.PUBLIC.FAQ,
     exact: true,
     strict: true,
-    layoutType: RouteLayoutType.NotAuthorizedPublic,
+    layoutType: RouteLayoutType.Public,
   },
   // ----
-  {
-    component: RegisterConfirm,
-    path: Page.REGISTER_CONFIRM,
-    exact: true,
-    strict: true,
-    layoutType: RouteLayoutType.SignFlow,
-  },
   {
     component: SingIn,
     path: Page.SIGN_IN,
@@ -91,22 +84,6 @@ const routesList = [
     strict: true,
     layoutType: RouteLayoutType.SignFlow,
   },
-
-  {
-    component: ForgotPassword,
-    path: Page.FORGOT_PASSWORD,
-    exact: true,
-    strict: true,
-    layoutType: RouteLayoutType.SignFlow,
-  },
-  {
-    component: ResetPassord,
-    path: Page.RESET_PASSWORD,
-    exact: true,
-    strict: true,
-    layoutType: RouteLayoutType.SignFlow,
-  },
-
   {
     component: SignUp,
     path: Page.SIGN_UP,
