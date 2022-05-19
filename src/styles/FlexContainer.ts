@@ -1,4 +1,3 @@
-import css from '@emotion/css';
 import styled from '@emotion/styled';
 
 export interface FlexContainerProps {
@@ -75,3 +74,4 @@ export const FlexContainer = styled.div<FlexContainerProps>`
   display: ${(props) => props.display || 'flex'};
   cursor: ${(props) => props.cursor};
 `;
+

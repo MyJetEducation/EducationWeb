@@ -5,6 +5,7 @@ import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
 
 import './Conc.css';
 import styled from "@emotion/styled";
+import SvgIcon from "../../../SvgIcon";
 
 const Concentration = () => {
   return (
@@ -70,6 +71,7 @@ const Concentration = () => {
           top="0"
           left="0"
         >
+
           <CircularProgressbar
             value={50}
             className="circular"
@@ -80,7 +82,6 @@ const Concentration = () => {
             strokeWidth={2}
           />
         </Wrapper>
-
       </FlexContainer>
 
   )
